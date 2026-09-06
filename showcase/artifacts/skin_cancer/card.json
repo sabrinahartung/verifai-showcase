@@ -1,0 +1,10 @@
+{
+  "id": "skin_cancer",
+  "name": "Skin-Lesion ResNet18",
+  "emoji": "🔬",
+  "domain": "image",
+  "dataset": "ham10000-examples",
+  "description": "Skin-lesion classification across 7 classes (HAM10000). Responsible-AI analysis across all pillars.",
+  "sample": false,
+  "hf_url": "https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18"
+}

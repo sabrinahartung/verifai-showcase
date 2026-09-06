@@ -10,40 +10,40 @@
       "pillar": "performance", "metric": "per_class_sensitivity", "domain": "image",
       "value": {"balanced_accuracy": 0.74},
       "verdict": "warn",
-      "summary": "Balanced Accuracy 0.74; Melanom-Sensitivität niedriger als erwünscht.",
-      "details": {"chart": {"kind": "bar", "title": "Sensitivität pro Klasse",
+      "summary": "Balanced accuracy 0.74; melanoma sensitivity lower than desired.",
+      "details": {"chart": {"kind": "bar", "title": "Sensitivity per class",
         "x": ["akiec","bcc","bkl","df","nv","mel","vasc"],
         "y": [0.61, 0.78, 0.70, 0.55, 0.93, 0.66, 0.80],
-        "x_title": "Klasse", "y_title": "Sensitivität"}},
+        "x_title": "Class", "y_title": "Sensitivity"}},
       "plots": []
     },
     {
       "pillar": "fairness", "metric": "subgroup_sensitivity_gap_ITA", "domain": "image",
       "value": {"gap": 0.18},
       "verdict": "fail",
-      "summary": "Melanom-Sensitivität fällt für dunklere Hauttypen um 18 Punkte (ITA-Bins) — dokumentierter Bias.",
-      "details": {"chart": {"kind": "bar", "title": "Melanom-Sensitivität nach Hauttyp (ITA)",
-        "x": ["hell (I–II)", "mittel (III–IV)", "dunkel (V–VI)"],
+      "summary": "Melanoma sensitivity drops by 18 points for darker skin types (ITA bins) — a documented bias.",
+      "details": {"chart": {"kind": "bar", "title": "Melanoma sensitivity by skin type (ITA)",
+        "x": ["light (I–II)", "medium (III–IV)", "dark (V–VI)"],
         "y": [0.71, 0.63, 0.53], "color": "#C77700",
-        "x_title": "Hauttyp (ITA-geschätzt)", "y_title": "Sensitivität"}},
+        "x_title": "Skin type (ITA-estimated)", "y_title": "Sensitivity"}},
       "plots": []
     },
     {
       "pillar": "robustness", "metric": "corruption_robustness", "domain": "image",
       "value": {"clean": 0.81, "mean_corrupted": 0.66},
       "verdict": "warn",
-      "summary": "Genauigkeit fällt unter Bildstörungen von 0.81 auf im Schnitt 0.66.",
-      "details": {"chart": {"kind": "bar", "title": "Genauigkeit unter Störungen",
+      "summary": "Accuracy drops from 0.81 to 0.66 on average under image corruptions.",
+      "details": {"chart": {"kind": "bar", "title": "Accuracy under corruptions",
         "x": ["clean","noise","blur","bright","jpeg"],
         "y": [0.81, 0.62, 0.67, 0.71, 0.64],
-        "x_title": "Störung", "y_title": "Accuracy"}},
+        "x_title": "Corruption", "y_title": "Accuracy"}},
       "plots": []
     },
     {
       "pillar": "explainability", "metric": "gradcam_faithfulness", "domain": "image",
       "value": {"faithfulness": 0.62},
       "verdict": "info",
-      "summary": "Grad-CAM-Faithfulness 0.62 (Deletion-Metrik); Overlays im echten Lauf.",
+      "summary": "Grad-CAM faithfulness 0.62 (deletion metric); overlays come with the real run.",
       "details": {"chart": {"kind": "gauge", "title": "Faithfulness (0–1)", "value": 0.62, "min": 0, "max": 1}},
       "plots": []
     },
@@ -51,8 +51,8 @@
       "pillar": "privacy", "metric": "membership_inference_auc", "domain": "image",
       "value": {"mia_auc": 0.57},
       "verdict": "pass",
-      "summary": "Membership-Inference-AUC 0.57 (nahe 0.5 = geringes Leakage-Risiko).",
-      "details": {"chart": {"kind": "gauge", "title": "MIA-AUC (0.5 = ideal)", "value": 0.57, "min": 0.5, "max": 1.0}},
+      "summary": "Membership-inference AUC 0.57 (close to 0.5 = low leakage risk).",
+      "details": {"chart": {"kind": "gauge", "title": "MIA AUC (0.5 = ideal)", "value": 0.57, "min": 0.5, "max": 1.0}},
       "plots": []
     }
   ]

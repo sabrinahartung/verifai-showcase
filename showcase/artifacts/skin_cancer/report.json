@@ -1,0 +1,330 @@
+{
+  "scenario": "skin_cancer",
+  "domain": "image",
+  "model_id": "skin-lesion-resnet18",
+  "dataset_id": "ham10000-examples",
+  "findings": [
+    {
+      "pillar": "performance",
+      "metric": "top1_accuracy",
+      "domain": "image",
+      "value": {
+        "accuracy": 1.0,
+        "n": 7,
+        "correct": 7
+      },
+      "verdict": "info",
+      "summary": "Top-1 accuracy 100% on 7 labeled examples. Small sample (n=7) — a plausibility check, not a benchmark.",
+      "details": {
+        "per_example": [
+          {
+            "id": "example_1",
+            "true": "melanoma",
+            "pred": "melanoma",
+            "confidence": 0.6207,
+            "correct": true
+          },
+          {
+            "id": "example_2",
+            "true": "melanocytic_Nevi",
+            "pred": "melanocytic_Nevi",
+            "confidence": 0.9937,
+            "correct": true
+          },
+          {
+            "id": "example_3",
+            "true": "basal_cell_carcinoma",
+            "pred": "basal_cell_carcinoma",
+            "confidence": 0.8502,
+            "correct": true
+          },
+          {
+            "id": "example_4",
+            "true": "actinic_keratoses",
+            "pred": "actinic_keratoses",
+            "confidence": 0.9986,
+            "correct": true
+          },
+          {
+            "id": "example_5",
+            "true": "benign_keratosis-like_lesions",
+            "pred": "benign_keratosis-like_lesions",
+            "confidence": 0.8192,
+            "correct": true
+          },
+          {
+            "id": "example_6",
+            "true": "dermatofibroma",
+            "pred": "dermatofibroma",
+            "confidence": 0.9995,
+            "correct": true
+          },
+          {
+            "id": "example_7",
+            "true": "vascular_lesions",
+            "pred": "vascular_lesions",
+            "confidence": 0.999,
+            "correct": true
+          }
+        ],
+        "chart": {
+          "kind": "bar",
+          "title": "Confidence of the top prediction per example",
+          "x": [
+            "example_1",
+            "example_2",
+            "example_3",
+            "example_4",
+            "example_5",
+            "example_6",
+            "example_7"
+          ],
+          "y": [
+            0.6207,
+            0.9937,
+            0.8502,
+            0.9986,
+            0.8192,
+            0.9995,
+            0.999
+          ],
+          "colors": [
+            "#2E9E5B",
+            "#2E9E5B",
+            "#2E9E5B",
+            "#2E9E5B",
+            "#2E9E5B",
+            "#2E9E5B",
+            "#2E9E5B"
+          ],
+          "x_title": "Example",
+          "y_title": "Confidence (top class)",
+          "hover": [
+            "melanoma (true: melanoma)",
+            "melanocytic_Nevi (true: melanocytic_Nevi)",
+            "basal_cell_carcinoma (true: basal_cell_carcinoma)",
+            "actinic_keratoses (true: actinic_keratoses)",
+            "benign_keratosis-like_lesions (true: benign_keratosis-like_lesions)",
+            "dermatofibroma (true: dermatofibroma)",
+            "vascular_lesions (true: vascular_lesions)"
+          ]
+        }
+      },
+      "plots": []
+    },
+    {
+      "pillar": "explainability",
+      "metric": "gradcam_faithfulness",
+      "domain": "image",
+      "value": {
+        "n_overlays": 7,
+        "mean_deletion_faithfulness": 0.669
+      },
+      "verdict": "info",
+      "summary": "Grad-CAM overlays for 7 examples; mean deletion faithfulness 0.669 (probability drop when the highlighted region is masked out).",
+      "details": {
+        "target_layer": "layer4[-1]",
+        "faithfulness_per_image": [
+          0.17,
+          0.971,
+          0.85,
+          0.998,
+          0.697,
+          0.999,
+          0.0
+        ],
+        "chart": {
+          "kind": "images",
+          "title": "Where the model looks (Grad-CAM)",
+          "paths": [
+            "plots/gradcam_example_1.png",
+            "plots/gradcam_example_2.png",
+            "plots/gradcam_example_3.png",
+            "plots/gradcam_example_4.png",
+            "plots/gradcam_example_5.png",
+            "plots/gradcam_example_6.png",
+            "plots/gradcam_example_7.png"
+          ],
+          "captions": [
+            "example_1: melanoma (62%)",
+            "example_2: melanocytic_Nevi (99%)",
+            "example_3: basal_cell_carcinoma (85%)",
+            "example_4: actinic_keratoses (100%)",
+            "example_5: benign_keratosis-like_lesions (82%)",
+            "example_6: dermatofibroma (100%)",
+            "example_7: vascular_lesions (100%)"
+          ]
+        },
+        "chart2": {
+          "kind": "gauge",
+          "title": "Deletion faithfulness (0–1)",
+          "value": 0.669,
+          "min": 0,
+          "max": 1
+        }
+      },
+      "plots": [
+        "plots/gradcam_example_1.png",
+        "plots/gradcam_example_2.png",
+        "plots/gradcam_example_3.png",
+        "plots/gradcam_example_4.png",
+        "plots/gradcam_example_5.png",
+        "plots/gradcam_example_6.png",
+        "plots/gradcam_example_7.png"
+      ]
+    },
+    {
+      "pillar": "robustness",
+      "metric": "corruption_stability",
+      "domain": "image",
+      "value": {
+        "prediction_stability": {
+          "noise": 0.571,
+          "blur": 0.714,
+          "brightness": 0.714,
+          "jpeg": 1.0
+        },
+        "mean_stability": 0.75,
+        "n": 7
+      },
+      "verdict": "info",
+      "summary": "The prediction stays stable under corruptions for 75% of the images on average. Small sample (n=7) — illustrative only.",
+      "details": {
+        "chart": {
+          "kind": "bar",
+          "title": "Prediction stability per corruption",
+          "x": [
+            "noise",
+            "blur",
+            "brightness",
+            "jpeg"
+          ],
+          "y": [
+            0.571,
+            0.714,
+            0.714,
+            1.0
+          ],
+          "color": "#1F8A70",
+          "x_title": "Corruption",
+          "y_title": "Share of unchanged top-1"
+        }
+      },
+      "plots": []
+    },
+    {
+      "pillar": "fairness",
+      "metric": "skin_tone_ita",
+      "domain": "image",
+      "value": {
+        "coverage": {
+          "light (I–II)": 6,
+          "medium (III–IV)": 0,
+          "dark (V–VI)": 1
+        },
+        "n": 7
+      },
+      "verdict": "warn",
+      "summary": "Skin-tone coverage (ITA-estimated) over n=7: light 6, medium 0, dark 1. The sample is small and skewed towards light skin types — a documented HAM10000 limitation. Use the full subset run for a meaningful subgroup accuracy.",
+      "details": {
+        "per_example": [
+          {
+            "id": "example_1",
+            "ita": 96.2,
+            "bin": "light (I–II)",
+            "true": "melanoma",
+            "pred": "melanoma",
+            "correct": true
+          },
+          {
+            "id": "example_2",
+            "ita": 17.7,
+            "bin": "dark (V–VI)",
+            "true": "melanocytic_Nevi",
+            "pred": "melanocytic_Nevi",
+            "correct": true
+          },
+          {
+            "id": "example_3",
+            "ita": 133.0,
+            "bin": "light (I–II)",
+            "true": "basal_cell_carcinoma",
+            "pred": "basal_cell_carcinoma",
+            "correct": true
+          },
+          {
+            "id": "example_4",
+            "ita": 70.7,
+            "bin": "light (I–II)",
+            "true": "actinic_keratoses",
+            "pred": "actinic_keratoses",
+            "correct": true
+          },
+          {
+            "id": "example_5",
+            "ita": 85.9,
+            "bin": "light (I–II)",
+            "true": "benign_keratosis-like_lesions",
+            "pred": "benign_keratosis-like_lesions",
+            "correct": true
+          },
+          {
+            "id": "example_6",
+            "ita": 79.2,
+            "bin": "light (I–II)",
+            "true": "dermatofibroma",
+            "pred": "dermatofibroma",
+            "correct": true
+          },
+          {
+            "id": "example_7",
+            "ita": 70.3,
+            "bin": "light (I–II)",
+            "true": "vascular_lesions",
+            "pred": "vascular_lesions",
+            "correct": true
+          }
+        ],
+        "chart": {
+          "kind": "bar",
+          "title": "Skin-tone coverage of the sample (ITA bins)",
+          "x": [
+            "light (I–II)",
+            "medium (III–IV)",
+            "dark (V–VI)"
+          ],
+          "y": [
+            6,
+            0,
+            1
+          ],
+          "color": "#C77700",
+          "x_title": "Estimated skin type",
+          "y_title": "Number of images"
+        },
+        "enough_per_bin": false
+      },
+      "plots": []
+    },
+    {
+      "pillar": "privacy",
+      "metric": "membership_inference_auc",
+      "domain": "image",
+      "value": {
+        "mia_auc": null,
+        "status": "requires_full_run"
+      },
+      "verdict": "info",
+      "summary": "Membership inference needs training vs. holdout images. The example set has no such split — so no number is invented here; the full run (GPU notebook) provides the AUC.",
+      "details": {
+        "note": "Set scenario.privacy.members/non_members to enable."
+      },
+      "plots": []
+    }
+  ],
+  "meta": {
+    "seed": 42,
+    "sample_size": 7
+  },
+  "created_at": "2026-09-06T21:13:51.305983+00:00"
+}

@@ -120,16 +120,16 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         domain="image",
         value={"n_overlays": len(rel_plots), "mean_deletion_faithfulness": mean_faith},
         verdict="info",
-        summary=(f"Grad-CAM-Overlays für {len(rel_plots)} Beispiele; mittlere Deletion-"
-                 f"Faithfulness {mean_faith} (Wahrscheinlichkeits­abfall beim Ausblenden "
-                 f"der markierten Region)." if mean_faith is not None
-                 else "Grad-CAM-Overlays erzeugt."),
+        summary=(f"Grad-CAM overlays for {len(rel_plots)} examples; mean deletion "
+                 f"faithfulness {mean_faith} (probability drop when the highlighted "
+                 f"region is masked out)." if mean_faith is not None
+                 else "Grad-CAM overlays generated."),
         details={
             "target_layer": "layer4[-1]",
             "faithfulness_per_image": [round(f, 3) for f in faith_scores],
-            "chart": {"kind": "images", "title": "Wohin das Modell schaut (Grad-CAM)",
+            "chart": {"kind": "images", "title": "Where the model looks (Grad-CAM)",
                       "paths": rel_plots, "captions": captions},
-            "chart2": {"kind": "gauge", "title": "Deletion-Faithfulness (0–1)",
+            "chart2": {"kind": "gauge", "title": "Deletion faithfulness (0–1)",
                        "value": mean_faith or 0.0, "min": 0, "max": 1},
         },
         plots=rel_plots,

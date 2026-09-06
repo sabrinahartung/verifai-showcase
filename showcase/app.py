@@ -80,21 +80,21 @@ def render_chart(spec: dict, base: Path):
 # ---------- views ----------
 def gallery(cards: list[dict]):
     st.title("VERIFAI — Responsible-AI Showcase")
-    st.caption("Wähle ein Modell — und sieh seine Analyse über die vier Säulen: "
-               "Fairness, Robustheit, Erklärbarkeit, Datenschutz.")
+    st.caption("Pick a model — and see its analysis across the four pillars: "
+               "fairness, robustness, explainability, privacy.")
     if not cards:
-        st.info("Noch keine Modelle. Erzeuge eins mit `python scripts/run_scenario.py scenarios/skin_cancer.yaml`.")
+        st.info("No models yet. Create one with `python scripts/run_scenario.py scenarios/skin_cancer.yaml`.")
         return
     cols = st.columns(3)
     for i, card in enumerate(cards):
         with cols[i % 3]:
             with st.container(border=True):
                 st.markdown(f"### {card.get('emoji','🧠')} {card['name']}")
-                st.caption(f"Domäne: {card.get('domain','?')}  ·  {card.get('dataset','')}")
+                st.caption(f"Domain: {card.get('domain','?')}  ·  {card.get('dataset','')}")
                 st.write(card.get("description", ""))
                 if card.get("sample"):
-                    st.warning("SAMPLE-Daten (Platzhalter, bis der echte Lauf drin ist)")
-                if st.button("Analyse ansehen →", key=f"btn_{card['id']}"):
+                    st.warning("SAMPLE data (placeholder until the real run lands)")
+                if st.button("View analysis →", key=f"btn_{card['id']}"):
                     st.session_state["selected"] = card["id"]
                     st.rerun()
 
@@ -103,16 +103,16 @@ def dashboard(card: dict):
     base = card["_dir"]
     report = json.loads((base / "report.json").read_text(encoding="utf-8"))
 
-    if st.button("← Zurück zur Übersicht"):
+    if st.button("← Back to overview"):
         st.session_state.pop("selected", None); st.rerun()
 
     st.title(f"{card.get('emoji','🧠')} {card['name']}")
-    st.write(f"**Domäne:** {report['domain']}  ·  **Modell:** `{report['model_id']}`  ·  "
-             f"**Datensatz:** `{report['dataset_id']}`")
+    st.write(f"**Domain:** {report['domain']}  ·  **Model:** `{report['model_id']}`  ·  "
+             f"**Dataset:** `{report['dataset_id']}`")
     if card.get("hf_url"):
-        st.markdown(f"[🤗 Modell auf Hugging Face]({card['hf_url']})")
+        st.markdown(f"[🤗 Model on Hugging Face]({card['hf_url']})")
     if card.get("sample"):
-        st.warning("Diese Ansicht zeigt SAMPLE-Daten — Platzhalter, bis der echte Engine-Lauf die Artefakte erzeugt.")
+        st.warning("This view shows SAMPLE data — a placeholder until the real engine run produces the artifacts.")
 
     by_pillar: dict[str, list] = {p: [] for p in PILLARS}
     for f in report["findings"]:

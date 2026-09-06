@@ -34,7 +34,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     if n >= 30:  # only claim a verdict once the sample is big enough to mean something
         verdict = "pass" if acc >= 0.75 else ("warn" if acc >= 0.6 else "fail")
 
-    note = (f"Kleine Stichprobe (n={n}) — Plausibilitätscheck, kein Benchmark."
+    note = (f"Small sample (n={n}) — a plausibility check, not a benchmark."
             if n < 30 else f"n={n}.")
 
     return Finding(
@@ -44,18 +44,18 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         value={"accuracy": round(acc, 4) if acc is not None else None, "n": n,
                "correct": correct},
         verdict=verdict,
-        summary=(f"Top-1-Trefferquote {acc*100:.0f}% auf {n} gelabelten Beispielen. {note}"
-                 if acc is not None else "Keine gelabelten Beispiele."),
+        summary=(f"Top-1 accuracy {acc*100:.0f}% on {n} labeled examples. {note}"
+                 if acc is not None else "No labeled examples."),
         details={
             "per_example": per_example,
             "chart": {
                 "kind": "bar",
-                "title": "Konfidenz der Top-Vorhersage je Beispiel",
+                "title": "Confidence of the top prediction per example",
                 "x": [e["id"] for e in per_example],
                 "y": [e["confidence"] for e in per_example],
                 "colors": ["#2E9E5B" if e["correct"] else "#C0392B" for e in per_example],
-                "x_title": "Beispiel", "y_title": "Konfidenz (Top-Klasse)",
-                "hover": [f"{e['pred']} (wahr: {e['true']})" for e in per_example],
+                "x_title": "Example", "y_title": "Confidence (top class)",
+                "hover": [f"{e['pred']} (true: {e['true']})" for e in per_example],
             },
         },
     )

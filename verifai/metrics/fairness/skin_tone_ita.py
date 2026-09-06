@@ -49,19 +49,19 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     enough_per_bin = populated and min(populated) >= 10
 
     # coverage skew: is any real skin tone essentially absent?
-    dark_share = per_bin_total.get("dunkel (V–VI)", 0) / n if n else 0
+    dark_share = per_bin_total.get(bins_order[-1], 0) / n if n else 0
     verdict = "warn" if dark_share < 0.15 else "info"
 
-    summary = (f"Hauttyp-Abdeckung (ITA-geschätzt) über n={n}: "
+    summary = (f"Skin-tone coverage (ITA-estimated) over n={n}: "
                + ", ".join(f"{b.split(' ')[0]} {per_bin_total.get(b,0)}" for b in bins_order)
-               + ". Die Stichprobe ist klein und schräg zu hellen Hauttypen — eine "
-                 "dokumentierte HAM10000-Limitation. Für eine belastbare Subgruppen-"
-                 "Trefferquote den vollen Subset-Lauf nutzen.")
+               + ". The sample is small and skewed towards light skin types — a "
+                 "documented HAM10000 limitation. Use the full subset run for a "
+                 "meaningful subgroup accuracy.")
 
     chart_bar = {
-        "kind": "bar", "title": "Hauttyp-Abdeckung der Stichprobe (ITA-Bins)",
+        "kind": "bar", "title": "Skin-tone coverage of the sample (ITA bins)",
         "x": [b for b in bins_order], "y": coverage, "color": "#C77700",
-        "x_title": "geschätzter Hauttyp", "y_title": "Anzahl Bilder",
+        "x_title": "Estimated skin type", "y_title": "Number of images",
     }
 
     details: dict[str, Any] = {"per_example": per_example, "chart": chart_bar,
@@ -77,12 +77,12 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         value["accuracy_gap"] = gap
         verdict = "fail" if gap > 0.15 else ("warn" if gap > 0.08 else "pass")
         details["chart2"] = {
-            "kind": "bar", "title": "Trefferquote nach Hauttyp (ITA)",
+            "kind": "bar", "title": "Accuracy by skin type (ITA)",
             "x": list(acc.keys()), "y": list(acc.values()), "color": "#5B3FD6",
-            "x_title": "geschätzter Hauttyp", "y_title": "Top-1-Trefferquote",
+            "x_title": "Estimated skin type", "y_title": "Top-1 accuracy",
         }
-        summary = (f"Subgruppen-Trefferquote nach ITA-Hauttyp; größter Abstand "
-                   f"{gap*100:.0f} Punkte (n={n}).")
+        summary = (f"Subgroup accuracy by ITA skin type; largest gap "
+                   f"{gap*100:.0f} points (n={n}).")
 
     return Finding(
         pillar="fairness", metric="skin_tone_ita", domain="image",

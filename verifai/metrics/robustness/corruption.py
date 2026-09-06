@@ -48,19 +48,19 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     if n >= 20 and mean_stability is not None:
         verdict = "pass" if mean_stability >= 0.85 else ("warn" if mean_stability >= 0.7 else "fail")
 
-    note = "" if n >= 20 else f" Kleine Stichprobe (n={n}) — illustrativ."
+    note = "" if n >= 20 else f" Small sample (n={n}) — illustrative only."
     return Finding(
         pillar="robustness", metric="corruption_stability", domain="image",
         value={"prediction_stability": stability, "mean_stability": mean_stability, "n": n},
         verdict=verdict,
-        summary=(f"Vorhersage bleibt im Schnitt bei {mean_stability*100:.0f}% der Bilder "
-                 f"unter Störungen stabil.{note}" if mean_stability is not None
-                 else "Keine Bilder ausgewertet."),
+        summary=(f"The prediction stays stable under corruptions for {mean_stability*100:.0f}% "
+                 f"of the images on average.{note}" if mean_stability is not None
+                 else "No images evaluated."),
         details={
             "chart": {
-                "kind": "bar", "title": "Vorhersage-Stabilität je Störung",
+                "kind": "bar", "title": "Prediction stability per corruption",
                 "x": names, "y": [stability[c] for c in names], "color": "#1F8A70",
-                "x_title": "Störung", "y_title": "Anteil unveränderter Top-1",
+                "x_title": "Corruption", "y_title": "Share of unchanged top-1",
             },
         },
     )

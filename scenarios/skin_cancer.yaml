@@ -28,7 +28,7 @@ dataset:
 card:
   name: "Skin-Lesion ResNet18"
   emoji: "🔬"
-  description: "Hautläsions-Klassifikation über 7 Klassen (HAM10000). Responsible-AI-Analyse über alle Säulen."
+  description: "Skin-lesion classification across 7 classes (HAM10000). Responsible-AI analysis across all pillars."
   hf_url: "https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18"
 
 # which pillars/metrics to run:

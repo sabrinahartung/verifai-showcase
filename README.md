@@ -1,129 +1,130 @@
-# VERIFAI Showcase — Responsible-AI-Evaluation
+# VERIFAI Showcase — Responsible-AI Evaluation
 
-**Systematische, reproduzierbare Bewertung von ML-Modellen entlang der Responsible-AI-Säulen** —
-Performance, Fairness, Robustheit, Erklärbarkeit, Datenschutz — über mehrere Datendomänen
-(Bild zuerst; Text/LLM folgen).
+**Systematic, reproducible evaluation of ML models along the Responsible-AI pillars** —
+performance, fairness, robustness, explainability, privacy — across several data domains
+(image first; text/LLM to follow).
 
-> Diese Version überführt das große VERIFAI-Framework in eine **dateibasierte, reproduzierbare,
-> gratis lauffähige** Form: die (potenziell schwere) Auswertung läuft *einmal* — lokal auf CPU für
-> kleine Stichproben oder auf einer Gratis-GPU für große — und erzeugt statische **Artefakte**
-> (JSON + Plots). Eine kleine Streamlit-App zeigt sie interaktiv: **Kacheln → Klick → Dashboard**.
-> Ohne Server, ohne Datenbank, ohne laufende Kosten.
+> This version turns the larger VERIFAI framework into a **file-based, reproducible, free-to-run**
+> form: the (potentially heavy) evaluation runs *once* — locally on CPU for small samples, or on a
+> free GPU for large ones — and produces static **artifacts** (JSON + plots). A small Streamlit app
+> shows them interactively: **tiles → click → dashboard**. No server, no database, no running costs.
 
 ---
 
-## Schnellstart
+## Quickstart
 
-**Engine — einen echten Lauf erzeugen** (in einer Umgebung mit `torch` — z. B. deiner
-`ML_Training_Dojo/.venv`, dort ist alles schon installiert):
+**Engine — produce a real run** (in an environment with `torch` — e.g. your
+`ML_Training_Dojo/.venv`, where everything is already installed):
 
 ```bash
-pip install -r requirements-engine.txt          # nur falls torch fehlt
+pip install -r requirements-engine.txt          # only if torch is missing
 python scripts/run_scenario.py scenarios/skin_cancer.yaml
 ```
 
-Das nutzt die **7 echten, gelabelten HAM10000-Beispielbilder** in `data/examples/` und dein
-**echtes ResNet18 von Hugging Face** und schreibt `showcase/artifacts/skin_cancer/` (report.json,
-card.json, plots/ mit Grad-CAM-Overlays). Läuft auf einem Laptop in Sekunden.
+This uses the **7 real, labeled HAM10000 example images** in `data/examples/` and your
+**real ResNet18 from Hugging Face**, and writes `showcase/artifacts/skin_cancer/` (report.json,
+card.json, plots/ with Grad-CAM overlays). Runs on a laptop in seconds.
 
-> Tipp: In `scenarios/skin_cancer.yaml` `weights_path:` auf deine lokale `.pt` zeigen lassen,
-> dann entfällt sogar der Hugging-Face-Download.
+> Tip: point `weights_path:` in `scenarios/skin_cancer.yaml` at your local `.pt` and even the
+> Hugging Face download goes away.
 
-**Showcase — anschauen:**
+**Showcase — take a look:**
 
 ```bash
 pip install -r showcase/requirements.txt
 streamlit run showcase/app.py
 ```
 
-**Großer Lauf ohne GPU-Sorgen:** `scripts/run_on_free_gpu.ipynb` (Colab/Kaggle) — genau dafür,
-dass dein Mac den vollen Subset **nicht** rechnen muss.
+**Big run without GPU worries:** `scripts/run_on_free_gpu.ipynb` (Colab/Kaggle) — exactly so your
+Mac does **not** have to compute the full subset.
 
 ---
 
-## Architektur auf einen Blick
+## Architecture at a glance
 
 ```
-verifai/            ← ENGINE (offline: lokal / Kaggle / Colab)
-  core/             Findings-Datenmodell + Runner + Metrik-Registry
-  models/           Domänen-Adapter (Bild: ResNet18 von Hugging Face)
-  datasets/         kleine, gepinnte Subsets über Manifeste (reproduzierbar)
-  metrics/          die Säulen: performance / fairness / robustness / explainability / privacy
-  export/           Findings -> statische Artefakte (JSON + Plots)
+verifai/            ← ENGINE (offline: local / Kaggle / Colab)
+  core/             findings data model + runner + metric registry
+  models/           domain adapters (image: ResNet18 from Hugging Face)
+  datasets/         small, pinned subsets via manifests (reproducible)
+  metrics/          the pillars: performance / fairness / robustness / explainability / privacy
+  export/           findings -> static artifacts (JSON + plots)
 
 data/
-  examples/         7 echte, gelabelte HAM10000-Bilder (MVP-Stichprobe)
-  manifests/        welche Bilder + Labels (CSV, versioniert)
+  examples/         7 real, labeled HAM10000 images (MVP sample)
+  manifests/        which images + labels (CSV, versioned)
 
-scenarios/          ein Lauf = eine YAML (z. B. skin_cancer.yaml)
+scenarios/          one run = one YAML (e.g. skin_cancer.yaml)
 scripts/            run_scenario.py (CLI) + run_on_free_gpu.ipynb
 
-showcase/           SCHAUFENSTER (deployt gratis auf Streamlit Community Cloud)
-  app.py            Kachel-Galerie -> Klick aufs Modell -> Plotly-Dashboard
-  artifacts/<id>/   ein Ordner = eine Kachel (card.json + report.json + plots/)
-  requirements.txt  bewusst LEICHT (Free-Tier-tauglich)
+showcase/           SHOP WINDOW (deploys for free on Streamlit Community Cloud)
+  app.py            tile gallery -> click a model -> Plotly dashboard
+  artifacts/<id>/   one folder = one tile (card.json + report.json + plots/)
+  requirements.txt  deliberately LIGHT (free-tier friendly)
 ```
 
-## Was der `skin_cancer`-Lauf misst (alle echt gerechnet)
+## What the `skin_cancer` run measures (all really computed)
 
-| Säule | Metrik | Was sie tut |
+| Pillar | Metric | What it does |
 |---|---|---|
-| Performance | `top1_accuracy` | Top-1-Treffer + Konfidenz je Beispiel (grün=richtig / rot=falsch) |
-| Erklärbarkeit | `gradcam_faithfulness` | Grad-CAM-Overlays (aus deinem `streamlit_app.py` portiert) + Deletion-Faithfulness |
-| Robustheit | `corruption_stability` | Bleibt die Vorhersage unter Rauschen/Blur/Helligkeit/JPEG stabil? |
-| Fairness | `skin_tone_ita` | Hauttyp-Abdeckung via ITA (label-frei); Subgruppen-Gap beim großen Lauf |
-| Datenschutz | `membership_inference_auc` | **ehrlich:** braucht Train/Holdout-Split → im GPU-Lauf, keine erfundene Zahl |
+| Performance | `top1_accuracy` | Top-1 hits + confidence per example (green=correct / red=wrong) |
+| Explainability | `gradcam_faithfulness` | Grad-CAM overlays (ported from your `streamlit_app.py`) + deletion faithfulness |
+| Robustness | `corruption_stability` | Does the prediction stay stable under noise/blur/brightness/JPEG? |
+| Fairness | `skin_tone_ita` | Skin-type coverage via ITA (label-free); subgroup gap on the big run |
+| Privacy | `membership_inference_auc` | **honest:** needs a train/holdout split → in the GPU run, no invented number |
 
-**Ehrlichkeit zur Stichprobe:** n=7 ist ein *Plausibilitätscheck*, kein Benchmark. Jede Metrik
-sagt das im Text und beansprucht erst ab genügend Datenpunkten ein hartes Urteil (pass/fail).
-Für belastbare Zahlen den größeren Subset über das GPU-Notebook fahren — **gleicher Code-Pfad**,
-nur mehr Zeilen im Manifest.
+**Honesty about the sample:** n=7 is a *plausibility check*, not a benchmark. Every metric says so
+in its text and only claims a hard verdict (pass/fail) once there are enough data points. For
+solid numbers, run the larger subset via the GPU notebook — **same code path**, just more rows in
+the manifest.
 
-## Erweiterbar: ein neues Modell / eine neue Domäne hinzufügen
+## Extensible: adding a new model / a new domain
 
-1. Szenario anlegen (`scenarios/<neu>.yaml`) mit Modell + Datensatz + Metriken.
-2. `python scripts/run_scenario.py scenarios/<neu>.yaml` → erzeugt `showcase/artifacts/<neu>/`.
-3. Fertig — beim nächsten Öffnen erscheint automatisch **eine neue Kachel**. Kein App-Code ändern.
+1. Create a scenario (`scenarios/<new>.yaml`) with model + dataset + metrics.
+2. `python scripts/run_scenario.py scenarios/<new>.yaml` → produces `showcase/artifacts/<new>/`.
+3. Done — the next time you open the app, **a new tile** appears automatically. No app code changes.
 
-Neue Metrik? Sie gibt in `Finding.details["chart"]` (optional `["chart2"]`) eine kleine
-Chart-Spezifikation zurück (`{"kind": "bar"|"line"|"heatmap"|"gauge"|"images", ...}`) — die App
-rendert sie generisch mit Plotly. Metrik-Signatur überall gleich: `run(model, dataset, ctx) -> Finding`.
+A new metric? It returns a small chart specification in `Finding.details["chart"]` (optionally
+`["chart2"]`) — `{"kind": "bar"|"line"|"heatmap"|"gauge"|"images", ...}` — and the app renders it
+generically with Plotly. The metric signature is the same everywhere:
+`run(model, dataset, ctx) -> Finding`.
 
-**Kein MongoDB, kein Docker-Zwang, kein Backend-Server.** Ergebnisse sind Dateien.
+**No MongoDB, no forced Docker, no backend server.** Results are files.
 
 ---
 
-## Transparenz (wichtig)
+## Transparency (important)
 
-Die öffentliche Streamlit-Demo zeigt **vorab berechnete** Ergebnisse, damit sie gratis und
-jederzeit erreichbar ist. Das ist eine bewusste Design-Entscheidung, keine Verschleierung:
+The public Streamlit demo shows **precomputed** results so it stays free and always reachable.
+That is a deliberate design decision, not obfuscation:
 
-- **Voller Code:** dieses Repo — inkl. jeder Metrik.
-- **Modell:** öffentlich auf Hugging Face ([`sabrinahartung1010/skin-lesion-resnet18`](https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18)).
-- **Daten:** die echten Beispielbilder liegen im Repo (`data/examples/`), Labels im Manifest.
-- **Selbst reproduzieren:** `scenarios/*.yaml` + `run_scenario.py` — jedes Ergebnis nachrechenbar
-  (GPU-Notebook liegt bei).
-- **Echter Lauf im Video:** siehe Portfolio.
+- **Full code:** this repo — including every metric.
+- **Model:** public on Hugging Face ([`sabrinahartung1010/skin-lesion-resnet18`](https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18)).
+- **Data:** the real example images are in the repo (`data/examples/`), labels in the manifest.
+- **Reproduce it yourself:** `scenarios/*.yaml` + `run_scenario.py` — every result is recomputable
+  (the GPU notebook is included).
+- **Real run on video:** see the portfolio.
 
-> `showcase/artifacts/_sample_skin_resnet/` ist ein **Dev-Fixture mit SAMPLE-Daten** (klar als
-> solches markiert), damit man die UI sofort anschauen kann, bevor der erste echte Lauf da ist.
-> Nach `run_scenario.py` erscheint daneben die echte Kachel `skin_cancer/`.
+> `showcase/artifacts/_sample_skin_resnet/` is a **dev fixture with SAMPLE data** (clearly marked
+> as such) so the UI can be viewed immediately, before the first real run exists. After
+> `run_scenario.py`, the real tile `skin_cancer/` appears next to it.
 
 ---
 
 ## Status
 
-- [x] Engine + Findings-Datenmodell + Runner + Registry
-- [x] Bild-Metriken über **alle Säulen** implementiert (Performance, Fairness, Robustheit, Erklärbarkeit; Datenschutz ehrlich als „braucht vollen Lauf")
-- [x] Streamlit-Showcase: Kachel-Galerie → Plotly-Dashboard, auto-erweiterbar
-- [x] Reproduzierbare Beispiel-Stichprobe (7 echte HAM10000-Bilder + Manifest)
-- [ ] **Erster echter Lauf** ausführen (`run_scenario.py`) → SAMPLE-Kachel durch echte ersetzen
-- [ ] Größerer Subset auf Gratis-GPU (belastbare Fairness-/Privacy-Zahlen)
-- [ ] Text/LLM-Szenario
-- [ ] Deploy auf Streamlit Community Cloud + kurzes Video
+- [x] Engine + findings data model + runner + registry
+- [x] Image metrics implemented across **all pillars** (performance, fairness, robustness, explainability; privacy honestly marked as "needs the full run")
+- [x] Streamlit showcase: tile gallery → Plotly dashboard, auto-extensible
+- [x] Reproducible example sample (7 real HAM10000 images + manifest)
+- [x] **First real run** executed (`run_scenario.py`) → replace the SAMPLE tile with the real one
+- [ ] Larger subset on a free GPU (solid fairness/privacy numbers)
+- [ ] add Text scenario
+- [ ] add LLM scenario
+- [ ] Deploy to Streamlit Community Cloud + short video
 
-## Data / Lizenz
+## Data / license
 
-Die Beispielbilder stammen aus **HAM10000** (Tschandl et al., 2018; CC BY-NC 4.0) und dienen hier
-nur der Demonstration. Das Modell ist ein **Bildungs-Proof-of-Concept — kein Medizinprodukt,
-nicht für diagnostische Zwecke.**
+The example images come from **HAM10000** (Tschandl et al., 2018; CC BY-NC 4.0) and serve
+demonstration purposes only. The model is an **educational proof of concept — not a medical
+device, not for diagnostic use.**

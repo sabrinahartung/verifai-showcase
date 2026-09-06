@@ -10,3 +10,5 @@ storage/
 *.pth
 *.onnx
 data/raw/
+# IDE
+.idea/

@@ -24,9 +24,9 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
             pillar="privacy", metric="membership_inference_auc", domain="image",
             value={"mia_auc": None, "status": "requires_full_run"},
             verdict="info",
-            summary=("Membership-Inference braucht Trainings- vs. Holdout-Bilder. Das "
-                     "Beispiel-Set hat diese Aufteilung nicht — daher hier keine erfundene "
-                     "Zahl; der volle Lauf (GPU-Notebook) liefert die AUC."),
+            summary=("Membership inference needs training vs. holdout images. The example "
+                     "set has no such split — so no number is invented here; the full run "
+                     "(GPU notebook) provides the AUC."),
             details={"note": "Set scenario.privacy.members/non_members to enable."},
         )
     # (full implementation runs in the notebook where the split exists)
@@ -34,6 +34,6 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         pillar="privacy", metric="membership_inference_auc", domain="image",
         value={"mia_auc": None, "status": "not_implemented_in_showcase"},
         verdict="info",
-        summary="MIA wird im vollen GPU-Lauf berechnet.",
+        summary="MIA is computed in the full GPU run.",
         details={},
     )

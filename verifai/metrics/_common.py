@@ -13,9 +13,9 @@ from PIL import Image, ImageFilter, ImageEnhance
 # ITA bins (after Kinyanjui et al. 2019) -> coarse skin-tone groups.
 # Higher ITA = lighter skin.
 ITA_BINS = [
-    ("hell (I–II)", 41.0, 1e9),
-    ("mittel (III–IV)", 19.0, 41.0),
-    ("dunkel (V–VI)", -1e9, 19.0),
+    ("light (I–II)", 41.0, 1e9),
+    ("medium (III–IV)", 19.0, 41.0),
+    ("dark (V–VI)", -1e9, 19.0),
 ]
 
 
@@ -67,7 +67,7 @@ def ita_bin(ita: float) -> str:
     for name, lo, hi in ITA_BINS:
         if lo <= ita < hi:
             return name
-    return "unbestimmt"
+    return "undetermined"
 
 
 # --- corruptions: name -> callable(PIL.Image) -> PIL.Image (seeded outside) ---
