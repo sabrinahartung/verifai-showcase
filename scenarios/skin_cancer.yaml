@@ -1,0 +1,40 @@
+# One end-to-end run for the skin-cancer (HAM10000) image model.
+# Run (in an env with torch/torchvision/pillow/huggingface_hub/matplotlib):
+#   python scripts/run_scenario.py scenarios/skin_cancer.yaml
+#
+# MVP-0 uses the 7 real, labeled example images bundled in data/examples/ so the
+# run is real + reproducible + laptop-CPU-fast. Point `manifest` at a bigger
+# subset and run on a free GPU for statistically meaningful numbers.
+name: skin_cancer
+domain: image
+seed: 42
+sample_size: 7            # small -> runs on CPU in seconds
+
+model:
+  loader: "verifai.models.image:load"
+  id: "skin-lesion-resnet18"
+  repo_id: "sabrinahartung1010/skin-lesion-resnet18"
+  filename: "resnet18_ham10000_classweights.pt"
+  # weights_path: "/Users/sabrina/Development/ML_Training_Dojo/resnet18_ham10000_classweights.pt"
+  #   ^ uncomment to use local weights and skip the Hugging Face download entirely.
+
+dataset:
+  loader: "verifai.datasets.loaders:load_ham10000"
+  id: "ham10000-examples"
+  manifest: "data/manifests/ham10000_examples.csv"
+  images_dir: "data/examples"
+
+# tile metadata for the showcase gallery (optional but nice):
+card:
+  name: "Skin-Lesion ResNet18"
+  emoji: "🔬"
+  description: "Hautläsions-Klassifikation über 7 Klassen (HAM10000). Responsible-AI-Analyse über alle Säulen."
+  hf_url: "https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18"
+
+# which pillars/metrics to run:
+metrics:
+  - "performance.classification"   # top-1 accuracy + per-example confidence
+  - "explainability.gradcam"       # Grad-CAM overlays + deletion-faithfulness
+  - "robustness.corruption"        # stability under noise/blur/brightness/JPEG
+  - "fairness.skin_tone"           # ITA-based skin-tone coverage (+ gap on full run)
+  - "privacy.mia"                  # honest: needs the full train/holdout split

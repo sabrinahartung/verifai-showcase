@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+# large local model/data caches — models come from HF hub, data from manifests
+storage/
+*.pt
+*.pth
+*.onnx
+data/raw/

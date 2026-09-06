@@ -1,0 +1,8 @@
+filename,label
+example_1.jpg,melanoma
+example_2.jpg,melanocytic_Nevi
+example_3.jpg,basal_cell_carcinoma
+example_4.jpg,actinic_keratoses
+example_5.jpg,benign_keratosis-like_lesions
+example_6.jpg,dermatofibroma
+example_7.jpg,vascular_lesions

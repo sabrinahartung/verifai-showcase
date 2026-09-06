@@ -1,0 +1,10 @@
+# The ENGINE (offline run: scripts/run_scenario.py). Heavier — runs once,
+# on your laptop CPU (tiny sample) or a free GPU (bigger subset).
+# On your Mac these are ALREADY in your ML_Training_Dojo/.venv.
+torch
+torchvision
+pillow
+numpy
+matplotlib
+huggingface-hub
+pyyaml

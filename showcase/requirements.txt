@@ -1,0 +1,10 @@
+# Streamlit Community Cloud installs THIS. Keep it light so the free tier is happy.
+# The showcase only READS precomputed artifacts (JSON + PNGs) and renders Plotly.
+streamlit
+pillow
+plotly
+
+# --- OPTIONAL: uncomment ONLY if you enable the live image-inference tab ---
+# torch
+# torchvision
+# huggingface-hub

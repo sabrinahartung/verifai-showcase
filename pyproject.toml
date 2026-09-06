@@ -1,0 +1,18 @@
+[project]
+name = "verifai"
+version = "0.1.0"
+description = "Responsible-AI evaluation across domains and the four RAI pillars (lean, file-based)."
+requires-python = ">=3.10"
+dependencies = [
+  "torch",
+  "torchvision",
+  "pillow",
+  "numpy",
+  "pyyaml",
+  "huggingface-hub",
+  "matplotlib",          # Grad-CAM overlays (ported by hand — no grad-cam pkg needed)
+  # add per pillar/domain as needed: scikit-learn (privacy AUC), transformers (text/LLM), ...
+]
+
+[tool.setuptools.packages.find]
+include = ["verifai*"]
