@@ -125,12 +125,38 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                  f"region is masked out)." if mean_faith is not None
                  else "Grad-CAM overlays generated."),
         details={
+            "explain": {
+                "what": ("Grad-CAM highlights the parts of the image that pushed the model "
+                         "towards its answer. The faithfulness score then checks whether "
+                         "those highlights are honest: the marked region is masked out and "
+                         "we measure how far the model's confidence falls."),
+                "how": ("In the overlays, warm colours (red/yellow) mark the regions that "
+                        "drove the decision, blue marks regions that barely mattered — you "
+                        "want the heat on the lesion, not on hair, rulers or the image "
+                        "border. The scale below shows the average confidence drop when "
+                        "that hot region is hidden: a bigger drop means the explanation "
+                        "reflects what the model actually used."),
+                "limits": ("A convincing heatmap is not proof of medically correct "
+                           "reasoning — it shows where the model looked, not whether it "
+                           "looked for the right reason. A low faithfulness score is the "
+                           "clearer signal: it means the highlight is largely decorative."),
+            },
             "target_layer": "layer4[-1]",
             "faithfulness_per_image": [round(f, 3) for f in faith_scores],
             "chart": {"kind": "images", "title": "Where the model looks (Grad-CAM)",
                       "paths": rel_plots, "captions": captions},
-            "chart2": {"kind": "gauge", "title": "Deletion faithfulness (0–1)",
-                       "value": mean_faith or 0.0, "min": 0, "max": 1},
+            "chart2": {
+                "kind": "scale", "title": "Deletion faithfulness",
+                "value": mean_faith or 0.0, "min": 0, "max": 1,
+                "ticks": [0, 0.2, 0.5, 1], "tick_labels": ["0", "0.2", "0.5", "1"],
+                "bands": [
+                    {"to": 0.2, "label": "decorative", "color": "#F5D3CE"},
+                    {"to": 0.5, "label": "partly faithful", "color": "#FAECC8"},
+                    {"to": 1.0, "label": "faithful", "color": "#CDE8D5"},
+                ],
+                "value_label": "How far confidence falls when the highlighted region "
+                               "is masked out — higher means the highlight mattered.",
+            },
         },
         plots=rel_plots,
     )

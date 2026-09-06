@@ -3,56 +3,237 @@
   "domain": "image",
   "model_id": "skin-lesion-resnet18",
   "dataset_id": "ham10000-subset",
-  "meta": {"seed": 42, "sample_size": 200, "note": "SAMPLE DATA — placeholder until the real engine run replaces it."},
+  "meta": {
+    "seed": 42,
+    "sample_size": 200,
+    "note": "SAMPLE DATA — placeholder until the real engine run replaces it."
+  },
   "created_at": "2026-09-06T00:00:00+00:00",
   "findings": [
     {
-      "pillar": "performance", "metric": "per_class_sensitivity", "domain": "image",
-      "value": {"balanced_accuracy": 0.74},
+      "pillar": "performance",
+      "metric": "per_class_sensitivity",
+      "domain": "image",
+      "value": {
+        "balanced_accuracy": 0.74
+      },
       "verdict": "warn",
       "summary": "Balanced accuracy 0.74; melanoma sensitivity lower than desired.",
-      "details": {"chart": {"kind": "bar", "title": "Sensitivity per class",
-        "x": ["akiec","bcc","bkl","df","nv","mel","vasc"],
-        "y": [0.61, 0.78, 0.70, 0.55, 0.93, 0.66, 0.80],
-        "x_title": "Class", "y_title": "Sensitivity"}},
+      "details": {
+        "chart": {
+          "kind": "bar",
+          "title": "Sensitivity per class",
+          "x": [
+            "akiec",
+            "bcc",
+            "bkl",
+            "df",
+            "nv",
+            "mel",
+            "vasc"
+          ],
+          "y": [
+            0.61,
+            0.78,
+            0.7,
+            0.55,
+            0.93,
+            0.66,
+            0.8
+          ],
+          "x_title": "Class",
+          "y_title": "Sensitivity"
+        },
+        "explain": {
+          "what": "Sensitivity is the share of truly affected cases a model catches. Shown per class, because one averaged number hides the classes that matter most.",
+          "how": "Each bar is one diagnosis class. Height is the share of that class the model correctly found. The rare, dangerous classes are the ones to read first — a tall bar on the common benign class cannot compensate for a short one on melanoma.",
+          "limits": "Sensitivity ignores false alarms. A model that flags everything as melanoma scores perfectly here while being useless in practice."
+        }
+      },
       "plots": []
     },
     {
-      "pillar": "fairness", "metric": "subgroup_sensitivity_gap_ITA", "domain": "image",
-      "value": {"gap": 0.18},
+      "pillar": "fairness",
+      "metric": "subgroup_sensitivity_gap_ITA",
+      "domain": "image",
+      "value": {
+        "gap": 0.18
+      },
       "verdict": "fail",
       "summary": "Melanoma sensitivity drops by 18 points for darker skin types (ITA bins) — a documented bias.",
-      "details": {"chart": {"kind": "bar", "title": "Melanoma sensitivity by skin type (ITA)",
-        "x": ["light (I–II)", "medium (III–IV)", "dark (V–VI)"],
-        "y": [0.71, 0.63, 0.53], "color": "#C77700",
-        "x_title": "Skin type (ITA-estimated)", "y_title": "Sensitivity"}},
+      "details": {
+        "chart": {
+          "kind": "bar",
+          "title": "Melanoma sensitivity by skin type (ITA)",
+          "x": [
+            "light (I–II)",
+            "medium (III–IV)",
+            "dark (V–VI)"
+          ],
+          "y": [
+            0.71,
+            0.63,
+            0.53
+          ],
+          "color": "#C77700",
+          "x_title": "Skin type (ITA-estimated)",
+          "y_title": "Sensitivity"
+        },
+        "explain": {
+          "what": "The same sensitivity, split by estimated skin tone (ITA). The gap between the best and worst group is the fairness signal: it shows who the model serves worse.",
+          "how": "Compare the bars against each other rather than their absolute height. A downward slope from light to dark skin means darker-skinned patients get missed more often.",
+          "limits": "ITA is estimated from pixels, not clinically assessed. Small groups make the gap noisy, so a gap only counts as evidence once each bin holds enough images."
+        }
+      },
       "plots": []
     },
     {
-      "pillar": "robustness", "metric": "corruption_robustness", "domain": "image",
-      "value": {"clean": 0.81, "mean_corrupted": 0.66},
+      "pillar": "robustness",
+      "metric": "corruption_robustness",
+      "domain": "image",
+      "value": {
+        "clean": 0.81,
+        "mean_corrupted": 0.66
+      },
       "verdict": "warn",
       "summary": "Accuracy drops from 0.81 to 0.66 on average under image corruptions.",
-      "details": {"chart": {"kind": "bar", "title": "Accuracy under corruptions",
-        "x": ["clean","noise","blur","bright","jpeg"],
-        "y": [0.81, 0.62, 0.67, 0.71, 0.64],
-        "x_title": "Corruption", "y_title": "Accuracy"}},
+      "details": {
+        "chart": {
+          "kind": "bar",
+          "title": "Accuracy under corruptions",
+          "x": [
+            "clean",
+            "noise",
+            "blur",
+            "bright",
+            "jpeg"
+          ],
+          "y": [
+            0.81,
+            0.62,
+            0.67,
+            0.71,
+            0.64
+          ],
+          "x_title": "Corruption",
+          "y_title": "Accuracy"
+        },
+        "explain": {
+          "what": "Accuracy measured again after realistic image degradations — noise, blur, brightness shifts, JPEG compression — none of which change the diagnosis.",
+          "how": "The first bar is the clean baseline; every other bar is accuracy under one distortion. The drop from the baseline is the interesting part, not the absolute values.",
+          "limits": "These are synthetic distortions. Real-world shifts — a different dermatoscope, a different clinic's lighting — can hurt more and are not covered here."
+        }
+      },
       "plots": []
     },
     {
-      "pillar": "explainability", "metric": "gradcam_faithfulness", "domain": "image",
-      "value": {"faithfulness": 0.62},
+      "pillar": "explainability",
+      "metric": "gradcam_faithfulness",
+      "domain": "image",
+      "value": {
+        "faithfulness": 0.62
+      },
       "verdict": "info",
       "summary": "Grad-CAM faithfulness 0.62 (deletion metric); overlays come with the real run.",
-      "details": {"chart": {"kind": "gauge", "title": "Faithfulness (0–1)", "value": 0.62, "min": 0, "max": 1}},
+      "details": {
+        "chart": {
+          "kind": "scale",
+          "title": "Deletion faithfulness",
+          "value": 0.62,
+          "min": 0,
+          "max": 1,
+          "ticks": [
+            0,
+            0.2,
+            0.5,
+            1
+          ],
+          "tick_labels": [
+            "0",
+            "0.2",
+            "0.5",
+            "1"
+          ],
+          "bands": [
+            {
+              "to": 0.2,
+              "label": "decorative",
+              "color": "#F5D3CE"
+            },
+            {
+              "to": 0.5,
+              "label": "partly faithful",
+              "color": "#FAECC8"
+            },
+            {
+              "to": 1.0,
+              "label": "faithful",
+              "color": "#CDE8D5"
+            }
+          ],
+          "value_label": "How far confidence falls when the highlighted region is masked out — higher means the highlight mattered."
+        },
+        "explain": {
+          "what": "Whether the model's own explanation is honest: the region Grad-CAM highlights is masked out and we measure how far the model's confidence falls.",
+          "how": "The marker sits on a scale from decorative to faithful. Further right means hiding the highlighted region really did break the prediction, so the highlight reflects what the model used.",
+          "limits": "A faithful explanation is not automatically a medically sensible one — it shows where the model looked, not whether looking there was right."
+        }
+      },
       "plots": []
     },
     {
-      "pillar": "privacy", "metric": "membership_inference_auc", "domain": "image",
-      "value": {"mia_auc": 0.57},
+      "pillar": "privacy",
+      "metric": "membership_inference_auc",
+      "domain": "image",
+      "value": {
+        "mia_auc": 0.57
+      },
       "verdict": "pass",
       "summary": "Membership-inference AUC 0.57 (close to 0.5 = low leakage risk).",
-      "details": {"chart": {"kind": "gauge", "title": "MIA AUC (0.5 = ideal)", "value": 0.57, "min": 0.5, "max": 1.0}},
+      "details": {
+        "chart": {
+          "kind": "scale",
+          "title": "Membership-inference AUC",
+          "value": 0.57,
+          "min": 0.5,
+          "max": 1.0,
+          "ticks": [
+            0.5,
+            0.6,
+            0.75,
+            1.0
+          ],
+          "tick_labels": [
+            "0.5",
+            "0.6",
+            "0.75",
+            "1.0"
+          ],
+          "bands": [
+            {
+              "to": 0.6,
+              "label": "low risk",
+              "color": "#CDE8D5"
+            },
+            {
+              "to": 0.75,
+              "label": "moderate",
+              "color": "#FAECC8"
+            },
+            {
+              "to": 1.0,
+              "label": "high risk",
+              "color": "#F5D3CE"
+            }
+          ],
+          "value_label": "0.5 = the attacker is only guessing (good). Towards 1.0 the model reveals who was in its training set."
+        },
+        "explain": {
+          "what": "How well an attacker could tell whether a specific patient's image was in the training set, using only the model's confidence.",
+          "how": "0.5 means the attacker is guessing — the good case, marked as low risk. The further right the marker sits, the more reliably the model betrays who it was trained on.",
+          "limits": "This tests one standard attack. A stronger, better-resourced attacker may do better, so a good score is evidence of low risk, not a guarantee of privacy."
+        }
+      },
       "plots": []
     }
   ]

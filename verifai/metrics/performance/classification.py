@@ -47,6 +47,20 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         summary=(f"Top-1 accuracy {acc*100:.0f}% on {n} labeled examples. {note}"
                  if acc is not None else "No labeled examples."),
         details={
+            "explain": {
+                "what": ("Top-1 accuracy is the share of images where the model's most "
+                         "confident class is the correct one — the plainest measure of "
+                         "'does it get the answer right'."),
+                "how": ("Each bar is one image. The height is how confident the model was "
+                        "in its single best guess. Green means that guess was correct, red "
+                        "means it was wrong — so a tall red bar is the worst case: "
+                        "confidently wrong. Hover a bar to see the predicted and true class."),
+                "limits": ("Accuracy alone hides *which* classes fail. A model can look "
+                           "good overall while missing most melanomas, because melanoma is "
+                           "rare in the data. It also says nothing about whether the "
+                           "accuracy is evenly spread across patient groups — that is what "
+                           "the fairness pillar is for."),
+            },
             "per_example": per_example,
             "chart": {
                 "kind": "bar",

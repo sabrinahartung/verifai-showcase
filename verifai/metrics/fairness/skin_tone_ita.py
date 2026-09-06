@@ -64,8 +64,25 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         "x_title": "Estimated skin type", "y_title": "Number of images",
     }
 
-    details: dict[str, Any] = {"per_example": per_example, "chart": chart_bar,
-                               "enough_per_bin": bool(enough_per_bin)}
+    explain = {
+        "what": ("A skin-lesion model that was only ever tested on light skin cannot be "
+                 "trusted on dark skin. HAM10000 carries no skin-type labels, so the skin "
+                 "tone is estimated from the image itself: the ITA (Individual Typology "
+                 "Angle) is measured on the healthy skin around the lesion and sorted into "
+                 "light, medium and dark bins."),
+        "how": ("The bars show how many images fall into each skin-tone bin. What matters "
+                "is the shape: a tall light bar next to a near-empty dark bar means the "
+                "model is barely being tested on darker skin, so any headline accuracy "
+                "mostly describes light skin. Once every populated bin holds at least 10 "
+                "images, a second chart adds the accuracy per bin and the gap between "
+                "them."),
+        "limits": ("Coverage is not performance — this chart shows who is in the sample, "
+                   "not how well the model serves them. ITA is also an estimate from "
+                   "pixels, not a clinical Fitzpatrick assessment: lighting, vignetting "
+                   "and dermatoscope settings all shift it."),
+    }
+    details: dict[str, Any] = {"explain": explain, "per_example": per_example,
+                               "chart": chart_bar, "enough_per_bin": bool(enough_per_bin)}
     value: dict[str, Any] = {"coverage": dict(zip(bins_order, coverage)), "n": n}
 
     if enough_per_bin:

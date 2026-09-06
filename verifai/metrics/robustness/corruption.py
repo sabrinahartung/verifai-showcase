@@ -57,6 +57,20 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                  f"of the images on average.{note}" if mean_stability is not None
                  else "No images evaluated."),
         details={
+            "explain": {
+                "what": ("Real images are never clean: sensor noise, a slightly out-of-"
+                         "focus shot, harsh lighting, heavy JPEG compression. None of that "
+                         "changes the diagnosis, so the model's answer should not change "
+                         "either. This applies each distortion and checks whether it does."),
+                "how": ("Each bar is one kind of distortion. The height is the share of "
+                        "images whose top-1 class stayed the same after it was applied — "
+                        "1.0 means the model never changed its mind, 0.5 means it flipped "
+                        "on half the images. Short bars point at the distortion this model "
+                        "is most brittle against."),
+                "limits": ("Stability is not correctness: a model that is confidently wrong "
+                           "both before and after a distortion scores a perfect 1.0 here. "
+                           "Read this next to the performance pillar, never on its own."),
+            },
             "chart": {
                 "kind": "bar", "title": "Prediction stability per corruption",
                 "x": names, "y": [stability[c] for c in names], "color": "#1F8A70",

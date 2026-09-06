@@ -27,7 +27,25 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
             summary=("Membership inference needs training vs. holdout images. The example "
                      "set has no such split — so no number is invented here; the full run "
                      "(GPU notebook) provides the AUC."),
-            details={"note": "Set scenario.privacy.members/non_members to enable."},
+            details={
+                "note": "Set scenario.privacy.members/non_members to enable.",
+                "explain": {
+                    "what": ("A model tends to be more confident on images it memorised "
+                             "during training. A membership-inference attack exploits "
+                             "exactly that: given one image, it guesses whether that "
+                             "patient was in the training set. This metric measures how "
+                             "well such an attack would work."),
+                    "how": ("The result is an AUC between 0.5 and 1.0. At 0.5 the attacker "
+                            "does no better than a coin flip, which is the good case. "
+                            "Towards 1.0 the model reliably betrays who was in its "
+                            "training data — a genuine patient-privacy problem."),
+                    "limits": ("Nothing is computed here, and no number is shown, because "
+                               "the attack needs images the model trained on *and* images "
+                               "it never saw. The bundled example set has no such split. "
+                               "Inventing a reassuring number would be worse than "
+                               "reporting nothing."),
+                },
+            },
         )
     # (full implementation runs in the notebook where the split exists)
     return Finding(

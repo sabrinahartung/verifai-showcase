@@ -65,8 +65,21 @@ a new artifact folder is a new tile. `card:` in the YAML is passed straight thro
 **Adding a metric** = write `run(model, dataset, ctx) -> Finding | list[Finding]`, register it in
 `METRIC_REGISTRY`, list its id under `metrics:` in the scenario. To be rendered, return a chart
 spec in `Finding.details["chart"]` (optionally `["chart2"]`); `showcase/app.py::render_chart`
-supports `kind` of `bar` | `line` | `heatmap` | `gauge` | `images` and falls back to `st.json`.
+supports `kind` of `bar` | `line` | `heatmap` | `scale` | `images` and falls back to `st.json`.
 Adding a new chart kind means touching `render_chart` — prefer reusing an existing kind.
+
+`scale` is the labeled-band indicator that replaced the old dial gauge: it plots one value against
+named bands so the reader sees whether a number is a *good* number, not just what it is. The bands
+come from the metric, so each metric defines its own semantics (for `membership_inference_auc`,
+low is good and the green band sits on the left). `kind: "gauge"` is still accepted as an alias
+that renders as a scale, so older artifacts don't break.
+
+**Every metric must also ship its own explanation** in `Finding.details["explain"]`, with three
+keys: `what` (what is being measured and why it matters), `how` (how to read this chart), and
+`limits` (what this number does *not* tell you). The app renders `what` + the summary inline and
+puts `how`/`limits` in a "How to read this chart" expander. This lives in the engine, not the app,
+so a new metric brings its own wording and still needs no app changes. Write it for a reader who
+has never seen a Responsible-AI report — plots alone do not communicate.
 
 `ctx` carries `{"scenario": ..., "seed": ..., "plot_dir": ...}`. Metrics that write images must
 write into `ctx["plot_dir"]` and reference them as `"plots/<name>.png"` (paths in `Finding.plots`
