@@ -121,8 +121,27 @@ against 1 in the best clean subset the old split could offer.
 train 2 epochs on MPS → evaluate → artifacts), so the pipeline is known to work
 before committing to the full download and training run.
 
-Compute: ~7k images, ResNet18 — roughly 1–2 h on the Mac's MPS, or ~20 min on a
-free Colab T4. Evaluation of 1,493 images is ~2 min on CPU.
+### Compute: this runs locally, and it is fast
+
+Measured on this machine (Apple M1 Max, 10 cores, 64 GB) rather than estimated —
+an earlier guess of "1–2 h on MPS" was wrong by about 15x:
+
+| Stage | Throughput | Time |
+|---|---|---|
+| ResNet18 fwd+bwd on MPS, bs=32 | 348 img/s | ~20 s/epoch |
+| JPEG decode + augment, 8 workers, 320px | 1,259 img/s | ~6 s/epoch |
+| **Realistic full epoch (7,014 images)** | **286 img/s** | **24.5 s** |
+| **Full 12-epoch training run** | | **~5 min** |
+| Evaluation of the 1,493-image test split | | ~2 min on CPU |
+
+Data loading is not the bottleneck once `workers: 8` is set — decoding runs about
+3.5x faster than the GPU consumes, which is the right shape. Two settings matter
+on macOS: `persistent_workers` (spawning 8 loader processes costs ~10 s, and
+without it they respawn every epoch) and `--max-size 320` when materialising.
+
+**No cloud is required for any of this.** The pipeline is local end to end. Because
+`device: auto` resolves cuda → mps → cpu, the same scenario runs unchanged on a
+CUDA machine later — the local option is not a fallback, it is the default path.
 
 ## Step 3 — Make leakage a first-class finding ✅ done 2026-09-07
 
@@ -152,6 +171,16 @@ This is the step that turns the original flaw into the product's strongest claim
 *this tool catches the error behind most published accuracy numbers.*
 
 ## Step 4 — Retrain, evaluate, deploy
+
+Fully local. The whole sequence is roughly 15 minutes of wall time:
+
+```bash
+python scripts/build_splits.py                              # done; manifests committed
+python scripts/materialize_images.py --max-size 320         # ~140 MB, a few minutes
+python scripts/train_model.py scenarios/skin_cancer_clean.yaml   # ~5 min on MPS
+python scripts/run_scenario.py scenarios/skin_cancer_clean.yaml  # ~2 min, integrity-checked
+git add showcase/artifacts && git commit && git push        # push == deploy
+```
 
 - [ ] Retrain on the clean lesion-grouped split
 - [ ] Full evaluation over the real holdout (~1,500 images) — all verdict gates active

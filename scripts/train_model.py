@@ -113,10 +113,15 @@ def main(scenario_path: str) -> None:
     print(f"  device={device}  arch={arch}  epochs={epochs}  bs={bs}  lr={lr}")
 
     from verifai.models.image import MEAN, STD
+    # persistent_workers matters on macOS: spawning 8 loader processes costs ~10s,
+    # and without this they respawn every epoch, doubling a short run's wall time.
+    workers = int(tcfg.get("workers", 8))
+    dl_kw = dict(batch_size=bs, num_workers=workers,
+                 persistent_workers=workers > 0)
     tl = DataLoader(_TorchView(train_ds, classes, _augment(size, MEAN, STD)),
-                    batch_size=bs, shuffle=True, num_workers=int(tcfg.get("workers", 0)))
+                    shuffle=True, **dl_kw)
     vl = DataLoader(_TorchView(val_ds, classes, build_preprocess(size)),
-                    batch_size=bs, shuffle=False, num_workers=int(tcfg.get("workers", 0)))
+                    shuffle=False, **dl_kw)
 
     # --- model ---------------------------------------------------------------
     net = getattr(tvm, arch)(weights="DEFAULT" if tcfg.get("pretrained", True) else None)
