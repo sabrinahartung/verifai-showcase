@@ -133,8 +133,16 @@ def render_chart(spec: dict, base: Path):
         fig.update_layout(title=title, xaxis_title=spec.get("x_title", ""), yaxis_title=spec.get("y_title", ""))
         st.plotly_chart(fig, width="stretch")
     elif kind == "heatmap":
-        fig = go.Figure(go.Heatmap(z=spec["z"], x=spec.get("x"), y=spec.get("y"), colorscale="Blues"))
-        fig.update_layout(title=title)
+        hm = go.Heatmap(z=spec["z"], x=spec.get("x"), y=spec.get("y"), colorscale="Blues",
+                        zmin=spec.get("zmin"), zmax=spec.get("zmax"))
+        if spec.get("text"):
+            hm.text = spec["text"]
+            hm.hovertemplate = "%{text}<extra></extra>"
+        fig = go.Figure(hm)
+        fig.update_layout(title=title, xaxis_title=spec.get("x_title", ""),
+                          yaxis_title=spec.get("y_title", ""),
+                          # true classes read top-to-bottom, like a printed matrix
+                          yaxis=dict(autorange="reversed"))
         st.plotly_chart(fig, width="stretch")
     elif kind in ("scale", "gauge"):   # "gauge" kept as an alias so older reports still render
         _scale(spec)

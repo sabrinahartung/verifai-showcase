@@ -64,6 +64,12 @@ card:
   emoji: "🔬"
   description: "Skin-lesion classification over 7 classes, trained on a lesion-grouped split of HAM10000 and evaluated on 1,493 images the model never saw."
 
+# Membership inference is finally computable: we know exactly what was trained on.
+privacy:
+  members: "data/manifests/ham10000_train.csv"       # the model saw these
+  non_members: "data/manifests/ham10000_test.csv"    # it never saw these
+  sample: 750                                        # per side, for runtime
+
 # Refuse to evaluate if the test manifest overlaps what the model trained on.
 # Derived from the training: block above; override with explicit train_manifests.
 integrity:

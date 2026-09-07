@@ -93,7 +93,9 @@ def main() -> None:
     want = wanted_ids(Path(a.manifests), a.prefix, a.split or ["train", "val", "test"])
     todo = {i: f for i, f in want.items() if not (out / f).exists()}
     print(f"▶ {len(want):,} images wanted, {len(want) - len(todo):,} already on disk, "
-          f"{len(todo):,} to fetch -> {out}")
+          f"{len(todo):,} to fetch -> {out}", flush=True)
+    print("  (reading the dataset's parquet; the first images take a while to appear)",
+          flush=True)
     if not todo:
         print("✓ nothing to do"); return
 
@@ -119,7 +121,8 @@ def main() -> None:
             (out / todo[image_id]).write_bytes(data)
             got += 1
             if got % 250 == 0:
-                print(f"   {got:,}/{len(todo):,}")
+                # flush: piping this to a log otherwise hides progress for minutes
+                print(f"   {got:,}/{len(todo):,}", flush=True)
             if a.limit and got >= a.limit:
                 print(f"✓ stopped at --limit {a.limit}"); return
     stamp.write_text(json.dumps(want_cfg, indent=2), encoding="utf-8")

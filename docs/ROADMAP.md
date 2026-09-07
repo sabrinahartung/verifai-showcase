@@ -203,14 +203,48 @@ python scripts/run_scenario.py scenarios/skin_cancer_clean.yaml  # ~2 min, integ
 git add showcase/artifacts && git commit && git push        # push == deploy
 ```
 
-- [ ] Retrain on the clean lesion-grouped split
-- [ ] Full evaluation over the real holdout (~1,500 images) — all verdict gates active
-- [ ] Membership inference finally computable: members = train manifest,
-      non-members = held-out manifest
-- [ ] Replace the per-example bar chart (unreadable past ~50 bars) with a
-      confusion matrix — the `heatmap` chart kind already exists — plus per-class accuracy
-- [ ] Commit artifacts and push. **Streamlit Community Cloud redeploys on push, so
-      committing the artifacts *is* the deploy.**
+- [x] Retrained on the clean lesion-grouped split — 12 epochs in **4.6 min** on MPS,
+      best val balanced accuracy 0.724
+- [x] Full evaluation over the real holdout: **1,493 images, 1:49**, every verdict
+      gate active for the first time
+- [x] Membership inference computed for real: members = train manifest,
+      non-members = test manifest, rank-based AUC with no new dependency
+- [x] Per-example bar chart replaced above 50 images by a confusion matrix plus
+      per-class recall
+- [ ] Push. **Streamlit Community Cloud redeploys on push, so committing the
+      artifacts *is* the deploy.**
+
+### The first trustworthy result
+
+| Pillar | Verdict | Result |
+|---|---|---|
+| Integrity | ✅ pass | 0 shared lesions, 0 shared images across 1,493 test images |
+| Performance | ✅ pass | 79.6% top-1, **72.8% balanced** |
+| Privacy | ✅ pass | membership-inference AUC 0.558 (0.5 = ideal) |
+| Robustness | ⚠️ warn | 71.7% of predictions survive corruption |
+| Fairness | ❌ **fail** | **21.3-point** accuracy gap across ITA skin-tone bins |
+
+What the headline number hides, and why the confusion matrix earns its place:
+
+| Class | Recall | Support |
+|---|---|---|
+| melanocytic_Nevi | 0.862 | 1,009 |
+| basal_cell_carcinoma | 0.855 | 76 |
+| vascular_lesions | 0.818 | 22 |
+| dermatofibroma | 0.769 | 13 |
+| **melanoma** | **0.638** | 163 |
+| benign_keratosis-like_lesions | 0.586 | 157 |
+| actinic_keratoses | 0.566 | 53 |
+
+**80% accuracy, and it misses one melanoma in three.** The class that matters most
+clinically is the second worst. That is the whole argument for this project in one
+table — and note that none of these numbers could have been believed before the
+integrity check passed.
+
+On fairness: light 78.5% (n=1,325), medium 96.3% (n=108), dark 75.0% (n=60). The
+gap is real and fails the threshold, but read the supports before drawing a
+conclusion — it is driven as much by the small medium-skin bin scoring unusually
+high as by dark skin scoring low.
 
 ## Step 5 — A larger image set
 
