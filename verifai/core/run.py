@@ -13,10 +13,16 @@ import random
 from typing import Any, Callable
 
 from verifai.core.findings import Report, Finding
+from verifai.core.integrity import audit_split, train_manifests_from_scenario
+
+
+class SplitLeakageError(RuntimeError):
+    """Raised instead of producing a flattering number from a leaking split."""
 
 # metric id -> "module_path:function_name"
 # Each metric fn has signature: fn(model, dataset, ctx: dict) -> Finding | list[Finding]
 METRIC_REGISTRY: dict[str, str] = {
+    "integrity.split_leakage":    "verifai.metrics.integrity.split_leakage:run",
     "performance.classification": "verifai.metrics.performance.classification:run",
     "explainability.gradcam":     "verifai.metrics.explainability.gradcam:run",
     "robustness.corruption":      "verifai.metrics.robustness.corruption:run",
@@ -46,6 +52,36 @@ def _safe_len(dataset) -> int | None:
         return None
 
 
+def _enforce_split_integrity(scenario: dict[str, Any], dataset) -> None:
+    """Refuse to evaluate a test set the model was trained on.
+
+    The failure mode this exists for is silent: a contaminated split does not
+    crash, it just reports a high number. Set `integrity.enforce: false` to
+    downgrade this to a reported finding instead of a hard stop.
+    """
+    cfg = scenario.get("integrity") or {}
+    if not cfg.get("enforce", True):
+        return
+    test_manifest = (getattr(dataset, "meta", None) or {}).get("manifest")
+    train_manifests = train_manifests_from_scenario(scenario)
+    if not test_manifest or not train_manifests:
+        return                      # nothing declared to check against; the metric says so
+    a = audit_split(test_manifest, train_manifests,
+                    group_key=cfg.get("group_key", "lesion_id"),
+                    id_key=cfg.get("id_key", "image_id"))
+    if not a["verifiable"]:
+        return                      # nothing comparable in the manifests; the metric says so
+    if not a["clean"]:
+        raise SplitLeakageError(
+            f"{a['affected_rows']} of {a['n_test']} test images ({a['contamination']*100:.1f}%) "
+            f"were seen during training: {a['shared_ids']} identical images, "
+            f"{a['shared_groups']} shared lesions (e.g. {a['example_shared_groups'][:3]}). "
+            f"Refusing to evaluate — the result would be a memorisation check. "
+            f"Rebuild the split with scripts/build_splits.py, or set integrity.enforce: false "
+            f"to report it as a finding instead."
+        )
+
+
 def run_scenario(scenario: dict[str, Any]) -> Report:
     seed = scenario.get("seed", 42)
     random.seed(seed)
@@ -57,6 +93,7 @@ def run_scenario(scenario: dict[str, Any]) -> Report:
 
     model = _build_model(scenario["model"])
     dataset = _build_dataset(scenario["dataset"])
+    _enforce_split_integrity(scenario, dataset)
 
     report = Report(
         scenario=scenario["name"],

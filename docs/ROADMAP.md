@@ -118,18 +118,31 @@ before committing to the full download and training run.
 Compute: ~7k images, ResNet18 — roughly 1–2 h on the Mac's MPS, or ~20 min on a
 free Colab T4. Evaluation of 1,493 images is ~2 min on CPU.
 
-## Step 3 — Make leakage a first-class finding
+## Step 3 — Make leakage a first-class finding ✅ done 2026-09-07
 
 *Goal: the framework catches the mistake that invalidated the last run.*
 
-- [ ] New pillar/metric `integrity.split_leakage` reporting: lesion IDs shared
-      between train and test, duplicate image IDs, contamination percentage
-- [ ] `run_scenario.py` **refuses to run** when the test manifest shares a
-      `lesion_id` with the train manifest, rather than quietly producing a
-      flattering number
-- [ ] The check renders as a normal tile finding with its own `explain` block
+- [x] New pillar `integrity` with metric `split_leakage`, reporting shared lesion
+      IDs, duplicate image IDs and the contamination percentage
+- [x] `run_scenario.py` raises `SplitLeakageError` **before any metric runs**
+      rather than quietly producing a flattering number. `integrity.enforce: false`
+      downgrades it to a reported finding
+- [x] `verifai/core/integrity.py` is the single implementation, used by both the
+      guard and the metric, so they cannot drift apart
+- [x] Renders as a normal tile finding with its own `explain` block; `integrity`
+      sits first in the dashboard because every other pillar is conditional on it
 
-This is the step that turns yesterday's flaw into the product's strongest claim:
+Two honesty bugs were found and fixed while building this:
+
+- A manifest without `image_id`/`lesion_id` columns compared as *zero* overlap and
+  scored a green "clean split" — publishing an unverified split as a verified one.
+  `audit_split` now separates `verifiable` from `clean`, and unverifiable reports
+  `info` with an explicit "this is not a clean bill of health".
+- `scenarios/skin_cancer.yaml` now runs the check and states plainly that its
+  integrity is unverified — which is the truthful status for a checkpoint trained
+  on ~99.5% of HAM10000.
+
+This is the step that turns the original flaw into the product's strongest claim:
 *this tool catches the error behind most published accuracy numbers.*
 
 ## Step 4 — Retrain, evaluate, deploy
@@ -142,6 +155,57 @@ This is the step that turns yesterday's flaw into the product's strongest claim:
       confusion matrix — the `heatmap` chart kind already exists — plus per-class accuracy
 - [ ] Commit artifacts and push. **Streamlit Community Cloud redeploys on push, so
       committing the artifacts *is* the deploy.**
+
+## Step 5 — A larger image set
+
+*Goal: more data, and a test set the model has no relationship to at all.*
+
+HAM10000 is 10,015 images and the model will have seen 70% of them. The next
+honest gain comes from data drawn from somewhere else entirely.
+
+- [ ] Add ISIC 2019 (~25k images, 8 classes) as additional **training** data
+- [ ] **Check the overlap first.** ISIC 2019 incorporates HAM10000, so the same
+      leakage trap is waiting: dedupe by `image_id`/`lesion_id` against our
+      manifests before mixing, and re-run `build_splits.py` over the union
+- [ ] Map the class vocabularies (ISIC's `SCC` has no HAM10000 equivalent —
+      decide explicitly whether to add an eighth class or drop those rows)
+- [ ] Consider a genuinely **external** test set (PH2, Derm7pt, PAD-UFES-20) as a
+      separate scenario. Different camera, different clinic, different population:
+      the gap between the internal and external number *is* the generalisation
+      result, and is worth publishing as its own tile
+
+Note that a larger training set does not by itself justify a bigger *test* set —
+what makes the test number trustworthy is that no lesion in it was ever trained on.
+
+## Step 6 — Snapshots and a comparison view
+
+*Goal: show improvement over time, without inviting a dishonest comparison.*
+
+- [ ] Keep every evaluation instead of overwriting: `run_scenario.py` writes
+      `showcase/artifacts/<id>/history/<created_at>.json` alongside the current
+      `report.json` (which stays "latest" so the dashboard is unchanged)
+- [ ] Give each card a `lineage:` field, so the app can group snapshots that
+      belong to the same model family across retrains
+- [ ] Record in each snapshot what makes it comparable: `dataset_id`, the test
+      manifest path and its content hash, plus the split-integrity verdict
+- [ ] New chart kind for multi-series data (`grouped_bar` or `series`); today's
+      `bar` takes a single x/y pair
+- [ ] Comparison tile: metric-by-metric across snapshots, plus a delta column
+
+**The trap this must avoid.** Two numbers are only comparable if they come from
+the same test manifest *and* both snapshots were clean. Comparing the original
+checkpoint against the retrained one is not a fair fight in either direction:
+
+- Evaluated on its own contaminated split, the old model scores inflated numbers.
+- Evaluated on the new clean manifest, it *still* scores inflated numbers, because
+  it trained on ~99.5% of HAM10000 — the new test set is unseen for the new model,
+  not for the old one.
+
+So the comparison view must refuse to plot snapshots with mismatched test
+manifests, and must render the integrity verdict beside every bar. A green
+"+12 points" against a leaked baseline would be exactly the kind of claim this
+project exists to catch. Where no fair comparison is possible, say so instead of
+drawing the chart.
 
 ---
 

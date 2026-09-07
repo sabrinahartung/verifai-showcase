@@ -139,3 +139,81 @@ def test_single_skin_tone_bin_never_claims_a_fairness_pass():
     assert len(populated) == 1, "test setup should produce exactly one populated bin"
     assert finding.verdict != "pass", "a single skin-tone bin must never read as a fairness pass"
     assert "accuracy_gap" not in finding.value, "no gap should be claimed from one group"
+
+
+# --- split integrity: the check that guards every other number ---------------
+def _split_manifest(tmp_path: Path, name: str, rows: list[tuple[str, str]]) -> Path:
+    p = tmp_path / f"{name}.csv"
+    with open(p, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["filename", "image_id", "lesion_id", "label"])
+        for img, les in rows:
+            w.writerow([f"{img}.jpg", img, les, "mel"])
+    return p
+
+
+def test_audit_split_passes_a_disjoint_split(tmp_path):
+    from verifai.core.integrity import audit_split
+    tr = _split_manifest(tmp_path, "tr", [("i1", "L1"), ("i2", "L2")])
+    te = _split_manifest(tmp_path, "te", [("i3", "L3"), ("i4", "L4")])
+    a = audit_split(te, [tr])
+    assert a["clean"] and a["contamination"] == 0.0
+
+
+def test_audit_split_catches_a_shared_lesion_even_with_new_images(tmp_path):
+    """The failure the original dataset had: distinct image_ids, same lesion."""
+    from verifai.core.integrity import audit_split
+    tr = _split_manifest(tmp_path, "tr", [("i1", "L1")])
+    te = _split_manifest(tmp_path, "te", [("i9", "L1"), ("i8", "L2")])   # i9 is a new photo of L1
+    a = audit_split(te, [tr])
+    assert not a["clean"]
+    assert a["shared_ids"] == 0 and a["shared_groups"] == 1
+    assert a["contamination"] == 0.5
+
+
+def test_audit_split_catches_identical_images(tmp_path):
+    from verifai.core.integrity import audit_split
+    tr = _split_manifest(tmp_path, "tr", [("i1", "L1")])
+    te = _split_manifest(tmp_path, "te", [("i1", "L1")])
+    a = audit_split(te, [tr])
+    assert a["shared_ids"] == 1 and a["contamination"] == 1.0
+
+
+def test_our_committed_manifests_are_leak_free():
+    """The real split this repo ships. If this ever fails, do not publish a number."""
+    from verifai.core.integrity import audit_split
+    man = REPO / "data" / "manifests"
+    if not (man / "ham10000_test.csv").exists():
+        pytest.skip("run scripts/build_splits.py first")
+    a = audit_split(man / "ham10000_test.csv",
+                    [man / "ham10000_train.csv", man / "ham10000_val.csv"])
+    assert a["clean"], f"committed split leaks: {a}"
+    assert a["n_test"] == 1493
+
+
+def test_train_manifests_are_derived_from_the_training_block():
+    from verifai.core.integrity import train_manifests_from_scenario
+    got = train_manifests_from_scenario(
+        {"training": {"manifest_prefix": "ham10000", "manifest_dir": "data/manifests"}})
+    assert got == ["data/manifests/ham10000_train.csv", "data/manifests/ham10000_val.csv"], \
+        "validation counts as seen — the model was selected on it"
+    assert train_manifests_from_scenario({}) == []
+
+
+def test_unverifiable_split_is_never_reported_as_clean(tmp_path):
+    """A manifest without identifiers answers nothing — that is not a pass.
+
+    Regression: manifests carrying only filename+label compared as 0 shared
+    lesions and 0 shared images, which scored a green 'clean split'.
+    """
+    from verifai.core.integrity import audit_split
+    def bare(name, rows):
+        p = tmp_path / f"{name}.csv"
+        with open(p, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, lineterminator="\n")
+            w.writerow(["filename", "label"])
+            w.writerows(rows)
+        return p
+    a = audit_split(bare("tr", [["a.jpg", "mel"]]), [bare("te", [["a.jpg", "mel"]])])
+    assert a["verifiable"] is False
+    assert a["clean"] is not True, "unverifiable must never read as clean"

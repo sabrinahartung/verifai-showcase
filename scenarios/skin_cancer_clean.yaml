@@ -60,7 +60,14 @@ card:
   emoji: "🔬"
   description: "Skin-lesion classification over 7 classes, trained on a lesion-grouped split of HAM10000 and evaluated on 1,493 images the model never saw."
 
+# Refuse to evaluate if the test manifest overlaps what the model trained on.
+# Derived from the training: block above; override with explicit train_manifests.
+integrity:
+  enforce: true
+  group_key: "lesion_id"
+
 metrics:
+  - "integrity.split_leakage"      # every number below is conditional on this
   - "performance.classification"
   - "explainability.gradcam"
   - "robustness.corruption"

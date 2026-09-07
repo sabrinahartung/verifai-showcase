@@ -40,6 +40,11 @@ card:
 
 # which pillars/metrics to run:
 metrics:
+  # No training manifest exists for this checkpoint, so this reports honestly that
+  # integrity is UNVERIFIED rather than claiming a clean split. It matters here:
+  # this model trained on ~99.5% of HAM10000, so these 7 examples were almost
+  # certainly seen. scenarios/skin_cancer_clean.yaml is the one with a real split.
+  - "integrity.split_leakage"
   - "performance.classification"   # top-1 accuracy + per-example confidence
   - "explainability.gradcam"       # Grad-CAM overlays + deletion-faithfulness
   - "robustness.corruption"        # stability under noise/blur/brightness/JPEG

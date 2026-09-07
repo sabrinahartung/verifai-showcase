@@ -5,6 +5,26 @@
   "dataset_id": "ham10000-examples",
   "findings": [
     {
+      "pillar": "integrity",
+      "metric": "split_leakage",
+      "domain": "image",
+      "value": {
+        "status": "not_checkable",
+        "reason": "no training manifests are declared"
+      },
+      "verdict": "info",
+      "summary": "Split integrity could not be verified: no training manifests are declared. Every number in this report therefore rests on an unverified assumption — that the model never saw this data.",
+      "details": {
+        "explain": {
+          "what": "A test set only means something if the model has never seen it. This compares the evaluation set against everything the model trained on — not just image by image, but by lesion, because the same lesion is often photographed several times and a second photo of a memorised lesion is not a fair question.",
+          "how": "The marker sits on the share of test images that are contaminated. At 0 the split is clean and every other number in this report can be read at face value. Anything above 0 means part of the score is recall rather than generalisation, and the accuracy above is inflated by roughly that share.",
+          "limits": "This checks identifiers, not pixels. Two different photographs of genuinely different lesions that happen to look alike are not caught, and neither is duplication that carries no shared lesion_id. A clean result here means no *declared* overlap, which is a floor on trustworthiness, not a ceiling."
+        },
+        "note": "Declare integrity.train_manifests (or a training: block) to enable."
+      },
+      "plots": []
+    },
+    {
       "pillar": "performance",
       "metric": "top1_accuracy",
       "domain": "image",
@@ -382,5 +402,5 @@
     "sample_size": 7,
     "device": "cpu"
   },
-  "created_at": "2026-09-07T10:07:48.479371+00:00"
+  "created_at": "2026-09-07T10:26:22.406138+00:00"
 }

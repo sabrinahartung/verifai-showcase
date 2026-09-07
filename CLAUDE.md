@@ -4,8 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-VERIFAI Showcase: file-based Responsible-AI evaluation of ML models across five pillars
-(performance, fairness, robustness, explainability, privacy). Deliberately **no server, no DB**:
+VERIFAI Showcase: file-based Responsible-AI evaluation of ML models across six pillars
+(integrity, performance, fairness, robustness, explainability, privacy). Deliberately **no server, no DB**:
 a heavy offline *engine* run produces static artifacts (JSON + PNGs), and a light Streamlit
 *showcase* only reads them. Keep that split — it is what makes the public demo free and always-on.
 
@@ -55,7 +55,15 @@ Data flows one way: **scenario YAML → runner → metrics → `Finding`s → `R
   downstream, including the app, is written against this shape.
 - `verifai/core/run.py` — `run_scenario(dict) -> Report`. Holds `METRIC_REGISTRY`
   (metric id → `"module:function"`), seeds RNGs, builds model/dataset by importing the
-  `loader:` string from the scenario, and calls each metric.
+  `loader:` string from the scenario, and calls each metric. Before any metric runs it
+  calls `_enforce_split_integrity` and raises `SplitLeakageError` if the test manifest
+  overlaps the training manifests — a contaminated split fails loudly instead of
+  reporting a high number.
+- `verifai/core/integrity.py` — the one implementation of that check. The runner uses it
+  as a precondition and `metrics/integrity/split_leakage.py` publishes the same result as
+  a finding, so the guard and the report cannot drift apart. Splits are compared by
+  `lesion_id` as well as `image_id`, because a second photo of a memorised lesion is not
+  a fair test question.
 - `verifai/models/image.py` — `ImageClassifier` wrapper (`SkinLesionModel` is kept as an alias).
   Metrics use `.torch_module` and `.cam_layer` (hooks/Grad-CAM), `.to_tensor()`,
   `.predict_probs()`. Classes, architecture, Grad-CAM layer, image size and device all come from

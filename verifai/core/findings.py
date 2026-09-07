@@ -10,7 +10,8 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from typing import Any, Literal
 
-Pillar = Literal["fairness", "robustness", "explainability", "privacy", "performance"]
+Pillar = Literal["integrity", "fairness", "robustness", "explainability",
+                 "privacy", "performance"]
 Verdict = Literal["pass", "warn", "fail", "info"]
 Domain = Literal["image", "text", "tabular", "llm"]
 

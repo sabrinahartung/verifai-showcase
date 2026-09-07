@@ -24,11 +24,13 @@ import streamlit as st
 import plotly.graph_objects as go
 
 ART = Path(__file__).parent / "artifacts"
-PILLARS = ["performance", "fairness", "robustness", "explainability", "privacy"]
+# integrity comes first on purpose: every other pillar is conditional on it.
+PILLARS = ["integrity", "performance", "fairness", "robustness", "explainability", "privacy"]
 
 # The plain-language question each pillar answers, for readers who have never
 # seen a Responsible-AI report.
 PILLAR_QUESTION = {
+    "integrity":      "Can these results be trusted at all?",
     "performance":    "Does the model get the answer right?",
     "fairness":       "Does it work equally well for everyone?",
     "robustness":     "Does it stay reliable when the image is imperfect?",
