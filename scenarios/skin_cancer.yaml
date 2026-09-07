@@ -17,6 +17,13 @@ model:
   filename: "resnet18_ham10000_classweights.pt"
   # weights_path: "/Users/sabrina/Development/ML_Training_Dojo/resnet18_ham10000_classweights.pt"
   #   ^ uncomment to use local weights and skip the Hugging Face download entirely.
+  arch: "resnet18"          # any torchvision classifier factory
+  cam_layer: "layer4[-1]"   # Grad-CAM target; default per arch if omitted
+  device: "cpu"             # auto | cpu | cuda | mps.
+  #   Pinned to cpu on purpose: at this sample size everything runs at batch size
+  #   1, where per-image transfer overhead makes MPS *slower* than CPU (5.5s vs
+  #   3.2s measured). Switch to "auto" for the big run on CUDA — and batch the
+  #   forward passes first, or the GPU will idle between single images.
 
 dataset:
   loader: "verifai.datasets.loaders:load_ham10000"

@@ -379,7 +379,8 @@
   ],
   "meta": {
     "seed": 42,
-    "sample_size": 7
+    "sample_size": 7,
+    "device": "cpu"
   },
-  "created_at": "2026-09-06T21:48:35.082445+00:00"
+  "created_at": "2026-09-07T09:40:33.958929+00:00"
 }

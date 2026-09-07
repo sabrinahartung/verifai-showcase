@@ -56,7 +56,8 @@ def run_scenario(scenario: dict[str, Any]) -> Report:
         domain=scenario["domain"],
         model_id=scenario["model"].get("id", "unknown"),
         dataset_id=scenario["dataset"].get("id", "unknown"),
-        meta={"seed": seed, "sample_size": scenario.get("sample_size")},
+        meta={"seed": seed, "sample_size": scenario.get("sample_size"),
+              "device": str(getattr(model, "device", "cpu"))},
     )
 
     ctx = {"scenario": scenario, "seed": seed, "plot_dir": scenario.get("_plot_dir", "plots")}

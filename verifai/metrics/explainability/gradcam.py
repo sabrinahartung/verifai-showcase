@@ -22,9 +22,13 @@ from verifai.core.findings import Finding
 FLAT_EPS = 1e-6
 
 
-def _gradcam(torch_model, x, class_idx):
-    """Raw (un-normalised) [7,7] Grad-CAM tensor for `class_idx`. See module docstring."""
-    layer = torch_model.layer4[-1]
+def _gradcam(torch_model, layer, x, class_idx):
+    """Raw (un-normalised) Grad-CAM tensor for `class_idx`. See module docstring.
+
+    `layer` comes from the model adapter (model.cam_layer), so this works for
+    any architecture rather than assuming a ResNet. Returns a CPU tensor so the
+    numpy/PIL code below stays device-agnostic.
+    """
     activations, gradients = {}, {}
     handles = [
         layer.register_forward_hook(lambda m, i, o: activations.update(v=o)),
@@ -37,9 +41,9 @@ def _gradcam(torch_model, x, class_idx):
     finally:
         for h in handles:
             h.remove()
-    acts, grads = activations["v"][0], gradients["v"][0]  # [C,7,7]
+    acts, grads = activations["v"][0], gradients["v"][0]  # [C,h,w]
     weights = grads.mean(dim=(1, 2), keepdim=True)
-    return (weights * acts).sum(dim=0).relu().detach()
+    return (weights * acts).sum(dim=0).relu().detach().cpu()
 
 
 def _overlay(img, cam, scale, alpha=0.5):
@@ -86,6 +90,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     plot_dir.mkdir(parents=True, exist_ok=True)
     classes = model.classes
     tm = model.torch_module
+    cam_layer = model.cam_layer
 
     rel_plots: list[str] = []
     captions: list[str] = []
@@ -101,7 +106,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
 
         x = model.to_tensor(img)
         x.requires_grad_(True)
-        cam = _gradcam(tm, x, ci)
+        cam = _gradcam(tm, cam_layer, x, ci)
         scale = max(FLAT_EPS, float(cam.max()))
 
         out = _overlay(img, cam, scale)
@@ -141,7 +146,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                            "looked for the right reason. A low faithfulness score is the "
                            "clearer signal: it means the highlight is largely decorative."),
             },
-            "target_layer": "layer4[-1]",
+            "target_layer": getattr(model, "cam_layer_path", "layer4[-1]"),
             "faithfulness_per_image": [round(f, 3) for f in faith_scores],
             "chart": {"kind": "images", "title": "Where the model looks (Grad-CAM)",
                       "paths": rel_plots, "captions": captions},

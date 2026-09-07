@@ -27,9 +27,20 @@ The repo `.venv` already has both engine and showcase deps (torch, torchvision, 
 Big/statistically meaningful runs go through `scripts/run_on_free_gpu.ipynb` (Colab/Kaggle) —
 same code path, only more rows in the manifest.
 
-There is no test suite and no linter configured yet (`tests/` is empty, pytest is not installed).
-The practical smoke test is running `scripts/run_scenario.py` on the 7-image example manifest;
-it finishes on laptop CPU in seconds.
+Contract tests live in `tests/` (13 of them, no network or checkpoint needed):
+
+```bash
+pip install -r requirements-dev.txt
+.venv/bin/python -m pytest tests/ -q
+.venv/bin/python -m pytest tests/test_engine_contracts.py::test_classes_are_derived_from_the_data -q
+```
+
+They cover the seams a second model plugs into. The end-to-end smoke test is still running
+`scripts/run_scenario.py` on the 7-image manifest; it finishes on laptop CPU in seconds.
+No linter is configured.
+
+`docs/ROADMAP.md` holds the plan and the leakage audit behind it — read it before planning
+any larger evaluation run.
 
 Dependency files are split on purpose: `requirements-engine.txt` (heavy, offline run) vs
 `showcase/requirements.txt` (light, Streamlit Community Cloud free tier). Never add torch to the
@@ -45,13 +56,19 @@ Data flows one way: **scenario YAML → runner → metrics → `Finding`s → `R
 - `verifai/core/run.py` — `run_scenario(dict) -> Report`. Holds `METRIC_REGISTRY`
   (metric id → `"module:function"`), seeds RNGs, builds model/dataset by importing the
   `loader:` string from the scenario, and calls each metric.
-- `verifai/models/image.py` — `SkinLesionModel` wrapper. Metrics use `.torch_module`
-  (hooks/Grad-CAM), `.to_tensor()`, `.predict_probs()`. `CLASSES`, `MEAN`/`STD` and the 224×224
-  resize must stay byte-for-byte the training-time preprocessing, otherwise every metric silently
-  measures a different model.
+- `verifai/models/image.py` — `ImageClassifier` wrapper (`SkinLesionModel` is kept as an alias).
+  Metrics use `.torch_module` and `.cam_layer` (hooks/Grad-CAM), `.to_tensor()`,
+  `.predict_probs()`. Classes, architecture, Grad-CAM layer, image size and device all come from
+  the scenario's `model:` block; the constants here are only defaults. Whatever a scenario sets,
+  the preprocessing must stay byte-for-byte the training-time preprocessing and `classes` must
+  match the checkpoint's output order — otherwise every metric silently measures a different
+  model. `device: auto` resolves cuda → mps → cpu and is recorded in `report.json`.
 - `verifai/datasets/loaders.py` — manifest-driven `ImageDataset` (`data/manifests/*.csv`,
-  columns `filename,label`). Paths resolve relative to repo root; samples are sorted for
-  determinism. Bigger run = longer manifest, nothing else.
+  columns `filename,label` plus any extras, which land on `ImageSample.meta` — that is where
+  `lesion_id`/`sex`/`age` belong). Paths resolve relative to repo root; samples are sorted for
+  determinism. Bigger run = longer manifest, nothing else. A dataset derives its class list from
+  its own labels (or `dataset.classes`) and must **never** import it from a model — that
+  backwards dependency existed once and is asserted against in `tests/`.
 - `verifai/export/artifacts.py` — writes `report.json` + `card.json` (+ `plots/`) under
   `showcase/artifacts/<scenario>/`.
 - `showcase/app.py` — auto-discovers every `artifacts/<id>/` folder with both `card.json` and
