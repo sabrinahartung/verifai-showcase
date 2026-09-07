@@ -109,3 +109,33 @@ def test_adapter_is_not_tied_to_seven_skin_classes():
     assert set(probs) == {"a", "b", "c"}
     assert abs(sum(probs.values()) - 1.0) < 1e-5
     assert clf.cam_layer is net.layer4[-1]
+
+
+# --- honesty gates: a verdict must not outrun the evidence -------------------
+def test_single_skin_tone_bin_never_claims_a_fairness_pass():
+    """One populated ITA bin means one group — a gap of 0 there is not a pass.
+
+    Regression: HAM10000 skews so heavily towards light skin that a full run can
+    put nearly every image in one bin. The old gate accepted that and emitted a
+    green 'pass' on fairness for the most skewed sample imaginable.
+    """
+    pytest.importorskip("numpy")
+    from PIL import Image
+    from verifai.metrics.fairness import skin_tone_ita as f
+
+    class _DS:
+        # 12 identical pale images -> all land in the same ITA bin
+        samples = [type("S", (), {"id": f"i{i}", "label": "mel", "meta": {}})()
+                   for i in range(12)]
+        def __iter__(self): return iter(self.samples)
+        def load(self, s): return Image.new("RGB", (64, 64), (245, 224, 210))
+
+    class _M:
+        classes = ["mel", "nv"]
+        def predict_probs(self, img): return {"mel": 0.9, "nv": 0.1}
+
+    finding = f.run(_M(), _DS(), {})
+    populated = [c for c in finding.value["coverage"].values() if c > 0]
+    assert len(populated) == 1, "test setup should produce exactly one populated bin"
+    assert finding.verdict != "pass", "a single skin-tone bin must never read as a fairness pass"
+    assert "accuracy_gap" not in finding.value, "no gap should be claimed from one group"

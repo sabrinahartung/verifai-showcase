@@ -1,0 +1,68 @@
+# Skin-lesion model trained on a LEAK-FREE split of HAM10000.
+#
+# The point of this scenario, versus scenarios/skin_cancer.yaml: the split is
+# grouped by lesion_id, so no lesion appears in both training and test. The
+# original marmal88/skin_cancer splits share 80% of their test image_ids with
+# train — see docs/ROADMAP.md for the audit.
+#
+#   1. python scripts/build_splits.py          # writes data/manifests/ham10000_*.csv
+#   2. python scripts/materialize_images.py    # ~2.9 GB into data/raw/ham10000/
+#   3. python scripts/train_model.py scenarios/skin_cancer_clean.yaml
+#   4. python scripts/run_scenario.py scenarios/skin_cancer_clean.yaml
+name: skin_cancer_clean
+domain: image
+seed: 42
+sample_size: null          # evaluate the whole test manifest (1,493 images)
+
+training:
+  manifest_prefix: "ham10000"    # reads ham10000_train.csv + ham10000_val.csv
+  manifest_dir: "data/manifests"
+  arch: "resnet18"
+  pretrained: true
+  epochs: 12
+  batch_size: 32
+  lr: 0.0001
+  class_weights: true            # 67% of this data is nevi
+  image_size: 224
+  device: "auto"                 # cuda > mps > cpu
+  workers: 0
+  out_dir: "artifacts_training"  # gitignored; *.pt never goes in git
+
+model:
+  loader: "verifai.models.image:load"
+  id: "skin-lesion-resnet18-clean"
+  arch: "resnet18"
+  cam_layer: "layer4[-1]"
+  device: "cpu"
+  # After training, point this at the checkpoint you just produced:
+  weights_path: "artifacts_training/skin_cancer_clean.pt"
+  # ...or pull it from the Hub once uploaded:
+  # repo_id: "sabrinahartung1010/skin-lesion-resnet18-clean"
+  # filename: "skin_cancer_clean.pt"
+  classes:                        # must match the training class order (sorted)
+    - actinic_keratoses
+    - basal_cell_carcinoma
+    - benign_keratosis-like_lesions
+    - dermatofibroma
+    - melanocytic_Nevi
+    - melanoma
+    - vascular_lesions
+
+dataset:
+  loader: "verifai.datasets.loaders:load_image_manifest"
+  id: "ham10000-clean-test"
+  manifest: "data/manifests/ham10000_test.csv"   # test ONLY — never train/val
+  images_dir: "data/raw/ham10000"
+  source: "HAM10000"
+
+card:
+  name: "Skin-Lesion ResNet18 (clean split)"
+  emoji: "🔬"
+  description: "Skin-lesion classification over 7 classes, trained on a lesion-grouped split of HAM10000 and evaluated on 1,493 images the model never saw."
+
+metrics:
+  - "performance.classification"
+  - "explainability.gradcam"
+  - "robustness.corruption"
+  - "fairness.skin_tone"
+  - "privacy.mia"

@@ -44,9 +44,12 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
 
     coverage = [per_bin_total.get(b, 0) for b in bins_order]
     n = len(per_example)
-    # smallest bin count among *populated* bins tells us if accuracy is meaningful
+    # A subgroup *gap* needs at least two groups to compare, each big enough to
+    # mean something. One populated bin would otherwise yield a gap of 0.0 and a
+    # green "pass" — precisely backwards on a sample that contains only one skin
+    # tone, which is HAM10000's documented skew.
     populated = [c for c in coverage if c > 0]
-    enough_per_bin = populated and min(populated) >= 10
+    enough_per_bin = len(populated) >= 2 and min(populated) >= 10
 
     # coverage skew: is any real skin tone essentially absent?
     dark_share = per_bin_total.get(bins_order[-1], 0) / n if n else 0

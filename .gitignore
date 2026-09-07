@@ -12,3 +12,6 @@ storage/
 data/raw/
 # IDE
 .idea/
+
+# training outputs (weights live on the HF Hub, not in git)
+artifacts_training/

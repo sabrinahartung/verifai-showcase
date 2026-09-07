@@ -1,0 +1,1509 @@
+filename,image_id,lesion_id,label,dx_type,age,sex,localization
+ISIC_0024306.jpg,ISIC_0024306,HAM_0000550,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0024310.jpg,ISIC_0024310,HAM_0003350,melanoma,histo,60.0,male,chest
+ISIC_0024314.jpg,ISIC_0024314,HAM_0002198,melanocytic_Nevi,histo,75.0,male,lower extremity
+ISIC_0024317.jpg,ISIC_0024317,HAM_0003951,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0024318.jpg,ISIC_0024318,HAM_0002450,dermatofibroma,consensus,65.0,female,lower extremity
+ISIC_0024337.jpg,ISIC_0024337,HAM_0005136,benign_keratosis-like_lesions,consensus,50.0,female,lower extremity
+ISIC_0024338.jpg,ISIC_0024338,HAM_0002809,benign_keratosis-like_lesions,histo,45.0,female,face
+ISIC_0024363.jpg,ISIC_0024363,HAM_0004534,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0024373.jpg,ISIC_0024373,HAM_0003297,melanocytic_Nevi,follow_up,60.0,male,abdomen
+ISIC_0024383.jpg,ISIC_0024383,HAM_0003668,benign_keratosis-like_lesions,consensus,70.0,female,trunk
+ISIC_0024384.jpg,ISIC_0024384,HAM_0001029,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0024396.jpg,ISIC_0024396,HAM_0002450,dermatofibroma,consensus,65.0,female,lower extremity
+ISIC_0024403.jpg,ISIC_0024403,HAM_0003680,basal_cell_carcinoma,histo,65.0,male,back
+ISIC_0024404.jpg,ISIC_0024404,HAM_0005076,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0024416.jpg,ISIC_0024416,HAM_0002172,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0024422.jpg,ISIC_0024422,HAM_0001605,benign_keratosis-like_lesions,histo,75.0,male,upper extremity
+ISIC_0024458.jpg,ISIC_0024458,HAM_0005590,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0024462.jpg,ISIC_0024462,HAM_0006693,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0024463.jpg,ISIC_0024463,HAM_0004568,actinic_keratoses,histo,50.0,male,upper extremity
+ISIC_0024464.jpg,ISIC_0024464,HAM_0005604,melanocytic_Nevi,follow_up,35.0,male,trunk
+ISIC_0024467.jpg,ISIC_0024467,HAM_0002819,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0024479.jpg,ISIC_0024479,HAM_0006469,melanocytic_Nevi,consensus,5.0,male,upper extremity
+ISIC_0024481.jpg,ISIC_0024481,HAM_0003315,melanoma,histo,50.0,female,trunk
+ISIC_0024486.jpg,ISIC_0024486,HAM_0002002,melanocytic_Nevi,follow_up,50.0,male,upper extremity
+ISIC_0024502.jpg,ISIC_0024502,HAM_0001732,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0024508.jpg,ISIC_0024508,HAM_0006598,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0024514.jpg,ISIC_0024514,HAM_0002201,melanocytic_Nevi,histo,50.0,male,back
+ISIC_0024523.jpg,ISIC_0024523,HAM_0006246,melanocytic_Nevi,follow_up,45.0,female,genital
+ISIC_0024536.jpg,ISIC_0024536,HAM_0003273,melanocytic_Nevi,follow_up,40.0,female,neck
+ISIC_0024538.jpg,ISIC_0024538,HAM_0000397,melanocytic_Nevi,histo,35.0,male,trunk
+ISIC_0024543.jpg,ISIC_0024543,HAM_0004749,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0024551.jpg,ISIC_0024551,HAM_0002629,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0024553.jpg,ISIC_0024553,HAM_0005330,dermatofibroma,consensus,50.0,female,upper extremity
+ISIC_0024556.jpg,ISIC_0024556,HAM_0003151,melanocytic_Nevi,follow_up,50.0,female,foot
+ISIC_0024561.jpg,ISIC_0024561,HAM_0000707,melanocytic_Nevi,histo,70.0,female,abdomen
+ISIC_0024562.jpg,ISIC_0024562,HAM_0002745,actinic_keratoses,histo,75.0,male,chest
+ISIC_0024568.jpg,ISIC_0024568,HAM_0007386,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0024569.jpg,ISIC_0024569,HAM_0002046,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0024576.jpg,ISIC_0024576,HAM_0003936,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0024585.jpg,ISIC_0024585,HAM_0004230,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0024586.jpg,ISIC_0024586,HAM_0003832,melanoma,histo,60.0,female,lower extremity
+ISIC_0024588.jpg,ISIC_0024588,HAM_0006931,melanocytic_Nevi,follow_up,40.0,male,neck
+ISIC_0024595.jpg,ISIC_0024595,HAM_0004027,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0024607.jpg,ISIC_0024607,HAM_0002563,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0024609.jpg,ISIC_0024609,HAM_0003498,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0024611.jpg,ISIC_0024611,HAM_0000385,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0024615.jpg,ISIC_0024615,HAM_0003308,melanocytic_Nevi,histo,35.0,male,face
+ISIC_0024617.jpg,ISIC_0024617,HAM_0003035,melanocytic_Nevi,consensus,10.0,female,upper extremity
+ISIC_0024646.jpg,ISIC_0024646,HAM_0006252,actinic_keratoses,histo,70.0,female,face
+ISIC_0024652.jpg,ISIC_0024652,HAM_0003428,melanoma,histo,85.0,female,upper extremity
+ISIC_0024654.jpg,ISIC_0024654,HAM_0005705,actinic_keratoses,histo,75.0,female,lower extremity
+ISIC_0024659.jpg,ISIC_0024659,HAM_0001514,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0024666.jpg,ISIC_0024666,HAM_0005435,basal_cell_carcinoma,histo,65.0,male,back
+ISIC_0024669.jpg,ISIC_0024669,HAM_0006617,vascular_lesions,histo,25.0,female,abdomen
+ISIC_0024692.jpg,ISIC_0024692,HAM_0004744,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0024694.jpg,ISIC_0024694,HAM_0001130,melanocytic_Nevi,histo,65.0,male,abdomen
+ISIC_0024699.jpg,ISIC_0024699,HAM_0007605,melanocytic_Nevi,follow_up,25.0,female,trunk
+ISIC_0024706.jpg,ISIC_0024706,HAM_0001038,vascular_lesions,consensus,50.0,male,trunk
+ISIC_0024711.jpg,ISIC_0024711,HAM_0004947,benign_keratosis-like_lesions,histo,75.0,male,abdomen
+ISIC_0024716.jpg,ISIC_0024716,HAM_0001058,melanocytic_Nevi,histo,75.0,female,upper extremity
+ISIC_0024717.jpg,ISIC_0024717,HAM_0004887,melanocytic_Nevi,follow_up,35.0,female,back
+ISIC_0024723.jpg,ISIC_0024723,HAM_0007373,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0024729.jpg,ISIC_0024729,HAM_0002011,melanoma,histo,55.0,female,lower extremity
+ISIC_0024733.jpg,ISIC_0024733,HAM_0001964,melanoma,histo,50.0,male,neck
+ISIC_0024734.jpg,ISIC_0024734,HAM_0007445,melanocytic_Nevi,consensus,25.0,male,foot
+ISIC_0024742.jpg,ISIC_0024742,HAM_0000111,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0024764.jpg,ISIC_0024764,HAM_0007246,melanocytic_Nevi,follow_up,55.0,female,foot
+ISIC_0024773.jpg,ISIC_0024773,HAM_0000844,benign_keratosis-like_lesions,histo,70.0,male,lower extremity
+ISIC_0024780.jpg,ISIC_0024780,HAM_0002374,melanocytic_Nevi,follow_up,35.0,male,back
+ISIC_0024782.jpg,ISIC_0024782,HAM_0004004,benign_keratosis-like_lesions,consensus,65.0,female,chest
+ISIC_0024785.jpg,ISIC_0024785,HAM_0004926,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0024796.jpg,ISIC_0024796,HAM_0003052,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0024812.jpg,ISIC_0024812,HAM_0000036,melanocytic_Nevi,follow_up,30.0,female,trunk
+ISIC_0024827.jpg,ISIC_0024827,HAM_0001125,melanocytic_Nevi,histo,60.0,male,chest
+ISIC_0024828.jpg,ISIC_0024828,HAM_0001587,melanocytic_Nevi,follow_up,60.0,male,back
+ISIC_0024832.jpg,ISIC_0024832,HAM_0001773,benign_keratosis-like_lesions,histo,40.0,female,face
+ISIC_0024838.jpg,ISIC_0024838,HAM_0002264,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0024855.jpg,ISIC_0024855,HAM_0003627,melanocytic_Nevi,histo,30.0,female,back
+ISIC_0024859.jpg,ISIC_0024859,HAM_0003390,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0024861.jpg,ISIC_0024861,HAM_0005892,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0024869.jpg,ISIC_0024869,HAM_0007373,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0024888.jpg,ISIC_0024888,HAM_0006199,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0024897.jpg,ISIC_0024897,HAM_0003716,basal_cell_carcinoma,histo,75.0,female,back
+ISIC_0024906.jpg,ISIC_0024906,HAM_0002217,melanocytic_Nevi,histo,35.0,female,unknown
+ISIC_0024910.jpg,ISIC_0024910,HAM_0000238,benign_keratosis-like_lesions,histo,70.0,female,face
+ISIC_0024915.jpg,ISIC_0024915,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0024924.jpg,ISIC_0024924,HAM_0004724,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0024932.jpg,ISIC_0024932,HAM_0004898,melanoma,histo,55.0,female,lower extremity
+ISIC_0024939.jpg,ISIC_0024939,HAM_0000074,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0024942.jpg,ISIC_0024942,HAM_0002220,melanocytic_Nevi,follow_up,65.0,female,trunk
+ISIC_0024957.jpg,ISIC_0024957,HAM_0005179,melanocytic_Nevi,follow_up,80.0,male,lower extremity
+ISIC_0024963.jpg,ISIC_0024963,HAM_0005620,melanocytic_Nevi,histo,35.0,male,ear
+ISIC_0024972.jpg,ISIC_0024972,HAM_0001284,melanoma,histo,75.0,female,ear
+ISIC_0024973.jpg,ISIC_0024973,HAM_0007227,dermatofibroma,histo,75.0,male,lower extremity
+ISIC_0025000.jpg,ISIC_0025000,HAM_0001643,melanocytic_Nevi,histo,45.0,female,foot
+ISIC_0025003.jpg,ISIC_0025003,HAM_0004269,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0025018.jpg,ISIC_0025018,HAM_0004265,melanoma,histo,45.0,male,unknown
+ISIC_0025023.jpg,ISIC_0025023,HAM_0006381,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025045.jpg,ISIC_0025045,HAM_0001745,melanocytic_Nevi,histo,65.0,male,back
+ISIC_0025048.jpg,ISIC_0025048,HAM_0005734,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0025049.jpg,ISIC_0025049,HAM_0001757,melanocytic_Nevi,histo,65.0,male,lower extremity
+ISIC_0025057.jpg,ISIC_0025057,HAM_0005217,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0025062.jpg,ISIC_0025062,HAM_0001418,melanocytic_Nevi,consensus,55.0,female,back
+ISIC_0025073.jpg,ISIC_0025073,HAM_0002217,melanocytic_Nevi,histo,35.0,female,unknown
+ISIC_0025088.jpg,ISIC_0025088,HAM_0002423,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0025096.jpg,ISIC_0025096,HAM_0000182,melanocytic_Nevi,histo,60.0,male,neck
+ISIC_0025101.jpg,ISIC_0025101,HAM_0005712,melanocytic_Nevi,consensus,5.0,female,foot
+ISIC_0025107.jpg,ISIC_0025107,HAM_0001887,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0025117.jpg,ISIC_0025117,HAM_0005880,melanocytic_Nevi,histo,25.0,female,hand
+ISIC_0025123.jpg,ISIC_0025123,HAM_0001126,melanocytic_Nevi,histo,20.0,female,back
+ISIC_0025126.jpg,ISIC_0025126,HAM_0002953,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0025133.jpg,ISIC_0025133,HAM_0005319,melanocytic_Nevi,histo,70.0,male,trunk
+ISIC_0025151.jpg,ISIC_0025151,HAM_0007309,melanocytic_Nevi,follow_up,30.0,male,abdomen
+ISIC_0025156.jpg,ISIC_0025156,HAM_0002106,melanocytic_Nevi,histo,45.0,male,foot
+ISIC_0025165.jpg,ISIC_0025165,HAM_0003033,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0025168.jpg,ISIC_0025168,HAM_0003035,melanocytic_Nevi,consensus,10.0,female,upper extremity
+ISIC_0025175.jpg,ISIC_0025175,HAM_0002124,melanocytic_Nevi,follow_up,50.0,female,upper extremity
+ISIC_0025176.jpg,ISIC_0025176,HAM_0002864,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0025184.jpg,ISIC_0025184,HAM_0007178,melanocytic_Nevi,histo,70.0,female,abdomen
+ISIC_0025189.jpg,ISIC_0025189,HAM_0007185,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0025193.jpg,ISIC_0025193,HAM_0006469,melanocytic_Nevi,consensus,5.0,male,upper extremity
+ISIC_0025194.jpg,ISIC_0025194,HAM_0005512,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0025198.jpg,ISIC_0025198,HAM_0006408,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0025199.jpg,ISIC_0025199,HAM_0003206,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0025200.jpg,ISIC_0025200,HAM_0002388,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0025203.jpg,ISIC_0025203,HAM_0004048,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0025206.jpg,ISIC_0025206,HAM_0004395,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0025208.jpg,ISIC_0025208,HAM_0000397,melanocytic_Nevi,histo,35.0,male,trunk
+ISIC_0025214.jpg,ISIC_0025214,HAM_0004356,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0025221.jpg,ISIC_0025221,HAM_0002294,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0025227.jpg,ISIC_0025227,HAM_0004717,melanocytic_Nevi,histo,50.0,male,back
+ISIC_0025270.jpg,ISIC_0025270,HAM_0004764,melanocytic_Nevi,follow_up,60.0,male,abdomen
+ISIC_0025273.jpg,ISIC_0025273,HAM_0004840,melanocytic_Nevi,follow_up,45.0,male,upper extremity
+ISIC_0025283.jpg,ISIC_0025283,HAM_0004693,melanocytic_Nevi,follow_up,50.0,female,foot
+ISIC_0025288.jpg,ISIC_0025288,HAM_0007595,melanocytic_Nevi,follow_up,65.0,female,abdomen
+ISIC_0025311.jpg,ISIC_0025311,HAM_0001594,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0025312.jpg,ISIC_0025312,HAM_0005610,benign_keratosis-like_lesions,confocal,65.0,female,face
+ISIC_0025314.jpg,ISIC_0025314,HAM_0000757,dermatofibroma,consensus,35.0,female,lower extremity
+ISIC_0025321.jpg,ISIC_0025321,HAM_0005155,vascular_lesions,histo,85.0,male,lower extremity
+ISIC_0025325.jpg,ISIC_0025325,HAM_0002561,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0025341.jpg,ISIC_0025341,HAM_0006352,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0025348.jpg,ISIC_0025348,HAM_0002688,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0025357.jpg,ISIC_0025357,HAM_0005118,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0025364.jpg,ISIC_0025364,HAM_0000692,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0025365.jpg,ISIC_0025365,HAM_0000532,melanocytic_Nevi,follow_up,45.0,female,foot
+ISIC_0025374.jpg,ISIC_0025374,HAM_0006031,benign_keratosis-like_lesions,histo,75.0,female,scalp
+ISIC_0025393.jpg,ISIC_0025393,HAM_0004358,melanocytic_Nevi,follow_up,25.0,female,face
+ISIC_0025404.jpg,ISIC_0025404,HAM_0000251,melanocytic_Nevi,follow_up,80.0,male,abdomen
+ISIC_0025405.jpg,ISIC_0025405,HAM_0007279,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0025410.jpg,ISIC_0025410,HAM_0005541,melanocytic_Nevi,histo,50.0,male,lower extremity
+ISIC_0025415.jpg,ISIC_0025415,HAM_0005619,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0025416.jpg,ISIC_0025416,HAM_0005683,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0025418.jpg,ISIC_0025418,HAM_0006571,melanocytic_Nevi,follow_up,30.0,female,upper extremity
+ISIC_0025419.jpg,ISIC_0025419,HAM_0007010,benign_keratosis-like_lesions,histo,40.0,male,trunk
+ISIC_0025429.jpg,ISIC_0025429,HAM_0007547,melanocytic_Nevi,follow_up,65.0,male,abdomen
+ISIC_0025440.jpg,ISIC_0025440,HAM_0007403,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0025441.jpg,ISIC_0025441,HAM_0001198,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0025450.jpg,ISIC_0025450,HAM_0003832,melanoma,histo,60.0,female,lower extremity
+ISIC_0025452.jpg,ISIC_0025452,HAM_0004257,vascular_lesions,consensus,55.0,female,abdomen
+ISIC_0025455.jpg,ISIC_0025455,HAM_0002504,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0025456.jpg,ISIC_0025456,HAM_0003158,melanocytic_Nevi,histo,30.0,male,upper extremity
+ISIC_0025459.jpg,ISIC_0025459,HAM_0002727,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0025460.jpg,ISIC_0025460,HAM_0006820,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025466.jpg,ISIC_0025466,HAM_0001620,benign_keratosis-like_lesions,consensus,70.0,male,face
+ISIC_0025468.jpg,ISIC_0025468,HAM_0001939,melanocytic_Nevi,follow_up,70.0,male,lower extremity
+ISIC_0025469.jpg,ISIC_0025469,HAM_0005319,melanocytic_Nevi,histo,70.0,male,trunk
+ISIC_0025475.jpg,ISIC_0025475,HAM_0003196,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025476.jpg,ISIC_0025476,HAM_0006052,melanocytic_Nevi,histo,60.0,female,face
+ISIC_0025494.jpg,ISIC_0025494,HAM_0000677,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0025503.jpg,ISIC_0025503,HAM_0005423,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0025506.jpg,ISIC_0025506,HAM_0005393,melanocytic_Nevi,histo,35.0,female,lower extremity
+ISIC_0025507.jpg,ISIC_0025507,HAM_0006190,benign_keratosis-like_lesions,histo,65.0,female,lower extremity
+ISIC_0025510.jpg,ISIC_0025510,HAM_0002092,benign_keratosis-like_lesions,histo,35.0,female,lower extremity
+ISIC_0025518.jpg,ISIC_0025518,HAM_0003698,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0025522.jpg,ISIC_0025522,HAM_0000454,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0025532.jpg,ISIC_0025532,HAM_0000438,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025533.jpg,ISIC_0025533,HAM_0004836,melanocytic_Nevi,histo,35.0,male,lower extremity
+ISIC_0025539.jpg,ISIC_0025539,HAM_0000967,actinic_keratoses,histo,75.0,male,lower extremity
+ISIC_0025541.jpg,ISIC_0025541,HAM_0005880,melanocytic_Nevi,histo,25.0,female,hand
+ISIC_0025555.jpg,ISIC_0025555,HAM_0003951,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0025560.jpg,ISIC_0025560,HAM_0003894,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0025563.jpg,ISIC_0025563,HAM_0006086,melanocytic_Nevi,histo,35.0,female,hand
+ISIC_0025566.jpg,ISIC_0025566,HAM_0006117,melanocytic_Nevi,follow_up,35.0,female,back
+ISIC_0025572.jpg,ISIC_0025572,HAM_0003268,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0025581.jpg,ISIC_0025581,HAM_0006358,melanocytic_Nevi,consensus,0.0,male,foot
+ISIC_0025595.jpg,ISIC_0025595,HAM_0000192,melanocytic_Nevi,follow_up,45.0,female,upper extremity
+ISIC_0025599.jpg,ISIC_0025599,HAM_0004765,vascular_lesions,histo,15.0,male,face
+ISIC_0025609.jpg,ISIC_0025609,HAM_0005906,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0025610.jpg,ISIC_0025610,HAM_0003308,melanocytic_Nevi,histo,35.0,male,face
+ISIC_0025615.jpg,ISIC_0025615,HAM_0006568,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0025620.jpg,ISIC_0025620,HAM_0001818,melanocytic_Nevi,histo,30.0,male,abdomen
+ISIC_0025623.jpg,ISIC_0025623,HAM_0000821,benign_keratosis-like_lesions,histo,75.0,male,back
+ISIC_0025626.jpg,ISIC_0025626,HAM_0007177,melanocytic_Nevi,follow_up,30.0,male,trunk
+ISIC_0025630.jpg,ISIC_0025630,HAM_0002017,basal_cell_carcinoma,histo,60.0,female,back
+ISIC_0025645.jpg,ISIC_0025645,HAM_0002543,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0025661.jpg,ISIC_0025661,HAM_0002730,benign_keratosis-like_lesions,histo,80.0,male,scalp
+ISIC_0025666.jpg,ISIC_0025666,HAM_0005882,melanocytic_Nevi,follow_up,50.0,male,upper extremity
+ISIC_0025668.jpg,ISIC_0025668,HAM_0007051,dermatofibroma,histo,65.0,male,upper extremity
+ISIC_0025671.jpg,ISIC_0025671,HAM_0004783,melanocytic_Nevi,histo,30.0,female,foot
+ISIC_0025677.jpg,ISIC_0025677,HAM_0004097,vascular_lesions,consensus,50.0,female,abdomen
+ISIC_0025691.jpg,ISIC_0025691,HAM_0000065,basal_cell_carcinoma,histo,50.0,female,abdomen
+ISIC_0025694.jpg,ISIC_0025694,HAM_0007057,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0025701.jpg,ISIC_0025701,HAM_0000359,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0025713.jpg,ISIC_0025713,HAM_0003178,melanocytic_Nevi,histo,25.0,female,upper extremity
+ISIC_0025719.jpg,ISIC_0025719,HAM_0000833,benign_keratosis-like_lesions,histo,40.0,male,face
+ISIC_0025722.jpg,ISIC_0025722,HAM_0001590,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0025725.jpg,ISIC_0025725,HAM_0000056,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0025726.jpg,ISIC_0025726,HAM_0001120,melanocytic_Nevi,histo,40.0,female,chest
+ISIC_0025739.jpg,ISIC_0025739,HAM_0002036,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0025743.jpg,ISIC_0025743,HAM_0004382,benign_keratosis-like_lesions,histo,85.0,male,face
+ISIC_0025747.jpg,ISIC_0025747,HAM_0006911,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0025752.jpg,ISIC_0025752,HAM_0005435,basal_cell_carcinoma,histo,65.0,male,back
+ISIC_0025754.jpg,ISIC_0025754,HAM_0006797,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0025761.jpg,ISIC_0025761,HAM_0006073,melanocytic_Nevi,follow_up,65.0,female,lower extremity
+ISIC_0025767.jpg,ISIC_0025767,HAM_0001949,benign_keratosis-like_lesions,histo,70.0,male,trunk
+ISIC_0025773.jpg,ISIC_0025773,HAM_0002709,melanocytic_Nevi,follow_up,70.0,male,trunk
+ISIC_0025784.jpg,ISIC_0025784,HAM_0003652,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0025789.jpg,ISIC_0025789,HAM_0007249,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0025793.jpg,ISIC_0025793,HAM_0004603,basal_cell_carcinoma,histo,60.0,male,trunk
+ISIC_0025797.jpg,ISIC_0025797,HAM_0001698,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0025799.jpg,ISIC_0025799,HAM_0004531,benign_keratosis-like_lesions,histo,75.0,female,lower extremity
+ISIC_0025807.jpg,ISIC_0025807,HAM_0003771,vascular_lesions,histo,50.0,female,hand
+ISIC_0025808.jpg,ISIC_0025808,HAM_0002261,actinic_keratoses,histo,50.0,male,back
+ISIC_0025809.jpg,ISIC_0025809,HAM_0004663,melanocytic_Nevi,histo,55.0,male,upper extremity
+ISIC_0025812.jpg,ISIC_0025812,HAM_0001767,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0025813.jpg,ISIC_0025813,HAM_0001915,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0025826.jpg,ISIC_0025826,HAM_0005585,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0025854.jpg,ISIC_0025854,HAM_0000360,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0025867.jpg,ISIC_0025867,HAM_0007220,benign_keratosis-like_lesions,histo,60.0,male,lower extremity
+ISIC_0025884.jpg,ISIC_0025884,HAM_0001999,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025888.jpg,ISIC_0025888,HAM_0000584,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0025892.jpg,ISIC_0025892,HAM_0002754,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0025899.jpg,ISIC_0025899,HAM_0001552,melanocytic_Nevi,histo,15.0,male,face
+ISIC_0025900.jpg,ISIC_0025900,HAM_0000943,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0025901.jpg,ISIC_0025901,HAM_0005562,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0025904.jpg,ISIC_0025904,HAM_0006908,melanoma,histo,70.0,male,back
+ISIC_0025906.jpg,ISIC_0025906,HAM_0007179,benign_keratosis-like_lesions,histo,0.0,female,back
+ISIC_0025911.jpg,ISIC_0025911,HAM_0004648,dermatofibroma,consensus,65.0,female,lower extremity
+ISIC_0025915.jpg,ISIC_0025915,HAM_0001601,benign_keratosis-like_lesions,histo,75.0,male,upper extremity
+ISIC_0025919.jpg,ISIC_0025919,HAM_0001085,melanocytic_Nevi,follow_up,75.0,male,abdomen
+ISIC_0025920.jpg,ISIC_0025920,HAM_0007194,melanocytic_Nevi,follow_up,55.0,female,abdomen
+ISIC_0025935.jpg,ISIC_0025935,HAM_0006029,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0025940.jpg,ISIC_0025940,HAM_0001503,basal_cell_carcinoma,histo,55.0,male,face
+ISIC_0025944.jpg,ISIC_0025944,HAM_0005634,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0025947.jpg,ISIC_0025947,HAM_0007060,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0025953.jpg,ISIC_0025953,HAM_0002461,actinic_keratoses,histo,65.0,male,face
+ISIC_0025962.jpg,ISIC_0025962,HAM_0006297,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0025964.jpg,ISIC_0025964,HAM_0000871,melanoma,histo,40.0,female,chest
+ISIC_0025970.jpg,ISIC_0025970,HAM_0003033,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0025977.jpg,ISIC_0025977,HAM_0001225,melanocytic_Nevi,follow_up,25.0,female,trunk
+ISIC_0025983.jpg,ISIC_0025983,HAM_0004025,melanocytic_Nevi,histo,20.0,female,abdomen
+ISIC_0025989.jpg,ISIC_0025989,HAM_0003033,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0025999.jpg,ISIC_0025999,HAM_0005286,melanocytic_Nevi,follow_up,50.0,female,foot
+ISIC_0026000.jpg,ISIC_0026000,HAM_0003071,melanocytic_Nevi,follow_up,80.0,male,abdomen
+ISIC_0026007.jpg,ISIC_0026007,HAM_0003931,melanocytic_Nevi,follow_up,65.0,male,trunk
+ISIC_0026016.jpg,ISIC_0026016,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0026018.jpg,ISIC_0026018,HAM_0005883,benign_keratosis-like_lesions,histo,65.0,male,back
+ISIC_0026023.jpg,ISIC_0026023,HAM_0000815,melanocytic_Nevi,histo,30.0,female,hand
+ISIC_0026040.jpg,ISIC_0026040,HAM_0006252,actinic_keratoses,histo,70.0,female,face
+ISIC_0026055.jpg,ISIC_0026055,HAM_0006605,melanocytic_Nevi,histo,50.0,female,neck
+ISIC_0026060.jpg,ISIC_0026060,HAM_0005891,benign_keratosis-like_lesions,histo,70.0,female,face
+ISIC_0026062.jpg,ISIC_0026062,HAM_0000625,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0026063.jpg,ISIC_0026063,HAM_0003139,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0026069.jpg,ISIC_0026069,HAM_0000524,benign_keratosis-like_lesions,confocal,65.0,female,face
+ISIC_0026077.jpg,ISIC_0026077,HAM_0005592,melanocytic_Nevi,follow_up,50.0,male,foot
+ISIC_0026101.jpg,ISIC_0026101,HAM_0003698,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0026102.jpg,ISIC_0026102,HAM_0006841,melanocytic_Nevi,follow_up,25.0,female,upper extremity
+ISIC_0026110.jpg,ISIC_0026110,HAM_0003295,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0026115.jpg,ISIC_0026115,HAM_0004910,melanoma,histo,70.0,male,chest
+ISIC_0026117.jpg,ISIC_0026117,HAM_0005984,basal_cell_carcinoma,histo,75.0,female,face
+ISIC_0026127.jpg,ISIC_0026127,HAM_0000199,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0026134.jpg,ISIC_0026134,HAM_0007119,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0026137.jpg,ISIC_0026137,HAM_0006669,melanocytic_Nevi,follow_up,25.0,female,upper extremity
+ISIC_0026139.jpg,ISIC_0026139,HAM_0002809,benign_keratosis-like_lesions,histo,45.0,female,face
+ISIC_0026145.jpg,ISIC_0026145,HAM_0005326,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0026150.jpg,ISIC_0026150,HAM_0004607,melanoma,histo,50.0,female,back
+ISIC_0026161.jpg,ISIC_0026161,HAM_0007407,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0026163.jpg,ISIC_0026163,HAM_0003771,vascular_lesions,histo,50.0,female,hand
+ISIC_0026167.jpg,ISIC_0026167,HAM_0003400,melanoma,histo,50.0,male,face
+ISIC_0026169.jpg,ISIC_0026169,HAM_0006785,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0026177.jpg,ISIC_0026177,HAM_0006583,melanocytic_Nevi,histo,30.0,male,trunk
+ISIC_0026186.jpg,ISIC_0026186,HAM_0002106,melanocytic_Nevi,histo,45.0,male,foot
+ISIC_0026198.jpg,ISIC_0026198,HAM_0004729,melanocytic_Nevi,follow_up,40.0,female,upper extremity
+ISIC_0026204.jpg,ISIC_0026204,HAM_0000670,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0026214.jpg,ISIC_0026214,HAM_0002256,melanocytic_Nevi,follow_up,40.0,male,abdomen
+ISIC_0026217.jpg,ISIC_0026217,HAM_0002205,melanocytic_Nevi,histo,35.0,male,back
+ISIC_0026218.jpg,ISIC_0026218,HAM_0001541,melanocytic_Nevi,consensus,30.0,male,trunk
+ISIC_0026225.jpg,ISIC_0026225,HAM_0003781,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0026230.jpg,ISIC_0026230,HAM_0005382,basal_cell_carcinoma,histo,50.0,female,back
+ISIC_0026235.jpg,ISIC_0026235,HAM_0002649,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0026260.jpg,ISIC_0026260,HAM_0000187,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0026269.jpg,ISIC_0026269,HAM_0007205,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0026270.jpg,ISIC_0026270,HAM_0000182,melanocytic_Nevi,histo,60.0,male,neck
+ISIC_0026281.jpg,ISIC_0026281,HAM_0004910,melanoma,histo,70.0,male,chest
+ISIC_0026296.jpg,ISIC_0026296,HAM_0004265,melanoma,histo,45.0,male,unknown
+ISIC_0026298.jpg,ISIC_0026298,HAM_0002529,benign_keratosis-like_lesions,histo,60.0,female,face
+ISIC_0026299.jpg,ISIC_0026299,HAM_0004856,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0026303.jpg,ISIC_0026303,HAM_0001680,melanocytic_Nevi,histo,55.0,male,lower extremity
+ISIC_0026306.jpg,ISIC_0026306,HAM_0004456,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0026331.jpg,ISIC_0026331,HAM_0005940,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0026336.jpg,ISIC_0026336,HAM_0006406,vascular_lesions,consensus,50.0,male,trunk
+ISIC_0026338.jpg,ISIC_0026338,HAM_0000905,melanocytic_Nevi,follow_up,65.0,female,trunk
+ISIC_0026353.jpg,ISIC_0026353,HAM_0002278,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0026354.jpg,ISIC_0026354,HAM_0005288,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0026358.jpg,ISIC_0026358,HAM_0006469,melanocytic_Nevi,consensus,5.0,male,upper extremity
+ISIC_0026362.jpg,ISIC_0026362,HAM_0005301,actinic_keratoses,histo,60.0,female,upper extremity
+ISIC_0026366.jpg,ISIC_0026366,HAM_0005236,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0026374.jpg,ISIC_0026374,HAM_0002238,melanocytic_Nevi,histo,60.0,female,chest
+ISIC_0026377.jpg,ISIC_0026377,HAM_0001019,melanocytic_Nevi,follow_up,75.0,female,upper extremity
+ISIC_0026382.jpg,ISIC_0026382,HAM_0003222,melanocytic_Nevi,histo,45.0,female,lower extremity
+ISIC_0026385.jpg,ISIC_0026385,HAM_0000577,melanocytic_Nevi,follow_up,60.0,female,lower extremity
+ISIC_0026392.jpg,ISIC_0026392,HAM_0004305,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0026395.jpg,ISIC_0026395,HAM_0005382,basal_cell_carcinoma,histo,50.0,female,back
+ISIC_0026398.jpg,ISIC_0026398,HAM_0007324,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0026406.jpg,ISIC_0026406,HAM_0005510,melanocytic_Nevi,histo,30.0,female,lower extremity
+ISIC_0026413.jpg,ISIC_0026413,HAM_0005431,melanocytic_Nevi,follow_up,65.0,male,lower extremity
+ISIC_0026416.jpg,ISIC_0026416,HAM_0003979,benign_keratosis-like_lesions,consensus,45.0,female,trunk
+ISIC_0026419.jpg,ISIC_0026419,HAM_0000752,melanocytic_Nevi,histo,15.0,male,lower extremity
+ISIC_0026432.jpg,ISIC_0026432,HAM_0006268,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0026433.jpg,ISIC_0026433,HAM_0003826,basal_cell_carcinoma,histo,70.0,male,chest
+ISIC_0026434.jpg,ISIC_0026434,HAM_0007414,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0026451.jpg,ISIC_0026451,HAM_0005712,melanocytic_Nevi,consensus,5.0,female,foot
+ISIC_0026462.jpg,ISIC_0026462,HAM_0001845,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0026472.jpg,ISIC_0026472,HAM_0004277,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0026477.jpg,ISIC_0026477,HAM_0006563,benign_keratosis-like_lesions,histo,50.0,female,lower extremity
+ISIC_0026488.jpg,ISIC_0026488,HAM_0005387,melanocytic_Nevi,histo,30.0,male,neck
+ISIC_0026491.jpg,ISIC_0026491,HAM_0005786,melanocytic_Nevi,histo,50.0,female,upper extremity
+ISIC_0026496.jpg,ISIC_0026496,HAM_0005757,basal_cell_carcinoma,histo,70.0,male,lower extremity
+ISIC_0026497.jpg,ISIC_0026497,HAM_0003627,melanocytic_Nevi,histo,30.0,female,back
+ISIC_0026502.jpg,ISIC_0026502,HAM_0005107,melanocytic_Nevi,histo,55.0,female,back
+ISIC_0026506.jpg,ISIC_0026506,HAM_0000871,melanoma,histo,40.0,female,trunk
+ISIC_0026507.jpg,ISIC_0026507,HAM_0006091,melanocytic_Nevi,follow_up,75.0,male,trunk
+ISIC_0026515.jpg,ISIC_0026515,HAM_0002779,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0026520.jpg,ISIC_0026520,HAM_0000642,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0026524.jpg,ISIC_0026524,HAM_0000524,benign_keratosis-like_lesions,confocal,65.0,female,face
+ISIC_0026527.jpg,ISIC_0026527,HAM_0002438,melanocytic_Nevi,follow_up,75.0,female,trunk
+ISIC_0026537.jpg,ISIC_0026537,HAM_0003278,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0026542.jpg,ISIC_0026542,HAM_0006929,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0026548.jpg,ISIC_0026548,HAM_0006255,melanocytic_Nevi,follow_up,65.0,male,lower extremity
+ISIC_0026559.jpg,ISIC_0026559,HAM_0006514,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0026564.jpg,ISIC_0026564,HAM_0001659,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0026567.jpg,ISIC_0026567,HAM_0000999,benign_keratosis-like_lesions,confocal,70.0,female,face
+ISIC_0026573.jpg,ISIC_0026573,HAM_0007001,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0026582.jpg,ISIC_0026582,HAM_0003747,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0026594.jpg,ISIC_0026594,HAM_0003383,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0026603.jpg,ISIC_0026603,HAM_0001306,melanocytic_Nevi,consensus,75.0,female,back
+ISIC_0026613.jpg,ISIC_0026613,HAM_0004116,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0026617.jpg,ISIC_0026617,HAM_0003804,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0026620.jpg,ISIC_0026620,HAM_0000435,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0026621.jpg,ISIC_0026621,HAM_0001494,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0026625.jpg,ISIC_0026625,HAM_0005354,actinic_keratoses,histo,60.0,male,face
+ISIC_0026641.jpg,ISIC_0026641,HAM_0002753,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0026644.jpg,ISIC_0026644,HAM_0004259,benign_keratosis-like_lesions,histo,60.0,female,neck
+ISIC_0026645.jpg,ISIC_0026645,HAM_0003136,actinic_keratoses,histo,65.0,male,back
+ISIC_0026649.jpg,ISIC_0026649,HAM_0006621,melanocytic_Nevi,follow_up,60.0,female,lower extremity
+ISIC_0026650.jpg,ISIC_0026650,HAM_0000545,actinic_keratoses,histo,70.0,male,face
+ISIC_0026658.jpg,ISIC_0026658,HAM_0005436,melanocytic_Nevi,histo,65.0,male,abdomen
+ISIC_0026664.jpg,ISIC_0026664,HAM_0002981,melanoma,histo,65.0,female,back
+ISIC_0026667.jpg,ISIC_0026667,HAM_0003660,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0026669.jpg,ISIC_0026669,HAM_0000511,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0026674.jpg,ISIC_0026674,HAM_0004836,melanocytic_Nevi,histo,35.0,male,lower extremity
+ISIC_0026677.jpg,ISIC_0026677,HAM_0001262,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0026681.jpg,ISIC_0026681,HAM_0006806,melanocytic_Nevi,follow_up,50.0,male,upper extremity
+ISIC_0026685.jpg,ISIC_0026685,HAM_0002475,melanocytic_Nevi,follow_up,70.0,female,foot
+ISIC_0026703.jpg,ISIC_0026703,HAM_0005290,melanocytic_Nevi,follow_up,65.0,male,trunk
+ISIC_0026707.jpg,ISIC_0026707,HAM_0003247,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0026710.jpg,ISIC_0026710,HAM_0003732,melanocytic_Nevi,follow_up,65.0,female,abdomen
+ISIC_0026713.jpg,ISIC_0026713,HAM_0006138,vascular_lesions,consensus,35.0,female,hand
+ISIC_0026719.jpg,ISIC_0026719,HAM_0000602,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0026722.jpg,ISIC_0026722,HAM_0002198,melanocytic_Nevi,histo,75.0,male,lower extremity
+ISIC_0026727.jpg,ISIC_0026727,HAM_0005920,melanocytic_Nevi,follow_up,80.0,male,trunk
+ISIC_0026741.jpg,ISIC_0026741,HAM_0005987,melanocytic_Nevi,histo,80.0,female,lower extremity
+ISIC_0026747.jpg,ISIC_0026747,HAM_0006169,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0026769.jpg,ISIC_0026769,HAM_0002730,benign_keratosis-like_lesions,histo,80.0,male,scalp
+ISIC_0026795.jpg,ISIC_0026795,HAM_0003603,melanocytic_Nevi,histo,30.0,male,back
+ISIC_0026810.jpg,ISIC_0026810,HAM_0007306,melanocytic_Nevi,histo,30.0,male,back
+ISIC_0026814.jpg,ISIC_0026814,HAM_0003917,melanocytic_Nevi,follow_up,65.0,female,back
+ISIC_0026815.jpg,ISIC_0026815,HAM_0000029,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0026819.jpg,ISIC_0026819,HAM_0007112,melanocytic_Nevi,histo,10.0,female,back
+ISIC_0026820.jpg,ISIC_0026820,HAM_0005254,melanocytic_Nevi,consensus,5.0,female,face
+ISIC_0026840.jpg,ISIC_0026840,HAM_0007253,melanocytic_Nevi,follow_up,65.0,female,trunk
+ISIC_0026850.jpg,ISIC_0026850,HAM_0003915,melanocytic_Nevi,follow_up,40.0,male,abdomen
+ISIC_0026866.jpg,ISIC_0026866,HAM_0002754,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0026872.jpg,ISIC_0026872,HAM_0006746,actinic_keratoses,histo,85.0,male,lower extremity
+ISIC_0026885.jpg,ISIC_0026885,HAM_0000482,melanocytic_Nevi,histo,85.0,female,back
+ISIC_0026895.jpg,ISIC_0026895,HAM_0003605,benign_keratosis-like_lesions,histo,55.0,male,face
+ISIC_0026912.jpg,ISIC_0026912,HAM_0007337,benign_keratosis-like_lesions,confocal,85.0,female,face
+ISIC_0026936.jpg,ISIC_0026936,HAM_0000574,melanocytic_Nevi,follow_up,45.0,female,face
+ISIC_0026937.jpg,ISIC_0026937,HAM_0002267,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0026953.jpg,ISIC_0026953,HAM_0001332,melanocytic_Nevi,follow_up,55.0,female,abdomen
+ISIC_0026955.jpg,ISIC_0026955,HAM_0003569,benign_keratosis-like_lesions,histo,75.0,male,unknown
+ISIC_0026958.jpg,ISIC_0026958,HAM_0001773,benign_keratosis-like_lesions,histo,40.0,female,face
+ISIC_0026959.jpg,ISIC_0026959,HAM_0003426,benign_keratosis-like_lesions,consensus,75.0,male,lower extremity
+ISIC_0026971.jpg,ISIC_0026971,HAM_0003407,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0026974.jpg,ISIC_0026974,HAM_0003603,melanocytic_Nevi,histo,30.0,male,back
+ISIC_0026981.jpg,ISIC_0026981,HAM_0000909,actinic_keratoses,histo,55.0,male,lower extremity
+ISIC_0026999.jpg,ISIC_0026999,HAM_0006075,melanocytic_Nevi,follow_up,60.0,female,trunk
+ISIC_0027003.jpg,ISIC_0027003,HAM_0007528,melanocytic_Nevi,histo,25.0,female,lower extremity
+ISIC_0027004.jpg,ISIC_0027004,HAM_0003826,basal_cell_carcinoma,histo,70.0,male,chest
+ISIC_0027009.jpg,ISIC_0027009,HAM_0003594,melanocytic_Nevi,follow_up,70.0,female,lower extremity
+ISIC_0027012.jpg,ISIC_0027012,HAM_0007445,melanocytic_Nevi,consensus,25.0,male,foot
+ISIC_0027013.jpg,ISIC_0027013,HAM_0001854,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0027019.jpg,ISIC_0027019,HAM_0004629,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0027021.jpg,ISIC_0027021,HAM_0006940,melanoma,histo,55.0,male,upper extremity
+ISIC_0027027.jpg,ISIC_0027027,HAM_0007604,benign_keratosis-like_lesions,consensus,70.0,female,trunk
+ISIC_0027044.jpg,ISIC_0027044,HAM_0002871,dermatofibroma,consensus,35.0,female,lower extremity
+ISIC_0027047.jpg,ISIC_0027047,HAM_0001786,actinic_keratoses,histo,70.0,male,upper extremity
+ISIC_0027052.jpg,ISIC_0027052,HAM_0000752,melanocytic_Nevi,histo,15.0,male,lower extremity
+ISIC_0027053.jpg,ISIC_0027053,HAM_0003847,benign_keratosis-like_lesions,histo,85.0,male,upper extremity
+ISIC_0027068.jpg,ISIC_0027068,HAM_0007296,benign_keratosis-like_lesions,histo,65.0,female,upper extremity
+ISIC_0027069.jpg,ISIC_0027069,HAM_0005926,melanoma,histo,75.0,male,back
+ISIC_0027075.jpg,ISIC_0027075,HAM_0004261,melanocytic_Nevi,follow_up,40.0,male,upper extremity
+ISIC_0027083.jpg,ISIC_0027083,HAM_0007381,benign_keratosis-like_lesions,consensus,85.0,female,face
+ISIC_0027084.jpg,ISIC_0027084,HAM_0006893,actinic_keratoses,histo,65.0,female,lower extremity
+ISIC_0027110.jpg,ISIC_0027110,HAM_0006348,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0027144.jpg,ISIC_0027144,HAM_0005064,melanoma,histo,40.0,female,back
+ISIC_0027147.jpg,ISIC_0027147,HAM_0000366,melanocytic_Nevi,histo,75.0,male,back
+ISIC_0027150.jpg,ISIC_0027150,HAM_0003742,melanocytic_Nevi,histo,20.0,female,back
+ISIC_0027151.jpg,ISIC_0027151,HAM_0007179,benign_keratosis-like_lesions,histo,0.0,female,back
+ISIC_0027152.jpg,ISIC_0027152,HAM_0003091,melanocytic_Nevi,histo,25.0,female,unknown
+ISIC_0027156.jpg,ISIC_0027156,HAM_0005172,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0027157.jpg,ISIC_0027157,HAM_0002756,melanocytic_Nevi,follow_up,30.0,male,lower extremity
+ISIC_0027164.jpg,ISIC_0027164,HAM_0004328,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0027165.jpg,ISIC_0027165,HAM_0005476,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0027192.jpg,ISIC_0027192,HAM_0001024,benign_keratosis-like_lesions,histo,45.0,male,face
+ISIC_0027193.jpg,ISIC_0027193,HAM_0002308,melanocytic_Nevi,follow_up,55.0,female,abdomen
+ISIC_0027196.jpg,ISIC_0027196,HAM_0007304,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0027209.jpg,ISIC_0027209,HAM_0001849,melanocytic_Nevi,histo,10.0,female,lower extremity
+ISIC_0027222.jpg,ISIC_0027222,HAM_0005741,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0027229.jpg,ISIC_0027229,HAM_0003826,basal_cell_carcinoma,histo,70.0,male,chest
+ISIC_0027235.jpg,ISIC_0027235,HAM_0003091,melanocytic_Nevi,histo,25.0,female,unknown
+ISIC_0027236.jpg,ISIC_0027236,HAM_0001555,melanocytic_Nevi,histo,35.0,female,upper extremity
+ISIC_0027240.jpg,ISIC_0027240,HAM_0005237,melanocytic_Nevi,histo,70.0,male,hand
+ISIC_0027243.jpg,ISIC_0027243,HAM_0007288,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0027252.jpg,ISIC_0027252,HAM_0004674,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0027259.jpg,ISIC_0027259,HAM_0004520,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0027261.jpg,ISIC_0027261,HAM_0005084,melanoma,histo,75.0,male,ear
+ISIC_0027280.jpg,ISIC_0027280,HAM_0005618,melanocytic_Nevi,follow_up,40.0,male,foot
+ISIC_0027283.jpg,ISIC_0027283,HAM_0000265,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0027289.jpg,ISIC_0027289,HAM_0003565,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0027294.jpg,ISIC_0027294,HAM_0001520,actinic_keratoses,histo,75.0,female,lower extremity
+ISIC_0027299.jpg,ISIC_0027299,HAM_0000475,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0027300.jpg,ISIC_0027300,HAM_0003350,melanoma,histo,60.0,male,chest
+ISIC_0027317.jpg,ISIC_0027317,HAM_0001857,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0027322.jpg,ISIC_0027322,HAM_0001044,melanocytic_Nevi,follow_up,60.0,female,trunk
+ISIC_0027336.jpg,ISIC_0027336,HAM_0006943,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0027339.jpg,ISIC_0027339,HAM_0000776,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0027340.jpg,ISIC_0027340,HAM_0007450,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0027342.jpg,ISIC_0027342,HAM_0000510,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0027351.jpg,ISIC_0027351,HAM_0002293,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0027377.jpg,ISIC_0027377,HAM_0005105,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0027384.jpg,ISIC_0027384,HAM_0005565,melanocytic_Nevi,follow_up,60.0,male,upper extremity
+ISIC_0027398.jpg,ISIC_0027398,HAM_0001567,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0027399.jpg,ISIC_0027399,HAM_0000935,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0027400.jpg,ISIC_0027400,HAM_0002062,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0027405.jpg,ISIC_0027405,HAM_0004628,melanocytic_Nevi,follow_up,45.0,male,foot
+ISIC_0027406.jpg,ISIC_0027406,HAM_0004524,melanocytic_Nevi,histo,75.0,female,upper extremity
+ISIC_0027416.jpg,ISIC_0027416,HAM_0006192,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0027421.jpg,ISIC_0027421,HAM_0001968,melanocytic_Nevi,histo,35.0,male,scalp
+ISIC_0027424.jpg,ISIC_0027424,HAM_0002840,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0027438.jpg,ISIC_0027438,HAM_0006808,melanocytic_Nevi,follow_up,65.0,male,lower extremity
+ISIC_0027445.jpg,ISIC_0027445,HAM_0007399,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0027457.jpg,ISIC_0027457,HAM_0002457,melanocytic_Nevi,follow_up,60.0,male,back
+ISIC_0027459.jpg,ISIC_0027459,HAM_0006999,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0027466.jpg,ISIC_0027466,HAM_0001454,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0027469.jpg,ISIC_0027469,HAM_0005884,melanocytic_Nevi,histo,30.0,male,back
+ISIC_0027471.jpg,ISIC_0027471,HAM_0005395,melanocytic_Nevi,histo,75.0,female,lower extremity
+ISIC_0027478.jpg,ISIC_0027478,HAM_0003593,basal_cell_carcinoma,histo,40.0,male,back
+ISIC_0027494.jpg,ISIC_0027494,HAM_0003554,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0027504.jpg,ISIC_0027504,HAM_0004660,benign_keratosis-like_lesions,histo,80.0,male,scalp
+ISIC_0027511.jpg,ISIC_0027511,HAM_0005897,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0027513.jpg,ISIC_0027513,HAM_0004748,benign_keratosis-like_lesions,histo,55.0,male,upper extremity
+ISIC_0027529.jpg,ISIC_0027529,HAM_0004568,actinic_keratoses,histo,50.0,male,upper extremity
+ISIC_0027534.jpg,ISIC_0027534,HAM_0001885,melanocytic_Nevi,follow_up,75.0,female,lower extremity
+ISIC_0027539.jpg,ISIC_0027539,HAM_0006176,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0027549.jpg,ISIC_0027549,HAM_0006358,melanocytic_Nevi,consensus,0.0,male,foot
+ISIC_0027554.jpg,ISIC_0027554,HAM_0001123,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0027555.jpg,ISIC_0027555,HAM_0003503,melanocytic_Nevi,follow_up,60.0,female,lower extremity
+ISIC_0027558.jpg,ISIC_0027558,HAM_0000144,melanocytic_Nevi,consensus,40.0,male,back
+ISIC_0027573.jpg,ISIC_0027573,HAM_0006942,melanoma,histo,55.0,male,face
+ISIC_0027579.jpg,ISIC_0027579,HAM_0004726,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0027583.jpg,ISIC_0027583,HAM_0001925,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0027597.jpg,ISIC_0027597,HAM_0005242,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0027608.jpg,ISIC_0027608,HAM_0005610,benign_keratosis-like_lesions,confocal,65.0,female,face
+ISIC_0027611.jpg,ISIC_0027611,HAM_0000160,melanocytic_Nevi,follow_up,25.0,male,upper extremity
+ISIC_0027613.jpg,ISIC_0027613,HAM_0005684,dermatofibroma,histo,75.0,female,lower extremity
+ISIC_0027622.jpg,ISIC_0027622,HAM_0006467,melanoma,histo,40.0,female,upper extremity
+ISIC_0027625.jpg,ISIC_0027625,HAM_0002922,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0027628.jpg,ISIC_0027628,HAM_0004002,melanocytic_Nevi,follow_up,55.0,male,foot
+ISIC_0027644.jpg,ISIC_0027644,HAM_0001107,melanocytic_Nevi,histo,40.0,male,upper extremity
+ISIC_0027645.jpg,ISIC_0027645,HAM_0006605,melanocytic_Nevi,histo,50.0,female,neck
+ISIC_0027664.jpg,ISIC_0027664,HAM_0000422,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0027665.jpg,ISIC_0027665,HAM_0001860,vascular_lesions,consensus,50.0,male,abdomen
+ISIC_0027680.jpg,ISIC_0027680,HAM_0004677,benign_keratosis-like_lesions,histo,80.0,male,back
+ISIC_0027687.jpg,ISIC_0027687,HAM_0004467,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0027689.jpg,ISIC_0027689,HAM_0003819,melanocytic_Nevi,consensus,40.0,male,unknown
+ISIC_0027694.jpg,ISIC_0027694,HAM_0007405,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0027700.jpg,ISIC_0027700,HAM_0001383,actinic_keratoses,histo,80.0,male,upper extremity
+ISIC_0027712.jpg,ISIC_0027712,HAM_0002784,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0027714.jpg,ISIC_0027714,HAM_0005720,melanocytic_Nevi,consensus,50.0,female,back
+ISIC_0027740.jpg,ISIC_0027740,HAM_0003397,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0027746.jpg,ISIC_0027746,HAM_0003450,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0027747.jpg,ISIC_0027747,HAM_0005932,benign_keratosis-like_lesions,consensus,55.0,male,back
+ISIC_0027752.jpg,ISIC_0027752,HAM_0007241,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0027757.jpg,ISIC_0027757,HAM_0007112,melanocytic_Nevi,histo,10.0,female,back
+ISIC_0027782.jpg,ISIC_0027782,HAM_0006043,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0027793.jpg,ISIC_0027793,HAM_0006870,melanoma,histo,35.0,female,neck
+ISIC_0027799.jpg,ISIC_0027799,HAM_0000654,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0027805.jpg,ISIC_0027805,HAM_0003962,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0027807.jpg,ISIC_0027807,HAM_0005406,melanocytic_Nevi,follow_up,45.0,female,upper extremity
+ISIC_0027815.jpg,ISIC_0027815,HAM_0005388,benign_keratosis-like_lesions,histo,80.0,male,chest
+ISIC_0027816.jpg,ISIC_0027816,HAM_0005094,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0027828.jpg,ISIC_0027828,HAM_0002521,benign_keratosis-like_lesions,histo,40.0,male,upper extremity
+ISIC_0027837.jpg,ISIC_0027837,HAM_0002476,melanocytic_Nevi,histo,15.0,male,back
+ISIC_0027845.jpg,ISIC_0027845,HAM_0006167,melanocytic_Nevi,follow_up,50.0,female,foot
+ISIC_0027865.jpg,ISIC_0027865,HAM_0000393,basal_cell_carcinoma,histo,40.0,female,abdomen
+ISIC_0027873.jpg,ISIC_0027873,HAM_0006114,melanocytic_Nevi,histo,30.0,female,foot
+ISIC_0027880.jpg,ISIC_0027880,HAM_0005687,melanocytic_Nevi,follow_up,65.0,male,upper extremity
+ISIC_0027893.jpg,ISIC_0027893,HAM_0000237,benign_keratosis-like_lesions,histo,80.0,male,lower extremity
+ISIC_0027894.jpg,ISIC_0027894,HAM_0002236,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0027901.jpg,ISIC_0027901,HAM_0004320,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0027919.jpg,ISIC_0027919,HAM_0006523,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0027922.jpg,ISIC_0027922,HAM_0007178,melanocytic_Nevi,histo,70.0,female,abdomen
+ISIC_0027923.jpg,ISIC_0027923,HAM_0003643,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0027924.jpg,ISIC_0027924,HAM_0006283,melanocytic_Nevi,consensus,20.0,male,chest
+ISIC_0027927.jpg,ISIC_0027927,HAM_0006614,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0027931.jpg,ISIC_0027931,HAM_0001220,melanocytic_Nevi,histo,60.0,female,chest
+ISIC_0027932.jpg,ISIC_0027932,HAM_0005569,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0027944.jpg,ISIC_0027944,HAM_0003414,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0027947.jpg,ISIC_0027947,HAM_0004416,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0027954.jpg,ISIC_0027954,HAM_0002034,benign_keratosis-like_lesions,consensus,5.0,male,abdomen
+ISIC_0027955.jpg,ISIC_0027955,HAM_0001099,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0027960.jpg,ISIC_0027960,HAM_0003569,benign_keratosis-like_lesions,histo,75.0,male,unknown
+ISIC_0027962.jpg,ISIC_0027962,HAM_0003432,melanocytic_Nevi,follow_up,50.0,female,upper extremity
+ISIC_0027963.jpg,ISIC_0027963,HAM_0000891,melanocytic_Nevi,histo,30.0,female,lower extremity
+ISIC_0027964.jpg,ISIC_0027964,HAM_0000125,melanoma,histo,60.0,male,lower extremity
+ISIC_0027967.jpg,ISIC_0027967,HAM_0002809,benign_keratosis-like_lesions,histo,45.0,female,face
+ISIC_0027971.jpg,ISIC_0027971,HAM_0007082,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0027975.jpg,ISIC_0027975,HAM_0002799,melanocytic_Nevi,follow_up,30.0,male,neck
+ISIC_0027977.jpg,ISIC_0027977,HAM_0004512,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0027987.jpg,ISIC_0027987,HAM_0006457,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0027989.jpg,ISIC_0027989,HAM_0000113,benign_keratosis-like_lesions,histo,75.0,female,hand
+ISIC_0027992.jpg,ISIC_0027992,HAM_0004451,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0027998.jpg,ISIC_0027998,HAM_0005947,basal_cell_carcinoma,histo,65.0,female,upper extremity
+ISIC_0028002.jpg,ISIC_0028002,HAM_0002168,melanocytic_Nevi,follow_up,35.0,male,back
+ISIC_0028005.jpg,ISIC_0028005,HAM_0000117,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0028020.jpg,ISIC_0028020,HAM_0003090,benign_keratosis-like_lesions,histo,50.0,female,lower extremity
+ISIC_0028022.jpg,ISIC_0028022,HAM_0001202,melanoma,histo,70.0,female,upper extremity
+ISIC_0028031.jpg,ISIC_0028031,HAM_0005765,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0028039.jpg,ISIC_0028039,HAM_0000035,melanocytic_Nevi,follow_up,20.0,male,foot
+ISIC_0028041.jpg,ISIC_0028041,HAM_0000796,melanoma,histo,60.0,male,trunk
+ISIC_0028043.jpg,ISIC_0028043,HAM_0000979,benign_keratosis-like_lesions,histo,70.0,male,scalp
+ISIC_0028045.jpg,ISIC_0028045,HAM_0003892,melanocytic_Nevi,histo,25.0,female,lower extremity
+ISIC_0028066.jpg,ISIC_0028066,HAM_0005689,melanocytic_Nevi,consensus,20.0,male,back
+ISIC_0028069.jpg,ISIC_0028069,HAM_0001811,melanoma,histo,35.0,female,neck
+ISIC_0028079.jpg,ISIC_0028079,HAM_0005947,basal_cell_carcinoma,histo,65.0,female,upper extremity
+ISIC_0028085.jpg,ISIC_0028085,HAM_0000065,basal_cell_carcinoma,histo,50.0,female,abdomen
+ISIC_0028086.jpg,ISIC_0028086,HAM_0005678,melanoma,histo,60.0,male,chest
+ISIC_0028087.jpg,ISIC_0028087,HAM_0002981,melanoma,histo,65.0,female,back
+ISIC_0028095.jpg,ISIC_0028095,HAM_0001926,basal_cell_carcinoma,histo,75.0,female,lower extremity
+ISIC_0028097.jpg,ISIC_0028097,HAM_0006928,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0028105.jpg,ISIC_0028105,HAM_0005397,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0028107.jpg,ISIC_0028107,HAM_0003135,basal_cell_carcinoma,histo,55.0,male,chest
+ISIC_0028113.jpg,ISIC_0028113,HAM_0003846,basal_cell_carcinoma,histo,80.0,male,back
+ISIC_0028116.jpg,ISIC_0028116,HAM_0006174,melanocytic_Nevi,histo,75.0,male,back
+ISIC_0028119.jpg,ISIC_0028119,HAM_0007564,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0028124.jpg,ISIC_0028124,HAM_0001294,benign_keratosis-like_lesions,histo,60.0,female,face
+ISIC_0028130.jpg,ISIC_0028130,HAM_0007263,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0028133.jpg,ISIC_0028133,HAM_0003087,melanocytic_Nevi,follow_up,75.0,male,chest
+ISIC_0028149.jpg,ISIC_0028149,HAM_0004650,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0028152.jpg,ISIC_0028152,HAM_0004825,melanocytic_Nevi,follow_up,50.0,male,upper extremity
+ISIC_0028160.jpg,ISIC_0028160,HAM_0006659,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0028163.jpg,ISIC_0028163,HAM_0006617,vascular_lesions,histo,25.0,female,abdomen
+ISIC_0028164.jpg,ISIC_0028164,HAM_0006443,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0028166.jpg,ISIC_0028166,HAM_0005510,melanocytic_Nevi,histo,30.0,female,lower extremity
+ISIC_0028169.jpg,ISIC_0028169,HAM_0002500,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0028172.jpg,ISIC_0028172,HAM_0001731,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0028198.jpg,ISIC_0028198,HAM_0005064,melanoma,histo,40.0,female,back
+ISIC_0028217.jpg,ISIC_0028217,HAM_0000763,melanocytic_Nevi,histo,35.0,female,back
+ISIC_0028222.jpg,ISIC_0028222,HAM_0001968,melanocytic_Nevi,histo,35.0,male,scalp
+ISIC_0028237.jpg,ISIC_0028237,HAM_0006327,benign_keratosis-like_lesions,histo,85.0,female,face
+ISIC_0028242.jpg,ISIC_0028242,HAM_0000768,melanocytic_Nevi,follow_up,35.0,male,back
+ISIC_0028252.jpg,ISIC_0028252,HAM_0001259,melanocytic_Nevi,consensus,40.0,female,abdomen
+ISIC_0028259.jpg,ISIC_0028259,HAM_0001348,melanocytic_Nevi,follow_up,35.0,female,upper extremity
+ISIC_0028272.jpg,ISIC_0028272,HAM_0001306,melanocytic_Nevi,consensus,75.0,female,back
+ISIC_0028276.jpg,ISIC_0028276,HAM_0001126,melanocytic_Nevi,histo,20.0,female,back
+ISIC_0028278.jpg,ISIC_0028278,HAM_0002191,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0028289.jpg,ISIC_0028289,HAM_0002748,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0028291.jpg,ISIC_0028291,HAM_0006253,melanoma,histo,65.0,male,back
+ISIC_0028292.jpg,ISIC_0028292,HAM_0006686,melanocytic_Nevi,follow_up,40.0,male,back
+ISIC_0028296.jpg,ISIC_0028296,HAM_0006365,melanocytic_Nevi,follow_up,80.0,male,lower extremity
+ISIC_0028299.jpg,ISIC_0028299,HAM_0001540,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0028305.jpg,ISIC_0028305,HAM_0001318,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0028312.jpg,ISIC_0028312,HAM_0002315,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0028315.jpg,ISIC_0028315,HAM_0002516,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0028328.jpg,ISIC_0028328,HAM_0001304,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0028341.jpg,ISIC_0028341,HAM_0006804,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0028357.jpg,ISIC_0028357,HAM_0004283,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0028358.jpg,ISIC_0028358,HAM_0001318,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0028361.jpg,ISIC_0028361,HAM_0001747,melanoma,histo,45.0,male,back
+ISIC_0028392.jpg,ISIC_0028392,HAM_0002634,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0028415.jpg,ISIC_0028415,HAM_0000796,melanoma,histo,60.0,male,trunk
+ISIC_0028439.jpg,ISIC_0028439,HAM_0000684,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0028442.jpg,ISIC_0028442,HAM_0001328,melanoma,histo,75.0,male,unknown
+ISIC_0028443.jpg,ISIC_0028443,HAM_0004601,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0028461.jpg,ISIC_0028461,HAM_0000072,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0028469.jpg,ISIC_0028469,HAM_0002145,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0028471.jpg,ISIC_0028471,HAM_0004085,melanocytic_Nevi,follow_up,55.0,female,abdomen
+ISIC_0028496.jpg,ISIC_0028496,HAM_0003830,benign_keratosis-like_lesions,histo,65.0,male,upper extremity
+ISIC_0028497.jpg,ISIC_0028497,HAM_0006533,benign_keratosis-like_lesions,consensus,80.0,male,face
+ISIC_0028499.jpg,ISIC_0028499,HAM_0004976,actinic_keratoses,histo,80.0,female,upper extremity
+ISIC_0028504.jpg,ISIC_0028504,HAM_0006910,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0028505.jpg,ISIC_0028505,HAM_0005084,melanoma,histo,75.0,male,ear
+ISIC_0028507.jpg,ISIC_0028507,HAM_0003340,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0028509.jpg,ISIC_0028509,HAM_0007249,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0028512.jpg,ISIC_0028512,HAM_0003350,melanoma,histo,60.0,male,chest
+ISIC_0028515.jpg,ISIC_0028515,HAM_0006463,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0028523.jpg,ISIC_0028523,HAM_0001523,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0028535.jpg,ISIC_0028535,HAM_0005493,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0028537.jpg,ISIC_0028537,HAM_0000856,melanoma,histo,35.0,male,back
+ISIC_0028541.jpg,ISIC_0028541,HAM_0004096,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0028557.jpg,ISIC_0028557,HAM_0005395,melanocytic_Nevi,histo,75.0,female,lower extremity
+ISIC_0028560.jpg,ISIC_0028560,HAM_0003847,benign_keratosis-like_lesions,histo,85.0,male,upper extremity
+ISIC_0028579.jpg,ISIC_0028579,HAM_0001811,melanoma,histo,35.0,female,neck
+ISIC_0028585.jpg,ISIC_0028585,HAM_0002554,melanocytic_Nevi,consensus,30.0,male,back
+ISIC_0028586.jpg,ISIC_0028586,HAM_0000690,melanocytic_Nevi,consensus,30.0,female,back
+ISIC_0028595.jpg,ISIC_0028595,HAM_0003237,melanocytic_Nevi,follow_up,65.0,male,lower extremity
+ISIC_0028605.jpg,ISIC_0028605,HAM_0000076,melanocytic_Nevi,follow_up,30.0,female,trunk
+ISIC_0028611.jpg,ISIC_0028611,HAM_0004695,benign_keratosis-like_lesions,histo,80.0,female,lower extremity
+ISIC_0028613.jpg,ISIC_0028613,HAM_0004080,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0028616.jpg,ISIC_0028616,HAM_0002846,melanocytic_Nevi,follow_up,60.0,female,back
+ISIC_0028624.jpg,ISIC_0028624,HAM_0003750,melanocytic_Nevi,follow_up,45.0,male,upper extremity
+ISIC_0028627.jpg,ISIC_0028627,HAM_0000980,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0028632.jpg,ISIC_0028632,HAM_0005960,melanocytic_Nevi,consensus,60.0,male,neck
+ISIC_0028639.jpg,ISIC_0028639,HAM_0006340,melanocytic_Nevi,follow_up,50.0,male,face
+ISIC_0028652.jpg,ISIC_0028652,HAM_0001575,basal_cell_carcinoma,histo,65.0,male,face
+ISIC_0028653.jpg,ISIC_0028653,HAM_0005837,basal_cell_carcinoma,histo,50.0,female,chest
+ISIC_0028655.jpg,ISIC_0028655,HAM_0007102,melanoma,histo,55.0,male,neck
+ISIC_0028658.jpg,ISIC_0028658,HAM_0004703,melanocytic_Nevi,consensus,10.0,male,abdomen
+ISIC_0028682.jpg,ISIC_0028682,HAM_0002651,melanocytic_Nevi,follow_up,25.0,female,trunk
+ISIC_0028686.jpg,ISIC_0028686,HAM_0005329,melanocytic_Nevi,histo,45.0,female,chest
+ISIC_0028695.jpg,ISIC_0028695,HAM_0006010,melanocytic_Nevi,follow_up,75.0,female,back
+ISIC_0028698.jpg,ISIC_0028698,HAM_0003033,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0028700.jpg,ISIC_0028700,HAM_0001717,melanocytic_Nevi,follow_up,70.0,male,abdomen
+ISIC_0028701.jpg,ISIC_0028701,HAM_0006128,benign_keratosis-like_lesions,histo,55.0,female,lower extremity
+ISIC_0028704.jpg,ISIC_0028704,HAM_0006427,melanocytic_Nevi,follow_up,60.0,male,upper extremity
+ISIC_0028710.jpg,ISIC_0028710,HAM_0004908,benign_keratosis-like_lesions,histo,45.0,female,hand
+ISIC_0028713.jpg,ISIC_0028713,HAM_0003898,melanocytic_Nevi,follow_up,45.0,male,foot
+ISIC_0028717.jpg,ISIC_0028717,HAM_0005803,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0028718.jpg,ISIC_0028718,HAM_0006380,melanoma,histo,35.0,female,upper extremity
+ISIC_0028725.jpg,ISIC_0028725,HAM_0003598,melanocytic_Nevi,follow_up,40.0,male,back
+ISIC_0028729.jpg,ISIC_0028729,HAM_0006989,melanocytic_Nevi,follow_up,40.0,female,foot
+ISIC_0028742.jpg,ISIC_0028742,HAM_0004062,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0028743.jpg,ISIC_0028743,HAM_0001075,melanocytic_Nevi,follow_up,30.0,female,back
+ISIC_0028746.jpg,ISIC_0028746,HAM_0000878,melanoma,histo,70.0,male,back
+ISIC_0028752.jpg,ISIC_0028752,HAM_0001695,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0028760.jpg,ISIC_0028760,HAM_0006088,melanoma,histo,30.0,female,abdomen
+ISIC_0028764.jpg,ISIC_0028764,HAM_0004746,melanoma,histo,65.0,female,back
+ISIC_0028766.jpg,ISIC_0028766,HAM_0001541,melanocytic_Nevi,consensus,30.0,male,trunk
+ISIC_0028769.jpg,ISIC_0028769,HAM_0004242,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0028777.jpg,ISIC_0028777,HAM_0000125,melanoma,histo,60.0,male,lower extremity
+ISIC_0028781.jpg,ISIC_0028781,HAM_0005208,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0028782.jpg,ISIC_0028782,HAM_0000528,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0028785.jpg,ISIC_0028785,HAM_0005914,melanocytic_Nevi,consensus,30.0,female,lower extremity
+ISIC_0028793.jpg,ISIC_0028793,HAM_0004783,melanocytic_Nevi,histo,30.0,female,foot
+ISIC_0028795.jpg,ISIC_0028795,HAM_0004568,actinic_keratoses,histo,50.0,male,upper extremity
+ISIC_0028805.jpg,ISIC_0028805,HAM_0006166,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0028818.jpg,ISIC_0028818,HAM_0003694,basal_cell_carcinoma,histo,70.0,male,foot
+ISIC_0028845.jpg,ISIC_0028845,HAM_0001016,melanocytic_Nevi,follow_up,35.0,male,abdomen
+ISIC_0028853.jpg,ISIC_0028853,HAM_0001047,melanocytic_Nevi,follow_up,35.0,female,back
+ISIC_0028861.jpg,ISIC_0028861,HAM_0005621,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0028862.jpg,ISIC_0028862,HAM_0003382,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0028864.jpg,ISIC_0028864,HAM_0005800,melanocytic_Nevi,follow_up,40.0,female,upper extremity
+ISIC_0028870.jpg,ISIC_0028870,HAM_0001381,melanocytic_Nevi,histo,80.0,male,scalp
+ISIC_0028875.jpg,ISIC_0028875,HAM_0002492,melanocytic_Nevi,follow_up,70.0,male,back
+ISIC_0028881.jpg,ISIC_0028881,HAM_0001605,benign_keratosis-like_lesions,histo,75.0,male,upper extremity
+ISIC_0028883.jpg,ISIC_0028883,HAM_0003372,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0028884.jpg,ISIC_0028884,HAM_0005914,melanocytic_Nevi,consensus,30.0,female,lower extremity
+ISIC_0028890.jpg,ISIC_0028890,HAM_0005435,basal_cell_carcinoma,histo,65.0,male,back
+ISIC_0028894.jpg,ISIC_0028894,HAM_0003639,melanocytic_Nevi,histo,60.0,female,abdomen
+ISIC_0028896.jpg,ISIC_0028896,HAM_0005659,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0028908.jpg,ISIC_0028908,HAM_0005281,melanocytic_Nevi,follow_up,60.0,female,lower extremity
+ISIC_0028915.jpg,ISIC_0028915,HAM_0006832,melanoma,histo,50.0,male,upper extremity
+ISIC_0028920.jpg,ISIC_0028920,HAM_0003452,benign_keratosis-like_lesions,histo,75.0,male,chest
+ISIC_0028921.jpg,ISIC_0028921,HAM_0000507,melanocytic_Nevi,follow_up,75.0,male,abdomen
+ISIC_0028922.jpg,ISIC_0028922,HAM_0001382,melanocytic_Nevi,follow_up,80.0,male,lower extremity
+ISIC_0028939.jpg,ISIC_0028939,HAM_0005218,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0028945.jpg,ISIC_0028945,HAM_0002370,melanocytic_Nevi,histo,65.0,male,back
+ISIC_0028953.jpg,ISIC_0028953,HAM_0000660,melanocytic_Nevi,follow_up,40.0,male,abdomen
+ISIC_0028954.jpg,ISIC_0028954,HAM_0000166,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0028963.jpg,ISIC_0028963,HAM_0002423,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0028966.jpg,ISIC_0028966,HAM_0001849,melanocytic_Nevi,histo,10.0,female,lower extremity
+ISIC_0028973.jpg,ISIC_0028973,HAM_0005665,basal_cell_carcinoma,histo,85.0,female,back
+ISIC_0028984.jpg,ISIC_0028984,HAM_0003400,melanoma,histo,50.0,male,face
+ISIC_0028986.jpg,ISIC_0028986,HAM_0007338,melanocytic_Nevi,follow_up,65.0,female,trunk
+ISIC_0028993.jpg,ISIC_0028993,HAM_0006352,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0029003.jpg,ISIC_0029003,HAM_0004947,benign_keratosis-like_lesions,histo,75.0,male,abdomen
+ISIC_0029007.jpg,ISIC_0029007,HAM_0000672,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0029008.jpg,ISIC_0029008,HAM_0000629,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0029015.jpg,ISIC_0029015,HAM_0002321,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0029021.jpg,ISIC_0029021,HAM_0004746,melanoma,histo,65.0,female,back
+ISIC_0029037.jpg,ISIC_0029037,HAM_0004311,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0029058.jpg,ISIC_0029058,HAM_0006292,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0029059.jpg,ISIC_0029059,HAM_0002771,actinic_keratoses,histo,80.0,female,lower extremity
+ISIC_0029066.jpg,ISIC_0029066,HAM_0004160,melanocytic_Nevi,follow_up,35.0,male,trunk
+ISIC_0029080.jpg,ISIC_0029080,HAM_0000186,benign_keratosis-like_lesions,histo,70.0,male,face
+ISIC_0029082.jpg,ISIC_0029082,HAM_0005665,basal_cell_carcinoma,histo,85.0,female,back
+ISIC_0029085.jpg,ISIC_0029085,HAM_0007467,melanocytic_Nevi,follow_up,65.0,female,lower extremity
+ISIC_0029087.jpg,ISIC_0029087,HAM_0000911,melanocytic_Nevi,follow_up,60.0,male,upper extremity
+ISIC_0029090.jpg,ISIC_0029090,HAM_0007389,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0029131.jpg,ISIC_0029131,HAM_0006985,melanocytic_Nevi,follow_up,35.0,male,trunk
+ISIC_0029155.jpg,ISIC_0029155,HAM_0007379,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0029160.jpg,ISIC_0029160,HAM_0006514,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0029174.jpg,ISIC_0029174,HAM_0001381,melanocytic_Nevi,histo,80.0,male,scalp
+ISIC_0029202.jpg,ISIC_0029202,HAM_0002355,benign_keratosis-like_lesions,consensus,35.0,male,abdomen
+ISIC_0029203.jpg,ISIC_0029203,HAM_0005510,melanocytic_Nevi,histo,30.0,female,lower extremity
+ISIC_0029204.jpg,ISIC_0029204,HAM_0005877,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0029213.jpg,ISIC_0029213,HAM_0000237,benign_keratosis-like_lesions,histo,80.0,male,lower extremity
+ISIC_0029224.jpg,ISIC_0029224,HAM_0006695,melanocytic_Nevi,follow_up,65.0,male,abdomen
+ISIC_0029230.jpg,ISIC_0029230,HAM_0007141,basal_cell_carcinoma,histo,50.0,male,trunk
+ISIC_0029248.jpg,ISIC_0029248,HAM_0004756,dermatofibroma,histo,55.0,male,lower extremity
+ISIC_0029255.jpg,ISIC_0029255,HAM_0007599,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0029259.jpg,ISIC_0029259,HAM_0003132,melanocytic_Nevi,follow_up,35.0,male,abdomen
+ISIC_0029264.jpg,ISIC_0029264,HAM_0001691,melanocytic_Nevi,follow_up,75.0,male,lower extremity
+ISIC_0029265.jpg,ISIC_0029265,HAM_0001272,melanoma,histo,85.0,male,upper extremity
+ISIC_0029271.jpg,ISIC_0029271,HAM_0005783,melanoma,histo,60.0,female,upper extremity
+ISIC_0029276.jpg,ISIC_0029276,HAM_0004719,melanocytic_Nevi,histo,25.0,male,lower extremity
+ISIC_0029279.jpg,ISIC_0029279,HAM_0000769,actinic_keratoses,histo,80.0,male,lower extremity
+ISIC_0029283.jpg,ISIC_0029283,HAM_0001873,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0029286.jpg,ISIC_0029286,HAM_0005450,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0029291.jpg,ISIC_0029291,HAM_0002521,benign_keratosis-like_lesions,histo,40.0,male,upper extremity
+ISIC_0029294.jpg,ISIC_0029294,HAM_0003564,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0029295.jpg,ISIC_0029295,HAM_0005941,melanocytic_Nevi,follow_up,40.0,male,abdomen
+ISIC_0029298.jpg,ISIC_0029298,HAM_0001508,melanocytic_Nevi,histo,65.0,female,lower extremity
+ISIC_0029305.jpg,ISIC_0029305,HAM_0002459,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0029310.jpg,ISIC_0029310,HAM_0006701,melanocytic_Nevi,follow_up,40.0,female,foot
+ISIC_0029323.jpg,ISIC_0029323,HAM_0000872,basal_cell_carcinoma,histo,75.0,male,chest
+ISIC_0029331.jpg,ISIC_0029331,HAM_0002069,basal_cell_carcinoma,histo,50.0,male,lower extremity
+ISIC_0029339.jpg,ISIC_0029339,HAM_0000418,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0029345.jpg,ISIC_0029345,HAM_0003260,benign_keratosis-like_lesions,consensus,80.0,male,back
+ISIC_0029353.jpg,ISIC_0029353,HAM_0001744,melanoma,histo,60.0,male,back
+ISIC_0029354.jpg,ISIC_0029354,HAM_0000269,melanocytic_Nevi,histo,25.0,male,neck
+ISIC_0029357.jpg,ISIC_0029357,HAM_0001767,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0029361.jpg,ISIC_0029361,HAM_0001182,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0029386.jpg,ISIC_0029386,HAM_0004707,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0029394.jpg,ISIC_0029394,HAM_0004566,benign_keratosis-like_lesions,histo,55.0,female,lower extremity
+ISIC_0029395.jpg,ISIC_0029395,HAM_0006958,melanocytic_Nevi,follow_up,65.0,female,lower extremity
+ISIC_0029415.jpg,ISIC_0029415,HAM_0004504,melanocytic_Nevi,follow_up,65.0,male,abdomen
+ISIC_0029419.jpg,ISIC_0029419,HAM_0002469,melanocytic_Nevi,follow_up,55.0,female,genital
+ISIC_0029428.jpg,ISIC_0029428,HAM_0003291,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0029440.jpg,ISIC_0029440,HAM_0000829,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0029460.jpg,ISIC_0029460,HAM_0000545,actinic_keratoses,histo,70.0,male,face
+ISIC_0029464.jpg,ISIC_0029464,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0029480.jpg,ISIC_0029480,HAM_0004898,melanoma,histo,55.0,female,lower extremity
+ISIC_0029483.jpg,ISIC_0029483,HAM_0003433,melanocytic_Nevi,follow_up,40.0,female,foot
+ISIC_0029492.jpg,ISIC_0029492,HAM_0000735,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0029495.jpg,ISIC_0029495,HAM_0002817,melanoma,histo,70.0,female,upper extremity
+ISIC_0029499.jpg,ISIC_0029499,HAM_0000397,melanocytic_Nevi,histo,35.0,male,trunk
+ISIC_0029500.jpg,ISIC_0029500,HAM_0006887,actinic_keratoses,histo,45.0,male,face
+ISIC_0029505.jpg,ISIC_0029505,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0029508.jpg,ISIC_0029508,HAM_0004966,melanocytic_Nevi,follow_up,65.0,male,trunk
+ISIC_0029519.jpg,ISIC_0029519,HAM_0005546,benign_keratosis-like_lesions,histo,60.0,male,back
+ISIC_0029529.jpg,ISIC_0029529,HAM_0007034,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0029548.jpg,ISIC_0029548,HAM_0000113,benign_keratosis-like_lesions,histo,75.0,female,hand
+ISIC_0029575.jpg,ISIC_0029575,HAM_0001747,melanoma,histo,45.0,male,back
+ISIC_0029579.jpg,ISIC_0029579,HAM_0003082,melanocytic_Nevi,follow_up,30.0,female,neck
+ISIC_0029585.jpg,ISIC_0029585,HAM_0006327,benign_keratosis-like_lesions,histo,85.0,female,face
+ISIC_0029586.jpg,ISIC_0029586,HAM_0003864,melanocytic_Nevi,follow_up,60.0,female,upper extremity
+ISIC_0029587.jpg,ISIC_0029587,HAM_0003160,melanocytic_Nevi,follow_up,75.0,female,back
+ISIC_0029590.jpg,ISIC_0029590,HAM_0002679,melanocytic_Nevi,follow_up,45.0,female,foot
+ISIC_0029599.jpg,ISIC_0029599,HAM_0000499,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0029604.jpg,ISIC_0029604,HAM_0001804,melanocytic_Nevi,follow_up,45.0,female,foot
+ISIC_0029623.jpg,ISIC_0029623,HAM_0004433,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0029627.jpg,ISIC_0029627,HAM_0004531,benign_keratosis-like_lesions,histo,75.0,female,lower extremity
+ISIC_0029628.jpg,ISIC_0029628,HAM_0004227,melanocytic_Nevi,follow_up,65.0,female,upper extremity
+ISIC_0029634.jpg,ISIC_0029634,HAM_0003971,actinic_keratoses,histo,60.0,male,face
+ISIC_0029635.jpg,ISIC_0029635,HAM_0005485,melanocytic_Nevi,follow_up,40.0,male,foot
+ISIC_0029636.jpg,ISIC_0029636,HAM_0001220,melanocytic_Nevi,histo,60.0,female,chest
+ISIC_0029644.jpg,ISIC_0029644,HAM_0005184,basal_cell_carcinoma,histo,40.0,female,lower extremity
+ISIC_0029652.jpg,ISIC_0029652,HAM_0006832,melanoma,histo,50.0,male,upper extremity
+ISIC_0029670.jpg,ISIC_0029670,HAM_0006016,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0029679.jpg,ISIC_0029679,HAM_0000366,melanocytic_Nevi,histo,75.0,male,back
+ISIC_0029681.jpg,ISIC_0029681,HAM_0000583,melanocytic_Nevi,follow_up,65.0,male,trunk
+ISIC_0029688.jpg,ISIC_0029688,HAM_0006369,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0029689.jpg,ISIC_0029689,HAM_0006976,melanocytic_Nevi,follow_up,65.0,female,trunk
+ISIC_0029690.jpg,ISIC_0029690,HAM_0006455,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0029693.jpg,ISIC_0029693,HAM_0002305,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0029698.jpg,ISIC_0029698,HAM_0005425,melanoma,histo,70.0,female,lower extremity
+ISIC_0029699.jpg,ISIC_0029699,HAM_0005241,melanocytic_Nevi,follow_up,30.0,male,trunk
+ISIC_0029721.jpg,ISIC_0029721,HAM_0006212,melanocytic_Nevi,follow_up,70.0,male,trunk
+ISIC_0029725.jpg,ISIC_0029725,HAM_0004724,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0029730.jpg,ISIC_0029730,HAM_0002907,melanocytic_Nevi,histo,30.0,male,trunk
+ISIC_0029734.jpg,ISIC_0029734,HAM_0003537,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0029736.jpg,ISIC_0029736,HAM_0003088,melanocytic_Nevi,histo,35.0,male,back
+ISIC_0029739.jpg,ISIC_0029739,HAM_0007352,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0029743.jpg,ISIC_0029743,HAM_0005367,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0029747.jpg,ISIC_0029747,HAM_0006800,basal_cell_carcinoma,histo,85.0,female,face
+ISIC_0029767.jpg,ISIC_0029767,HAM_0003734,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0029773.jpg,ISIC_0029773,HAM_0003340,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0029778.jpg,ISIC_0029778,HAM_0007381,benign_keratosis-like_lesions,consensus,85.0,female,face
+ISIC_0029787.jpg,ISIC_0029787,HAM_0004136,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0029806.jpg,ISIC_0029806,HAM_0006204,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0029814.jpg,ISIC_0029814,HAM_0004485,melanocytic_Nevi,histo,35.0,female,lower extremity
+ISIC_0029815.jpg,ISIC_0029815,HAM_0006537,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0029821.jpg,ISIC_0029821,HAM_0005707,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0029822.jpg,ISIC_0029822,HAM_0006332,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0029833.jpg,ISIC_0029833,HAM_0006664,melanocytic_Nevi,histo,25.0,female,back
+ISIC_0029839.jpg,ISIC_0029839,HAM_0002113,melanoma,histo,65.0,male,back
+ISIC_0029841.jpg,ISIC_0029841,HAM_0003605,benign_keratosis-like_lesions,histo,55.0,male,face
+ISIC_0029842.jpg,ISIC_0029842,HAM_0006865,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0029849.jpg,ISIC_0029849,HAM_0003605,benign_keratosis-like_lesions,histo,55.0,male,face
+ISIC_0029851.jpg,ISIC_0029851,HAM_0000769,actinic_keratoses,histo,80.0,male,lower extremity
+ISIC_0029852.jpg,ISIC_0029852,HAM_0002444,melanocytic_Nevi,follow_up,35.0,female,upper extremity
+ISIC_0029854.jpg,ISIC_0029854,HAM_0003933,melanocytic_Nevi,histo,55.0,female,upper extremity
+ISIC_0029862.jpg,ISIC_0029862,HAM_0006910,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0029872.jpg,ISIC_0029872,HAM_0004004,benign_keratosis-like_lesions,consensus,65.0,female,chest
+ISIC_0029880.jpg,ISIC_0029880,HAM_0002366,benign_keratosis-like_lesions,consensus,70.0,female,back
+ISIC_0029881.jpg,ISIC_0029881,HAM_0000217,melanocytic_Nevi,histo,40.0,male,chest
+ISIC_0029885.jpg,ISIC_0029885,HAM_0000856,melanoma,histo,35.0,male,back
+ISIC_0029891.jpg,ISIC_0029891,HAM_0007227,dermatofibroma,histo,75.0,male,lower extremity
+ISIC_0029904.jpg,ISIC_0029904,HAM_0007079,melanocytic_Nevi,histo,35.0,male,upper extremity
+ISIC_0029914.jpg,ISIC_0029914,HAM_0006626,melanoma,histo,60.0,male,lower extremity
+ISIC_0029917.jpg,ISIC_0029917,HAM_0007364,basal_cell_carcinoma,histo,80.0,male,back
+ISIC_0029920.jpg,ISIC_0029920,HAM_0004475,melanocytic_Nevi,consensus,85.0,female,back
+ISIC_0029924.jpg,ISIC_0029924,HAM_0003010,benign_keratosis-like_lesions,consensus,55.0,female,face
+ISIC_0029927.jpg,ISIC_0029927,HAM_0000999,benign_keratosis-like_lesions,confocal,70.0,female,face
+ISIC_0029930.jpg,ISIC_0029930,HAM_0005889,actinic_keratoses,histo,70.0,female,face
+ISIC_0029949.jpg,ISIC_0029949,HAM_0002337,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0029953.jpg,ISIC_0029953,HAM_0002793,melanocytic_Nevi,histo,10.0,male,genital
+ISIC_0029965.jpg,ISIC_0029965,HAM_0001360,melanocytic_Nevi,follow_up,45.0,female,hand
+ISIC_0029970.jpg,ISIC_0029970,HAM_0005712,melanocytic_Nevi,consensus,5.0,female,foot
+ISIC_0029972.jpg,ISIC_0029972,HAM_0002997,melanocytic_Nevi,follow_up,35.0,female,upper extremity
+ISIC_0029992.jpg,ISIC_0029992,HAM_0002735,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0029993.jpg,ISIC_0029993,HAM_0005987,melanocytic_Nevi,histo,80.0,female,lower extremity
+ISIC_0030016.jpg,ISIC_0030016,HAM_0003673,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0030020.jpg,ISIC_0030020,HAM_0003986,melanocytic_Nevi,follow_up,30.0,female,trunk
+ISIC_0030022.jpg,ISIC_0030022,HAM_0002347,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0030025.jpg,ISIC_0030025,HAM_0003391,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0030031.jpg,ISIC_0030031,HAM_0007102,melanoma,histo,55.0,male,neck
+ISIC_0030036.jpg,ISIC_0030036,HAM_0007008,actinic_keratoses,histo,60.0,male,hand
+ISIC_0030041.jpg,ISIC_0030041,HAM_0000925,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0030043.jpg,ISIC_0030043,HAM_0002549,melanocytic_Nevi,follow_up,45.0,female,unknown
+ISIC_0030064.jpg,ISIC_0030064,HAM_0006048,melanocytic_Nevi,histo,25.0,male,abdomen
+ISIC_0030074.jpg,ISIC_0030074,HAM_0000140,melanocytic_Nevi,histo,40.0,male,upper extremity
+ISIC_0030082.jpg,ISIC_0030082,HAM_0006154,melanocytic_Nevi,histo,20.0,male,lower extremity
+ISIC_0030096.jpg,ISIC_0030096,HAM_0003669,basal_cell_carcinoma,histo,65.0,male,chest
+ISIC_0030116.jpg,ISIC_0030116,HAM_0000182,melanocytic_Nevi,histo,60.0,male,neck
+ISIC_0030121.jpg,ISIC_0030121,HAM_0003088,melanocytic_Nevi,histo,35.0,male,back
+ISIC_0030125.jpg,ISIC_0030125,HAM_0001680,melanocytic_Nevi,histo,55.0,male,lower extremity
+ISIC_0030132.jpg,ISIC_0030132,HAM_0005857,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0030148.jpg,ISIC_0030148,HAM_0000381,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0030149.jpg,ISIC_0030149,HAM_0003693,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0030163.jpg,ISIC_0030163,HAM_0006140,melanocytic_Nevi,follow_up,55.0,female,foot
+ISIC_0030170.jpg,ISIC_0030170,HAM_0006845,melanocytic_Nevi,follow_up,45.0,female,upper extremity
+ISIC_0030171.jpg,ISIC_0030171,HAM_0006253,melanoma,histo,65.0,male,back
+ISIC_0030174.jpg,ISIC_0030174,HAM_0005259,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0030175.jpg,ISIC_0030175,HAM_0003051,actinic_keratoses,histo,85.0,female,upper extremity
+ISIC_0030176.jpg,ISIC_0030176,HAM_0005450,melanocytic_Nevi,histo,40.0,female,lower extremity
+ISIC_0030182.jpg,ISIC_0030182,HAM_0000690,melanocytic_Nevi,consensus,30.0,female,back
+ISIC_0030210.jpg,ISIC_0030210,HAM_0004534,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0030218.jpg,ISIC_0030218,HAM_0002098,melanocytic_Nevi,follow_up,35.0,female,face
+ISIC_0030241.jpg,ISIC_0030241,HAM_0001294,benign_keratosis-like_lesions,histo,60.0,female,face
+ISIC_0030246.jpg,ISIC_0030246,HAM_0003149,melanoma,histo,60.0,male,upper extremity
+ISIC_0030248.jpg,ISIC_0030248,HAM_0006403,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0030254.jpg,ISIC_0030254,HAM_0006759,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0030255.jpg,ISIC_0030255,HAM_0002817,melanoma,histo,70.0,female,upper extremity
+ISIC_0030256.jpg,ISIC_0030256,HAM_0001586,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0030268.jpg,ISIC_0030268,HAM_0004717,melanocytic_Nevi,histo,50.0,male,back
+ISIC_0030270.jpg,ISIC_0030270,HAM_0002029,melanocytic_Nevi,follow_up,50.0,male,abdomen
+ISIC_0030273.jpg,ISIC_0030273,HAM_0004524,melanocytic_Nevi,histo,75.0,female,upper extremity
+ISIC_0030281.jpg,ISIC_0030281,HAM_0003315,melanoma,histo,50.0,female,trunk
+ISIC_0030283.jpg,ISIC_0030283,HAM_0007372,vascular_lesions,consensus,55.0,male,trunk
+ISIC_0030288.jpg,ISIC_0030288,HAM_0003626,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0030289.jpg,ISIC_0030289,HAM_0002836,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0030290.jpg,ISIC_0030290,HAM_0004391,melanocytic_Nevi,follow_up,60.0,male,lower extremity
+ISIC_0030296.jpg,ISIC_0030296,HAM_0005795,melanocytic_Nevi,histo,60.0,male,back
+ISIC_0030306.jpg,ISIC_0030306,HAM_0001904,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0030325.jpg,ISIC_0030325,HAM_0004493,melanocytic_Nevi,follow_up,60.0,male,upper extremity
+ISIC_0030328.jpg,ISIC_0030328,HAM_0001334,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0030329.jpg,ISIC_0030329,HAM_0003279,benign_keratosis-like_lesions,histo,70.0,female,lower extremity
+ISIC_0030332.jpg,ISIC_0030332,HAM_0007035,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0030333.jpg,ISIC_0030333,HAM_0004853,melanoma,histo,80.0,male,upper extremity
+ISIC_0030335.jpg,ISIC_0030335,HAM_0004603,basal_cell_carcinoma,histo,60.0,male,trunk
+ISIC_0030343.jpg,ISIC_0030343,HAM_0006570,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0030358.jpg,ISIC_0030358,HAM_0005960,melanocytic_Nevi,consensus,60.0,male,neck
+ISIC_0030368.jpg,ISIC_0030368,HAM_0006422,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0030379.jpg,ISIC_0030379,HAM_0003416,melanocytic_Nevi,follow_up,40.0,male,lower extremity
+ISIC_0030396.jpg,ISIC_0030396,HAM_0004570,benign_keratosis-like_lesions,histo,50.0,female,chest
+ISIC_0030397.jpg,ISIC_0030397,HAM_0005614,melanocytic_Nevi,histo,35.0,female,trunk
+ISIC_0030401.jpg,ISIC_0030401,HAM_0002370,melanocytic_Nevi,histo,65.0,male,back
+ISIC_0030402.jpg,ISIC_0030402,HAM_0002019,melanocytic_Nevi,follow_up,60.0,male,back
+ISIC_0030403.jpg,ISIC_0030403,HAM_0004027,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0030412.jpg,ISIC_0030412,HAM_0002123,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0030420.jpg,ISIC_0030420,HAM_0003106,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0030430.jpg,ISIC_0030430,HAM_0003185,melanocytic_Nevi,follow_up,40.0,male,foot
+ISIC_0030437.jpg,ISIC_0030437,HAM_0003746,melanocytic_Nevi,follow_up,25.0,male,trunk
+ISIC_0030441.jpg,ISIC_0030441,HAM_0000479,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0030442.jpg,ISIC_0030442,HAM_0004756,dermatofibroma,histo,55.0,male,lower extremity
+ISIC_0030443.jpg,ISIC_0030443,HAM_0006722,melanoma,histo,85.0,female,lower extremity
+ISIC_0030456.jpg,ISIC_0030456,HAM_0000194,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0030458.jpg,ISIC_0030458,HAM_0004494,benign_keratosis-like_lesions,histo,60.0,female,neck
+ISIC_0030463.jpg,ISIC_0030463,HAM_0004655,actinic_keratoses,histo,70.0,female,face
+ISIC_0030474.jpg,ISIC_0030474,HAM_0005399,melanocytic_Nevi,follow_up,60.0,male,back
+ISIC_0030480.jpg,ISIC_0030480,HAM_0004468,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0030490.jpg,ISIC_0030490,HAM_0001438,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0030492.jpg,ISIC_0030492,HAM_0004043,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0030494.jpg,ISIC_0030494,HAM_0004715,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0030497.jpg,ISIC_0030497,HAM_0004804,melanocytic_Nevi,follow_up,25.0,female,back
+ISIC_0030511.jpg,ISIC_0030511,HAM_0005599,basal_cell_carcinoma,histo,70.0,female,back
+ISIC_0030528.jpg,ISIC_0030528,HAM_0000512,basal_cell_carcinoma,histo,45.0,female,face
+ISIC_0030542.jpg,ISIC_0030542,HAM_0002810,benign_keratosis-like_lesions,histo,70.0,female,chest
+ISIC_0030543.jpg,ISIC_0030543,HAM_0001745,melanocytic_Nevi,histo,65.0,male,back
+ISIC_0030549.jpg,ISIC_0030549,HAM_0002094,actinic_keratoses,histo,50.0,male,upper extremity
+ISIC_0030552.jpg,ISIC_0030552,HAM_0002897,melanoma,histo,75.0,male,back
+ISIC_0030554.jpg,ISIC_0030554,HAM_0005422,melanocytic_Nevi,follow_up,65.0,female,lower extremity
+ISIC_0030558.jpg,ISIC_0030558,HAM_0007192,melanocytic_Nevi,follow_up,35.0,female,upper extremity
+ISIC_0030561.jpg,ISIC_0030561,HAM_0004377,benign_keratosis-like_lesions,histo,40.0,female,foot
+ISIC_0030563.jpg,ISIC_0030563,HAM_0007136,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0030575.jpg,ISIC_0030575,HAM_0002032,melanoma,histo,25.0,male,back
+ISIC_0030578.jpg,ISIC_0030578,HAM_0002789,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0030585.jpg,ISIC_0030585,HAM_0005720,melanocytic_Nevi,consensus,50.0,female,back
+ISIC_0030592.jpg,ISIC_0030592,HAM_0006154,melanocytic_Nevi,histo,20.0,male,lower extremity
+ISIC_0030610.jpg,ISIC_0030610,HAM_0001130,melanocytic_Nevi,histo,65.0,male,abdomen
+ISIC_0030614.jpg,ISIC_0030614,HAM_0001568,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0030617.jpg,ISIC_0030617,HAM_0006778,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0030623.jpg,ISIC_0030623,HAM_0000871,melanoma,histo,40.0,female,chest
+ISIC_0030625.jpg,ISIC_0030625,HAM_0007342,melanocytic_Nevi,histo,35.0,male,back
+ISIC_0030632.jpg,ISIC_0030632,HAM_0002811,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0030636.jpg,ISIC_0030636,HAM_0001226,benign_keratosis-like_lesions,histo,70.0,female,back
+ISIC_0030639.jpg,ISIC_0030639,HAM_0000815,melanocytic_Nevi,histo,30.0,female,hand
+ISIC_0030661.jpg,ISIC_0030661,HAM_0003847,benign_keratosis-like_lesions,histo,85.0,male,upper extremity
+ISIC_0030667.jpg,ISIC_0030667,HAM_0004530,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0030668.jpg,ISIC_0030668,HAM_0006579,melanocytic_Nevi,follow_up,40.0,female,foot
+ISIC_0030676.jpg,ISIC_0030676,HAM_0005054,melanocytic_Nevi,follow_up,40.0,male,foot
+ISIC_0030678.jpg,ISIC_0030678,HAM_0006591,melanocytic_Nevi,follow_up,40.0,male,abdomen
+ISIC_0030683.jpg,ISIC_0030683,HAM_0001024,benign_keratosis-like_lesions,histo,45.0,male,face
+ISIC_0030684.jpg,ISIC_0030684,HAM_0007328,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0030701.jpg,ISIC_0030701,HAM_0005045,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0030706.jpg,ISIC_0030706,HAM_0003089,benign_keratosis-like_lesions,histo,85.0,male,back
+ISIC_0030713.jpg,ISIC_0030713,HAM_0006866,melanocytic_Nevi,follow_up,65.0,female,upper extremity
+ISIC_0030720.jpg,ISIC_0030720,HAM_0002663,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0030723.jpg,ISIC_0030723,HAM_0000782,benign_keratosis-like_lesions,histo,75.0,female,face
+ISIC_0030724.jpg,ISIC_0030724,HAM_0000862,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0030731.jpg,ISIC_0030731,HAM_0005865,benign_keratosis-like_lesions,histo,70.0,male,chest
+ISIC_0030732.jpg,ISIC_0030732,HAM_0006366,melanocytic_Nevi,histo,65.0,female,upper extremity
+ISIC_0030733.jpg,ISIC_0030733,HAM_0006245,melanocytic_Nevi,histo,60.0,male,back
+ISIC_0030734.jpg,ISIC_0030734,HAM_0004692,melanocytic_Nevi,follow_up,60.0,male,abdomen
+ISIC_0030745.jpg,ISIC_0030745,HAM_0000115,melanocytic_Nevi,follow_up,75.0,male,back
+ISIC_0030747.jpg,ISIC_0030747,HAM_0006380,melanoma,histo,35.0,female,upper extremity
+ISIC_0030748.jpg,ISIC_0030748,HAM_0000540,melanocytic_Nevi,follow_up,65.0,female,abdomen
+ISIC_0030750.jpg,ISIC_0030750,HAM_0005277,melanocytic_Nevi,follow_up,40.0,male,back
+ISIC_0030757.jpg,ISIC_0030757,HAM_0003290,dermatofibroma,histo,80.0,male,upper extremity
+ISIC_0030767.jpg,ISIC_0030767,HAM_0004685,basal_cell_carcinoma,histo,75.0,male,scalp
+ISIC_0030778.jpg,ISIC_0030778,HAM_0006800,basal_cell_carcinoma,histo,85.0,female,face
+ISIC_0030780.jpg,ISIC_0030780,HAM_0007501,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0030791.jpg,ISIC_0030791,HAM_0002265,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0030807.jpg,ISIC_0030807,HAM_0004799,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0030816.jpg,ISIC_0030816,HAM_0002205,melanocytic_Nevi,histo,35.0,male,back
+ISIC_0030823.jpg,ISIC_0030823,HAM_0004902,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0030827.jpg,ISIC_0030827,HAM_0001173,actinic_keratoses,histo,40.0,female,face
+ISIC_0030832.jpg,ISIC_0030832,HAM_0003756,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0030834.jpg,ISIC_0030834,HAM_0001871,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0030845.jpg,ISIC_0030845,HAM_0000093,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0030847.jpg,ISIC_0030847,HAM_0005153,melanocytic_Nevi,histo,65.0,male,lower extremity
+ISIC_0030860.jpg,ISIC_0030860,HAM_0004911,melanocytic_Nevi,follow_up,55.0,male,lower extremity
+ISIC_0030869.jpg,ISIC_0030869,HAM_0004838,melanocytic_Nevi,follow_up,70.0,male,lower extremity
+ISIC_0030870.jpg,ISIC_0030870,HAM_0006707,dermatofibroma,consensus,45.0,female,lower extremity
+ISIC_0030886.jpg,ISIC_0030886,HAM_0003334,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0030899.jpg,ISIC_0030899,HAM_0004222,melanocytic_Nevi,histo,15.0,female,abdomen
+ISIC_0030901.jpg,ISIC_0030901,HAM_0002131,melanoma,histo,55.0,male,upper extremity
+ISIC_0030902.jpg,ISIC_0030902,HAM_0004790,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0030906.jpg,ISIC_0030906,HAM_0004847,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0030908.jpg,ISIC_0030908,HAM_0004474,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0030913.jpg,ISIC_0030913,HAM_0002969,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0030922.jpg,ISIC_0030922,HAM_0005197,melanocytic_Nevi,histo,75.0,male,trunk
+ISIC_0030924.jpg,ISIC_0030924,HAM_0004049,melanocytic_Nevi,follow_up,50.0,male,upper extremity
+ISIC_0030935.jpg,ISIC_0030935,HAM_0000237,benign_keratosis-like_lesions,histo,80.0,male,lower extremity
+ISIC_0030942.jpg,ISIC_0030942,HAM_0000194,melanocytic_Nevi,histo,50.0,female,lower extremity
+ISIC_0030943.jpg,ISIC_0030943,HAM_0000518,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0030951.jpg,ISIC_0030951,HAM_0000590,melanoma,histo,85.0,female,lower extremity
+ISIC_0030971.jpg,ISIC_0030971,HAM_0001700,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0030981.jpg,ISIC_0030981,HAM_0001552,melanocytic_Nevi,histo,15.0,male,face
+ISIC_0030992.jpg,ISIC_0030992,HAM_0005151,melanocytic_Nevi,follow_up,65.0,male,abdomen
+ISIC_0030995.jpg,ISIC_0030995,HAM_0002131,melanoma,histo,55.0,male,upper extremity
+ISIC_0031002.jpg,ISIC_0031002,HAM_0007051,dermatofibroma,histo,65.0,male,upper extremity
+ISIC_0031010.jpg,ISIC_0031010,HAM_0002910,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0031022.jpg,ISIC_0031022,HAM_0000875,melanocytic_Nevi,follow_up,60.0,male,back
+ISIC_0031023.jpg,ISIC_0031023,HAM_0005678,melanoma,histo,60.0,male,chest
+ISIC_0031027.jpg,ISIC_0031027,HAM_0006499,melanocytic_Nevi,follow_up,40.0,female,abdomen
+ISIC_0031029.jpg,ISIC_0031029,HAM_0001601,benign_keratosis-like_lesions,histo,75.0,male,upper extremity
+ISIC_0031036.jpg,ISIC_0031036,HAM_0005254,melanocytic_Nevi,consensus,5.0,female,face
+ISIC_0031041.jpg,ISIC_0031041,HAM_0002733,basal_cell_carcinoma,histo,70.0,male,chest
+ISIC_0031045.jpg,ISIC_0031045,HAM_0001454,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0031047.jpg,ISIC_0031047,HAM_0002594,melanocytic_Nevi,follow_up,45.0,female,upper extremity
+ISIC_0031066.jpg,ISIC_0031066,HAM_0006488,melanocytic_Nevi,follow_up,60.0,male,upper extremity
+ISIC_0031070.jpg,ISIC_0031070,HAM_0000632,melanocytic_Nevi,histo,25.0,female,lower extremity
+ISIC_0031073.jpg,ISIC_0031073,HAM_0001800,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0031077.jpg,ISIC_0031077,HAM_0005826,melanoma,histo,65.0,female,trunk
+ISIC_0031084.jpg,ISIC_0031084,HAM_0006562,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0031086.jpg,ISIC_0031086,HAM_0004159,melanocytic_Nevi,follow_up,50.0,female,upper extremity
+ISIC_0031096.jpg,ISIC_0031096,HAM_0005773,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0031098.jpg,ISIC_0031098,HAM_0006504,melanocytic_Nevi,follow_up,55.0,female,lower extremity
+ISIC_0031102.jpg,ISIC_0031102,HAM_0004122,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0031113.jpg,ISIC_0031113,HAM_0000707,melanocytic_Nevi,histo,70.0,female,abdomen
+ISIC_0031115.jpg,ISIC_0031115,HAM_0000217,melanocytic_Nevi,histo,40.0,male,chest
+ISIC_0031121.jpg,ISIC_0031121,HAM_0006205,melanocytic_Nevi,histo,55.0,male,chest
+ISIC_0031127.jpg,ISIC_0031127,HAM_0000144,melanocytic_Nevi,consensus,40.0,male,back
+ISIC_0031128.jpg,ISIC_0031128,HAM_0004287,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0031129.jpg,ISIC_0031129,HAM_0006848,melanocytic_Nevi,follow_up,45.0,female,foot
+ISIC_0031132.jpg,ISIC_0031132,HAM_0006064,benign_keratosis-like_lesions,consensus,75.0,male,back
+ISIC_0031136.jpg,ISIC_0031136,HAM_0001970,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0031138.jpg,ISIC_0031138,HAM_0004908,benign_keratosis-like_lesions,histo,45.0,female,hand
+ISIC_0031150.jpg,ISIC_0031150,HAM_0001094,benign_keratosis-like_lesions,histo,70.0,female,upper extremity
+ISIC_0031161.jpg,ISIC_0031161,HAM_0001195,melanocytic_Nevi,follow_up,60.0,male,abdomen
+ISIC_0031162.jpg,ISIC_0031162,HAM_0003490,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0031170.jpg,ISIC_0031170,HAM_0003428,melanoma,histo,85.0,female,upper extremity
+ISIC_0031171.jpg,ISIC_0031171,HAM_0000872,basal_cell_carcinoma,histo,75.0,male,chest
+ISIC_0031176.jpg,ISIC_0031176,HAM_0003952,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0031180.jpg,ISIC_0031180,HAM_0002612,melanocytic_Nevi,follow_up,35.0,male,abdomen
+ISIC_0031186.jpg,ISIC_0031186,HAM_0000988,melanoma,histo,70.0,male,face
+ISIC_0031188.jpg,ISIC_0031188,HAM_0004475,melanocytic_Nevi,consensus,85.0,female,back
+ISIC_0031196.jpg,ISIC_0031196,HAM_0000734,benign_keratosis-like_lesions,consensus,45.0,male,abdomen
+ISIC_0031197.jpg,ISIC_0031197,HAM_0006889,vascular_lesions,histo,20.0,male,upper extremity
+ISIC_0031200.jpg,ISIC_0031200,HAM_0006267,benign_keratosis-like_lesions,histo,50.0,female,back
+ISIC_0031205.jpg,ISIC_0031205,HAM_0002920,melanocytic_Nevi,follow_up,35.0,female,trunk
+ISIC_0031214.jpg,ISIC_0031214,HAM_0002148,melanocytic_Nevi,follow_up,70.0,male,back
+ISIC_0031216.jpg,ISIC_0031216,HAM_0006861,melanocytic_Nevi,consensus,50.0,female,back
+ISIC_0031217.jpg,ISIC_0031217,HAM_0004765,vascular_lesions,histo,15.0,male,face
+ISIC_0031224.jpg,ISIC_0031224,HAM_0000753,melanocytic_Nevi,follow_up,50.0,female,lower extremity
+ISIC_0031227.jpg,ISIC_0031227,HAM_0002252,melanocytic_Nevi,follow_up,40.0,male,back
+ISIC_0031238.jpg,ISIC_0031238,HAM_0002238,melanocytic_Nevi,histo,60.0,female,chest
+ISIC_0031245.jpg,ISIC_0031245,HAM_0005901,basal_cell_carcinoma,histo,65.0,male,chest
+ISIC_0031252.jpg,ISIC_0031252,HAM_0002580,melanocytic_Nevi,follow_up,40.0,male,back
+ISIC_0031264.jpg,ISIC_0031264,HAM_0006227,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0031265.jpg,ISIC_0031265,HAM_0007357,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0031266.jpg,ISIC_0031266,HAM_0006609,basal_cell_carcinoma,histo,80.0,male,back
+ISIC_0031270.jpg,ISIC_0031270,HAM_0006889,vascular_lesions,histo,20.0,male,upper extremity
+ISIC_0031276.jpg,ISIC_0031276,HAM_0006447,vascular_lesions,consensus,75.0,male,abdomen
+ISIC_0031277.jpg,ISIC_0031277,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0031278.jpg,ISIC_0031278,HAM_0001014,melanocytic_Nevi,histo,70.0,male,back
+ISIC_0031286.jpg,ISIC_0031286,HAM_0000909,actinic_keratoses,histo,55.0,male,lower extremity
+ISIC_0031292.jpg,ISIC_0031292,HAM_0007008,actinic_keratoses,histo,60.0,male,hand
+ISIC_0031295.jpg,ISIC_0031295,HAM_0006832,melanoma,histo,50.0,male,upper extremity
+ISIC_0031304.jpg,ISIC_0031304,HAM_0001125,melanocytic_Nevi,histo,60.0,male,chest
+ISIC_0031317.jpg,ISIC_0031317,HAM_0004667,melanocytic_Nevi,consensus,55.0,male,neck
+ISIC_0031324.jpg,ISIC_0031324,HAM_0003628,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0031325.jpg,ISIC_0031325,HAM_0002082,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0031328.jpg,ISIC_0031328,HAM_0000424,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0031339.jpg,ISIC_0031339,HAM_0001744,melanoma,histo,60.0,male,back
+ISIC_0031343.jpg,ISIC_0031343,HAM_0006505,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0031345.jpg,ISIC_0031345,HAM_0002691,benign_keratosis-like_lesions,histo,80.0,female,hand
+ISIC_0031350.jpg,ISIC_0031350,HAM_0003435,melanoma,histo,60.0,male,back
+ISIC_0031351.jpg,ISIC_0031351,HAM_0006274,basal_cell_carcinoma,histo,75.0,male,chest
+ISIC_0031358.jpg,ISIC_0031358,HAM_0003290,dermatofibroma,histo,80.0,male,upper extremity
+ISIC_0031363.jpg,ISIC_0031363,HAM_0001334,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0031377.jpg,ISIC_0031377,HAM_0000022,melanoma,histo,65.0,male,back
+ISIC_0031393.jpg,ISIC_0031393,HAM_0006247,melanocytic_Nevi,follow_up,50.0,female,upper extremity
+ISIC_0031397.jpg,ISIC_0031397,HAM_0000178,melanocytic_Nevi,follow_up,60.0,male,abdomen
+ISIC_0031398.jpg,ISIC_0031398,HAM_0005474,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0031407.jpg,ISIC_0031407,HAM_0001575,basal_cell_carcinoma,histo,65.0,male,face
+ISIC_0031409.jpg,ISIC_0031409,HAM_0003403,melanocytic_Nevi,follow_up,70.0,male,abdomen
+ISIC_0031415.jpg,ISIC_0031415,HAM_0001704,melanocytic_Nevi,follow_up,50.0,male,back
+ISIC_0031417.jpg,ISIC_0031417,HAM_0006380,melanoma,histo,35.0,female,upper extremity
+ISIC_0031421.jpg,ISIC_0031421,HAM_0004976,actinic_keratoses,histo,80.0,female,upper extremity
+ISIC_0031422.jpg,ISIC_0031422,HAM_0003375,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0031430.jpg,ISIC_0031430,HAM_0005705,actinic_keratoses,histo,75.0,female,lower extremity
+ISIC_0031440.jpg,ISIC_0031440,HAM_0002100,melanocytic_Nevi,histo,55.0,male,back
+ISIC_0031458.jpg,ISIC_0031458,HAM_0007561,melanocytic_Nevi,follow_up,45.0,male,upper extremity
+ISIC_0031459.jpg,ISIC_0031459,HAM_0004494,benign_keratosis-like_lesions,histo,60.0,female,neck
+ISIC_0031465.jpg,ISIC_0031465,HAM_0000821,benign_keratosis-like_lesions,histo,75.0,male,back
+ISIC_0031474.jpg,ISIC_0031474,HAM_0000072,melanocytic_Nevi,histo,60.0,female,lower extremity
+ISIC_0031477.jpg,ISIC_0031477,HAM_0005464,melanocytic_Nevi,follow_up,45.0,male,lower extremity
+ISIC_0031480.jpg,ISIC_0031480,HAM_0007256,melanocytic_Nevi,follow_up,40.0,male,upper extremity
+ISIC_0031481.jpg,ISIC_0031481,HAM_0004485,melanocytic_Nevi,histo,35.0,female,lower extremity
+ISIC_0031486.jpg,ISIC_0031486,HAM_0005487,melanocytic_Nevi,follow_up,45.0,male,upper extremity
+ISIC_0031491.jpg,ISIC_0031491,HAM_0006918,melanocytic_Nevi,follow_up,65.0,male,trunk
+ISIC_0031499.jpg,ISIC_0031499,HAM_0006722,melanoma,histo,85.0,female,lower extremity
+ISIC_0031513.jpg,ISIC_0031513,HAM_0007141,basal_cell_carcinoma,histo,50.0,male,trunk
+ISIC_0031515.jpg,ISIC_0031515,HAM_0003933,melanocytic_Nevi,histo,55.0,female,upper extremity
+ISIC_0031517.jpg,ISIC_0031517,HAM_0001202,melanoma,histo,70.0,female,upper extremity
+ISIC_0031520.jpg,ISIC_0031520,HAM_0000872,basal_cell_carcinoma,histo,75.0,male,chest
+ISIC_0031522.jpg,ISIC_0031522,HAM_0005865,benign_keratosis-like_lesions,histo,70.0,male,chest
+ISIC_0031556.jpg,ISIC_0031556,HAM_0006122,benign_keratosis-like_lesions,histo,60.0,male,scalp
+ISIC_0031560.jpg,ISIC_0031560,HAM_0004663,melanocytic_Nevi,histo,55.0,male,upper extremity
+ISIC_0031624.jpg,ISIC_0031624,HAM_0002092,benign_keratosis-like_lesions,histo,35.0,female,lower extremity
+ISIC_0031631.jpg,ISIC_0031631,HAM_0003742,melanocytic_Nevi,histo,20.0,female,back
+ISIC_0031642.jpg,ISIC_0031642,HAM_0004607,melanoma,histo,50.0,female,back
+ISIC_0031650.jpg,ISIC_0031650,HAM_0003847,benign_keratosis-like_lesions,histo,85.0,male,upper extremity
+ISIC_0031652.jpg,ISIC_0031652,HAM_0004789,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0031661.jpg,ISIC_0031661,HAM_0001519,melanocytic_Nevi,follow_up,55.0,female,abdomen
+ISIC_0031676.jpg,ISIC_0031676,HAM_0007553,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0031679.jpg,ISIC_0031679,HAM_0002219,melanocytic_Nevi,follow_up,55.0,female,trunk
+ISIC_0031682.jpg,ISIC_0031682,HAM_0002144,melanocytic_Nevi,follow_up,35.0,female,abdomen
+ISIC_0031685.jpg,ISIC_0031685,HAM_0002054,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0031691.jpg,ISIC_0031691,HAM_0007010,benign_keratosis-like_lesions,histo,40.0,male,trunk
+ISIC_0031692.jpg,ISIC_0031692,HAM_0007131,actinic_keratoses,histo,60.0,male,back
+ISIC_0031695.jpg,ISIC_0031695,HAM_0005402,melanocytic_Nevi,follow_up,45.0,female,upper extremity
+ISIC_0031706.jpg,ISIC_0031706,HAM_0000934,vascular_lesions,consensus,60.0,male,trunk
+ISIC_0031711.jpg,ISIC_0031711,HAM_0002011,melanoma,histo,55.0,female,lower extremity
+ISIC_0031712.jpg,ISIC_0031712,HAM_0004147,basal_cell_carcinoma,histo,75.0,male,back
+ISIC_0031720.jpg,ISIC_0031720,HAM_0003222,melanocytic_Nevi,histo,45.0,female,lower extremity
+ISIC_0031721.jpg,ISIC_0031721,HAM_0006564,basal_cell_carcinoma,histo,70.0,male,unknown
+ISIC_0031733.jpg,ISIC_0031733,HAM_0005237,melanocytic_Nevi,histo,70.0,male,hand
+ISIC_0031735.jpg,ISIC_0031735,HAM_0003290,dermatofibroma,histo,80.0,male,upper extremity
+ISIC_0031748.jpg,ISIC_0031748,HAM_0000269,melanocytic_Nevi,histo,25.0,male,neck
+ISIC_0031751.jpg,ISIC_0031751,HAM_0006858,melanocytic_Nevi,follow_up,35.0,male,lower extremity
+ISIC_0031757.jpg,ISIC_0031757,HAM_0004222,melanocytic_Nevi,histo,15.0,female,abdomen
+ISIC_0031761.jpg,ISIC_0031761,HAM_0000296,benign_keratosis-like_lesions,consensus,35.0,female,trunk
+ISIC_0031768.jpg,ISIC_0031768,HAM_0004312,melanocytic_Nevi,follow_up,45.0,male,foot
+ISIC_0031769.jpg,ISIC_0031769,HAM_0006861,melanocytic_Nevi,consensus,50.0,female,back
+ISIC_0031770.jpg,ISIC_0031770,HAM_0006128,benign_keratosis-like_lesions,histo,55.0,female,lower extremity
+ISIC_0031776.jpg,ISIC_0031776,HAM_0002404,melanocytic_Nevi,follow_up,55.0,male,back
+ISIC_0031779.jpg,ISIC_0031779,HAM_0001284,melanoma,histo,75.0,female,ear
+ISIC_0031786.jpg,ISIC_0031786,HAM_0000255,melanocytic_Nevi,follow_up,70.0,male,abdomen
+ISIC_0031787.jpg,ISIC_0031787,HAM_0002478,melanocytic_Nevi,follow_up,60.0,female,unknown
+ISIC_0031792.jpg,ISIC_0031792,HAM_0006961,melanocytic_Nevi,follow_up,50.0,male,trunk
+ISIC_0031805.jpg,ISIC_0031805,HAM_0005023,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0031815.jpg,ISIC_0031815,HAM_0002760,melanocytic_Nevi,follow_up,35.0,female,back
+ISIC_0031817.jpg,ISIC_0031817,HAM_0004461,melanocytic_Nevi,histo,20.0,female,lower extremity
+ISIC_0031819.jpg,ISIC_0031819,HAM_0005527,benign_keratosis-like_lesions,histo,50.0,male,unknown
+ISIC_0031836.jpg,ISIC_0031836,HAM_0003600,basal_cell_carcinoma,histo,40.0,female,abdomen
+ISIC_0031849.jpg,ISIC_0031849,HAM_0007401,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0031853.jpg,ISIC_0031853,HAM_0003789,benign_keratosis-like_lesions,confocal,55.0,female,face
+ISIC_0031860.jpg,ISIC_0031860,HAM_0001521,melanocytic_Nevi,follow_up,40.0,male,foot
+ISIC_0031876.jpg,ISIC_0031876,HAM_0002810,benign_keratosis-like_lesions,histo,70.0,female,chest
+ISIC_0031884.jpg,ISIC_0031884,HAM_0004753,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0031888.jpg,ISIC_0031888,HAM_0003398,benign_keratosis-like_lesions,confocal,85.0,female,face
+ISIC_0031890.jpg,ISIC_0031890,HAM_0007420,melanoma,histo,85.0,male,face
+ISIC_0031897.jpg,ISIC_0031897,HAM_0000382,benign_keratosis-like_lesions,consensus,55.0,male,abdomen
+ISIC_0031898.jpg,ISIC_0031898,HAM_0001008,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0031902.jpg,ISIC_0031902,HAM_0005432,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0031907.jpg,ISIC_0031907,HAM_0004177,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0031918.jpg,ISIC_0031918,HAM_0003141,actinic_keratoses,histo,65.0,male,neck
+ISIC_0031922.jpg,ISIC_0031922,HAM_0000020,actinic_keratoses,histo,60.0,female,face
+ISIC_0031924.jpg,ISIC_0031924,HAM_0002423,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0031937.jpg,ISIC_0031937,HAM_0000833,benign_keratosis-like_lesions,histo,40.0,male,face
+ISIC_0031942.jpg,ISIC_0031942,HAM_0003408,melanocytic_Nevi,histo,65.0,male,back
+ISIC_0031943.jpg,ISIC_0031943,HAM_0000393,basal_cell_carcinoma,histo,40.0,female,abdomen
+ISIC_0031944.jpg,ISIC_0031944,HAM_0004162,melanocytic_Nevi,follow_up,65.0,male,back
+ISIC_0031947.jpg,ISIC_0031947,HAM_0002961,melanocytic_Nevi,follow_up,45.0,female,lower extremity
+ISIC_0031956.jpg,ISIC_0031956,HAM_0001588,melanocytic_Nevi,histo,30.0,female,lower extremity
+ISIC_0031959.jpg,ISIC_0031959,HAM_0001088,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0031971.jpg,ISIC_0031971,HAM_0006564,basal_cell_carcinoma,histo,70.0,male,unknown
+ISIC_0031976.jpg,ISIC_0031976,HAM_0006851,basal_cell_carcinoma,histo,80.0,male,face
+ISIC_0031986.jpg,ISIC_0031986,HAM_0000658,basal_cell_carcinoma,histo,60.0,female,back
+ISIC_0031993.jpg,ISIC_0031993,HAM_0006887,actinic_keratoses,histo,45.0,male,face
+ISIC_0032006.jpg,ISIC_0032006,HAM_0003452,benign_keratosis-like_lesions,histo,75.0,male,chest
+ISIC_0032008.jpg,ISIC_0032008,HAM_0004667,melanocytic_Nevi,consensus,55.0,male,neck
+ISIC_0032009.jpg,ISIC_0032009,HAM_0001107,melanocytic_Nevi,histo,40.0,male,upper extremity
+ISIC_0032010.jpg,ISIC_0032010,HAM_0000445,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0032015.jpg,ISIC_0032015,HAM_0005643,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0032034.jpg,ISIC_0032034,HAM_0006205,melanocytic_Nevi,histo,55.0,male,chest
+ISIC_0032040.jpg,ISIC_0032040,HAM_0000237,benign_keratosis-like_lesions,histo,80.0,male,lower extremity
+ISIC_0032054.jpg,ISIC_0032054,HAM_0005350,melanocytic_Nevi,follow_up,35.0,female,upper extremity
+ISIC_0032056.jpg,ISIC_0032056,HAM_0004306,melanocytic_Nevi,follow_up,65.0,female,lower extremity
+ISIC_0032057.jpg,ISIC_0032057,HAM_0004862,vascular_lesions,consensus,55.0,female,abdomen
+ISIC_0032059.jpg,ISIC_0032059,HAM_0001661,melanocytic_Nevi,follow_up,55.0,female,genital
+ISIC_0032061.jpg,ISIC_0032061,HAM_0004685,basal_cell_carcinoma,histo,75.0,male,scalp
+ISIC_0032064.jpg,ISIC_0032064,HAM_0002482,melanocytic_Nevi,follow_up,40.0,female,lower extremity
+ISIC_0032073.jpg,ISIC_0032073,HAM_0001794,melanocytic_Nevi,follow_up,50.0,female,back
+ISIC_0032076.jpg,ISIC_0032076,HAM_0005155,vascular_lesions,histo,85.0,male,lower extremity
+ISIC_0032078.jpg,ISIC_0032078,HAM_0001088,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0032082.jpg,ISIC_0032082,HAM_0005107,melanocytic_Nevi,histo,55.0,female,back
+ISIC_0032089.jpg,ISIC_0032089,HAM_0002887,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0032091.jpg,ISIC_0032091,HAM_0003114,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0032094.jpg,ISIC_0032094,HAM_0006087,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0032099.jpg,ISIC_0032099,HAM_0002455,benign_keratosis-like_lesions,histo,85.0,male,back
+ISIC_0032101.jpg,ISIC_0032101,HAM_0004978,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0032102.jpg,ISIC_0032102,HAM_0002554,melanocytic_Nevi,consensus,30.0,male,back
+ISIC_0032107.jpg,ISIC_0032107,HAM_0003313,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0032111.jpg,ISIC_0032111,HAM_0006064,benign_keratosis-like_lesions,consensus,75.0,male,back
+ISIC_0032112.jpg,ISIC_0032112,HAM_0003652,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0032116.jpg,ISIC_0032116,HAM_0003275,benign_keratosis-like_lesions,histo,75.0,female,chest
+ISIC_0032118.jpg,ISIC_0032118,HAM_0007540,melanocytic_Nevi,follow_up,45.0,male,abdomen
+ISIC_0032124.jpg,ISIC_0032124,HAM_0002536,benign_keratosis-like_lesions,consensus,70.0,female,trunk
+ISIC_0032149.jpg,ISIC_0032149,HAM_0001964,melanoma,histo,50.0,male,neck
+ISIC_0032151.jpg,ISIC_0032151,HAM_0007553,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0032155.jpg,ISIC_0032155,HAM_0002052,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0032194.jpg,ISIC_0032194,HAM_0003596,basal_cell_carcinoma,histo,45.0,male,neck
+ISIC_0032197.jpg,ISIC_0032197,HAM_0003400,melanoma,histo,50.0,male,face
+ISIC_0032202.jpg,ISIC_0032202,HAM_0001170,melanocytic_Nevi,follow_up,55.0,male,abdomen
+ISIC_0032207.jpg,ISIC_0032207,HAM_0000513,melanoma,histo,35.0,female,upper extremity
+ISIC_0032216.jpg,ISIC_0032216,HAM_0004123,melanocytic_Nevi,follow_up,45.0,male,trunk
+ISIC_0032233.jpg,ISIC_0032233,HAM_0006174,melanocytic_Nevi,histo,75.0,male,back
+ISIC_0032242.jpg,ISIC_0032242,HAM_0003951,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0032252.jpg,ISIC_0032252,HAM_0005895,melanocytic_Nevi,follow_up,45.0,female,back
+ISIC_0032256.jpg,ISIC_0032256,HAM_0006424,melanocytic_Nevi,follow_up,20.0,male,upper extremity
+ISIC_0032257.jpg,ISIC_0032257,HAM_0006457,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0032273.jpg,ISIC_0032273,HAM_0006283,melanocytic_Nevi,consensus,20.0,male,chest
+ISIC_0032275.jpg,ISIC_0032275,HAM_0003489,melanocytic_Nevi,follow_up,40.0,male,trunk
+ISIC_0032282.jpg,ISIC_0032282,HAM_0007064,melanocytic_Nevi,follow_up,40.0,female,back
+ISIC_0032291.jpg,ISIC_0032291,HAM_0000032,melanocytic_Nevi,histo,60.0,male,abdomen
+ISIC_0032296.jpg,ISIC_0032296,HAM_0006151,melanocytic_Nevi,follow_up,40.0,female,trunk
+ISIC_0032319.jpg,ISIC_0032319,HAM_0002352,melanocytic_Nevi,follow_up,60.0,female,back
+ISIC_0032325.jpg,ISIC_0032325,HAM_0002184,benign_keratosis-like_lesions,histo,70.0,male,scalp
+ISIC_0032328.jpg,ISIC_0032328,HAM_0006469,melanocytic_Nevi,consensus,5.0,male,upper extremity
+ISIC_0032336.jpg,ISIC_0032336,HAM_0002460,melanocytic_Nevi,follow_up,35.0,female,lower extremity
+ISIC_0032338.jpg,ISIC_0032338,HAM_0004024,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0032348.jpg,ISIC_0032348,HAM_0006294,benign_keratosis-like_lesions,histo,75.0,female,chest
+ISIC_0032349.jpg,ISIC_0032349,HAM_0003086,actinic_keratoses,histo,60.0,male,lower extremity
+ISIC_0032354.jpg,ISIC_0032354,HAM_0001714,melanocytic_Nevi,follow_up,30.0,female,trunk
+ISIC_0032358.jpg,ISIC_0032358,HAM_0006267,benign_keratosis-like_lesions,histo,50.0,female,back
+ISIC_0032361.jpg,ISIC_0032361,HAM_0001690,melanocytic_Nevi,follow_up,50.0,female,abdomen
+ISIC_0032365.jpg,ISIC_0032365,HAM_0003206,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0032372.jpg,ISIC_0032372,HAM_0000125,melanoma,histo,60.0,male,lower extremity
+ISIC_0032385.jpg,ISIC_0032385,HAM_0005712,melanocytic_Nevi,consensus,5.0,female,foot
+ISIC_0032392.jpg,ISIC_0032392,HAM_0000157,melanocytic_Nevi,follow_up,65.0,male,abdomen
+ISIC_0032398.jpg,ISIC_0032398,HAM_0002555,melanocytic_Nevi,follow_up,55.0,male,trunk
+ISIC_0032407.jpg,ISIC_0032407,HAM_0001567,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032414.jpg,ISIC_0032414,HAM_0001926,basal_cell_carcinoma,histo,75.0,female,lower extremity
+ISIC_0032417.jpg,ISIC_0032417,HAM_0001949,benign_keratosis-like_lesions,histo,70.0,male,trunk
+ISIC_0032419.jpg,ISIC_0032419,HAM_0004879,melanocytic_Nevi,follow_up,45.0,female,trunk
+ISIC_0032421.jpg,ISIC_0032421,HAM_0004461,melanocytic_Nevi,histo,20.0,female,lower extremity
+ISIC_0032423.jpg,ISIC_0032423,HAM_0001014,melanocytic_Nevi,histo,70.0,male,back
+ISIC_0032430.jpg,ISIC_0032430,HAM_0006942,melanoma,histo,55.0,male,face
+ISIC_0032432.jpg,ISIC_0032432,HAM_0001937,melanocytic_Nevi,follow_up,30.0,male,genital
+ISIC_0032439.jpg,ISIC_0032439,HAM_0005547,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0032440.jpg,ISIC_0032440,HAM_0005570,melanocytic_Nevi,follow_up,25.0,female,back
+ISIC_0032442.jpg,ISIC_0032442,HAM_0000812,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0032450.jpg,ISIC_0032450,HAM_0006908,melanoma,histo,70.0,male,back
+ISIC_0032455.jpg,ISIC_0032455,HAM_0001337,actinic_keratoses,histo,80.0,male,upper extremity
+ISIC_0032462.jpg,ISIC_0032462,HAM_0001274,melanoma,histo,70.0,male,upper extremity
+ISIC_0032467.jpg,ISIC_0032467,HAM_0003234,melanocytic_Nevi,follow_up,50.0,female,trunk
+ISIC_0032468.jpg,ISIC_0032468,HAM_0005684,dermatofibroma,histo,75.0,female,lower extremity
+ISIC_0032472.jpg,ISIC_0032472,HAM_0002140,melanocytic_Nevi,follow_up,45.0,female,abdomen
+ISIC_0032474.jpg,ISIC_0032474,HAM_0003282,melanocytic_Nevi,histo,60.0,male,chest
+ISIC_0032476.jpg,ISIC_0032476,HAM_0001744,melanoma,histo,60.0,male,back
+ISIC_0032477.jpg,ISIC_0032477,HAM_0000430,melanocytic_Nevi,follow_up,35.0,male,abdomen
+ISIC_0032478.jpg,ISIC_0032478,HAM_0003254,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032481.jpg,ISIC_0032481,HAM_0002769,benign_keratosis-like_lesions,histo,80.0,male,back
+ISIC_0032484.jpg,ISIC_0032484,HAM_0005506,melanocytic_Nevi,follow_up,60.0,male,trunk
+ISIC_0032489.jpg,ISIC_0032489,HAM_0001327,melanocytic_Nevi,histo,45.0,male,abdomen
+ISIC_0032490.jpg,ISIC_0032490,HAM_0002620,melanocytic_Nevi,follow_up,45.0,male,back
+ISIC_0032494.jpg,ISIC_0032494,HAM_0004226,melanocytic_Nevi,histo,25.0,female,trunk
+ISIC_0032495.jpg,ISIC_0032495,HAM_0004770,melanocytic_Nevi,follow_up,50.0,male,lower extremity
+ISIC_0032502.jpg,ISIC_0032502,HAM_0006650,melanocytic_Nevi,follow_up,50.0,female,ear
+ISIC_0032516.jpg,ISIC_0032516,HAM_0006539,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0032520.jpg,ISIC_0032520,HAM_0004548,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0032532.jpg,ISIC_0032532,HAM_0004405,melanoma,histo,80.0,male,back
+ISIC_0032534.jpg,ISIC_0032534,HAM_0004332,benign_keratosis-like_lesions,histo,55.0,male,trunk
+ISIC_0032566.jpg,ISIC_0032566,HAM_0004574,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0032572.jpg,ISIC_0032572,HAM_0003356,melanocytic_Nevi,consensus,45.0,female,unknown
+ISIC_0032588.jpg,ISIC_0032588,HAM_0002600,melanocytic_Nevi,consensus,25.0,male,unknown
+ISIC_0032602.jpg,ISIC_0032602,HAM_0004811,melanoma,histo,50.0,female,back
+ISIC_0032616.jpg,ISIC_0032616,HAM_0007376,melanocytic_Nevi,consensus,40.0,male,back
+ISIC_0032620.jpg,ISIC_0032620,HAM_0003106,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0032629.jpg,ISIC_0032629,HAM_0000483,melanoma,histo,70.0,male,lower extremity
+ISIC_0032632.jpg,ISIC_0032632,HAM_0006230,melanocytic_Nevi,consensus,60.0,male,unknown
+ISIC_0032635.jpg,ISIC_0032635,HAM_0004185,melanocytic_Nevi,consensus,40.0,female,unknown
+ISIC_0032638.jpg,ISIC_0032638,HAM_0005711,melanoma,histo,35.0,male,back
+ISIC_0032648.jpg,ISIC_0032648,HAM_0003106,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0032653.jpg,ISIC_0032653,HAM_0002841,melanoma,histo,20.0,male,back
+ISIC_0032671.jpg,ISIC_0032671,HAM_0004574,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0032673.jpg,ISIC_0032673,HAM_0003441,melanocytic_Nevi,histo,55.0,male,chest
+ISIC_0032680.jpg,ISIC_0032680,HAM_0001358,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0032683.jpg,ISIC_0032683,HAM_0005383,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032695.jpg,ISIC_0032695,HAM_0004853,melanoma,histo,80.0,male,upper extremity
+ISIC_0032700.jpg,ISIC_0032700,HAM_0005190,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032706.jpg,ISIC_0032706,HAM_0000412,melanocytic_Nevi,consensus,70.0,male,trunk
+ISIC_0032719.jpg,ISIC_0032719,HAM_0006673,benign_keratosis-like_lesions,consensus,60.0,female,face
+ISIC_0032724.jpg,ISIC_0032724,HAM_0004811,melanoma,histo,50.0,female,back
+ISIC_0032728.jpg,ISIC_0032728,HAM_0004550,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0032739.jpg,ISIC_0032739,HAM_0001790,melanocytic_Nevi,histo,70.0,male,abdomen
+ISIC_0032742.jpg,ISIC_0032742,HAM_0000579,melanocytic_Nevi,histo,30.0,female,upper extremity
+ISIC_0032760.jpg,ISIC_0032760,HAM_0004226,melanocytic_Nevi,histo,25.0,female,trunk
+ISIC_0032765.jpg,ISIC_0032765,HAM_0003254,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032772.jpg,ISIC_0032772,HAM_0005496,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0032780.jpg,ISIC_0032780,HAM_0006615,melanocytic_Nevi,histo,45.0,male,trunk
+ISIC_0032788.jpg,ISIC_0032788,HAM_0003623,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0032794.jpg,ISIC_0032794,HAM_0003133,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0032801.jpg,ISIC_0032801,HAM_0003133,melanocytic_Nevi,histo,30.0,female,abdomen
+ISIC_0032816.jpg,ISIC_0032816,HAM_0000879,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0032823.jpg,ISIC_0032823,HAM_0006886,melanoma,histo,55.0,male,back
+ISIC_0032824.jpg,ISIC_0032824,HAM_0004590,melanocytic_Nevi,consensus,55.0,male,unknown
+ISIC_0032830.jpg,ISIC_0032830,HAM_0003002,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0032832.jpg,ISIC_0032832,HAM_0004548,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0032836.jpg,ISIC_0032836,HAM_0003073,melanoma,histo,50.0,male,abdomen
+ISIC_0032838.jpg,ISIC_0032838,HAM_0001264,melanocytic_Nevi,histo,45.0,male,chest
+ISIC_0032852.jpg,ISIC_0032852,HAM_0002164,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0032853.jpg,ISIC_0032853,HAM_0004773,melanocytic_Nevi,histo,25.0,female,chest
+ISIC_0032861.jpg,ISIC_0032861,HAM_0006615,melanocytic_Nevi,histo,45.0,male,trunk
+ISIC_0032862.jpg,ISIC_0032862,HAM_0000176,melanoma,histo,65.0,male,upper extremity
+ISIC_0032873.jpg,ISIC_0032873,HAM_0003174,melanoma,histo,85.0,male,trunk
+ISIC_0032874.jpg,ISIC_0032874,HAM_0001790,melanocytic_Nevi,histo,70.0,male,abdomen
+ISIC_0032875.jpg,ISIC_0032875,HAM_0003625,melanoma,histo,75.0,male,abdomen
+ISIC_0032876.jpg,ISIC_0032876,HAM_0001309,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0032877.jpg,ISIC_0032877,HAM_0003770,benign_keratosis-like_lesions,histo,80.0,male,face
+ISIC_0032879.jpg,ISIC_0032879,HAM_0004984,melanoma,histo,80.0,male,face
+ISIC_0032893.jpg,ISIC_0032893,HAM_0005383,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0032895.jpg,ISIC_0032895,HAM_0003259,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0032911.jpg,ISIC_0032911,HAM_0002329,melanocytic_Nevi,histo,45.0,female,lower extremity
+ISIC_0032921.jpg,ISIC_0032921,HAM_0004927,melanoma,histo,70.0,male,abdomen
+ISIC_0032926.jpg,ISIC_0032926,HAM_0001948,melanocytic_Nevi,histo,35.0,male,foot
+ISIC_0032928.jpg,ISIC_0032928,HAM_0002501,melanocytic_Nevi,histo,40.0,male,trunk
+ISIC_0032939.jpg,ISIC_0032939,HAM_0003358,melanocytic_Nevi,consensus,45.0,female,unknown
+ISIC_0032940.jpg,ISIC_0032940,HAM_0005628,melanoma,histo,70.0,male,scalp
+ISIC_0032960.jpg,ISIC_0032960,HAM_0000169,melanoma,histo,,male,face
+ISIC_0032961.jpg,ISIC_0032961,HAM_0000579,melanocytic_Nevi,histo,30.0,female,upper extremity
+ISIC_0032968.jpg,ISIC_0032968,HAM_0001272,melanoma,histo,85.0,male,upper extremity
+ISIC_0032971.jpg,ISIC_0032971,HAM_0003824,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0032982.jpg,ISIC_0032982,HAM_0002841,melanoma,histo,20.0,male,back
+ISIC_0032986.jpg,ISIC_0032986,HAM_0002519,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0033003.jpg,ISIC_0033003,HAM_0002750,melanocytic_Nevi,histo,60.0,female,back
+ISIC_0033008.jpg,ISIC_0033008,HAM_0005115,melanocytic_Nevi,consensus,35.0,male,upper extremity
+ISIC_0033009.jpg,ISIC_0033009,HAM_0002501,melanocytic_Nevi,histo,40.0,male,trunk
+ISIC_0033014.jpg,ISIC_0033014,HAM_0006539,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0033027.jpg,ISIC_0033027,HAM_0001174,melanoma,histo,70.0,male,scalp
+ISIC_0033032.jpg,ISIC_0033032,HAM_0003505,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0033038.jpg,ISIC_0033038,HAM_0003466,melanoma,histo,70.0,female,lower extremity
+ISIC_0033040.jpg,ISIC_0033040,HAM_0007478,melanocytic_Nevi,consensus,30.0,male,back
+ISIC_0033041.jpg,ISIC_0033041,HAM_0002040,benign_keratosis-like_lesions,histo,50.0,female,lower extremity
+ISIC_0033049.jpg,ISIC_0033049,HAM_0001948,melanocytic_Nevi,histo,35.0,male,foot
+ISIC_0033050.jpg,ISIC_0033050,HAM_0003439,melanoma,histo,75.0,female,back
+ISIC_0033054.jpg,ISIC_0033054,HAM_0002664,basal_cell_carcinoma,histo,60.0,male,face
+ISIC_0033057.jpg,ISIC_0033057,HAM_0001264,melanocytic_Nevi,histo,45.0,male,chest
+ISIC_0033063.jpg,ISIC_0033063,HAM_0005280,melanoma,histo,70.0,male,upper extremity
+ISIC_0033073.jpg,ISIC_0033073,HAM_0000176,melanoma,histo,65.0,male,upper extremity
+ISIC_0033075.jpg,ISIC_0033075,HAM_0002170,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0033077.jpg,ISIC_0033077,HAM_0007433,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0033079.jpg,ISIC_0033079,HAM_0007402,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0033084.jpg,ISIC_0033084,HAM_0002867,actinic_keratoses,histo,40.0,male,abdomen
+ISIC_0033087.jpg,ISIC_0033087,HAM_0000578,melanocytic_Nevi,histo,30.0,female,back
+ISIC_0033091.jpg,ISIC_0033091,HAM_0003824,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0033105.jpg,ISIC_0033105,HAM_0003356,melanocytic_Nevi,consensus,45.0,female,unknown
+ISIC_0033109.jpg,ISIC_0033109,HAM_0002519,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0033129.jpg,ISIC_0033129,HAM_0004811,melanoma,histo,50.0,female,back
+ISIC_0033132.jpg,ISIC_0033132,HAM_0004387,melanocytic_Nevi,consensus,55.0,female,trunk
+ISIC_0033138.jpg,ISIC_0033138,HAM_0004550,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0033148.jpg,ISIC_0033148,HAM_0002519,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0033149.jpg,ISIC_0033149,HAM_0007433,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0033169.jpg,ISIC_0033169,HAM_0002792,benign_keratosis-like_lesions,consensus,80.0,female,back
+ISIC_0033170.jpg,ISIC_0033170,HAM_0001358,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0033184.jpg,ISIC_0033184,HAM_0004332,benign_keratosis-like_lesions,histo,55.0,male,trunk
+ISIC_0033187.jpg,ISIC_0033187,HAM_0003034,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0033196.jpg,ISIC_0033196,HAM_0002841,melanoma,histo,20.0,male,back
+ISIC_0033199.jpg,ISIC_0033199,HAM_0006673,benign_keratosis-like_lesions,consensus,60.0,female,face
+ISIC_0033203.jpg,ISIC_0033203,HAM_0000879,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0033204.jpg,ISIC_0033204,HAM_0006886,melanoma,histo,55.0,male,back
+ISIC_0033212.jpg,ISIC_0033212,HAM_0001385,benign_keratosis-like_lesions,histo,50.0,female,neck
+ISIC_0033217.jpg,ISIC_0033217,HAM_0005141,melanoma,histo,70.0,male,back
+ISIC_0033218.jpg,ISIC_0033218,HAM_0002664,basal_cell_carcinoma,histo,60.0,male,face
+ISIC_0033243.jpg,ISIC_0033243,HAM_0003106,melanocytic_Nevi,histo,30.0,male,chest
+ISIC_0033265.jpg,ISIC_0033265,HAM_0005820,melanocytic_Nevi,histo,35.0,female,back
+ISIC_0033276.jpg,ISIC_0033276,HAM_0000304,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0033277.jpg,ISIC_0033277,HAM_0004588,melanocytic_Nevi,consensus,55.0,male,unknown
+ISIC_0033278.jpg,ISIC_0033278,HAM_0003983,melanoma,histo,85.0,male,abdomen
+ISIC_0033280.jpg,ISIC_0033280,HAM_0001385,benign_keratosis-like_lesions,histo,50.0,female,neck
+ISIC_0033288.jpg,ISIC_0033288,HAM_0000578,melanocytic_Nevi,histo,30.0,female,back
+ISIC_0033302.jpg,ISIC_0033302,HAM_0005040,melanoma,histo,40.0,female,upper extremity
+ISIC_0033311.jpg,ISIC_0033311,HAM_0005190,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0033316.jpg,ISIC_0033316,HAM_0000304,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0033319.jpg,ISIC_0033319,HAM_0005972,melanocytic_Nevi,histo,35.0,female,lower extremity
+ISIC_0033325.jpg,ISIC_0033325,HAM_0005777,melanoma,histo,60.0,male,chest
+ISIC_0033337.jpg,ISIC_0033337,HAM_0005581,melanoma,histo,50.0,male,back
+ISIC_0033342.jpg,ISIC_0033342,HAM_0005820,melanocytic_Nevi,histo,35.0,female,back
+ISIC_0033361.jpg,ISIC_0033361,HAM_0002040,benign_keratosis-like_lesions,histo,50.0,female,lower extremity
+ISIC_0033366.jpg,ISIC_0033366,HAM_0000879,basal_cell_carcinoma,histo,65.0,female,back
+ISIC_0033374.jpg,ISIC_0033374,HAM_0006766,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0033384.jpg,ISIC_0033384,HAM_0003002,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0033386.jpg,ISIC_0033386,HAM_0002750,melanocytic_Nevi,histo,60.0,female,back
+ISIC_0033388.jpg,ISIC_0033388,HAM_0002501,melanocytic_Nevi,histo,40.0,male,trunk
+ISIC_0033392.jpg,ISIC_0033392,HAM_0003174,melanoma,histo,85.0,male,trunk
+ISIC_0033415.jpg,ISIC_0033415,HAM_0004927,melanoma,histo,70.0,male,abdomen
+ISIC_0033424.jpg,ISIC_0033424,HAM_0000079,melanoma,histo,50.0,female,face
+ISIC_0033427.jpg,ISIC_0033427,HAM_0001641,melanocytic_Nevi,histo,60.0,male,abdomen
+ISIC_0033429.jpg,ISIC_0033429,HAM_0003625,melanoma,histo,75.0,male,abdomen
+ISIC_0033440.jpg,ISIC_0033440,HAM_0000392,melanoma,histo,70.0,male,trunk
+ISIC_0033444.jpg,ISIC_0033444,HAM_0003073,melanoma,histo,50.0,male,abdomen
+ISIC_0033454.jpg,ISIC_0033454,HAM_0005021,melanoma,histo,75.0,male,face
+ISIC_0033467.jpg,ISIC_0033467,HAM_0004197,melanocytic_Nevi,consensus,40.0,female,unknown
+ISIC_0033484.jpg,ISIC_0033484,HAM_0000556,melanocytic_Nevi,consensus,50.0,female,upper extremity
+ISIC_0033487.jpg,ISIC_0033487,HAM_0005673,melanoma,histo,60.0,male,back
+ISIC_0033491.jpg,ISIC_0033491,HAM_0007427,benign_keratosis-like_lesions,consensus,60.0,female,back
+ISIC_0033500.jpg,ISIC_0033500,HAM_0004405,melanoma,histo,80.0,male,back
+ISIC_0033507.jpg,ISIC_0033507,HAM_0006281,benign_keratosis-like_lesions,histo,75.0,male,lower extremity
+ISIC_0033512.jpg,ISIC_0033512,HAM_0003623,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0033515.jpg,ISIC_0033515,HAM_0002402,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0033523.jpg,ISIC_0033523,HAM_0003770,benign_keratosis-like_lesions,histo,80.0,male,face
+ISIC_0033526.jpg,ISIC_0033526,HAM_0003439,melanoma,histo,75.0,female,back
+ISIC_0033527.jpg,ISIC_0033527,HAM_0003259,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0033535.jpg,ISIC_0033535,HAM_0003017,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0033536.jpg,ISIC_0033536,HAM_0002867,actinic_keratoses,histo,40.0,male,abdomen
+ISIC_0033540.jpg,ISIC_0033540,HAM_0000556,melanocytic_Nevi,consensus,50.0,female,upper extremity
+ISIC_0033550.jpg,ISIC_0033550,HAM_0002867,actinic_keratoses,histo,40.0,male,abdomen
+ISIC_0033563.jpg,ISIC_0033563,HAM_0003505,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0033577.jpg,ISIC_0033577,HAM_0004346,melanocytic_Nevi,consensus,40.0,female,unknown
+ISIC_0033585.jpg,ISIC_0033585,HAM_0005972,melanocytic_Nevi,histo,35.0,female,lower extremity
+ISIC_0033594.jpg,ISIC_0033594,HAM_0005581,melanoma,histo,50.0,male,back
+ISIC_0033595.jpg,ISIC_0033595,HAM_0005280,melanoma,histo,70.0,male,upper extremity
+ISIC_0033598.jpg,ISIC_0033598,HAM_0005496,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0033613.jpg,ISIC_0033613,HAM_0006938,benign_keratosis-like_lesions,histo,45.0,male,face
+ISIC_0033622.jpg,ISIC_0033622,HAM_0003818,melanocytic_Nevi,consensus,40.0,male,unknown
+ISIC_0033629.jpg,ISIC_0033629,HAM_0001309,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0033630.jpg,ISIC_0033630,HAM_0004984,melanoma,histo,80.0,male,face
+ISIC_0033638.jpg,ISIC_0033638,HAM_0005040,melanoma,histo,40.0,female,upper extremity
+ISIC_0033641.jpg,ISIC_0033641,HAM_0003259,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0033643.jpg,ISIC_0033643,HAM_0000483,melanoma,histo,70.0,male,lower extremity
+ISIC_0033660.jpg,ISIC_0033660,HAM_0007427,benign_keratosis-like_lesions,consensus,60.0,female,back
+ISIC_0033666.jpg,ISIC_0033666,HAM_0002664,basal_cell_carcinoma,histo,60.0,male,face
+ISIC_0033674.jpg,ISIC_0033674,HAM_0001358,melanocytic_Nevi,histo,50.0,female,back
+ISIC_0033678.jpg,ISIC_0033678,HAM_0001412,melanoma,histo,75.0,female,back
+ISIC_0033679.jpg,ISIC_0033679,HAM_0003983,melanoma,histo,85.0,male,abdomen
+ISIC_0033680.jpg,ISIC_0033680,HAM_0001641,melanocytic_Nevi,histo,60.0,male,abdomen
+ISIC_0033682.jpg,ISIC_0033682,HAM_0003365,melanocytic_Nevi,consensus,45.0,female,unknown
+ISIC_0033684.jpg,ISIC_0033684,HAM_0003441,melanocytic_Nevi,histo,55.0,male,chest
+ISIC_0033685.jpg,ISIC_0033685,HAM_0000372,benign_keratosis-like_lesions,consensus,,unknown,unknown
+ISIC_0033696.jpg,ISIC_0033696,HAM_0000176,melanoma,histo,65.0,male,upper extremity
+ISIC_0033697.jpg,ISIC_0033697,HAM_0002603,melanocytic_Nevi,consensus,25.0,male,unknown
+ISIC_0033703.jpg,ISIC_0033703,HAM_0005594,melanocytic_Nevi,histo,40.0,female,neck
+ISIC_0033708.jpg,ISIC_0033708,HAM_0000169,melanoma,histo,,male,face
+ISIC_0033716.jpg,ISIC_0033716,HAM_0006938,benign_keratosis-like_lesions,histo,45.0,male,face
+ISIC_0033719.jpg,ISIC_0033719,HAM_0001708,melanocytic_Nevi,histo,55.0,male,lower extremity
+ISIC_0033748.jpg,ISIC_0033748,HAM_0000747,melanocytic_Nevi,histo,30.0,male,trunk
+ISIC_0033752.jpg,ISIC_0033752,HAM_0000079,melanoma,histo,50.0,female,face
+ISIC_0033766.jpg,ISIC_0033766,HAM_0005115,melanocytic_Nevi,consensus,35.0,male,upper extremity
+ISIC_0033770.jpg,ISIC_0033770,HAM_0001385,benign_keratosis-like_lesions,histo,50.0,female,neck
+ISIC_0033772.jpg,ISIC_0033772,HAM_0004204,melanocytic_Nevi,consensus,40.0,female,unknown
+ISIC_0033779.jpg,ISIC_0033779,HAM_0005711,melanoma,histo,35.0,male,back
+ISIC_0033785.jpg,ISIC_0033785,HAM_0004332,benign_keratosis-like_lesions,histo,55.0,male,trunk
+ISIC_0033791.jpg,ISIC_0033791,HAM_0006281,benign_keratosis-like_lesions,histo,75.0,male,lower extremity
+ISIC_0033792.jpg,ISIC_0033792,HAM_0004043,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0033798.jpg,ISIC_0033798,HAM_0006539,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0033802.jpg,ISIC_0033802,HAM_0003625,melanoma,histo,75.0,male,abdomen
+ISIC_0033805.jpg,ISIC_0033805,HAM_0005040,melanoma,histo,40.0,female,upper extremity
+ISIC_0033813.jpg,ISIC_0033813,HAM_0000423,melanoma,histo,55.0,male,lower extremity
+ISIC_0033814.jpg,ISIC_0033814,HAM_0002086,melanoma,histo,70.0,male,face
+ISIC_0033820.jpg,ISIC_0033820,HAM_0002086,melanoma,histo,70.0,male,face
+ISIC_0033821.jpg,ISIC_0033821,HAM_0004387,melanocytic_Nevi,consensus,55.0,female,trunk
+ISIC_0033832.jpg,ISIC_0033832,HAM_0005383,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0033834.jpg,ISIC_0033834,HAM_0001412,melanoma,histo,75.0,female,back
+ISIC_0033849.jpg,ISIC_0033849,HAM_0006615,melanocytic_Nevi,histo,45.0,male,trunk
+ISIC_0033850.jpg,ISIC_0033850,HAM_0004574,melanocytic_Nevi,histo,70.0,female,back
+ISIC_0033855.jpg,ISIC_0033855,HAM_0006157,benign_keratosis-like_lesions,consensus,80.0,female,back
+ISIC_0033858.jpg,ISIC_0033858,HAM_0004207,melanocytic_Nevi,consensus,40.0,female,unknown
+ISIC_0033885.jpg,ISIC_0033885,HAM_0005737,melanoma,histo,60.0,female,lower extremity
+ISIC_0033890.jpg,ISIC_0033890,HAM_0003365,melanocytic_Nevi,consensus,45.0,female,unknown
+ISIC_0033900.jpg,ISIC_0033900,HAM_0002040,benign_keratosis-like_lesions,histo,50.0,female,lower extremity
+ISIC_0033904.jpg,ISIC_0033904,HAM_0005820,melanocytic_Nevi,histo,35.0,female,back
+ISIC_0033911.jpg,ISIC_0033911,HAM_0005711,melanoma,histo,35.0,male,back
+ISIC_0033917.jpg,ISIC_0033917,HAM_0004548,melanocytic_Nevi,histo,45.0,female,upper extremity
+ISIC_0033926.jpg,ISIC_0033926,HAM_0004043,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0033945.jpg,ISIC_0033945,HAM_0007427,benign_keratosis-like_lesions,consensus,60.0,female,back
+ISIC_0033948.jpg,ISIC_0033948,HAM_0001641,melanocytic_Nevi,histo,60.0,male,abdomen
+ISIC_0033949.jpg,ISIC_0033949,HAM_0003728,benign_keratosis-like_lesions,consensus,70.0,male,back
+ISIC_0033951.jpg,ISIC_0033951,HAM_0007433,melanocytic_Nevi,histo,45.0,male,back
+ISIC_0033953.jpg,ISIC_0033953,HAM_0006886,melanoma,histo,55.0,male,back
+ISIC_0033975.jpg,ISIC_0033975,HAM_0003983,melanoma,histo,85.0,male,abdomen
+ISIC_0033987.jpg,ISIC_0033987,HAM_0006148,benign_keratosis-like_lesions,consensus,80.0,female,back
+ISIC_0033993.jpg,ISIC_0033993,HAM_0001948,melanocytic_Nevi,histo,35.0,male,foot
+ISIC_0033995.jpg,ISIC_0033995,HAM_0005673,melanoma,histo,60.0,male,back
+ISIC_0034003.jpg,ISIC_0034003,HAM_0007402,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0034005.jpg,ISIC_0034005,HAM_0006763,melanoma,histo,75.0,male,foot
+ISIC_0034011.jpg,ISIC_0034011,HAM_0006938,benign_keratosis-like_lesions,histo,45.0,male,face
+ISIC_0034012.jpg,ISIC_0034012,HAM_0006011,melanoma,histo,85.0,male,back
+ISIC_0034015.jpg,ISIC_0034015,HAM_0003216,basal_cell_carcinoma,histo,85.0,female,face
+ISIC_0034021.jpg,ISIC_0034021,HAM_0005496,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0034026.jpg,ISIC_0034026,HAM_0006586,basal_cell_carcinoma,histo,80.0,female,face
+ISIC_0034027.jpg,ISIC_0034027,HAM_0005059,melanocytic_Nevi,consensus,70.0,male,upper extremity
+ISIC_0034032.jpg,ISIC_0034032,HAM_0002170,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0034034.jpg,ISIC_0034034,HAM_0005141,melanoma,histo,70.0,male,back
+ISIC_0034037.jpg,ISIC_0034037,HAM_0001309,benign_keratosis-like_lesions,histo,60.0,female,lower extremity
+ISIC_0034041.jpg,ISIC_0034041,HAM_0005496,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0034044.jpg,ISIC_0034044,HAM_0000747,melanocytic_Nevi,histo,30.0,male,trunk
+ISIC_0034047.jpg,ISIC_0034047,HAM_0002559,basal_cell_carcinoma,histo,70.0,male,face
+ISIC_0034049.jpg,ISIC_0034049,HAM_0007589,melanoma,histo,70.0,male,back
+ISIC_0034059.jpg,ISIC_0034059,HAM_0005280,melanoma,histo,70.0,male,upper extremity
+ISIC_0034067.jpg,ISIC_0034067,HAM_0004024,melanocytic_Nevi,histo,65.0,female,back
+ISIC_0034069.jpg,ISIC_0034069,HAM_0003441,melanocytic_Nevi,histo,55.0,male,chest
+ISIC_0034080.jpg,ISIC_0034080,HAM_0000421,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0034083.jpg,ISIC_0034083,HAM_0000304,melanocytic_Nevi,histo,45.0,female,abdomen
+ISIC_0034101.jpg,ISIC_0034101,HAM_0004853,melanoma,histo,80.0,male,upper extremity
+ISIC_0034105.jpg,ISIC_0034105,HAM_0004550,melanocytic_Nevi,histo,35.0,female,abdomen
+ISIC_0034112.jpg,ISIC_0034112,HAM_0000579,melanocytic_Nevi,histo,30.0,female,upper extremity
+ISIC_0034117.jpg,ISIC_0034117,HAM_0004927,melanoma,histo,70.0,male,abdomen
+ISIC_0034123.jpg,ISIC_0034123,HAM_0006586,basal_cell_carcinoma,histo,80.0,female,face
+ISIC_0034128.jpg,ISIC_0034128,HAM_0004226,melanocytic_Nevi,histo,25.0,female,trunk
+ISIC_0034130.jpg,ISIC_0034130,HAM_0007172,melanocytic_Nevi,consensus,,unknown,unknown
+ISIC_0034132.jpg,ISIC_0034132,HAM_0003466,melanoma,histo,70.0,female,lower extremity
+ISIC_0034136.jpg,ISIC_0034136,HAM_0002750,melanocytic_Nevi,histo,60.0,female,back
+ISIC_0034138.jpg,ISIC_0034138,HAM_0003824,melanocytic_Nevi,histo,15.0,female,lower extremity
+ISIC_0034141.jpg,ISIC_0034141,HAM_0000483,melanoma,histo,70.0,male,lower extremity
+ISIC_0034148.jpg,ISIC_0034148,HAM_0004773,melanocytic_Nevi,histo,25.0,female,chest
+ISIC_0034150.jpg,ISIC_0034150,HAM_0006011,melanoma,histo,85.0,male,back
+ISIC_0034167.jpg,ISIC_0034167,HAM_0003728,benign_keratosis-like_lesions,consensus,70.0,male,back
+ISIC_0034173.jpg,ISIC_0034173,HAM_0005021,melanoma,histo,75.0,male,face
+ISIC_0034175.jpg,ISIC_0034175,HAM_0003770,benign_keratosis-like_lesions,histo,80.0,male,face
+ISIC_0034183.jpg,ISIC_0034183,HAM_0003073,melanoma,histo,50.0,male,abdomen
+ISIC_0034187.jpg,ISIC_0034187,HAM_0002476,melanocytic_Nevi,histo,15.0,male,back
+ISIC_0034191.jpg,ISIC_0034191,HAM_0001708,melanocytic_Nevi,histo,55.0,male,lower extremity
+ISIC_0034200.jpg,ISIC_0034200,HAM_0004583,melanocytic_Nevi,consensus,55.0,male,unknown
+ISIC_0034203.jpg,ISIC_0034203,HAM_0005190,melanocytic_Nevi,histo,40.0,female,back
+ISIC_0034208.jpg,ISIC_0034208,HAM_0005777,melanoma,histo,60.0,male,chest
+ISIC_0034215.jpg,ISIC_0034215,HAM_0004088,melanocytic_Nevi,histo,20.0,female,lower extremity
+ISIC_0034221.jpg,ISIC_0034221,HAM_0007427,benign_keratosis-like_lesions,consensus,60.0,female,back
+ISIC_0034223.jpg,ISIC_0034223,HAM_0003216,basal_cell_carcinoma,histo,85.0,female,face
+ISIC_0034227.jpg,ISIC_0034227,HAM_0003505,melanocytic_Nevi,histo,40.0,male,back
+ISIC_0034229.jpg,ISIC_0034229,HAM_0005689,melanocytic_Nevi,consensus,20.0,male,back
+ISIC_0034230.jpg,ISIC_0034230,HAM_0001264,melanocytic_Nevi,histo,45.0,male,chest
+ISIC_0034237.jpg,ISIC_0034237,HAM_0002170,melanocytic_Nevi,histo,40.0,male,lower extremity
+ISIC_0034238.jpg,ISIC_0034238,HAM_0002712,melanocytic_Nevi,consensus,30.0,male,back
+ISIC_0034241.jpg,ISIC_0034241,HAM_0004773,melanocytic_Nevi,histo,25.0,female,chest
+ISIC_0034245.jpg,ISIC_0034245,HAM_0005594,melanocytic_Nevi,histo,40.0,female,neck
+ISIC_0034271.jpg,ISIC_0034271,HAM_0000443,melanocytic_Nevi,histo,35.0,female,back
+ISIC_0034272.jpg,ISIC_0034272,HAM_0002329,melanocytic_Nevi,histo,45.0,female,lower extremity
+ISIC_0034275.jpg,ISIC_0034275,HAM_0000392,melanoma,histo,70.0,male,trunk
+ISIC_0034279.jpg,ISIC_0034279,HAM_0000556,melanocytic_Nevi,consensus,50.0,female,upper extremity
+ISIC_0034280.jpg,ISIC_0034280,HAM_0007427,benign_keratosis-like_lesions,consensus,60.0,female,back
+ISIC_0034319.jpg,ISIC_0034319,HAM_0000747,melanocytic_Nevi,histo,30.0,male,trunk

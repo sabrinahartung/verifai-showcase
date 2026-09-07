@@ -39,6 +39,13 @@ def _build_dataset(spec: dict[str, Any]):
     return _load(spec["loader"])(spec)
 
 
+def _safe_len(dataset) -> int | None:
+    try:
+        return len(dataset)
+    except TypeError:
+        return None
+
+
 def run_scenario(scenario: dict[str, Any]) -> Report:
     seed = scenario.get("seed", 42)
     random.seed(seed)
@@ -56,7 +63,9 @@ def run_scenario(scenario: dict[str, Any]) -> Report:
         domain=scenario["domain"],
         model_id=scenario["model"].get("id", "unknown"),
         dataset_id=scenario["dataset"].get("id", "unknown"),
-        meta={"seed": seed, "sample_size": scenario.get("sample_size"),
+        meta={"seed": seed,
+              # what was actually evaluated, not merely what the YAML asked for
+              "sample_size": scenario.get("sample_size") or _safe_len(dataset),
               "device": str(getattr(model, "device", "cpu"))},
     )
 

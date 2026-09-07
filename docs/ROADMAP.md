@@ -80,22 +80,43 @@ The scenario is therefore pinned to `device: cpu`, and the device is now recorde
 in `report.json` under `meta.device`. Batching (see gaps below) is what makes a
 GPU pay off — the device fix is its prerequisite, not a speedup on its own.
 
-## Step 2 — Training, with the split as a contract
+## Step 2 — Training, with the split as a contract ✅ code done 2026-09-07
 
 *Goal: training and evaluation can never disagree about what was held out.*
 
-- [ ] `scripts/train_model.py <scenario.yaml>` — trains from a `training:` block
-      in the scenario (epochs, lr, batch size, class weights)
-- [ ] Split with `GroupShuffleSplit` on **`lesion_id`**, not on rows
-- [ ] Write `data/manifests/<name>_{train,val,test}.csv`, each carrying
-      `image_id, lesion_id, label` — these are versioned in git and become the
-      contract between training and evaluation
-- [ ] Push weights to the HF Hub (a ResNet18 `.pt` is ~45 MB — too big for git,
-      and `.gitignore` already excludes `*.pt`)
-- [ ] `run_scenario.py` evaluates **only** on `<name>_test.csv`
+- [x] `scripts/build_splits.py` — stratified split **on `lesion_id`**. Better than
+      `GroupShuffleSplit`: every lesion carries exactly one diagnosis (verified), so
+      the split is stratified *and* grouped. Reads only metadata columns over HTTP
+      range requests — a few MB, not the 3.6 GB the images would cost
+- [x] Manifests written and committed: `data/manifests/ham10000_{train,val,test}.csv`,
+      carrying `filename, image_id, lesion_id, label, dx_type, age, sex, localization`
+- [x] `scripts/materialize_images.py` — fetches the JPEGs the manifests name into
+      the gitignored `data/raw/ham10000/` (~2.9 GB, deduplicated by image_id)
+- [x] `scripts/train_model.py` — reads the `training:` block, trains on train,
+      selects on val by **balanced** accuracy, never opens the test manifest, and
+      writes `<name>_training.json` recording exactly which manifests were used
+- [x] `scenarios/skin_cancer_clean.yaml` — the retrained model's scenario
+- [ ] Upload the checkpoint to the HF Hub (`.pt` is gitignored)
 
-Compute: ~8k images, ResNet18 — roughly 1–2 h on the Mac's MPS once the device bug
-is fixed, or ~20 min on a free Colab T4. Evaluation of ~1,500 images is ~2 min on CPU.
+**The resulting split:**
+
+| Split | Images | Lesions |
+|---|---|---|
+| train | 7,014 | 5,230 |
+| val | 1,508 | 1,120 |
+| **test** | **1,493** | **1,120** |
+
+Zero shared lesions and zero shared images between any pair of splits, checked by
+the script itself, which exits non-zero rather than emit a leaking split. Class
+stratification holds at 11–16% per class in test, including **163 melanomas** —
+against 1 in the best clean subset the old split could offer.
+
+**Verified end to end** on a 42-image miniature of the real split (build → fetch →
+train 2 epochs on MPS → evaluate → artifacts), so the pipeline is known to work
+before committing to the full download and training run.
+
+Compute: ~7k images, ResNet18 — roughly 1–2 h on the Mac's MPS, or ~20 min on a
+free Colab T4. Evaluation of 1,493 images is ~2 min on CPU.
 
 ## Step 3 — Make leakage a first-class finding
 
