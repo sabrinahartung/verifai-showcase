@@ -35,7 +35,9 @@ model:
   id: "skin-lesion-resnet18-clean"
   arch: "resnet18"
   cam_layer: "layer4[-1]"
-  device: "cpu"
+  # "auto" -> mps here. At 1,493 images the ~206 ms MPS setup is irrelevant and
+  # inference runs ~3.5x faster than CPU (2.8 vs 9.8 ms/img).
+  device: "auto"
   # After training, point this at the checkpoint you just produced:
   weights_path: "artifacts_training/skin_cancer_clean.pt"
   # ...or pull it from the Hub once uploaded:

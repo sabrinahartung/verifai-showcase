@@ -134,6 +134,27 @@ an earlier guess of "1–2 h on MPS" was wrong by about 15x:
 | **Full 12-epoch training run** | | **~5 min** |
 | Evaluation of the 1,493-image test split | | ~2 min on CPU |
 
+Inference, measured the same way — MPS is worth it for anything but a toy run:
+
+| Device / batch | img/s | 1,493 images x 7 passes |
+|---|---|---|
+| cpu, batch 1 (today) | 99 | 105 s |
+| **mps, batch 1 (today)** | **365** | **29 s** |
+| mps, batch 32 (needs batching) | 1,266 | 8 s |
+
+MPS costs ~206 ms of one-time setup and then runs at 2.8 ms/img against CPU's 9.8,
+so it pays for itself after **~30 forward passes** — which a scenario reaches at
+about 5 images, since each one costs ~7 passes. That is why `skin_cancer.yaml` (n=7)
+is pinned to cpu while `skin_cancer_clean.yaml` (n=1,493) uses `auto`. Batching the
+forward passes would win another ~3.5x on top, but 29 s is not worth the refactor yet.
+
+One reproducibility caveat: results are bit-identical *per device*, not across
+devices. CPU and MPS agreed exactly on every metric at n=7, but at n=14 deletion
+faithfulness came out 0.066 on CPU and 0.065 on MPS — float ordering differs
+between backends, and that metric stacks quantile, masking and two forward passes.
+Expect third-decimal drift when comparing runs made on different devices; this is
+why `report.json` records `meta.device`.
+
 Data loading is not the bottleneck once `workers: 8` is set — decoding runs about
 3.5x faster than the GPU consumes, which is the right shape. Two settings matter
 on macOS: `persistent_workers` (spawning 8 loader processes costs ~10 s, and

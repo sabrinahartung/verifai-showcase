@@ -20,10 +20,10 @@ model:
   arch: "resnet18"          # any torchvision classifier factory
   cam_layer: "layer4[-1]"   # Grad-CAM target; default per arch if omitted
   device: "cpu"             # auto | cpu | cuda | mps.
-  #   Pinned to cpu on purpose: at this sample size everything runs at batch size
-  #   1, where per-image transfer overhead makes MPS *slower* than CPU (5.5s vs
-  #   3.2s measured). Switch to "auto" for the big run on CUDA — and batch the
-  #   forward passes first, or the GPU will idle between single images.
+  #   Pinned to cpu because this run is tiny, not because MPS is slow. MPS costs
+  #   ~206 ms of one-time setup, then runs at 2.8 ms/img against CPU's 9.8 — so it
+  #   pays for itself after ~30 images and loses below that. With n=7 the whole
+  #   run is 3.2s on CPU vs 5.5s on MPS. Larger scenarios should use "auto".
 
 dataset:
   loader: "verifai.datasets.loaders:load_ham10000"
