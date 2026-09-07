@@ -9,6 +9,9 @@ performance, fairness, robustness, explainability, privacy — across several da
 > free GPU for large ones — and produces static **artifacts** (JSON + plots). A small Streamlit app
 > shows them interactively: **tiles → click → dashboard**. No server, no database, no running costs.
 
+**Full documentation:** `mkdocs serve` (or `docs/`) — architecture, the data model, the
+pipeline, all six pillars, and the split-integrity story, with diagrams.
+
 ---
 
 ## Quickstart

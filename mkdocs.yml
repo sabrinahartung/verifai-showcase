@@ -1,0 +1,56 @@
+site_name: VERIFAI Showcase
+site_description: File-based Responsible-AI evaluation across six pillars
+repo_url: https://github.com/sabrinahartung/verifai-showcase
+repo_name: sabrinahartung/verifai-showcase
+docs_dir: docs
+theme:
+  name: material
+  icon:
+    logo: material/microscope
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle: {icon: material/weather-night, name: Switch to dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle: {icon: material/weather-sunny, name: Switch to light mode}
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc: {permalink: true}
+  - pymdownx.details
+  - pymdownx.highlight: {anchor_linenums: true}
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+nav:
+  - Home: index.md
+  - Architecture:
+      - Overview: architecture.md
+      - Data model: data-model.md
+      - The pipeline: pipeline.md
+  - Evaluation:
+      - The six pillars: pillars.md
+      - Split integrity: integrity.md
+      - Current results: results.md
+  - Working on it:
+      - Extending: extending.md
+      - Development: development.md
+      - Roadmap: ROADMAP.md

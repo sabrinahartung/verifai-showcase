@@ -39,8 +39,11 @@ They cover the seams a second model plugs into. The end-to-end smoke test is sti
 `scripts/run_scenario.py` on the 7-image manifest; it finishes on laptop CPU in seconds.
 No linter is configured.
 
-`docs/ROADMAP.md` holds the plan and the leakage audit behind it — read it before planning
-any larger evaluation run.
+`docs/` is a MkDocs site (`.venv/bin/mkdocs serve`) covering the architecture, data model,
+pipeline, the six pillars and the split-integrity story. `docs/ROADMAP.md` holds the plan and
+the leakage audit behind it — read it before planning any larger evaluation run. When you
+change engine behaviour, update the matching page: the numbers in `docs/results.md` and
+`docs/pipeline.md` are measured, not illustrative, so they must not drift.
 
 Dependency files are split on purpose: `requirements-engine.txt` (heavy, offline run) vs
 `showcase/requirements.txt` (light, Streamlit Community Cloud free tier). Never add torch to the

@@ -15,3 +15,6 @@ data/raw/
 
 # training outputs (weights live on the HF Hub, not in git)
 artifacts_training/
+
+# mkdocs build output
+site/
