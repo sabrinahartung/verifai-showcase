@@ -91,7 +91,13 @@ GPU pay off — the device fix is its prerequisite, not a speedup on its own.
 - [x] Manifests written and committed: `data/manifests/ham10000_{train,val,test}.csv`,
       carrying `filename, image_id, lesion_id, label, dx_type, age, sex, localization`
 - [x] `scripts/materialize_images.py` — fetches the JPEGs the manifests name into
-      the gitignored `data/raw/ham10000/` (~2.9 GB, deduplicated by image_id)
+      the gitignored `data/raw/ham10000/`, deduplicated by image_id. `--max-size 320`
+      re-encodes on the way in: **~140 MB instead of 2.7 GB** (measured, 19x), which
+      costs training nothing because the first transform resizes to 224 anyway.
+      Keep one resolution for a whole comparison — a blur radius or JPEG quality
+      means something different at a different size, so the robustness numbers
+      shift. The choice is recorded in `_materialize.json` and the script refuses
+      to mix resolutions in one directory
 - [x] `scripts/train_model.py` — reads the `training:` block, trains on train,
       selects on val by **balanced** accuracy, never opens the test manifest, and
       writes `<name>_training.json` recording exactly which manifests were used
