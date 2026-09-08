@@ -44,29 +44,44 @@ the last one — but only when the comparison is legitimate.
 
 ```mermaid
 flowchart LR
-    W["find the real weakness<br/><i>melanoma recall 0.638,<br/>not accuracy 0.796</i>"]
-    H["form a hypothesis<br/><i>loss · sampling ·<br/>threshold · backbone</i>"]
-    T["train a variant"]
-    E["evaluate — six pillars"]
-    I{"integrity<br/>clean?"}
-    S["snapshot<br/><i>keyed to the evaluation<br/>set's content hash</i>"]
-    C["compare against baseline<br/><i>including what got worse</i>"]
-    X["✋ refused —<br/>not comparable"]
+    subgraph once["done once"]
+        BS["build_splits.py<br/><i>group by lesion, stratify</i>"] --> F["frozen test manifest"]
+    end
 
-    W --> H --> T --> E --> I
-    I -->|no| X
-    I -->|yes| S --> C --> W
+    W["find the weakness<br/><i>melanoma recall 0.638,<br/>not accuracy 0.796</i>"]
+    H["change ONE thing<br/><i>loss · sampling · threshold ·<br/>backbone — or more training data</i>"]
+    T["train a variant"]
+    E["evaluate on the frozen test set"]
+    G{"is train ∩ test<br/>still empty?"}
+    S["snapshot — admissible<br/><i>keyed to the test set's<br/>content hash</i>"]
+    C["compare against baseline<br/><i>including what got worse</i>"]
+    X["✋ excluded from the<br/>comparison, with the reason"]
+
+    W --> H --> T --> E --> G
+    G -->|yes| S --> C --> W
+    G -->|no| X
+    F --> E
 
     style W fill:#FFF6E0,stroke:#C77700,color:#1a1a2e
     style C fill:#E3F2E7,stroke:#2E9E5B,color:#1a1a2e
     style X fill:#F5D3CE,stroke:#C0392B,color:#1a1a2e
+    style once fill:#EDE9FB,stroke:#5B3FD6,color:#1a1a2e
 ```
 
+**Why the integrity check repeats, when the split was built once.** Contamination is not a
+property of the test set — it is a property of `train ∩ test`. Freezing the test set does not
+freeze that relation, because the *training* side moves: the loop explicitly allows adding
+training data as a variant. Pull in ISIC 2019, which incorporates HAM10000, and a test set you
+correctly froze months ago is quietly contaminated again. The check is cheap, and it is the
+only thing standing between that and a published number.
+
+**What may change inside the loop:** the model (loss, sampling, operating point, backbone) and
+the training data. **What may not:** the test manifest. Change that and you have not iterated —
+you have started a separate comparison group, which is exactly how the tool treats it.
+
 Every run writes a snapshot to `history/`, so an experiment cannot silently overwrite the
-evidence of the one before it. Runs are grouped by the **content hash** of the evaluation
-manifest rather than its filename, and any run whose split was contaminated — or never
-checked — is excluded from the chart with the reason stated. A green *+12 points* against a
-leaked baseline is exactly the claim this project exists to catch.
+evidence of the one before it. A green *+12 points* against a leaked baseline is exactly the
+claim this project exists to catch.
 
 ## The design in three claims
 
