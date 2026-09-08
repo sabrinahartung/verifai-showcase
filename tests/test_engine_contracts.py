@@ -272,3 +272,76 @@ def test_eval_set_fingerprint_uses_content_not_filename(tmp_path):
     a.write_text("filename,label\ny.jpg,nv\n")            # same path, different rows
     second = _eval_set_fingerprint(_DS(a))["sha256"]
     assert first and second and first != second, "different rows must not look comparable"
+
+
+# --- uncertainty: a number without an interval is not a claim ---------------
+def test_wilson_interval_brackets_the_estimate_and_narrows_with_n():
+    from verifai.metrics._stats import wilson
+    lo, hi = wilson(104, 163)                       # melanoma in the real test set
+    assert lo < 104 / 163 < hi
+    wide = wilson(10, 13)                           # dermatofibroma: 13 images
+    narrow = wilson(776, 1009)                      # nevi: 1,009 images
+    assert (wide[1] - wide[0]) > 3 * (narrow[1] - narrow[0]), \
+        "a class with 13 images must not look as certain as one with 1,009"
+
+
+def test_wilson_stays_inside_zero_one_at_the_extremes():
+    """Where the normal approximation fails: 0/n and n/n."""
+    from verifai.metrics._stats import wilson
+    lo, hi = wilson(0, 10)
+    assert lo == 0.0 and 0.0 < hi < 1.0, "0/10 is not certainty"
+    lo, hi = wilson(10, 10)
+    assert hi == 1.0 and 0.0 < lo < 1.0, "10/10 is not certainty either"
+    assert wilson(5, 0) is None
+
+
+def test_ppv_moves_with_prevalence_even_though_sensitivity_does_not():
+    """The clinical point: precision on a test set is not PPV at deployment."""
+    from verifai.metrics._stats import ppv_at_prevalence
+    high = ppv_at_prevalence(0.85, 0.90, 0.10)
+    low = ppv_at_prevalence(0.85, 0.90, 0.01)
+    assert high > 5 * low, "PPV must fall sharply as prevalence falls"
+    assert ppv_at_prevalence(0.85, 0.90, 0.0) is None
+
+
+def test_per_class_metrics_from_a_known_confusion_matrix():
+    from verifai.metrics.performance.classification import _per_class
+    #            pred A  B
+    cm = [[8, 2],      # true A: 10
+          [3, 7]]      # true B: 10
+    pc = _per_class(cm, ["A", "B"])
+    assert pc["A"]["sensitivity"] == 0.8 and pc["A"]["support"] == 10
+    assert pc["A"]["specificity"] == 0.7          # B correctly not called A: 7/10
+    assert pc["A"]["ppv_test_prevalence"] == round(8 / 11, 4)
+    assert pc["A"]["sensitivity_ci"][0] < 0.8 < pc["A"]["sensitivity_ci"][1]
+
+
+def test_fairness_gap_is_not_claimed_when_group_intervals_overlap():
+    """A large gap between two small groups is not evidence of a gap."""
+    pytest.importorskip("numpy")
+    from PIL import Image
+    from verifai.metrics.fairness import skin_tone_ita as f
+
+    # two bins, 10 images each, one scoring 0.6 and one 0.9 -> wide, overlapping CIs
+    light = [(245, 224, 210)] * 10
+    dark = [(90, 62, 48)] * 10
+
+    class _S:
+        def __init__(self, i, rgb, ok): self.id, self.rgb, self.label = f"i{i}", rgb, ("a" if ok else "b")
+
+    samples = [_S(i, c, i < 6) for i, c in enumerate(light)] + \
+              [_S(100 + i, c, i < 9) for i, c in enumerate(dark)]
+
+    class _DS:
+        def __iter__(self): return iter(samples)
+        def load(self, s): return Image.new("RGB", (64, 64), s.rgb)
+
+    class _M:
+        classes = ["a", "b"]
+        def predict_probs(self, img): return {"a": 0.9, "b": 0.1}   # always predicts "a"
+
+    finding = f.run(_M(), _DS(), {})
+    if "accuracy_gap" in finding.value:              # only if both bins were populated
+        assert finding.value["gap_is_separated"] is False
+        assert finding.verdict != "fail", \
+            "an unseparated gap must not be reported as a failure"

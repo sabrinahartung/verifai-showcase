@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from verifai.core.findings import Finding
+from verifai.metrics._stats import auc_ci
 
 EXPLAIN = {
     "what": ("A model is usually more confident on images it memorised during training. "
@@ -111,16 +112,22 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         )
 
     auc = round(_rank_auc(member_conf, non_conf), 4)
-    verdict = "pass" if auc < 0.60 else ("warn" if auc < 0.75 else "fail")
+    ci = auc_ci(auc, len(member_conf), len(non_conf))
+    # A verdict on the interval, not the point estimate: an AUC of 0.59 whose
+    # interval reaches 0.68 has not been shown to be low-risk.
+    verdict = "pass" if (ci and ci[1] < 0.60) else ("warn" if auc < 0.75 else "fail")
     mean_m = round(sum(member_conf) / len(member_conf), 4)
     mean_n = round(sum(non_conf) / len(non_conf), 4)
 
     return Finding(
         pillar="privacy", metric="membership_inference_auc", domain="image",
-        value={"mia_auc": auc, "n_members": len(member_conf), "n_non_members": len(non_conf),
+        value={"mia_auc": auc, "mia_auc_ci": ci,
+               "n_members": len(member_conf), "n_non_members": len(non_conf),
                "mean_confidence_members": mean_m, "mean_confidence_non_members": mean_n},
         verdict=verdict,
-        summary=(f"Membership-inference AUC {auc} from {len(member_conf)} training and "
+        summary=(f"Membership-inference AUC {auc}"
+                 f"{f' [{ci[0]:.2f}-{ci[1]:.2f}]' if ci else ''} "
+                 f"from {len(member_conf)} training and "
                  f"{len(non_conf)} held-out images (0.5 = an attacker cannot tell them "
                  f"apart). Mean confidence in the true class was {mean_m} on training "
                  f"images against {mean_n} on unseen ones."),

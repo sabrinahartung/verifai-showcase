@@ -18,6 +18,7 @@ import numpy as np
 
 from verifai.core.findings import Finding
 from verifai.metrics._common import CORRUPTIONS
+from verifai.metrics._stats import fmt, wilson
 
 
 def run(model, dataset, ctx: dict[str, Any]) -> Finding:
@@ -42,6 +43,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
             conf_after[c].append(probs[clean_top])
 
     stability = {c: round(stable[c] / n, 3) for c in names} if n else {}
+    stability_ci = {c: wilson(stable[c], n) for c in names} if n else {}
     mean_stability = round(float(np.mean(list(stability.values()))), 3) if stability else None
 
     verdict = "info"
@@ -51,7 +53,8 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     note = "" if n >= 20 else f" Small sample (n={n}) — illustrative only."
     return Finding(
         pillar="robustness", metric="corruption_stability", domain="image",
-        value={"prediction_stability": stability, "mean_stability": mean_stability, "n": n},
+        value={"prediction_stability": stability, "stability_ci": stability_ci,
+               "mean_stability": mean_stability, "n": n},
         verdict=verdict,
         summary=(f"The prediction stays stable under corruptions for {mean_stability*100:.0f}% "
                  f"of the images on average.{note}" if mean_stability is not None
@@ -74,6 +77,11 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
             "chart": {
                 "kind": "bar", "title": "Prediction stability per corruption",
                 "x": names, "y": [stability[c] for c in names], "color": "#1F8A70",
+                "y_lo": [stability_ci[c][0] for c in names],
+                "y_hi": [stability_ci[c][1] for c in names],
+                "hover": [f"{stability[c]:.3f} "
+                          f"[{stability_ci[c][0]:.2f}-{stability_ci[c][1]:.2f}] of {n}"
+                          for c in names],
                 "x_title": "Corruption", "y_title": "Share of unchanged top-1",
             },
         },

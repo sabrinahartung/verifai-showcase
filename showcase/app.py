@@ -167,6 +167,13 @@ def render_chart(spec: dict, base: Path):
     if kind == "bar":
         marker_color = spec.get("colors", spec.get("color", "#5B3FD6"))  # list = per-bar
         bar = go.Bar(x=spec["x"], y=spec["y"], marker_color=marker_color)
+        if spec.get("y_lo") and spec.get("y_hi"):
+            # Wilson intervals are asymmetric, so plus/minus arms differ.
+            bar.error_y = dict(
+                type="data", symmetric=False,
+                array=[hi - y for y, hi in zip(spec["y"], spec["y_hi"])],
+                arrayminus=[y - lo for y, lo in zip(spec["y"], spec["y_lo"])],
+                thickness=1.4, width=6, color="#455A64")
         if spec.get("hover"):
             bar.text = spec["hover"]
             bar.hovertemplate = "%{text}<br>%{y}<extra></extra>"

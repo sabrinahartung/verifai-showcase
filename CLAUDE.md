@@ -39,6 +39,14 @@ They cover the seams a second model plugs into. The end-to-end smoke test is sti
 `scripts/run_scenario.py` on the 7-image manifest; it finishes on laptop CPU in seconds.
 No linter is configured.
 
+Every metric reports uncertainty. `verifai/metrics/_stats.py` has Wilson intervals for
+proportions (not the normal approximation — it misbehaves at 0 and 1, exactly where small
+classes live), Hanley–McNeil for AUC, and Bayes PPV at a stated prevalence. A new metric that
+reports a proportion without an interval is incomplete: with 13 images, a recall of 0.769 has a
+95% interval of [0.50, 0.92], and the interval is what makes that honest. Where a verdict can
+be taken on the interval rather than the point estimate, do so — privacy passes on the upper
+bound, and a fairness gap is only claimed when the groups' intervals separate.
+
 `docs/` is a MkDocs site (`.venv/bin/mkdocs serve`) covering the architecture, data model,
 pipeline, the six pillars and the split-integrity story. `docs/ROADMAP.md` holds the plan and
 the leakage audit behind it — read it before planning any larger evaluation run. When you

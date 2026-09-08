@@ -246,6 +246,26 @@ gap is real and fails the threshold, but read the supports before drawing a
 conclusion — it is driven as much by the small medium-skin bin scoring unusually
 high as by dark skin scoring low.
 
+## Step 4b — Clinical metrics and uncertainty ✅ done 2026-09-08
+
+*Goal: measure the thing you are about to improve, before improving it.*
+
+- [x] `verifai/metrics/_stats.py` — Wilson score intervals (correct at the extremes,
+      where the normal approximation is not), Hanley–McNeil for AUC, Bayes PPV at a
+      stated prevalence. Pure `math`, no scipy
+- [x] Per-class **sensitivity, specificity and PPV**, each with a 95% interval
+- [x] **Top-3 differential accuracy** — how a dermatologist actually consumes a
+      suggestion, and the metric that shows this model is better than top-1 implies
+- [x] Intervals on robustness stability, fairness subgroup accuracy, and the MIA AUC
+- [x] Verdicts taken on the *interval* where it matters: privacy passes on the upper
+      bound, and a fairness gap is only claimed when the two groups' intervals separate
+- [x] Asymmetric error bars in the bar renderer (Wilson intervals are not symmetric)
+
+Why this had to come before any model variant: the old metric measured top-1 argmax
+accuracy only. Improving melanoma detection can *lower* top-1 accuracy while making
+the model clinically better — optimising against that metric would have punished the
+intended change.
+
 ## Step 5 — A larger image set
 
 *Goal: more data, and a test set the model has no relationship to at all.*

@@ -19,6 +19,7 @@ from typing import Any
 
 from verifai.core.findings import Finding
 from verifai.metrics._common import estimate_ita, ita_bin, ITA_BINS
+from verifai.metrics._stats import wilson
 
 
 def run(model, dataset, ctx: dict[str, Any]) -> Finding:
@@ -89,20 +90,44 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     value: dict[str, Any] = {"coverage": dict(zip(bins_order, coverage)), "n": n}
 
     if enough_per_bin:
-        acc = {b: round(per_bin_correct[b] / per_bin_total[b], 3)
-               for b in bins_order if per_bin_total.get(b)}
+        populated_bins = [b for b in bins_order if per_bin_total.get(b)]
+        acc = {b: round(per_bin_correct[b] / per_bin_total[b], 3) for b in populated_bins}
+        ci = {b: wilson(per_bin_correct[b], per_bin_total[b]) for b in populated_bins}
         vals = list(acc.values())
         gap = round(max(vals) - min(vals), 3) if len(vals) > 1 else 0.0
         value["subgroup_accuracy"] = acc
+        value["subgroup_accuracy_ci"] = ci
         value["accuracy_gap"] = gap
-        verdict = "fail" if gap > 0.15 else ("warn" if gap > 0.08 else "pass")
+
+        # A gap only counts as evidence if the groups' intervals do not overlap.
+        # Small bins produce wide intervals and therefore large but unsupported gaps.
+        best = max(acc, key=acc.get)
+        worst = min(acc, key=acc.get)
+        separated = bool(ci[best] and ci[worst] and ci[worst][1] < ci[best][0])
+        value["gap_is_separated"] = separated
+
+        if not separated:
+            verdict = "warn"
+        else:
+            verdict = "fail" if gap > 0.15 else ("warn" if gap > 0.08 else "pass")
+
         details["chart2"] = {
-            "kind": "bar", "title": "Accuracy by skin type (ITA)",
-            "x": list(acc.keys()), "y": list(acc.values()), "color": "#5B3FD6",
+            "kind": "bar", "title": "Accuracy by skin type (ITA), with 95% intervals",
+            "x": populated_bins, "y": [acc[b] for b in populated_bins], "color": "#5B3FD6",
+            "y_lo": [ci[b][0] for b in populated_bins],
+            "y_hi": [ci[b][1] for b in populated_bins],
             "x_title": "Estimated skin type", "y_title": "Top-1 accuracy",
+            "hover": [f"{acc[b]:.3f} [{ci[b][0]:.2f}-{ci[b][1]:.2f}] on "
+                      f"{per_bin_total[b]} images" for b in populated_bins],
         }
-        summary = (f"Subgroup accuracy by ITA skin type; largest gap "
-                   f"{gap*100:.0f} points (n={n}).")
+        summary = (
+            f"Subgroup accuracy by ITA skin type; largest gap {gap*100:.0f} points "
+            f"between {worst} ({acc[worst]:.2f}, n={per_bin_total[worst]}) and {best} "
+            f"({acc[best]:.2f}, n={per_bin_total[best]}), n={n}. "
+            + ("Their 95% intervals do not overlap, so the difference is supported."
+               if separated else
+               "Their 95% intervals overlap, so this gap is not yet distinguishable from "
+               "sampling noise — the smaller groups are too small to conclude from."))
 
     return Finding(
         pillar="fairness", metric="skin_tone_ita", domain="image",

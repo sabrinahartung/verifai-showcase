@@ -30,9 +30,146 @@
       "domain": "image",
       "value": {
         "accuracy": 1.0,
+        "accuracy_ci": [
+          0.6457,
+          1.0
+        ],
         "n": 7,
         "correct": 7,
         "balanced_accuracy": 1.0,
+        "top3_accuracy": 1.0,
+        "top3_accuracy_ci": [
+          0.6457,
+          1.0
+        ],
+        "per_class": {
+          "actinic_keratoses": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "basal_cell_carcinoma": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "benign_keratosis-like_lesions": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "dermatofibroma": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "melanocytic_Nevi": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "melanoma": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          },
+          "vascular_lesions": {
+            "support": 1,
+            "sensitivity": 1.0,
+            "sensitivity_ci": [
+              0.2065,
+              1.0
+            ],
+            "specificity": 1.0,
+            "specificity_ci": [
+              0.6097,
+              1.0
+            ],
+            "ppv_test_prevalence": 1.0,
+            "ppv_ci": [
+              0.2065,
+              1.0
+            ]
+          }
+        },
         "per_class_recall": {
           "actinic_keratoses": 1.0,
           "basal_cell_carcinoma": 1.0,
@@ -53,12 +190,12 @@
         }
       },
       "verdict": "info",
-      "summary": "Top-1 accuracy 100% on 7 labeled examples. Small sample (n=7) — a plausibility check, not a benchmark.",
+      "summary": "Top-1 accuracy 1.000 [0.65–1.00] on 7 labeled examples; balanced 1.0. Weakest class actinic_keratoses: sensitivity 1.000 [0.21–1.00] on 1 images. Small sample (n=7) — a plausibility check, not a benchmark.",
       "details": {
         "explain": {
-          "what": "Top-1 accuracy is the share of images where the model's most confident class is the correct one — the plainest measure of 'does it get the answer right'.",
-          "how": "Each bar is one image. The height is how confident the model was in its single best guess. Green means that guess was correct, red means it was wrong — so a tall red bar is the worst case: confidently wrong. Hover a bar to see the predicted and true class.",
-          "limits": "Accuracy alone hides *which* classes fail. A model can look good overall while missing most melanomas, because melanoma is rare in the data. It also says nothing about whether the accuracy is evenly spread across patient groups — that is what the fairness pillar is for."
+          "what": "Top-1 accuracy is the share of images whose most confident class is correct. Reported per class as well, because one averaged number hides the classes that matter most: a model can look strong overall while missing most melanomas, since melanoma is rare in the data.",
+          "how": "Each bar is one image. Height is the model's confidence in its single best guess. Green means that guess was right, red means wrong — a tall red bar is the worst case, confidently wrong.",
+          "limits": "Every figure carries a 95% interval, and the interval is the point: a class with 13 images produces a recall whose true value could plausibly sit anywhere across half the range. Two numbers whose intervals overlap have not been shown to differ. PPV additionally depends on prevalence — precision measured here is PPV at *this test set's* case mix, which is rarely the one at deployment."
         },
         "per_example": [
           {
@@ -66,49 +203,56 @@
             "true": "melanoma",
             "pred": "melanoma",
             "confidence": 0.6207,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_2",
             "true": "melanocytic_Nevi",
             "pred": "melanocytic_Nevi",
             "confidence": 0.9937,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_3",
             "true": "basal_cell_carcinoma",
             "pred": "basal_cell_carcinoma",
             "confidence": 0.8502,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_4",
             "true": "actinic_keratoses",
             "pred": "actinic_keratoses",
             "confidence": 0.9986,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_5",
             "true": "benign_keratosis-like_lesions",
             "pred": "benign_keratosis-like_lesions",
             "confidence": 0.8192,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_6",
             "true": "dermatofibroma",
             "pred": "dermatofibroma",
             "confidence": 0.9995,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           },
           {
             "id": "example_7",
             "true": "vascular_lesions",
             "pred": "vascular_lesions",
             "confidence": 0.999,
-            "correct": true
+            "correct": true,
+            "in_top3": true
           }
         ],
         "chart": {
@@ -263,6 +407,24 @@
           "brightness": 0.714,
           "jpeg": 1.0
         },
+        "stability_ci": {
+          "noise": [
+            0.2505,
+            0.8418
+          ],
+          "blur": [
+            0.3589,
+            0.9178
+          ],
+          "brightness": [
+            0.3589,
+            0.9178
+          ],
+          "jpeg": [
+            0.6457,
+            1.0
+          ]
+        },
         "mean_stability": 0.75,
         "n": 7
       },
@@ -290,6 +452,24 @@
             1.0
           ],
           "color": "#1F8A70",
+          "y_lo": [
+            0.2505,
+            0.3589,
+            0.3589,
+            0.6457
+          ],
+          "y_hi": [
+            0.8418,
+            0.9178,
+            0.9178,
+            1.0
+          ],
+          "hover": [
+            "0.571 [0.25-0.84] of 7",
+            "0.714 [0.36-0.92] of 7",
+            "0.714 [0.36-0.92] of 7",
+            "1.000 [0.65-1.00] of 7"
+          ],
           "x_title": "Corruption",
           "y_title": "Share of unchanged top-1"
         }
@@ -427,5 +607,5 @@
     },
     "label": "skin-lesion-resnet18"
   },
-  "created_at": "2026-09-08T11:24:42.110716+00:00"
+  "created_at": "2026-09-08T17:35:27.019886+00:00"
 }
