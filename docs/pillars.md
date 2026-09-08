@@ -1,5 +1,9 @@
 # The six pillars
 
+!!! tip "Unfamiliar terms?"
+    Sensitivity, PPV, confidence intervals, ITA and the rest are defined in plain
+    language with worked examples in the [Glossary](glossary.md).
+
 Each pillar answers one plain question. The dashboard shows them in this order because
 **integrity comes first** — every other number is conditional on it.
 

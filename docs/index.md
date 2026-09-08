@@ -113,4 +113,5 @@ claim this project exists to catch.
 | Know what is actually measured | [The six pillars](pillars.md) |
 | Understand the leakage story | [Split integrity](integrity.md) |
 | See the numbers | [Current results](results.md) |
+| Not know what a term means | **[Glossary](glossary.md)** |
 | Add a model or a metric | [Extending](extending.md) |

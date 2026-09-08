@@ -42,6 +42,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 nav:
   - Home: index.md
+  - Glossary: glossary.md
   - Architecture:
       - Overview: architecture.md
       - Data model: data-model.md

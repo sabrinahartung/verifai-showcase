@@ -47,6 +47,11 @@ reports a proportion without an interval is incomplete: with 13 images, a recall
 be taken on the interval rather than the point estimate, do so — privacy passes on the upper
 bound, and a fairness gap is only claimed when the groups' intervals separate.
 
+`docs/glossary.md` defines every term the project uses in plain language, with a worked
+example from the real run. When you add a metric or coin a term, add it there too — the
+dashboard is aimed at readers who have never seen a Responsible-AI report, and the
+per-metric `explain` text defines terms one at a time but never side by side.
+
 `docs/` is a MkDocs site (`.venv/bin/mkdocs serve`) covering the architecture, data model,
 pipeline, the six pillars and the split-integrity story. `docs/ROADMAP.md` holds the plan and
 the leakage audit behind it — read it before planning any larger evaluation run. When you

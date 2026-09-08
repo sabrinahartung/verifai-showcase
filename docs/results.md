@@ -1,5 +1,8 @@
 # Current results
 
+!!! tip "Reading these numbers"
+    Every metric here is defined in plain language in the [Glossary](glossary.md).
+
 `skin_cancer_clean` — ResNet18 trained on a lesion-grouped split of HAM10000 and evaluated
 on **1,493 images the model provably never saw**. First run in this project where every
 verdict gate is active, so the first whose verdicts claim anything.
