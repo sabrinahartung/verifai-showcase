@@ -36,6 +36,38 @@ only one of them fits in a headline.
     memorisation check wearing a benchmark's clothes. Nothing crashed; the number just came
     out high. See [Split integrity](integrity.md).
 
+## The loop it is built for
+
+Auditing a model once is the small use. The point is the cycle: the framework finds the
+weakness that the headline number hides, you act on it, and the next run is compared against
+the last one — but only when the comparison is legitimate.
+
+```mermaid
+flowchart LR
+    W["find the real weakness<br/><i>melanoma recall 0.638,<br/>not accuracy 0.796</i>"]
+    H["form a hypothesis<br/><i>loss · sampling ·<br/>threshold · backbone</i>"]
+    T["train a variant"]
+    E["evaluate — six pillars"]
+    I{"integrity<br/>clean?"}
+    S["snapshot<br/><i>keyed to the evaluation<br/>set's content hash</i>"]
+    C["compare against baseline<br/><i>including what got worse</i>"]
+    X["✋ refused —<br/>not comparable"]
+
+    W --> H --> T --> E --> I
+    I -->|no| X
+    I -->|yes| S --> C --> W
+
+    style W fill:#FFF6E0,stroke:#C77700,color:#1a1a2e
+    style C fill:#E3F2E7,stroke:#2E9E5B,color:#1a1a2e
+    style X fill:#F5D3CE,stroke:#C0392B,color:#1a1a2e
+```
+
+Every run writes a snapshot to `history/`, so an experiment cannot silently overwrite the
+evidence of the one before it. Runs are grouped by the **content hash** of the evaluation
+manifest rather than its filename, and any run whose split was contaminated — or never
+checked — is excluded from the chart with the reason stated. A green *+12 points* against a
+leaked baseline is exactly the claim this project exists to catch.
+
 ## The design in three claims
 
 === "Results are files"

@@ -6,6 +6,7 @@ seams that broke when the engine was generalised from one hardcoded model.
 from __future__ import annotations
 
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -217,3 +218,57 @@ def test_unverifiable_split_is_never_reported_as_clean(tmp_path):
     a = audit_split(bare("tr", [["a.jpg", "mel"]]), [bare("te", [["a.jpg", "mel"]])])
     assert a["verifiable"] is False
     assert a["clean"] is not True, "unverifiable must never read as clean"
+
+
+# --- snapshots: the evidence trail that makes comparison possible -----------
+def _report_with(value, pillar="performance", verdict="pass"):
+    from verifai.core.findings import Report, Finding
+    r = Report(scenario="s", domain="image", model_id="m", dataset_id="d")
+    r.add(Finding(pillar=pillar, metric="m", domain="image", value=value, verdict=verdict))
+    return r
+
+
+def test_snapshot_metrics_flattens_numeric_leaves_only():
+    from verifai.export.artifacts import snapshot_metrics
+    m = snapshot_metrics(_report_with(
+        {"accuracy": 0.8, "n": 100, "correct": True,          # bool is not a metric
+         "per_class_recall": {"melanoma": 0.64, "nevi": None},
+         "note": "text"}))
+    assert m["performance.accuracy"] == 0.8
+    assert m["performance.n"] == 100.0
+    assert m["performance.per_class_recall.melanoma"] == 0.64
+    assert "performance.correct" not in m, "bool must not be recorded as a metric"
+    assert "performance.note" not in m
+    assert "performance.per_class_recall.nevi" not in m
+
+
+def test_snapshot_records_what_makes_a_run_comparable(tmp_path):
+    from verifai.export.artifacts import write_snapshot
+    r = _report_with({"accuracy": 0.8})
+    r.add.__self__.findings.append(
+        __import__("verifai.core.findings", fromlist=["Finding"]).Finding(
+            pillar="integrity", metric="split_leakage", domain="image",
+            value={"contamination": 0.0}, verdict="pass"))
+    r.meta = {"eval_set": {"manifest": "m.csv", "sha256": "deadbeef", "n": 10},
+              "label": "baseline", "device": "cpu", "seed": 42}
+    path = write_snapshot(r, tmp_path)
+    snap = json.loads(path.read_text(encoding="utf-8"))
+    assert snap["eval_set"]["sha256"] == "deadbeef"
+    assert snap["integrity"] == "pass", "the integrity verdict must travel with the snapshot"
+    assert snap["label"] == "baseline"
+    assert snap["metrics"]["performance.accuracy"] == 0.8
+
+
+def test_eval_set_fingerprint_uses_content_not_filename(tmp_path):
+    """A manifest can be regenerated with a different seed and keep its name."""
+    from verifai.core.run import _eval_set_fingerprint
+
+    class _DS:
+        def __init__(self, p): self.meta = {"manifest": str(p)}
+        def __len__(self): return 2
+
+    a = tmp_path / "same_name.csv"; a.write_text("filename,label\nx.jpg,mel\n")
+    first = _eval_set_fingerprint(_DS(a))["sha256"]
+    a.write_text("filename,label\ny.jpg,nv\n")            # same path, different rows
+    second = _eval_set_fingerprint(_DS(a))["sha256"]
+    assert first and second and first != second, "different rows must not look comparable"

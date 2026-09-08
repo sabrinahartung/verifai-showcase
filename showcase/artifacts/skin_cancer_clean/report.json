@@ -22972,7 +22972,13 @@
   "meta": {
     "seed": 42,
     "sample_size": 1493,
-    "device": "mps"
+    "device": "mps",
+    "eval_set": {
+      "manifest": "/Users/sabrina/Development/verifai-showcase/data/manifests/ham10000_test.csv",
+      "sha256": "469669d0f340a335",
+      "n": 1493
+    },
+    "label": "skin-lesion-resnet18-clean"
   },
-  "created_at": "2026-09-07T13:56:15.370377+00:00"
+  "created_at": "2026-09-08T11:25:34.222906+00:00"
 }

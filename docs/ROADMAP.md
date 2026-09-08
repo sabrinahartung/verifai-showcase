@@ -271,16 +271,21 @@ what makes the test number trustworthy is that no lesion in it was ever trained 
 
 *Goal: show improvement over time, without inviting a dishonest comparison.*
 
-- [ ] Keep every evaluation instead of overwriting: `run_scenario.py` writes
-      `showcase/artifacts/<id>/history/<created_at>.json` alongside the current
-      `report.json` (which stays "latest" so the dashboard is unchanged)
-- [ ] Give each card a `lineage:` field, so the app can group snapshots that
-      belong to the same model family across retrains
-- [ ] Record in each snapshot what makes it comparable: `dataset_id`, the test
-      manifest path and its content hash, plus the split-integrity verdict
-- [ ] New chart kind for multi-series data (`grouped_bar` or `series`); today's
-      `bar` takes a single x/y pair
-- [ ] Comparison tile: metric-by-metric across snapshots, plus a delta column
+- [x] Keep every evaluation instead of overwriting: every run writes
+      `showcase/artifacts/<id>/history/<created_at>.json` alongside `report.json`
+      (which stays "latest", so the dashboard is unchanged). ~2.7 KB per snapshot
+- [x] Each snapshot records what makes it comparable: the evaluation manifest's
+      **content hash** (not its path — a manifest can be regenerated with a
+      different seed and keep its name), the row count, and the integrity verdict
+- [x] Metrics are flattened generically (`<pillar>.<path>`, numeric leaves only,
+      booleans excluded), so a new metric becomes comparable without the exporter
+      learning anything about it
+- [x] Comparison view: runs grouped by evaluation set, metric table with a delta
+      column, and a per-metric chart
+- [x] **Refusal**, which is the point: runs scored on different rows are never
+      plotted together, and a run whose split was contaminated or unverified is
+      excluded with the reason shown
+- [ ] `lineage:` on the card, to group retrains of one model family across folders
 
 **The trap this must avoid.** Two numbers are only comparable if they come from
 the same test manifest *and* both snapshots were clean. Comparing the original

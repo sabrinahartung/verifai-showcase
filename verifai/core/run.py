@@ -10,7 +10,10 @@ from __future__ import annotations
 
 import importlib
 import random
+from pathlib import Path
 from typing import Any, Callable
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 from verifai.core.findings import Report, Finding
 from verifai.core.integrity import audit_split, train_manifests_from_scenario
@@ -43,6 +46,28 @@ def _build_model(spec: dict[str, Any]):
 
 def _build_dataset(spec: dict[str, Any]):
     return _load(spec["loader"])(spec)
+
+
+def _eval_set_fingerprint(dataset) -> dict[str, Any]:
+    """Identify *what was evaluated on*, precisely enough to refuse bad comparisons.
+
+    Two runs are only comparable if they were scored on the same rows. A path is
+    not enough — a manifest can be regenerated with a different seed and keep its
+    name — so the file's content hash is what actually decides.
+    """
+    import hashlib
+    meta = getattr(dataset, "meta", None) or {}
+    manifest = meta.get("manifest")
+    digest = None
+    if manifest:
+        path = Path(manifest)
+        if not path.is_absolute():
+            path = REPO_ROOT / path
+        if path.exists():
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    return {"manifest": str(manifest) if manifest else None,
+            "sha256": digest,
+            "n": _safe_len(dataset)}
 
 
 def _safe_len(dataset) -> int | None:
@@ -103,7 +128,9 @@ def run_scenario(scenario: dict[str, Any]) -> Report:
         meta={"seed": seed,
               # what was actually evaluated, not merely what the YAML asked for
               "sample_size": scenario.get("sample_size") or _safe_len(dataset),
-              "device": str(getattr(model, "device", "cpu"))},
+              "device": str(getattr(model, "device", "cpu")),
+              "eval_set": _eval_set_fingerprint(dataset),
+              "label": scenario.get("label") or scenario["model"].get("id", scenario["name"])},
     )
 
     ctx = {"scenario": scenario, "seed": seed, "plot_dir": scenario.get("_plot_dir", "plots")}

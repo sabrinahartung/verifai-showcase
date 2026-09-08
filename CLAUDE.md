@@ -81,7 +81,11 @@ Data flows one way: **scenario YAML → runner → metrics → `Finding`s → `R
   its own labels (or `dataset.classes`) and must **never** import it from a model — that
   backwards dependency existed once and is asserted against in `tests/`.
 - `verifai/export/artifacts.py` — writes `report.json` + `card.json` (+ `plots/`) under
-  `showcase/artifacts/<scenario>/`.
+  `showcase/artifacts/<scenario>/`, plus one immutable snapshot per run in `history/`.
+  `snapshot_metrics()` flattens each finding's numeric leaves to `<pillar>.<path>` generically,
+  so a new metric becomes comparable without this module knowing about it. Every snapshot
+  carries the evaluation manifest's **content hash** and the integrity verdict — those two
+  fields are what let `showcase/app.py` refuse a dishonest comparison, so do not drop them.
 - `showcase/app.py` — auto-discovers every `artifacts/<id>/` folder with both `card.json` and
   `report.json` and renders a tile; clicking a tile renders the report grouped by pillar.
 

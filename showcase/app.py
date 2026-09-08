@@ -65,6 +65,51 @@ def load_catalog() -> list[dict]:
     return cards
 
 
+# ---------- snapshots: comparing runs, and refusing to ----------
+def load_snapshots() -> list[dict]:
+    """Every recorded run across every artifact folder, newest last."""
+    snaps = []
+    if not ART.exists():
+        return snaps
+    for d in sorted(ART.iterdir()):
+        for f in sorted((d / "history").glob("*.json")) if (d / "history").is_dir() else []:
+            try:
+                s = json.loads(f.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                continue
+            s["_file"] = f.name
+            snaps.append(s)
+    return sorted(snaps, key=lambda s: s.get("created_at", ""))
+
+
+def comparability_key(snap: dict) -> tuple:
+    """Runs are comparable only when scored on exactly the same rows.
+
+    The manifest's content hash, not its path — a manifest can be regenerated
+    with a different seed and keep its name.
+    """
+    ev = snap.get("eval_set") or {}
+    return (ev.get("sha256"), ev.get("manifest"))
+
+
+def group_snapshots(snaps: list[dict]) -> dict[tuple, list[dict]]:
+    groups: dict[tuple, list[dict]] = {}
+    for s in snaps:
+        groups.setdefault(comparability_key(s), []).append(s)
+    return groups
+
+
+def _blocked_reason(snap: dict) -> str | None:
+    """Why this run must not be plotted alongside the others."""
+    if (snap.get("eval_set") or {}).get("sha256") is None:
+        return "no evaluation manifest recorded, so there is nothing to match against"
+    if snap.get("integrity") == "fail":
+        return "its split was contaminated — the numbers are inflated by an unknown amount"
+    if snap.get("integrity") != "pass":
+        return "split integrity was never verified, so the numbers rest on an unchecked assumption"
+    return None
+
+
 # ---------- generic Plotly renderer (the extensibility trick) ----------
 def _scale(spec: dict):
     """A value placed on a labeled band scale.
@@ -199,6 +244,12 @@ def gallery(cards: list[dict]):
     if not cards:
         st.info("No models yet. Create one with `python scripts/run_scenario.py scenarios/skin_cancer.yaml`.")
         return
+    snaps = load_snapshots()
+    if snaps:
+        if st.button(f"Compare runs ({len(snaps)} recorded) →"):
+            st.session_state["compare"] = True
+            st.rerun()
+
     cols = st.columns(3)
     for i, card in enumerate(cards):
         with cols[i % 3]:
@@ -211,6 +262,90 @@ def gallery(cards: list[dict]):
                 if st.button("View analysis →", key=f"btn_{card['id']}"):
                     st.session_state["selected"] = card["id"]
                     st.rerun()
+
+
+def comparison(snaps: list[dict]):
+    st.title("Comparing runs")
+    st.caption("Every recorded evaluation, grouped by the exact set of images it was scored on.")
+
+    if st.button("← Back to overview"):
+        st.session_state.pop("compare", None); st.rerun()
+
+    with st.expander("Why runs are grouped, and when a comparison is refused"):
+        st.markdown(
+            "A difference between two numbers only means something if everything else was "
+            "held equal. Two rules decide that here:\n\n"
+            "1. **Same images.** Runs are grouped by the *content hash* of the evaluation "
+            "manifest, not its filename — a manifest can be regenerated with a different "
+            "seed and keep its name. Runs in different groups are never plotted together.\n"
+            "2. **A verified split.** A run whose split was contaminated, or never checked, "
+            "is excluded from the chart and listed with the reason. Its accuracy is inflated "
+            "by an unknown amount, so plotting it beside an honest run would manufacture a "
+            "comparison rather than report one.\n\n"
+            "This is deliberately stricter than most dashboards. A green *+12 points* against "
+            "a leaked baseline is exactly the claim this project exists to catch."
+        )
+
+    groups = group_snapshots(snaps)
+    if not groups:
+        st.info("No runs recorded yet. Every `run_scenario.py` invocation writes one.")
+        return
+
+    order = sorted(groups.items(), key=lambda kv: -len(kv[1]))
+    for gi, (key, runs) in enumerate(order):
+        ev = runs[0].get("eval_set") or {}
+        name = (ev.get("manifest") or "unknown evaluation set").split("/")[-1]
+        st.subheader(f"{name}  ·  {ev.get('n') or '?'} images")
+        st.caption(f"content hash `{ev.get('sha256') or 'none'}`  ·  {len(runs)} run(s)")
+
+        usable = [r for r in runs if _blocked_reason(r) is None]
+        blocked = [(r, _blocked_reason(r)) for r in runs if _blocked_reason(r) is not None]
+
+        for r, why in blocked:
+            st.warning(f"**{r.get('label', r.get('scenario'))}** is excluded — {why}.")
+
+        if len(usable) < 2:
+            st.info(
+                "Nothing to compare yet in this group: "
+                + ("no run here has a verified split." if not usable
+                   else "only one comparable run so far. Train a variant and re-run it "
+                        "against this same manifest.")
+            )
+            st.divider(); continue
+
+        keys = sorted({k for r in usable for k in r["metrics"]})
+        default = [k for k in ("performance.accuracy", "performance.balanced_accuracy",
+                               "robustness.mean_stability", "fairness.accuracy_gap",
+                               "privacy.mia_auc") if k in keys]
+        chosen = st.multiselect("Metrics", keys, default=default or keys[:5],
+                                key=f"ms_{gi}")
+
+        base = usable[0]
+        rows = []
+        for k in chosen:
+            row = {"metric": k}
+            for r in usable:
+                row[r.get("label") or r["scenario"]] = r["metrics"].get(k)
+            b, last = base["metrics"].get(k), usable[-1]["metrics"].get(k)
+            row["Δ vs first"] = (None if b is None or last is None else round(last - b, 4))
+            rows.append(row)
+        st.dataframe(rows, width="stretch")
+
+        if chosen:
+            metric = st.selectbox("Chart", chosen, key=f"sb_{gi}")
+            labels = [r.get("label") or r["scenario"] for r in usable]
+            vals = [r["metrics"].get(metric) for r in usable]
+            fig = go.Figure(go.Bar(x=labels, y=vals, marker_color="#5B3FD6"))
+            fig.update_layout(title=metric, xaxis_title="Run", yaxis_title=metric)
+            st.plotly_chart(fig, width="stretch")
+        st.divider()
+
+    if len(order) > 1:
+        st.error(
+            f"**{len(order)} groups above were not compared with each other.** They were "
+            "scored on different sets of images, so a difference between them would measure "
+            "the datasets, not the models."
+        )
 
 
 def dashboard(card: dict):
@@ -281,6 +416,9 @@ def dashboard(card: dict):
 
 # ---------- main ----------
 cards = load_catalog()
+if st.session_state.get("compare"):
+    comparison(load_snapshots())
+    st.stop()
 sel = st.session_state.get("selected")
 if sel:
     card = next((c for c in cards if c["id"] == sel), None)

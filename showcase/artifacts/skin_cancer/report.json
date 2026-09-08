@@ -31,7 +31,26 @@
       "value": {
         "accuracy": 1.0,
         "n": 7,
-        "correct": 7
+        "correct": 7,
+        "balanced_accuracy": 1.0,
+        "per_class_recall": {
+          "actinic_keratoses": 1.0,
+          "basal_cell_carcinoma": 1.0,
+          "benign_keratosis-like_lesions": 1.0,
+          "dermatofibroma": 1.0,
+          "melanocytic_Nevi": 1.0,
+          "melanoma": 1.0,
+          "vascular_lesions": 1.0
+        },
+        "support": {
+          "actinic_keratoses": 1,
+          "basal_cell_carcinoma": 1,
+          "benign_keratosis-like_lesions": 1,
+          "dermatofibroma": 1,
+          "melanocytic_Nevi": 1,
+          "melanoma": 1,
+          "vascular_lesions": 1
+        }
       },
       "verdict": "info",
       "summary": "Top-1 accuracy 100% on 7 labeled examples. Small sample (n=7) — a plausibility check, not a benchmark.",
@@ -382,17 +401,17 @@
       "domain": "image",
       "value": {
         "mia_auc": null,
-        "status": "requires_full_run"
+        "status": "requires_members"
       },
       "verdict": "info",
-      "summary": "Membership inference needs training vs. holdout images. The example set has no such split — so no number is invented here; the full run (GPU notebook) provides the AUC.",
+      "summary": "Membership inference needs training vs. holdout images. This scenario declares no members set — so no number is invented here. Point privacy.members at the training manifest to enable it.",
       "details": {
-        "note": "Set scenario.privacy.members/non_members to enable.",
         "explain": {
-          "what": "A model tends to be more confident on images it memorised during training. A membership-inference attack exploits exactly that: given one image, it guesses whether that patient was in the training set. This metric measures how well such an attack would work.",
-          "how": "The result is an AUC between 0.5 and 1.0. At 0.5 the attacker does no better than a coin flip, which is the good case. Towards 1.0 the model reliably betrays who was in its training data — a genuine patient-privacy problem.",
-          "limits": "Nothing is computed here, and no number is shown, because the attack needs images the model trained on *and* images it never saw. The bundled example set has no such split. Inventing a reassuring number would be worse than reporting nothing."
-        }
+          "what": "A model is usually more confident on images it memorised during training. A membership-inference attack exploits exactly that: given one image, it guesses whether that patient was in the training set. This runs the attack and reports how well it works.",
+          "how": "The result is an AUC. At 0.5 the attacker does no better than a coin flip, which is the good case — members and non-members are indistinguishable. Towards 1.0 the model reliably betrays who was in its training data, which for medical images is a real patient-privacy problem.",
+          "limits": "This is one cheap, standard attack using confidence alone. A determined attacker with shadow models or per-class calibration can do better, so a low score here is evidence of low risk rather than a guarantee of privacy. It also says nothing about what could be reconstructed from the weights."
+        },
+        "note": "Set scenario.privacy.members (and optionally non_members)."
       },
       "plots": []
     }
@@ -400,7 +419,13 @@
   "meta": {
     "seed": 42,
     "sample_size": 7,
-    "device": "cpu"
+    "device": "cpu",
+    "eval_set": {
+      "manifest": "/Users/sabrina/Development/verifai-showcase/data/manifests/ham10000_examples.csv",
+      "sha256": "40357043e5d7edaf",
+      "n": 7
+    },
+    "label": "skin-lesion-resnet18"
   },
-  "created_at": "2026-09-07T13:02:59.740266+00:00"
+  "created_at": "2026-09-08T11:24:42.110716+00:00"
 }
