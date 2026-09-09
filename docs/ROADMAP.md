@@ -338,6 +338,45 @@ manifests, and must render the integrity verdict beside every bar. A green
 project exists to catch. Where no fair comparison is possible, say so instead of
 drawing the chart.
 
+## Step 7 — Group the gallery, before it becomes a wall of tiles
+
+*Goal: one tile per scenario stops working once one model has ten configurations.*
+
+Today every scenario produces a folder, and every folder produces a tile. The three
+cost-sensitive runs are already three tiles for **one** model; focal loss, oversampling and a
+backbone comparison would add several more, and a second use case would sit undifferentiated
+among them.
+
+Two grouping axes, deliberately separate:
+
+```mermaid
+flowchart TB
+    G1["🔬 Skin lesion — HAM10000"]
+    G2["🫁 Chest X-ray — (future)"]
+    G3["🧪 Demo fixtures"]
+    G1 --> L1["resnet18-clean<br/><i>lineage</i>"]
+    L1 --> R1["baseline (argmax)"]
+    L1 --> R2["melanoma ×5"]
+    L1 --> R3["melanoma ×50"]
+    G1 --> L2["resnet18-focal<br/><i>lineage</i>"]
+    style G1 fill:#EDE9FB,stroke:#5B3FD6,color:#1a1a2e
+    style G3 fill:#EEEEEE,stroke:#999,color:#1a1a2e
+```
+
+- [ ] `card.group` — a section heading in the gallery ("Skin lesion — HAM10000").
+      Ungrouped cards fall into a default section, so nothing breaks
+- [ ] Move `_sample_skin_resnet` into a **Demo fixtures** group, so placeholder data is
+      visually separated from real results rather than sitting beside them
+- [ ] `card.lineage` — configurations of the same underlying model collapse into **one**
+      card showing "3 runs", which opens the comparison view already filtered to that lineage
+- [ ] The comparison view keeps grouping by evaluation-set hash regardless: `group` and
+      `lineage` are presentation, **comparability is evidence**, and the two must not be
+      confused. Two runs in one lineage that were scored on different manifests still must
+      not be plotted together
+
+Do this *before* the next batch of variants: adding `group:` to four scenarios now is cheaper
+than retrofitting it to a dozen later.
+
 ---
 
 ## Known scaling gaps (bite at n>1000, not at n=7)
