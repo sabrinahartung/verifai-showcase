@@ -1,0 +1,9 @@
+{
+  "id": "skin_cancer_focal",
+  "name": "Focal loss (γ=2)",
+  "emoji": "🔬",
+  "domain": "image",
+  "dataset": "ham10000-clean-test",
+  "description": "Focal loss instead of plain cross-entropy, class weights kept. Down-weights the easy nevi so the rare, hard classes dominate the gradient.",
+  "sample": false
+}

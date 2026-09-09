@@ -1,0 +1,88 @@
+# Skin-lesion model trained on a LEAK-FREE split of HAM10000.
+#
+# The point of this scenario, versus scenarios/skin_cancer.yaml: the split is
+# grouped by lesion_id, so no lesion appears in both training and test. The
+# original marmal88/skin_cancer splits share 80% of their test image_ids with
+# train — see docs/ROADMAP.md for the audit.
+#
+#   1. python scripts/build_splits.py          # writes data/manifests/ham10000_*.csv
+#   2. python scripts/materialize_images.py    # ~2.9 GB into data/raw/ham10000/
+#   3. python scripts/train_model.py scenarios/skin_cancer_clean.yaml
+#   4. python scripts/run_scenario.py scenarios/skin_cancer_clean.yaml
+name: skin_cancer_focal
+label: "Focal loss (γ=2)"
+domain: image
+seed: 42
+sample_size: null          # evaluate the whole test manifest (1,493 images)
+
+training:
+  manifest_prefix: "ham10000"    # reads ham10000_train.csv + ham10000_val.csv
+  manifest_dir: "data/manifests"
+  arch: "resnet18"
+  pretrained: true
+  epochs: 12
+  batch_size: 32
+  lr: 0.0001
+  class_weights: true            # one change vs the baseline, nothing else
+  loss: "focal"
+  focal_gamma: 2.0
+  image_size: 224
+  device: "auto"                 # cuda > mps > cpu
+  # 8 loader workers keep the GPU fed: decoding runs at ~1,250 img/s while the
+  # M1 Max GPU consumes ~350 img/s, so training stays compute-bound as it should.
+  workers: 8
+  out_dir: "artifacts_training"  # gitignored; *.pt never goes in git
+
+model:
+  loader: "verifai.models.image:load"
+  id: "skin-lesion-resnet18-clean"
+  arch: "resnet18"
+  cam_layer: "layer4[-1]"
+  # "auto" -> mps here. At 1,493 images the ~206 ms MPS setup is irrelevant and
+  # inference runs ~3.5x faster than CPU (2.8 vs 9.8 ms/img).
+  device: "auto"
+  # After training, point this at the checkpoint you just produced:
+  weights_path: "artifacts_training/skin_cancer_focal.pt"
+  # ...or pull it from the Hub once uploaded:
+  # repo_id: "sabrinahartung1010/skin-lesion-resnet18-clean"
+  # filename: "skin_cancer_clean.pt"
+  classes:                        # must match the training class order (sorted)
+    - actinic_keratoses
+    - basal_cell_carcinoma
+    - benign_keratosis-like_lesions
+    - dermatofibroma
+    - melanocytic_Nevi
+    - melanoma
+    - vascular_lesions
+
+dataset:
+  loader: "verifai.datasets.loaders:load_image_manifest"
+  id: "ham10000-clean-test"
+  manifest: "data/manifests/ham10000_test.csv"   # test ONLY — never train/val
+  images_dir: "data/raw/ham10000"
+  source: "HAM10000"
+
+card:
+  name: "Focal loss (γ=2)"
+  emoji: "🔬"
+  description: "Focal loss instead of plain cross-entropy, class weights kept. Down-weights the easy nevi so the rare, hard classes dominate the gradient."
+
+# Membership inference is finally computable: we know exactly what was trained on.
+privacy:
+  members: "data/manifests/ham10000_train.csv"       # the model saw these
+  non_members: "data/manifests/ham10000_test.csv"    # it never saw these
+  sample: 750                                        # per side, for runtime
+
+# Refuse to evaluate if the test manifest overlaps what the model trained on.
+# Derived from the training: block above; override with explicit train_manifests.
+integrity:
+  enforce: true
+  group_key: "lesion_id"
+
+metrics:
+  - "integrity.split_leakage"      # every number below is conditional on this
+  - "performance.classification"
+  - "explainability.gradcam"
+  - "robustness.corruption"
+  - "fairness.skin_tone"
+  - "privacy.mia"

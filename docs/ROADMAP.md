@@ -282,6 +282,24 @@ intended change.
 and the verdict went `pass` → `warn`, so an accuracy-only evaluation would have rejected
 a clinically much better configuration. See [Current results](results.md).
 
+## Step 4d — Focal loss and oversampling ✅ done 2026-09-09
+
+- [x] `FocalLoss` in `scripts/train_model.py` (γ configurable; γ=0 recovers CE exactly,
+      asserted in tests) and `training.loss: focal`
+- [x] `training.sampling: balanced` via `WeightedRandomSampler`, with a warning when
+      class weighting is left on as well, since that double-corrects
+- [x] Two variants trained and evaluated on the frozen test set
+
+**Negative result, and the most useful one so far.** Neither intervention produced a
+demonstrated change in melanoma sensitivity: focal −14.1 points, oversampling +1.8, both
+with intervals overlapping the baseline. Meanwhile the free decision-rule change from
+step 4c moved it +30.7. Top-3 accuracy is 0.974–0.979 across *all five* configurations —
+these interventions do not change what the model knows, only where it commits. The next
+real gain therefore has to come from information, not from reshaping the same loss.
+
+That argues for promoting step 5 (more real minority images) ahead of further loss
+engineering.
+
 ## Step 5 — A larger image set
 
 *Goal: more data, and a test set the model has no relationship to at all.*

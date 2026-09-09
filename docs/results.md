@@ -160,6 +160,45 @@ why this project refuses to emit one number.
     differ somewhat in melanoma difficulty, so a tuned threshold should not be assumed to
     carry over exactly.
 
+## Experiment 2 — focal loss and oversampling (a negative result)
+
+Two standard remedies for class imbalance, each changing exactly one thing against the
+baseline, both trained on the same manifests and evaluated on the same frozen test set.
+Oversampling and class weighting are competing answers to the same problem, so the
+oversampling variant turns class weighting **off** rather than stacking them.
+
+| Configuration | Melanoma sensitivity | Melanoma PPV | Top-1 | Balanced | Top-3 |
+|---|---:|---:|---:|---:|---:|
+| baseline (CE + class weights) | 0.638 [0.56, 0.71] | 0.495 | 0.796 | 0.728 | 0.976 |
+| focal loss γ=2 + weights | 0.497 [0.42, 0.57] | **0.540** | 0.784 | 0.698 | 0.976 |
+| balanced oversampling, no weights | 0.656 [0.58, 0.72] | 0.448 | 0.785 | 0.685 | 0.976 |
+| *baseline + melanoma ×5 (rule only)* | *0.804 [0.74, 0.86]* | *0.379* | *0.754* | *0.721* | *0.979* |
+| *baseline + melanoma ×50 (rule only)* | ***0.945** [0.90, 0.97]* | *0.264* | *0.656* | *0.673* | *0.974* |
+
+**Neither training intervention produced a demonstrated improvement.** Focal loss *lowered*
+melanoma sensitivity by 14 points and oversampling raised it by 1.8 — and in both cases the
+intervals overlap the baseline's, so neither difference is established. Validation balanced
+accuracy was 0.724 / 0.724 / 0.717: from the aggregate alone, nothing happened at all.
+
+!!! note "The comparison that makes this worth reporting"
+    A **free change to the decision rule** — no retraining, no new data — moved melanoma
+    sensitivity from 0.638 to 0.945. Two days of standard imbalance engineering moved it by an
+    amount indistinguishable from noise.
+
+    Focal loss did do something, just not the intended thing: it made the model *more*
+    conservative, buying the best melanoma PPV of any configuration (0.540) at the cost of
+    sensitivity. That is a legitimate trade, but it is the opposite of what it was reached for.
+
+**Top-3 accuracy is 0.974–0.979 across all five configurations.** None of these interventions
+changed what the model *knows* — the correct diagnosis sits in its top three just as often
+either way. They only change where it draws the line for its single committed answer. That is
+precisely why a decision rule outperformed retraining here, and it suggests the next real gain
+has to come from more information (more minority images, external data), not from reshaping
+the same loss surface.
+
+**No configuration dominates any other** across the eight compared metrics — five of five
+survive as genuine trade-offs, each best at something.
+
 ## Training run
 
 12 epochs, 4.6 minutes on MPS, batch size 32, lr 1e-4, class-weighted cross-entropy.

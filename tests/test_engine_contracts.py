@@ -399,3 +399,38 @@ def test_metrics_declare_their_own_direction_rather_than_the_app_guessing():
     assert d["privacy.mia_auc"] == "lower"
     assert d["performance.accuracy"] == "higher"
     assert d["performance.per_class.*.sensitivity"] == "higher"
+
+
+# --- training variants: focal loss and balanced sampling -------------------
+def test_focal_loss_reduces_to_cross_entropy_at_gamma_zero():
+    torch = pytest.importorskip("torch")
+    sys.path.insert(0, str(REPO / "scripts"))
+    from train_model import FocalLoss
+    logits = torch.tensor([[3.0, 0.0, 0.0], [0.4, 0.3, 0.3]])
+    target = torch.tensor([0, 0])
+    ce = torch.nn.CrossEntropyLoss()(logits, target)
+    assert torch.allclose(FocalLoss(gamma=0.0)(logits, target), ce)
+
+
+def test_focal_loss_shifts_weight_from_easy_examples_to_hard_ones():
+    """The whole point: a confidently-correct nevus should stop contributing."""
+    torch = pytest.importorskip("torch")
+    sys.path.insert(0, str(REPO / "scripts"))
+    from train_model import FocalLoss
+    easy = (torch.tensor([[6.0, 0.0, 0.0]]), torch.tensor([0]))    # already right
+    hard = (torch.tensor([[0.4, 0.3, 0.3]]), torch.tensor([0]))    # barely right
+    ce_ratio = (torch.nn.CrossEntropyLoss()(*hard) / torch.nn.CrossEntropyLoss()(*easy))
+    fl = FocalLoss(gamma=2.0)
+    focal_ratio = fl(*hard) / fl(*easy)
+    assert focal_ratio > 10 * ce_ratio, "focal must concentrate far harder on hard cases"
+
+
+def test_focal_loss_accepts_class_weights_so_it_composes_with_alpha():
+    torch = pytest.importorskip("torch")
+    sys.path.insert(0, str(REPO / "scripts"))
+    from train_model import FocalLoss
+    logits = torch.tensor([[0.4, 0.3, 0.3]])
+    target = torch.tensor([0])
+    plain = FocalLoss(gamma=2.0)(logits, target)
+    weighted = FocalLoss(gamma=2.0, weight=torch.tensor([5.0, 1.0, 1.0]))(logits, target)
+    assert weighted > plain, "a class weight of 5 must scale that class's loss up"

@@ -1,0 +1,9 @@
+{
+  "id": "skin_cancer_oversample",
+  "name": "Balanced oversampling",
+  "emoji": "🔬",
+  "domain": "image",
+  "dataset": "ham10000-clean-test",
+  "description": "Minority classes oversampled to balance each batch, with class weighting turned OFF — oversampling and reweighting are competing answers to the same problem.",
+  "sample": false
+}

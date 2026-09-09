@@ -39,6 +39,29 @@ def _augment(size: int, mean, std):
     ])
 
 
+class FocalLoss:
+    """Cross-entropy that fades out the examples the model already gets right.
+
+    Standard CE spends most of its gradient on the 4,698 nevi it is already
+    confident about. Focal loss scales each example's loss by (1 - p_true)^gamma,
+    so a confidently-correct nevus contributes almost nothing and the hard,
+    rare cases dominate the update. gamma=0 recovers plain CE.
+
+    `weight` is the usual per-class alpha term, so this composes with class
+    weighting rather than replacing it.
+    """
+
+    def __init__(self, gamma: float = 2.0, weight=None):
+        self.gamma, self.weight = gamma, weight
+
+    def __call__(self, logits, target):
+        import torch.nn.functional as F
+        logp = F.log_softmax(logits, dim=1)
+        ce = F.nll_loss(logp, target, weight=self.weight, reduction="none")
+        pt = logp.gather(1, target.unsqueeze(1)).squeeze(1).exp()
+        return ((1.0 - pt) ** self.gamma * ce).mean()
+
+
 class _TorchView:
     """Adapts our ImageDataset to what a torch DataLoader expects."""
 
@@ -118,8 +141,19 @@ def main(scenario_path: str) -> None:
     workers = int(tcfg.get("workers", 8))
     dl_kw = dict(batch_size=bs, num_workers=workers,
                  persistent_workers=workers > 0)
-    tl = DataLoader(_TorchView(train_ds, classes, _augment(size, MEAN, STD)),
-                    shuffle=True, **dl_kw)
+    train_view = _TorchView(train_ds, classes, _augment(size, MEAN, STD))
+    sampling = tcfg.get("sampling", "none")
+    if sampling == "balanced":
+        # Oversampling and class weighting are competing answers to the same
+        # problem; applying both double-corrects. A scenario should pick one.
+        from torch.utils.data import WeightedRandomSampler
+        counts_s = Counter(s.label for s in train_ds if s.label)
+        per_sample = [1.0 / counts_s[s.label] for s in train_view.samples]
+        sampler = WeightedRandomSampler(torch.tensor(per_sample, dtype=torch.double),
+                                        num_samples=len(per_sample), replacement=True)
+        tl = DataLoader(train_view, sampler=sampler, **dl_kw)
+    else:
+        tl = DataLoader(train_view, shuffle=True, **dl_kw)
     vl = DataLoader(_TorchView(val_ds, classes, build_preprocess(size)),
                     shuffle=False, **dl_kw)
 
@@ -132,7 +166,21 @@ def main(scenario_path: str) -> None:
     counts = Counter(s.label for s in train_ds if s.label)
     w = torch.tensor([len(train_ds) / (len(classes) * counts[c]) for c in classes],
                      dtype=torch.float32, device=device)
-    crit = torch.nn.CrossEntropyLoss(weight=w if tcfg.get("class_weights", True) else None)
+    use_w = bool(tcfg.get("class_weights", True))
+    if use_w and sampling == "balanced":
+        print("  ! class_weights AND balanced sampling both on — that double-corrects "
+              "the imbalance; a variant should pick one.")
+    alpha = w if use_w else None
+    loss_name = tcfg.get("loss", "ce")
+    gamma = float(tcfg.get("focal_gamma", 2.0))
+    if loss_name == "focal":
+        crit = FocalLoss(gamma=gamma, weight=alpha)
+    elif loss_name == "ce":
+        crit = torch.nn.CrossEntropyLoss(weight=alpha)
+    else:
+        sys.exit(f"unknown training.loss {loss_name!r} (expected 'ce' or 'focal')")
+    print(f"  loss={loss_name}" + (f" gamma={gamma}" if loss_name == "focal" else "")
+          + f"  class_weights={use_w}  sampling={sampling}")
     opt = torch.optim.Adam(net.parameters(), lr=lr)
 
     out_dir = Path(tcfg.get("out_dir", "artifacts_training"))
@@ -163,7 +211,9 @@ def main(scenario_path: str) -> None:
     meta = {
         "scenario": sc["name"], "arch": arch, "classes": classes, "seed": seed,
         "epochs": epochs, "batch_size": bs, "lr": lr, "device": str(device),
-        "image_size": size, "class_weights": bool(tcfg.get("class_weights", True)),
+        "image_size": size, "class_weights": use_w,
+        "loss": loss_name, "focal_gamma": gamma if loss_name == "focal" else None,
+        "sampling": sampling,
         "best_val_balanced_accuracy": round(best, 4), "history": history,
         "manifests": {s: f"{man_dir}/{prefix}_{s}.csv" for s in ("train", "val", "test")},
         "train_images": len(train_ds), "val_images": len(val_ds),
