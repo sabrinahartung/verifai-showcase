@@ -85,6 +85,21 @@ def snapshot_metrics(report: Report) -> dict[str, float]:
     return flat
 
 
+def snapshot_directions(report: Report) -> dict[str, str]:
+    """Which way is an improvement, as declared by each metric.
+
+    The app must not infer this: "auc" means higher-is-better for a classifier and
+    lower-is-better for membership inference, so only the metric knows. Patterns
+    may contain `*` (e.g. `per_class.*.sensitivity`). Anything undeclared is left
+    unranked rather than guessed at.
+    """
+    out: dict[str, str] = {}
+    for f in report.findings:
+        for pattern, direction in ((f.details or {}).get("better") or {}).items():
+            out[f"{f.pillar}.{pattern}"] = direction
+    return out
+
+
 def write_snapshot(report: Report, base: Path) -> Path:
     """One immutable record per run, carrying what makes it comparable (or not)."""
     hist = base / "history"
@@ -105,6 +120,7 @@ def write_snapshot(report: Report, base: Path) -> Path:
         "seed": meta.get("seed"),
         "verdicts": {f.pillar: f.verdict for f in report.findings},
         "metrics": snapshot_metrics(report),
+        "directions": snapshot_directions(report),
     }
     name = re.sub(r"[^0-9A-Za-z]", "-", report.created_at) + ".json"
     path = hist / name

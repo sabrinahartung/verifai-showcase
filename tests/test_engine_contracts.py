@@ -382,3 +382,20 @@ def test_ranking_follows_the_same_rule_so_top_k_stays_consistent():
 def test_unlisted_classes_keep_weight_one():
     probs = {"nevus": 0.5, "melanoma": 0.3, "other": 0.2}
     assert _clf({"other": 10.0}).decide(probs) == "other"        # 2.0 beats 0.5
+
+
+# --- comparison: what is decidable from data, and what is not --------------
+def test_metrics_declare_their_own_direction_rather_than_the_app_guessing():
+    """'auc' is higher-better for a classifier and lower-better for membership
+    inference. Only the metric can say which."""
+    from verifai.export.artifacts import snapshot_directions
+    from verifai.core.findings import Report, Finding
+    r = Report(scenario="s", domain="image", model_id="m", dataset_id="d")
+    r.add(Finding(pillar="privacy", metric="m", domain="image", value={"mia_auc": 0.6},
+                  details={"better": {"mia_auc": "lower"}}))
+    r.add(Finding(pillar="performance", metric="m", domain="image", value={"accuracy": 0.8},
+                  details={"better": {"accuracy": "higher", "per_class.*.sensitivity": "higher"}}))
+    d = snapshot_directions(r)
+    assert d["privacy.mia_auc"] == "lower"
+    assert d["performance.accuracy"] == "higher"
+    assert d["performance.per_class.*.sensitivity"] == "higher"

@@ -85,7 +85,10 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                    "pixels, not a clinical Fitzpatrick assessment: lighting, vignetting "
                    "and dermatoscope settings all shift it."),
     }
-    details: dict[str, Any] = {"explain": explain, "per_example": per_example,
+    details: dict[str, Any] = {"explain": explain,
+                               "better": {"accuracy_gap": "lower",
+                                          "subgroup_accuracy.*": "higher"},
+                               "per_example": per_example,
                                "chart": chart_bar, "enough_per_bin": bool(enough_per_bin)}
     value: dict[str, Any] = {"coverage": dict(zip(bins_order, coverage)), "n": n}
 

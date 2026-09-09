@@ -144,6 +144,41 @@ flowchart LR
 `kind: "gauge"` is still accepted as an alias that renders as a scale, so artifacts written
 before the change keep rendering.
 
+## Comparing runs
+
+Every evaluation writes a snapshot to `history/`. The comparison view groups them by the
+evaluation set's content hash and separates three questions:
+
+```mermaid
+flowchart TB
+    Q1{"same rows, and<br/>both splits verified?"}
+    Q1 -->|no| R1["✋ not compared —<br/>reason shown"]
+    Q1 -->|yes| Q2{"is one run better or equal<br/>on EVERY chosen metric?"}
+    Q2 -->|yes| R2["that run dominates —<br/>drop the others, no judgement needed"]
+    Q2 -->|no| R3["a genuine trade-off —<br/>choose by <b>intended use</b>,<br/>which the data cannot settle"]
+    style R1 fill:#F5D3CE,stroke:#C0392B,color:#1a1a2e
+    style R2 fill:#CDE8D5,stroke:#2E9E5B,color:#1a1a2e
+    style R3 fill:#FFF6E0,stroke:#C77700,color:#1a1a2e
+```
+
+Ranking needs to know which direction is an improvement, and **the metric declares that**, in
+`details["better"]` (patterns may use `*`):
+
+```python
+"better": {"accuracy": "higher", "per_class.*.sensitivity": "higher"}   # performance
+"better": {"mia_auc": "lower"}                                          # privacy
+```
+
+The app must not infer it from the name: an AUC is normally higher-is-better, but for
+membership inference 0.5 is the good end. Anything undeclared is displayed and left unranked —
+showing a value is honest, calling it "best" without knowing which way is good is not.
+
+!!! note "What this shows on the current runs"
+    Across the three configurations, the baseline leads on six of eight metrics — and loses
+    the one that matters most clinically, melanoma sensitivity. **No run dominates any other.**
+    A weighted average would have crowned the baseline and shipped a model that misses a third
+    of melanomas. That is the argument against aggregate scoring, produced by the tool itself.
+
 ## Artifact layout
 
 ```mermaid

@@ -39,6 +39,12 @@ They cover the seams a second model plugs into. The end-to-end smoke test is sti
 `scripts/run_scenario.py` on the 7-image manifest; it finishes on laptop CPU in seconds.
 No linter is configured.
 
+A metric that reports a number must also declare which direction is an improvement, in
+`details["better"]` (e.g. `{"accuracy": "higher", "per_class.*.sensitivity": "higher"}`; `*`
+allowed). The comparison view ranks only on declared directions and leaves anything else
+unranked — it must never infer from the name, since `mia_auc` is lower-is-better while an AUC
+normally is not.
+
 Metrics must never hardcode `argmax`. Route decisions through `model.decide(probs)` and
 `model.rank(probs)`, so a scenario's `decision_weights` apply everywhere at once — four metrics
 were each reimplementing the rule before this existed. `argmax` is the default, not a law: it

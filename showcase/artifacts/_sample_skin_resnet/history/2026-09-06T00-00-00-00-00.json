@@ -22,5 +22,6 @@
     "robustness.mean_corrupted": 0.66,
     "explainability.faithfulness": 0.62,
     "privacy.mia_auc": 0.57
-  }
+  },
+  "directions": {}
 }

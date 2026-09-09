@@ -60,6 +60,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                  f"of the images on average.{note}" if mean_stability is not None
                  else "No images evaluated."),
         details={
+            "better": {"mean_stability": "higher", "prediction_stability.*": "higher"},
             "explain": {
                 "what": ("Real images are never clean: sensor noise, a slightly out-of-"
                          "focus shot, harsh lighting, heavy JPEG compression. None of that "

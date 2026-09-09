@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-09-09T09:10:34.717152+00:00",
+  "created_at": "2026-09-09T18:00:43.471229+00:00",
   "scenario": "skin_cancer_cost_moderate",
   "label": "Melanoma-weighted (w=5)",
   "model_id": "skin-lesion-resnet18-clean",
@@ -96,5 +96,21 @@
     "privacy.mean_confidence_members": 0.8727,
     "privacy.mean_confidence_non_members": 0.777
   },
-  "directions": {}
+  "directions": {
+    "integrity.contamination": "lower",
+    "integrity.shared_groups": "lower",
+    "integrity.shared_ids": "lower",
+    "performance.accuracy": "higher",
+    "performance.balanced_accuracy": "higher",
+    "performance.top3_accuracy": "higher",
+    "performance.per_class.*.sensitivity": "higher",
+    "performance.per_class.*.specificity": "higher",
+    "performance.per_class.*.ppv_test_prevalence": "higher",
+    "performance.per_class_recall.*": "higher",
+    "robustness.mean_stability": "higher",
+    "robustness.prediction_stability.*": "higher",
+    "fairness.accuracy_gap": "lower",
+    "fairness.subgroup_accuracy.*": "higher",
+    "privacy.mia_auc": "lower"
+  }
 }

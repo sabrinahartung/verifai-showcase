@@ -99,6 +99,67 @@ def group_snapshots(snaps: list[dict]) -> dict[tuple, list[dict]]:
     return groups
 
 
+def direction_for(key: str, snaps: list[dict]) -> str | None:
+    """'higher' | 'lower' | None — as declared by the metric, never inferred.
+
+    Patterns may contain `*` (e.g. `performance.per_class.*.sensitivity`). An
+    undeclared metric stays unranked: showing a value is honest, calling it better
+    is not.
+    """
+    import fnmatch
+    for s in snaps:
+        for pattern, d in (s.get("directions") or {}).items():
+            if key == pattern or fnmatch.fnmatch(key, pattern):
+                return d
+    return None
+
+
+def best_run(key: str, runs: list[dict], direction: str | None) -> str | None:
+    """Label of the run leading on this metric, or None if the metric is unranked."""
+    if not direction:
+        return None
+    vals = [(r, r["metrics"].get(key)) for r in runs]
+    vals = [(r, v) for r, v in vals if v is not None]
+    if not vals:
+        return None
+    pick = max(vals, key=lambda rv: rv[1]) if direction == "higher" else min(vals, key=lambda rv: rv[1])
+    return pick[0].get("label") or pick[0]["scenario"]
+
+
+def dominated_by(runs: list[dict], keys: list[str], dirs: dict[str, str | None]) -> dict[str, str]:
+    """Which runs are beaten on *every* ranked metric by some other run.
+
+    A dominated run can be dismissed on the evidence alone. Anything left over is
+    a genuine trade-off, where choosing requires saying what the model is *for* —
+    which no amount of charting can decide.
+    """
+    ranked = [k for k in keys if dirs.get(k)]
+    if not ranked:
+        return {}
+    out: dict[str, str] = {}
+    for a in runs:
+        la = a.get("label") or a["scenario"]
+        for b in runs:
+            if a is b:
+                continue
+            lb = b.get("label") or b["scenario"]
+            better_somewhere = False
+            worse_somewhere = False
+            for k in ranked:
+                va, vb = a["metrics"].get(k), b["metrics"].get(k)
+                if va is None or vb is None:
+                    worse_somewhere = True      # cannot claim dominance on missing data
+                    break
+                if va == vb:
+                    continue
+                a_wins = (va > vb) if dirs[k] == "higher" else (va < vb)
+                better_somewhere |= a_wins
+                worse_somewhere |= not a_wins
+            if not worse_somewhere and better_somewhere:
+                out[lb] = la                     # b is dominated by a
+    return out
+
+
 def _blocked_reason(snap: dict) -> str | None:
     """Why this run must not be plotted alongside the others."""
     if (snap.get("eval_set") or {}).get("sha256") is None:
@@ -293,6 +354,23 @@ def comparison(snaps: list[dict]):
             "a leaked baseline is exactly the claim this project exists to catch."
         )
 
+    with st.expander("Why several runs, and how to read them"):
+        st.markdown(
+            "Each run is one configuration — a model, plus the decision rule that reads "
+            "its probabilities. They are not competitors in a race with a winner; "
+            "together they map a **trade-off**.\n\n"
+            "Two things here *are* decidable from the data:\n\n"
+            "- **Which run leads on a given metric** — shown in the `best` column.\n"
+            "- **Whether a run is beaten on everything.** If another run is at least as "
+            "good on every selected metric, the loser can be dropped with no judgement "
+            "call at all.\n\n"
+            "What is *not* decidable: which of the surviving runs is best overall. A "
+            "configuration catching 94% of melanomas while misreading a third of moles "
+            "is better or worse than the reverse **depending entirely on what the tool "
+            "is for**. Collapsing that into one score would not resolve the question, "
+            "it would only hide it."
+        )
+
     groups = group_snapshots(snaps)
     if not groups:
         st.info("No runs recorded yet. Every `run_scenario.py` invocation writes one.")
@@ -308,6 +386,18 @@ def comparison(snaps: list[dict]):
         usable = [r for r in runs if _blocked_reason(r) is None]
         blocked = [(r, _blocked_reason(r)) for r in runs if _blocked_reason(r) is not None]
 
+        # Re-running the same configuration records another snapshot, which is the
+        # point of a history — but three identical rows help nobody read a table.
+        # Collapse to the newest per configuration, with the full record a click away.
+        by_label: dict[str, list[dict]] = {}
+        for r in sorted(usable, key=lambda r: r.get("created_at", "")):
+            by_label.setdefault(r.get("label") or r["scenario"], []).append(r)
+        repeats = sum(len(v) - 1 for v in by_label.values())
+        if repeats and not st.checkbox(
+                f"Show every recorded run ({repeats} repeat(s) of a configuration hidden)",
+                key=f"all_{gi}"):
+            usable = [v[-1] for v in by_label.values()]
+
         for r, why in blocked:
             st.warning(f"**{r.get('label', r.get('scenario'))}** is excluded — {why}.")
 
@@ -321,30 +411,82 @@ def comparison(snaps: list[dict]):
             st.divider(); continue
 
         keys = sorted({k for r in usable for k in r["metrics"]})
-        default = [k for k in ("performance.accuracy", "performance.balanced_accuracy",
-                               "robustness.mean_stability", "fairness.accuracy_gap",
-                               "privacy.mia_auc") if k in keys]
-        chosen = st.multiselect("Metrics", keys, default=default or keys[:5],
+        default = [k for k in ("performance.per_class.melanoma.sensitivity",
+                               "performance.per_class.melanoma.ppv_test_prevalence",
+                               "performance.accuracy", "performance.balanced_accuracy",
+                               "performance.top3_accuracy", "robustness.mean_stability",
+                               "fairness.accuracy_gap", "privacy.mia_auc") if k in keys]
+        chosen = st.multiselect("Metrics to compare", keys, default=default or keys[:6],
                                 key=f"ms_{gi}")
+        if not chosen:
+            st.divider(); continue
 
-        base = usable[0]
+        dirs = {k: direction_for(k, usable) for k in chosen}
+        labels = [r.get("label") or r["scenario"] for r in usable]
+
+        # --- is there an outright winner, or is this a trade-off? ---
+        dom = dominated_by(usable, chosen, dirs)
+        survivors = [l for l in labels if l not in dom]
+        if len(survivors) == 1 and len(labels) > 1:
+            st.success(f"**{survivors[0]}** is at least as good as every other run on all "
+                       f"selected metrics. On this evidence it is the one to keep.")
+        else:
+            st.info(
+                f"**No single best run.** {len(survivors)} of {len(labels)} runs trade off "
+                "against each other: each is better on some selected metric and worse on "
+                "another. Which one is *right* depends on what the model is for — a triage "
+                "tool and a rule-out tool want opposite ends of this table. That is a "
+                "decision about intended use, not one the data can settle."
+            )
+        for loser, winner in dom.items():
+            st.caption(f"↳ **{loser}** is beaten by *{winner}* on every selected metric, "
+                       f"so it can be dismissed without a value judgement.")
+
+        # --- table: value, direction, and who leads each metric ---
         rows = []
         for k in chosen:
-            row = {"metric": k}
+            d = dirs[k]
+            arrow = {"higher": "↑ better", "lower": "↓ better"}.get(d, "—")
+            leader = best_run(k, usable, d)
+            row = {"metric": k, "good": arrow}
             for r in usable:
-                row[r.get("label") or r["scenario"]] = r["metrics"].get(k)
-            b, last = base["metrics"].get(k), usable[-1]["metrics"].get(k)
-            row["Δ vs first"] = (None if b is None or last is None else round(last - b, 4))
+                lab = r.get("label") or r["scenario"]
+                v = r["metrics"].get(k)
+                row[lab] = None if v is None else round(v, 4)
+            row["best"] = leader or "—"
             rows.append(row)
         st.dataframe(rows, width="stretch")
+        st.caption("**best** is only filled in where the metric declared which direction is "
+                   "an improvement. An undeclared metric is shown but not ranked.")
 
-        if chosen:
-            metric = st.selectbox("Chart", chosen, key=f"sb_{gi}")
-            labels = [r.get("label") or r["scenario"] for r in usable]
-            vals = [r["metrics"].get(metric) for r in usable]
-            fig = go.Figure(go.Bar(x=labels, y=vals, marker_color="#5B3FD6"))
-            fig.update_layout(title=metric, xaxis_title="Run", yaxis_title=metric)
+        # --- the trade-off, seen directly ---
+        ranked_keys = [k for k in chosen if dirs.get(k)]
+        if len(ranked_keys) >= 2:
+            c1, c2 = st.columns(2)
+            xk = c1.selectbox("Trade-off: x", ranked_keys, index=0, key=f"x_{gi}")
+            yk = c2.selectbox("Trade-off: y", ranked_keys,
+                              index=min(1, len(ranked_keys) - 1), key=f"y_{gi}")
+            fig = go.Figure()
+            for r in usable:
+                lab = r.get("label") or r["scenario"]
+                fig.add_trace(go.Scatter(
+                    x=[r["metrics"].get(xk)], y=[r["metrics"].get(yk)], mode="markers+text",
+                    text=[lab], textposition="top center", name=lab, marker=dict(size=14)))
+            fig.update_layout(
+                title=f"{yk} against {xk} — each point is one run",
+                xaxis_title=f"{xk} ({dirs.get(xk, '')} is better)",
+                yaxis_title=f"{yk} ({dirs.get(yk, '')} is better)", showlegend=False)
             st.plotly_chart(fig, width="stretch")
+
+        metric = st.selectbox("Bar chart", chosen, key=f"sb_{gi}")
+        leader = best_run(metric, usable, dirs.get(metric))
+        fig = go.Figure(go.Bar(
+            x=labels, y=[r["metrics"].get(metric) for r in usable],
+            marker_color=["#2E9E5B" if l == leader else "#5B3FD6" for l in labels]))
+        fig.update_layout(title=f"{metric}"
+                                + (f"  ·  best: {leader}" if leader else "  ·  unranked"),
+                          xaxis_title="Run", yaxis_title=metric)
+        st.plotly_chart(fig, width="stretch")
         st.divider()
 
     if len(order) > 1:

@@ -93,6 +93,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
         pillar="integrity", metric="split_leakage", domain=scenario.get("domain", "image"),
         value=a, verdict=verdict, summary=summary,
         details={
+            "better": {"contamination": "lower", "shared_groups": "lower", "shared_ids": "lower"},
             "explain": EXPLAIN,
             "train_manifests": [str(m) for m in train_manifests],
             "test_manifest": str(test_manifest),

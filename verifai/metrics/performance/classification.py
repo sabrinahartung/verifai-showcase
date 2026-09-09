@@ -26,6 +26,14 @@ from verifai.metrics._stats import auc_ci, fmt, ppv_at_prevalence, wilson  # noq
 PER_EXAMPLE_CHART_LIMIT = 50
 VERDICT_MIN_N = 30
 
+# Which direction is an improvement, for the comparison view. Patterns may use *.
+_BETTER = {
+    "accuracy": "higher", "balanced_accuracy": "higher", "top3_accuracy": "higher",
+    "per_class.*.sensitivity": "higher", "per_class.*.specificity": "higher",
+    "per_class.*.ppv_test_prevalence": "higher",
+    "per_class_recall.*": "higher",
+}
+
 
 def _per_class(cm: list[list[int]], classes: list[str]) -> dict[str, dict[str, Any]]:
     """One-vs-rest sensitivity / specificity / PPV per class, each with a 95% CI."""
@@ -150,7 +158,7 @@ def _details(per_example, classes, cm, per_class, n) -> dict[str, Any]:
 
     if n <= PER_EXAMPLE_CHART_LIMIT:
         return {
-            "explain": explain, "per_example": per_example,
+            "explain": explain, "better": _BETTER, "per_example": per_example,
             "chart": {
                 "kind": "bar", "title": "Confidence of the top prediction per example",
                 "x": [e["id"] for e in per_example], "y": [e["confidence"] for e in per_example],
@@ -175,7 +183,7 @@ def _details(per_example, classes, cm, per_class, n) -> dict[str, Any]:
         "error bars, not the bar heights**: a short bar on a class with a thousand images is a "
         "finding, while a tall bar on a class with thirteen may be luck.")
     return {
-        "explain": explain, "per_example": per_example,
+        "explain": explain, "better": _BETTER, "per_example": per_example,
         "chart": {
             "kind": "heatmap",
             "title": "Confusion matrix (row-normalised: each row is one true class)",

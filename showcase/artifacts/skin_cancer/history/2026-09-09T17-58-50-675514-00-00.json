@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-09-08T17:35:27.019886+00:00",
+  "created_at": "2026-09-09T17:58:50.675514+00:00",
   "scenario": "skin_cancer",
   "label": "skin-lesion-resnet18",
   "model_id": "skin-lesion-resnet18",
@@ -81,5 +81,17 @@
     "fairness.coverage.dark (V–VI)": 1.0,
     "fairness.n": 7.0
   },
-  "directions": {}
+  "directions": {
+    "performance.accuracy": "higher",
+    "performance.balanced_accuracy": "higher",
+    "performance.top3_accuracy": "higher",
+    "performance.per_class.*.sensitivity": "higher",
+    "performance.per_class.*.specificity": "higher",
+    "performance.per_class.*.ppv_test_prevalence": "higher",
+    "performance.per_class_recall.*": "higher",
+    "robustness.mean_stability": "higher",
+    "robustness.prediction_stability.*": "higher",
+    "fairness.accuracy_gap": "lower",
+    "fairness.subgroup_accuracy.*": "higher"
+  }
 }

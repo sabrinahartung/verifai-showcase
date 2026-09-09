@@ -132,6 +132,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
                  f"apart). Mean confidence in the true class was {mean_m} on training "
                  f"images against {mean_n} on unseen ones."),
         details={
+            "better": {"mia_auc": "lower"},
             "explain": EXPLAIN,
             "members_manifest": str(members_manifest),
             "non_members_manifest": str(non_manifest or (dataset.meta or {}).get("manifest")),

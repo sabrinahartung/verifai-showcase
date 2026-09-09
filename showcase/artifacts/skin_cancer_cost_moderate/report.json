@@ -25,6 +25,11 @@
       "verdict": "pass",
       "summary": "Clean split: none of the 1,493 test images shares a lesion or an image with the 8,522 the model trained on.",
       "details": {
+        "better": {
+          "contamination": "lower",
+          "shared_groups": "lower",
+          "shared_ids": "lower"
+        },
         "explain": {
           "what": "A test set only means something if the model has never seen it. This compares the evaluation set against everything the model trained on — not just image by image, but by lesion, because the same lesion is often photographed several times and a second photo of a memorised lesion is not a fair question.",
           "how": "The marker sits on the share of test images that are contaminated. At 0 the split is clean and every other number in this report can be read at face value. Anything above 0 means part of the score is recall rather than generalisation, and the accuracy above is inflated by roughly that share.",
@@ -247,6 +252,15 @@
           "what": "Top-1 accuracy is the share of images whose most confident class is correct. Reported per class as well, because one averaged number hides the classes that matter most: a model can look strong overall while missing most melanomas, since melanoma is rare in the data.",
           "how": "The matrix reads row by row: each row is one true diagnosis, the columns are what the model called those images. A perfect model is a bright diagonal; bright cells *off* it are the confusions that matter — read the melanoma row to see what melanomas get mistaken for. Below it, sensitivity per class with its 95% interval. **Compare the error bars, not the bar heights**: a short bar on a class with a thousand images is a finding, while a tall bar on a class with thirteen may be luck.",
           "limits": "Every figure carries a 95% interval, and the interval is the point: a class with 13 images produces a recall whose true value could plausibly sit anywhere across half the range. Two numbers whose intervals overlap have not been shown to differ. PPV additionally depends on prevalence — precision measured here is PPV at *this test set's* case mix, which is rarely the one at deployment."
+        },
+        "better": {
+          "accuracy": "higher",
+          "balanced_accuracy": "higher",
+          "top3_accuracy": "higher",
+          "per_class.*.sensitivity": "higher",
+          "per_class.*.specificity": "higher",
+          "per_class.*.ppv_test_prevalence": "higher",
+          "per_class_recall.*": "higher"
         },
         "per_example": [
           {
@@ -12536,6 +12550,10 @@
       "verdict": "fail",
       "summary": "The prediction stays stable under corruptions for 70% of the images on average.",
       "details": {
+        "better": {
+          "mean_stability": "higher",
+          "prediction_stability.*": "higher"
+        },
         "explain": {
           "what": "Real images are never clean: sensor noise, a slightly out-of-focus shot, harsh lighting, heavy JPEG compression. None of that changes the diagnosis, so the model's answer should not change either. This applies each distortion and checks whether it does.",
           "how": "Each bar is one kind of distortion. The height is the share of images whose top-1 class stayed the same after it was applied — 1.0 means the model never changed its mind, 0.5 means it flipped on half the images. Short bars point at the distortion this model is most brittle against.",
@@ -12621,6 +12639,10 @@
           "what": "A skin-lesion model that was only ever tested on light skin cannot be trusted on dark skin. HAM10000 carries no skin-type labels, so the skin tone is estimated from the image itself: the ITA (Individual Typology Angle) is measured on the healthy skin around the lesion and sorted into light, medium and dark bins.",
           "how": "The bars show how many images fall into each skin-tone bin. What matters is the shape: a tall light bar next to a near-empty dark bar means the model is barely being tested on darker skin, so any headline accuracy mostly describes light skin. Once every populated bin holds at least 10 images, a second chart adds the accuracy per bin and the gap between them.",
           "limits": "Coverage is not performance — this chart shows who is in the sample, not how well the model serves them. ITA is also an estimate from pixels, not a clinical Fitzpatrick assessment: lighting, vignetting and dermatoscope settings all shift it."
+        },
+        "better": {
+          "accuracy_gap": "lower",
+          "subgroup_accuracy.*": "higher"
         },
         "per_example": [
           {
@@ -24639,6 +24661,9 @@
       "verdict": "pass",
       "summary": "Membership-inference AUC 0.5577 [0.53-0.59] from 750 training and 750 held-out images (0.5 = an attacker cannot tell them apart). Mean confidence in the true class was 0.8727 on training images against 0.777 on unseen ones.",
       "details": {
+        "better": {
+          "mia_auc": "lower"
+        },
         "explain": {
           "what": "A model is usually more confident on images it memorised during training. A membership-inference attack exploits exactly that: given one image, it guesses whether that patient was in the training set. This runs the attack and reports how well it works.",
           "how": "The result is an AUC. At 0.5 the attacker does no better than a coin flip, which is the good case — members and non-members are indistinguishable. Towards 1.0 the model reliably betrays who was in its training data, which for medical images is a real patient-privacy problem.",
@@ -24698,5 +24723,5 @@
     },
     "label": "Melanoma-weighted (w=5)"
   },
-  "created_at": "2026-09-09T09:10:34.717152+00:00"
+  "created_at": "2026-09-09T18:00:43.471229+00:00"
 }
