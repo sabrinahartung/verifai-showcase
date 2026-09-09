@@ -87,13 +87,15 @@ class ImageClassifier:
     """
 
     def __init__(self, model, classes: list[str], device=None,
-                 cam_layer: str = "layer4[-1]", preprocess=None):
+                 cam_layer: str = "layer4[-1]", preprocess=None,
+                 decision_weights: dict[str, float] | None = None):
         import torch
         self.device = device if device is not None else torch.device("cpu")
         self.model = model.to(self.device)
         self.classes = classes
         self.cam_layer_path = cam_layer
         self._pre = preprocess or build_preprocess()
+        self.decision_weights = dict(decision_weights or {})
 
     @property
     def torch_module(self):
@@ -106,6 +108,30 @@ class ImageClassifier:
 
     def to_tensor(self, img):
         return self._pre(img.convert("RGB")).unsqueeze(0).to(self.device)  # [1,3,H,W]
+
+    def decide(self, probs: dict[str, float]) -> str:
+        """Turn a probability vector into an answer.
+
+        `argmax` is the default, but it is a *choice*, not a law — it maximises
+        expected accuracy, which on imbalanced data means systematically
+        under-calling rare classes. `decision_weights` scales each class by the
+        cost of missing it, so melanoma can clear a lower bar than nevi while the
+        model itself is untouched.
+
+        Every metric routes its decision through here, so the rule is configured
+        once per scenario rather than reimplemented per metric.
+        """
+        if not self.decision_weights:
+            return max(probs, key=probs.get)
+        w = self.decision_weights
+        return max(probs, key=lambda c: probs[c] * w.get(c, 1.0))
+
+    def rank(self, probs: dict[str, float]) -> list[str]:
+        """Classes best-first under the same rule — for top-k differential metrics."""
+        if not self.decision_weights:
+            return sorted(probs, key=probs.get, reverse=True)
+        w = self.decision_weights
+        return sorted(probs, key=lambda c: probs[c] * w.get(c, 1.0), reverse=True)
 
     def predict_probs(self, img) -> dict[str, float]:
         import torch
@@ -129,7 +155,8 @@ def load(spec: dict[str, Any]) -> ImageClassifier:
      arch: "resnet18",          # any torchvision classifier factory
      classes: [...],            # must match the checkpoint's output order
      cam_layer: "layer4[-1]",   # Grad-CAM target
-     device: "auto"}            # auto | cpu | cuda | mps
+     device: "auto",            # auto | cpu | cuda | mps
+     decision_weights: {melanoma: 2.5}}   # cost-sensitive rule; default is argmax
     """
     import torch
     import torchvision.models as tvm
@@ -172,4 +199,5 @@ def load(spec: dict[str, Any]) -> ImageClassifier:
         model, classes, device=device,
         cam_layer=spec.get("cam_layer") or DEFAULT_CAM_LAYER.get(arch, "layer4[-1]"),
         preprocess=build_preprocess(size, spec.get("mean"), spec.get("std")),
+        decision_weights=spec.get("decision_weights"),
     )

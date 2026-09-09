@@ -134,6 +134,7 @@ def test_single_skin_tone_bin_never_claims_a_fairness_pass():
     class _M:
         classes = ["mel", "nv"]
         def predict_probs(self, img): return {"mel": 0.9, "nv": 0.1}
+        def decide(self, probs): return max(probs, key=probs.get)
 
     finding = f.run(_M(), _DS(), {})
     populated = [c for c in finding.value["coverage"].values() if c > 0]
@@ -339,9 +340,45 @@ def test_fairness_gap_is_not_claimed_when_group_intervals_overlap():
     class _M:
         classes = ["a", "b"]
         def predict_probs(self, img): return {"a": 0.9, "b": 0.1}   # always predicts "a"
+        def decide(self, probs): return max(probs, key=probs.get)
 
     finding = f.run(_M(), _DS(), {})
     if "accuracy_gap" in finding.value:              # only if both bins were populated
         assert finding.value["gap_is_separated"] is False
         assert finding.verdict != "fail", \
             "an unseparated gap must not be reported as a failure"
+
+
+# --- the decision rule: argmax is a choice, not a law -----------------------
+def _clf(weights=None):
+    torch = pytest.importorskip("torch")
+    tvm = pytest.importorskip("torchvision.models")
+    from verifai.models.image import ImageClassifier
+    net = tvm.resnet18(weights=None)
+    net.fc = torch.nn.Linear(net.fc.in_features, 3)
+    return ImageClassifier(net.eval(), ["nevus", "melanoma", "other"],
+                           device=torch.device("cpu"), decision_weights=weights)
+
+
+def test_default_decision_rule_is_plain_argmax():
+    clf = _clf()
+    assert clf.decide({"nevus": 0.5, "melanoma": 0.3, "other": 0.2}) == "nevus"
+
+
+def test_weights_let_a_rare_class_clear_a_lower_bar():
+    """The whole point: melanoma wins on 0.3 vs 0.5 once missing it costs more."""
+    probs = {"nevus": 0.5, "melanoma": 0.3, "other": 0.2}
+    assert _clf({"melanoma": 2.0}).decide(probs) == "melanoma"   # 0.6 > 0.5
+    assert _clf({"melanoma": 1.5}).decide(probs) == "nevus"      # 0.45 < 0.5, not enough
+    assert _clf().decide(probs) == "nevus"                       # unweighted
+
+
+def test_ranking_follows_the_same_rule_so_top_k_stays_consistent():
+    probs = {"nevus": 0.5, "melanoma": 0.3, "other": 0.2}
+    assert _clf().rank(probs)[0] == "nevus"
+    assert _clf({"melanoma": 2.0}).rank(probs)[0] == "melanoma"
+
+
+def test_unlisted_classes_keep_weight_one():
+    probs = {"nevus": 0.5, "melanoma": 0.3, "other": 0.2}
+    assert _clf({"other": 10.0}).decide(probs) == "other"        # 2.0 beats 0.5

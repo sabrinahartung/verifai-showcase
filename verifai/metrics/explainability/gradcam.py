@@ -101,7 +101,7 @@ def run(model, dataset, ctx: dict[str, Any]) -> Finding:
     for s in list(dataset)[:max_imgs]:
         img = dataset.load(s)
         probs = model.predict_probs(img)
-        top = max(probs, key=probs.get)
+        top = model.decide(probs)
         ci = classes.index(top)
 
         x = model.to_tensor(img)

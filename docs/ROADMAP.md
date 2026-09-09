@@ -266,6 +266,22 @@ accuracy only. Improving melanoma detection can *lower* top-1 accuracy while mak
 the model clinically better — optimising against that metric would have punished the
 intended change.
 
+## Step 4c — First loop iteration: cost-sensitive decision ✅ done 2026-09-09
+
+- [x] `ImageClassifier.decide()` / `.rank()` — the decision rule lives on the model
+      adapter, configured per scenario. Four metrics were each hardcoding `argmax`
+      independently; they now route through one place
+- [x] `scripts/tune_decision.py` — sweeps the weight on **validation**, never test,
+      and prints the sensitivity/PPV/accuracy trade-off with intervals
+- [x] Two variants evaluated on the frozen test set (`melanoma ×5`, `melanoma ×50`)
+- [x] Snapshot flattening deepened to reach `per_class.<class>.<metric>` — at the old
+      depth the very number the experiment was about was missing from the comparison
+
+**Result: melanoma sensitivity 0.638 → 0.945 with no retraining**, at the cost of PPV
+(0.495 → 0.264) and nevi sensitivity (0.862 → 0.640). Top-1 accuracy fell 0.796 → 0.656
+and the verdict went `pass` → `warn`, so an accuracy-only evaluation would have rejected
+a clinically much better configuration. See [Current results](results.md).
+
 ## Step 5 — A larger image set
 
 *Goal: more data, and a test set the model has no relationship to at all.*

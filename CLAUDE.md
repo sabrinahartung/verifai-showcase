@@ -39,6 +39,14 @@ They cover the seams a second model plugs into. The end-to-end smoke test is sti
 `scripts/run_scenario.py` on the 7-image manifest; it finishes on laptop CPU in seconds.
 No linter is configured.
 
+Metrics must never hardcode `argmax`. Route decisions through `model.decide(probs)` and
+`model.rank(probs)`, so a scenario's `decision_weights` apply everywhere at once — four metrics
+were each reimplementing the rule before this existed. `argmax` is the default, not a law: it
+maximises expected accuracy, which on imbalanced data systematically under-calls rare classes.
+Any threshold or weight must be tuned on **validation** (`scripts/tune_decision.py`), never on
+the test manifest — that would be fitting the decision rule to the test set, and the integrity
+check cannot catch it.
+
 Every metric reports uncertainty. `verifai/metrics/_stats.py` has Wilson intervals for
 proportions (not the normal approximation — it misbehaves at 0 and 1, exactly where small
 classes live), Hanley–McNeil for AUC, and Bayes PPV at a stated prevalence. A new metric that

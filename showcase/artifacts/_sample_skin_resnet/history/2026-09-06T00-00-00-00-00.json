@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-09-06T00:00:00+00:00",
+  "scenario": "skin_cancer",
+  "label": "skin-lesion-resnet18",
+  "model_id": "skin-lesion-resnet18",
+  "dataset_id": "ham10000-subset",
+  "eval_set": {},
+  "integrity": null,
+  "device": null,
+  "seed": 42,
+  "verdicts": {
+    "performance": "warn",
+    "fairness": "fail",
+    "robustness": "warn",
+    "explainability": "info",
+    "privacy": "pass"
+  },
+  "metrics": {
+    "performance.balanced_accuracy": 0.74,
+    "fairness.gap": 0.18,
+    "robustness.clean": 0.81,
+    "robustness.mean_corrupted": 0.66,
+    "explainability.faithfulness": 0.62,
+    "privacy.mia_auc": 0.57
+  }
+}

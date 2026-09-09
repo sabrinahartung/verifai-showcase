@@ -41,7 +41,7 @@ streamlit run showcase/app.py
 **Big run without GPU worries:** `scripts/run_on_free_gpu.ipynb` (Colab/Kaggle) — exactly so your
 Mac does **not** have to compute the full subset.
 
----
+--- thank
 
 ## Architecture at a glance
 

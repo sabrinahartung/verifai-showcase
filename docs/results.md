@@ -115,6 +115,51 @@ costs the predicted class 45 percentage points of confidence on average, which p
 the "partly faithful" band. Reported as `info` — there is no defensible universal threshold
 for "faithful enough", and 7 overlays is an illustration rather than a measurement.
 
+## Experiment 1 — a cost-sensitive decision rule
+
+**No retraining.** Identical weights; only the rule that reads the probabilities changed.
+`argmax` maximises expected accuracy, which on imbalanced data means under-calling rare
+classes. Scaling melanoma's probability by *w* lets it win against a nevus it would otherwise
+lose to. The weight was chosen by sweeping on the **validation** manifest — tuning it on test
+would be fitting the decision rule to the test set, a quieter form of leakage that the
+integrity check would not catch.
+
+| Run | Melanoma sensitivity | Melanoma PPV | Nevi sensitivity | Top-1 | Balanced | Top-3 |
+|---|---:|---:|---:|---:|---:|---:|
+| baseline (argmax) | 0.638 [0.56, 0.71] | 0.495 | 0.862 | **0.796** | 0.728 | 0.976 |
+| melanoma ×5 | 0.804 [0.74, 0.86] | 0.379 | 0.784 | 0.754 | 0.721 | 0.979 |
+| melanoma ×50 | **0.945** [0.90, 0.97] | 0.264 | 0.640 | 0.656 | 0.673 | 0.974 |
+
+**Melanoma sensitivity rose from 0.638 to 0.945 — from missing one melanoma in three to
+missing one in eighteen — without touching the model.** The cost is explicit: PPV falls from
+0.495 to 0.264, so three in four melanoma flags become false alarms, and nevi sensitivity
+drops from 0.862 to 0.640.
+
+!!! danger "The result that justifies this whole pillar redesign"
+    Top-1 accuracy **falls** from 0.796 to 0.656, and the performance verdict goes from
+    `pass` to `warn`. An evaluation that measured only accuracy would have **rejected** the
+    change that made the model dramatically better at catching cancer.
+
+    This is not a hypothetical. It is why the clinical metrics had to be built before the
+    first experiment, and it is the concrete argument against a single headline score.
+
+Note also that top-3 accuracy is nearly unmoved (0.976 → 0.974): reordering the top-1 barely
+disturbs which three diagnoses are in contention. As a ranked differential, all three
+configurations are equally good — they differ only in what they *commit to*.
+
+**Which one is correct?** None of them, until an intended use is declared. For a rule-out tool
+("this is not cancer, go home"), 0.638 sensitivity is indefensible and ×50 is arguably still
+too low. For a tool that reorders a dermatologist's worklist, the baseline's precision may be
+worth more than the recall. Same model, same test set, opposite conclusions — which is exactly
+why this project refuses to emit one number.
+
+!!! note "Honest caveat on transfer"
+    The weight was tuned for 0.85 melanoma sensitivity on validation and delivered 0.945 on
+    test — better than targeted, and the intervals do not overlap (val [0.79, 0.90] against
+    test [0.90, 0.97]). The operating point transferred, but validation and test evidently
+    differ somewhat in melanoma difficulty, so a tuned threshold should not be assumed to
+    carry over exactly.
+
 ## Training run
 
 12 epochs, 4.6 minutes on MPS, batch size 32, lr 1e-4, class-weighted cross-entropy.

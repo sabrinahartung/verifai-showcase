@@ -54,6 +54,13 @@ def write_report(report: Report, out_dir: str = "showcase/artifacts",
     return base / "report.json"
 
 
+# Deep enough to reach value["per_class"]["melanoma"]["sensitivity"] — the number
+# a cost-sensitive experiment is actually about. At depth 2 it was invisible, so
+# the comparison could show accuracy moving while the metric that motivated the
+# change was missing from the table.
+MAX_FLATTEN_DEPTH = 3
+
+
 def _flatten(value: Any, prefix: str, out: dict[str, float], depth: int = 0) -> None:
     """Collect the numeric leaves of a finding's `value` as dotted keys.
 
@@ -65,7 +72,7 @@ def _flatten(value: Any, prefix: str, out: dict[str, float], depth: int = 0) -> 
     if isinstance(value, (int, float)):
         out[prefix] = float(value)
         return
-    if isinstance(value, dict) and depth < 2:
+    if isinstance(value, dict) and depth < MAX_FLATTEN_DEPTH:
         for k, v in value.items():
             _flatten(v, f"{prefix}.{k}" if prefix else str(k), out, depth + 1)
 
