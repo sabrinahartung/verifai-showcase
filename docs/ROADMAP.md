@@ -356,7 +356,7 @@ manifests, and must render the integrity verdict beside every bar. A green
 project exists to catch. Where no fair comparison is possible, say so instead of
 drawing the chart.
 
-## Step 7 — Group the gallery, before it becomes a wall of tiles
+## Step 7 — Group the gallery ✅ done 2026-09-10
 
 *Goal: one tile per scenario stops working once one model has ten configurations.*
 
@@ -381,19 +381,24 @@ flowchart TB
     style G3 fill:#EEEEEE,stroke:#999,color:#1a1a2e
 ```
 
-- [ ] `card.group` — a section heading in the gallery ("Skin lesion — HAM10000").
+- [x] `card.group` — a section heading in the gallery ("Skin lesion — HAM10000").
       Ungrouped cards fall into a default section, so nothing breaks
-- [ ] Move `_sample_skin_resnet` into a **Demo fixtures** group, so placeholder data is
+- [x] Moved `_sample_skin_resnet` into a **Demo fixtures** group, so placeholder data is
       visually separated from real results rather than sitting beside them
-- [ ] `card.lineage` — configurations of the same underlying model collapse into **one**
+- [x] `card.lineage` — configurations of the same underlying model collapse into **one**
       card showing "3 runs", which opens the comparison view already filtered to that lineage
-- [ ] The comparison view keeps grouping by evaluation-set hash regardless: `group` and
+- [x] The comparison view keeps grouping by evaluation-set hash regardless: `group` and
       `lineage` are presentation, **comparability is evidence**, and the two must not be
       confused. Two runs in one lineage that were scored on different manifests still must
       not be plotted together
 
-Do this *before* the next batch of variants: adding `group:` to four scenarios now is cheaper
-than retrofitting it to a dozen later.
+**Result: seven tiles became three cards.** One section per problem, and the five clean-split
+configurations collapsed into a single card that opens straight into their comparison — which
+is the useful view of a set that exists to be read against itself.
+
+A test now asserts the constraint that was easy to violate: two configurations of one lineage
+scored on *different* manifests still land in different comparability groups. Lineage narrows
+what is displayed; it never widens what may be compared.
 
 ---
 

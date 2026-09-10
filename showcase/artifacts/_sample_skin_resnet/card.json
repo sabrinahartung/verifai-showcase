@@ -6,5 +6,7 @@
   "dataset": "HAM10000 (Subset)",
   "description": "Skin-lesion classification across 7 classes. Example dashboard covering all 4 Responsible-AI pillars.",
   "hf_url": "https://huggingface.co/sabrinahartung1010/skin-lesion-resnet18",
-  "sample": true
+  "sample": true,
+  "group": "Demo fixtures (placeholder data)",
+  "lineage": "sample"
 }

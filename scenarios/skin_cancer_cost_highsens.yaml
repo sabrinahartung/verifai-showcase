@@ -67,6 +67,8 @@ dataset:
   source: "HAM10000"
 
 card:
+  group: "Skin lesion — HAM10000 (verified split)"
+  lineage: "ResNet18 · clean split"
   name: "High-sensitivity (w=50)"
   emoji: "🔬"
   description: "Same weights again, tuned on validation to reach 0.85 melanoma sensitivity. The cost in precision and overall accuracy is the point of the comparison."

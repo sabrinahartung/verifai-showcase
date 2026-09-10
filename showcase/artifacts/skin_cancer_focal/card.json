@@ -5,5 +5,7 @@
   "domain": "image",
   "dataset": "ham10000-clean-test",
   "description": "Focal loss instead of plain cross-entropy, class weights kept. Down-weights the easy nevi so the rare, hard classes dominate the gradient.",
-  "sample": false
+  "sample": false,
+  "group": "Skin lesion — HAM10000 (verified split)",
+  "lineage": "ResNet18 · clean split"
 }

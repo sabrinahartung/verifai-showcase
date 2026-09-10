@@ -434,3 +434,22 @@ def test_focal_loss_accepts_class_weights_so_it_composes_with_alpha():
     plain = FocalLoss(gamma=2.0)(logits, target)
     weighted = FocalLoss(gamma=2.0, weight=torch.tensor([5.0, 1.0, 1.0]))(logits, target)
     assert weighted > plain, "a class weight of 5 must scale that class's loss up"
+
+
+def test_lineage_never_widens_what_may_be_compared():
+    """Presentation grouping must not leak into the comparability rule.
+
+    Two configurations of one lineage that were scored on different manifests
+    still have to land in different comparability groups — the content hash
+    decides, not the label they share in the gallery.
+    """
+    pytest.importorskip("streamlit")
+    sys.path.insert(0, str(REPO / "showcase"))
+    import app
+    same_lineage_different_rows = [
+        {"scenario": "a", "label": "a", "integrity": "pass", "created_at": "1",
+         "eval_set": {"sha256": "aaa", "manifest": "test.csv", "n": 100}, "metrics": {}},
+        {"scenario": "b", "label": "b", "integrity": "pass", "created_at": "2",
+         "eval_set": {"sha256": "bbb", "manifest": "test.csv", "n": 100}, "metrics": {}},
+    ]
+    assert len(app.group_snapshots(same_lineage_different_rows)) == 2

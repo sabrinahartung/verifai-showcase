@@ -63,6 +63,8 @@ dataset:
   source: "HAM10000"
 
 card:
+  group: "Skin lesion — HAM10000 (verified split)"
+  lineage: "ResNet18 · clean split"
   name: "Focal loss (γ=2)"
   emoji: "🔬"
   description: "Focal loss instead of plain cross-entropy, class weights kept. Down-weights the easy nevi so the rare, hard classes dominate the gradient."

@@ -62,6 +62,8 @@ dataset:
   source: "HAM10000"
 
 card:
+  group: "Skin lesion — HAM10000 (verified split)"
+  lineage: "ResNet18 · clean split"
   name: "Balanced oversampling"
   emoji: "🔬"
   description: "Minority classes oversampled to balance each batch, with class weighting turned OFF — oversampling and reweighting are competing answers to the same problem."

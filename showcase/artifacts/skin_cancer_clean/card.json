@@ -5,5 +5,7 @@
   "domain": "image",
   "dataset": "ham10000-clean-test",
   "description": "Skin-lesion classification over 7 classes, trained on a lesion-grouped split of HAM10000 and evaluated on 1,493 images the model never saw.",
-  "sample": false
+  "sample": false,
+  "group": "Skin lesion — HAM10000 (verified split)",
+  "lineage": "ResNet18 · clean split"
 }

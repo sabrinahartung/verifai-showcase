@@ -5,5 +5,7 @@
   "domain": "image",
   "dataset": "ham10000-clean-test",
   "description": "Same weights again, tuned on validation to reach 0.85 melanoma sensitivity. The cost in precision and overall accuracy is the point of the comparison.",
-  "sample": false
+  "sample": false,
+  "group": "Skin lesion — HAM10000 (verified split)",
+  "lineage": "ResNet18 · clean split"
 }

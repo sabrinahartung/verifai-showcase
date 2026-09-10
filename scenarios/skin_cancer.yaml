@@ -33,6 +33,8 @@ dataset:
 
 # tile metadata for the showcase gallery (optional but nice):
 card:
+  group: "Earlier run — split integrity unverified"
+  lineage: "ResNet18 · original checkpoint"
   name: "Skin-Lesion ResNet18"
   emoji: "🔬"
   description: "Skin-lesion classification across 7 classes (HAM10000). Responsible-AI analysis across all pillars."

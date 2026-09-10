@@ -114,7 +114,11 @@ Data flows one way: **scenario YAML → runner → metrics → `Finding`s → `R
   carries the evaluation manifest's **content hash** and the integrity verdict — those two
   fields are what let `showcase/app.py` refuse a dishonest comparison, so do not drop them.
 - `showcase/app.py` — auto-discovers every `artifacts/<id>/` folder with both `card.json` and
-  `report.json` and renders a tile; clicking a tile renders the report grouped by pillar.
+  `report.json`; clicking through renders the report grouped by pillar. The gallery is sectioned
+  by `card.group` (which problem) and collapses `card.lineage` (configurations of one
+  investigation) into a single card. Both are **presentation only**: comparability is decided by
+  the evaluation manifest's content hash, and a lineage filter must never widen it — asserted in
+  `tests/`.
 
 ### The two extension contracts
 
