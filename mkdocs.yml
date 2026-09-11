@@ -1,5 +1,6 @@
 site_name: VERIFAI Showcase
 site_description: File-based Responsible-AI evaluation across six pillars
+site_url: https://sabrinahartung.github.io/verifai-showcase/
 repo_url: https://github.com/sabrinahartung/verifai-showcase
 repo_name: sabrinahartung/verifai-showcase
 docs_dir: docs

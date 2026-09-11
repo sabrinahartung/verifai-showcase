@@ -70,6 +70,40 @@ The honesty tests are regressions for bugs that actually shipped: a single popul
 scoring a green fairness `pass`, and an unverifiable split reporting as clean. Both were the
 exact failure mode the project claims to prevent.
 
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every push to **`master`** (this repo's default branch —
+a workflow keyed to `main` would silently never fire):
+
+```mermaid
+flowchart LR
+    P["push to master"] --> T["tests<br/><i>CPU torch + 38 contract tests</i>"]
+    T -->|pass| D["mkdocs build --strict"]
+    T -->|fail| X["✋ nothing published"]
+    D --> G["GitHub Pages"]
+    style X fill:#F5D3CE,stroke:#C0392B,color:#1a1a2e
+    style G fill:#CDE8D5,stroke:#2E9E5B,color:#1a1a2e
+```
+
+Two deliberate choices:
+
+- **CPU torch wheels.** The default `pip install torch` pulls ~2.5 GB of CUDA onto a runner
+  with no GPU. It is installed before `requirements-engine.txt` so that file's plain `torch`
+  line is already satisfied.
+- **Docs depend on tests.** A build describing code that fails its own contracts should not
+  publish, so the `docs` job has `needs: test`.
+
+`--strict` fails the build on a broken internal link, so a bad cross-reference breaks CI
+rather than shipping a dead link.
+
+!!! note "One-time setup"
+    GitHub Pages must be switched to the Actions source: **Settings → Pages → Build and
+    deployment → Source: GitHub Actions**. Until that is set, the deploy step fails with a
+    permissions error even though the workflow is correct.
+
+The Streamlit dashboard deploys separately, straight from the repo — Streamlit Community
+Cloud redeploys on push with no workflow involved, because the app only reads committed files.
+
 ## Repository layout
 
 ```
