@@ -1,6 +1,6 @@
 # VERIFAI Showcase — Responsible-AI Evaluation
 
-[![tests & docs](https://github.com/sabrinahartung/verifai-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/sabrinahartung/verifai-showcase/actions/workflows/ci.yml)
+[![tests & docs](https://github.com/sabrinahartung/verifai-medical/actions/workflows/ci.yml/badge.svg)](https://github.com/sabrinahartung/verifai-medical/actions/workflows/ci.yml)
 
 **Systematic, reproducible evaluation of ML models along the Responsible-AI pillars** —
 performance, fairness, robustness, explainability, privacy — across several data domains
