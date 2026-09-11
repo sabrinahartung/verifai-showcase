@@ -86,10 +86,20 @@ def comparability_key(snap: dict) -> tuple:
     """Runs are comparable only when scored on exactly the same rows.
 
     The manifest's content hash, not its path — a manifest can be regenerated
-    with a different seed and keep its name.
+    with a different seed and keep its name, and the same bytes can be read from
+    a different path (a clone elsewhere, or a renamed checkout). The hash is
+    recorded over the file's contents alone, so it already answers the only
+    question that matters: were these runs scored on the same rows?
+
+    A snapshot with no hash is the exception. Absent a hash there is nothing to
+    compare on, so those fall back to the path and never merge with each other
+    on the strength of being equally unidentified.
     """
     ev = snap.get("eval_set") or {}
-    return (ev.get("sha256"), ev.get("manifest"))
+    digest = ev.get("sha256")
+    if not digest:
+        return (None, ev.get("manifest"))
+    return (digest,)
 
 
 def group_snapshots(snaps: list[dict]) -> dict[tuple, list[dict]]:

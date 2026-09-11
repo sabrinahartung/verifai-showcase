@@ -453,3 +453,40 @@ def test_lineage_never_widens_what_may_be_compared():
          "eval_set": {"sha256": "bbb", "manifest": "test.csv", "n": 100}, "metrics": {}},
     ]
     assert len(app.group_snapshots(same_lineage_different_rows)) == 2
+
+
+def test_the_same_rows_at_a_different_path_stay_comparable():
+    """A moved or renamed checkout must not split a comparison group.
+
+    The hash is taken over the manifest's contents alone, so the same rows read
+    from `/old/repo/test.csv` and `/new/repo/test.csv` are the same evaluation
+    set. Keying on the path too would have quietly filed every run made before a
+    directory rename apart from every run made after it — same rows, two groups,
+    each looking like it held fewer runs than it did.
+    """
+    pytest.importorskip("streamlit")
+    sys.path.insert(0, str(REPO / "showcase"))
+    import app
+    same_rows_moved_repo = [
+        {"scenario": "a", "label": "a", "integrity": "pass", "created_at": "1",
+         "eval_set": {"sha256": "aaa", "manifest": "/old/repo/test.csv", "n": 100},
+         "metrics": {}},
+        {"scenario": "b", "label": "b", "integrity": "pass", "created_at": "2",
+         "eval_set": {"sha256": "aaa", "manifest": "/new/repo/test.csv", "n": 100},
+         "metrics": {}},
+    ]
+    assert len(app.group_snapshots(same_rows_moved_repo)) == 1
+
+
+def test_unhashed_snapshots_do_not_merge_on_being_equally_unidentified():
+    """No hash means nothing to compare on — those must not pool together."""
+    pytest.importorskip("streamlit")
+    sys.path.insert(0, str(REPO / "showcase"))
+    import app
+    no_hash = [
+        {"scenario": "a", "label": "a", "integrity": "pass", "created_at": "1",
+         "eval_set": {"sha256": None, "manifest": "a.csv", "n": 7}, "metrics": {}},
+        {"scenario": "b", "label": "b", "integrity": "pass", "created_at": "2",
+         "eval_set": {"sha256": None, "manifest": "b.csv", "n": 9}, "metrics": {}},
+    ]
+    assert len(app.group_snapshots(no_hash)) == 2
