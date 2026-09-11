@@ -27,7 +27,7 @@ The repo `.venv` already has both engine and showcase deps (torch, torchvision, 
 Big/statistically meaningful runs go through `scripts/run_on_free_gpu.ipynb` (Colab/Kaggle) —
 same code path, only more rows in the manifest.
 
-Contract tests live in `tests/` (13 of them, no network or checkpoint needed):
+Contract tests live in `tests/` (40 of them, no network or checkpoint needed):
 
 ```bash
 pip install -r requirements-dev.txt
