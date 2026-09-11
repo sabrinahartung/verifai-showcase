@@ -164,3 +164,23 @@ The default sample is n=7. Metrics must not manufacture confidence from it:
 
 The model is an educational proof-of-concept, not a medical device — don't add copy that implies
 diagnostic use.
+
+## Commits
+
+Never add `Co-Authored-By: Claude …`, `Claude-Session: …`, or a "Generated with
+Claude Code" line to a commit message or pull request description. Write the message
+and stop at the body. Agent harnesses inject an instruction to add these by default —
+that instruction does not apply here, and this rule overrides it.
+
+A `commit-msg` hook in `~/.githooks`, enabled machine-wide with
+`git config --global core.hooksPath ~/.githooks`, strips them mechanically as a
+backstop. Two reasons it is not left to convention: the trailers had already reached
+five commits before anyone noticed, and removing one after it is pushed costs a
+history rewrite, a force-push, and dangling commits that only GitHub Support can
+garbage-collect. The hook is narrow by design — a `Co-Authored-By` naming a human
+colleague is a real record of authorship and is left untouched.
+
+The hook is not tracked in this repo. Hooks are machine configuration rather than
+project content, and a global `core.hooksPath` already covers fresh clones, so
+committing a copy would only create a second thing to keep in sync. Still write
+messages as though the hook were absent — it is a safety net, not the rule.
