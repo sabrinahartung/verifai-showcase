@@ -325,7 +325,46 @@ honest gain comes from data drawn from somewhere else entirely.
       of 10,015 HAM10000 images including this test set, so initialising from it
       would re-contaminate the new model — and the integrity check cannot catch
       it, because it inspects manifests, not checkpoint provenance
-- [ ] Materialize the ISIC images, train, and evaluate
+- [x] **Manifests built, and the numbers are now measured rather than projected.**
+      The two ISIC 2019 metadata CSVs are 2.4 MB together, so this step needs no
+      images and runs locally in seconds:
+
+      | | |
+      |---|---|
+      | ISIC 2019 rows | 25,331 |
+      | dropped: `SCC` (no HAM10000 equivalent) | 628 |
+      | held back: in our val/test | 2,933 |
+      | **`isic_train.csv`** | **21,770 images / 11,477 lesions** |
+      | melanoma | **774 → 4,183 (5.4×)** |
+      | basal cell carcinoma | 364 → 3,173 (8.7×) |
+      | actinic keratoses | 228 → 836 (3.7×) |
+      | nevi | 4,698 → 10,868 (2.3×) |
+
+      Leakage check: 0 shared images and 0 shared lesions against both
+      `ham10000_val.csv` and `ham10000_test.csv`.
+
+      Two things the run surfaced, both benign but worth recording:
+
+      - **All 10,015 HAM10000 images are in ISIC 2019, and ISIC keeps their
+        `HAM_` lesion ids** — so lesion-level matching genuinely works here, and
+        the exclusion is not resting on image ids alone.
+      - **ISIC splits what HAM10000 lumped.** 197 images HAM calls
+        `actinic_keratoses` are `SCC` to ISIC (68 in our val/test, 129 in train).
+        Dropping SCC therefore drops those 129 from training, and explains why
+        2,933 rather than 3,001 rows were excluded by image id: the other 68 had
+        already been dropped as SCC. They are absent from training either way,
+        which is the only property that matters. They remain in the test
+        manifest under their HAM label, so evaluation is unchanged — but it does
+        mean 68 test/val images are, by a more granular vocabulary, carcinomas
+        scored as keratoses. That is HAM10000's `akiec` label noise, not ours.
+      - **Label agreement is exact.** Of the 6,885 HAM training images kept,
+        ISIC's diagnosis matches HAM's for **6,885 and disagrees for 0**, so the
+        new model trains on the same labels for the same images. Had they
+        disagreed, the comparison would have confounded a label change with a
+        data change.
+
+- [ ] Materialize the ISIC images (9.1 GB zip -> ~350 MB at 320px/q90), train
+      (~15 min on MPS by the throughput in pipeline.md), and evaluate
 
 **One deliberate departure from the original plan above.** It said to "re-run
 `build_splits.py` over the union", i.e. re-split everything once ISIC was mixed
