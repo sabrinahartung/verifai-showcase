@@ -38,8 +38,8 @@ assumed away — the same `verifiable` vs `clean` distinction `audit_split` make
 
 Usage:
     python scripts/build_isic_train.py \
-        --groundtruth data/raw/isic/ISIC_2019_Training_GroundTruth.csv \
-        --metadata    data/raw/isic/ISIC_2019_Training_Metadata.csv
+        --groundtruth data/raw/isic2019/ISIC_2019_Training_GroundTruth.csv \
+        --metadata    data/raw/isic2019/ISIC_2019_Training_Metadata.csv
 """
 from __future__ import annotations
 

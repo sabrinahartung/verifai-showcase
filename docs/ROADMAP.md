@@ -366,6 +366,20 @@ honest gain comes from data drawn from somewhere else entirely.
 - [ ] Materialize the ISIC images (9.1 GB zip -> ~350 MB at 320px/q90), train
       (~15 min on MPS by the throughput in pipeline.md), and evaluate
 
+**Image directories are per-corpus, not merged.** ISIC images go to
+`data/raw/isic2019/`, self-contained, including re-materialized copies of the
+6,885 HAM10000 images that `isic_train.csv` shares — about 108 MB of duplication.
+
+`data/raw/ham10000/` stays frozen, because it is the pixel source for five
+published artifacts: merging into it would retroactively change what those
+numbers mean, one layer below the manifest. `materialize_images.py` already
+enforces this — its `_materialize.json` stamp records `source`, `max_size` and
+`quality`, and it exits rather than mixing settings in one directory, so a merge
+would also make the existing stamp (`source: marmal88/skin_cancer`) false.
+
+The directory name carries the edition. `isic2019`, not `isic`, so adding ISIC
+2020 later does not make an existing path ambiguous.
+
 **One deliberate departure from the original plan above.** It said to "re-run
 `build_splits.py` over the union", i.e. re-split everything once ISIC was mixed
 in. That is wrong, and the comparison view is what makes it wrong: re-splitting
