@@ -626,3 +626,46 @@ def test_building_isic_manifests_leaves_the_frozen_test_set_untouched(tmp_path):
     m.write_manifest(rows, tmp_path / "isic_train.csv")
 
     assert hashlib.sha256(test_manifest.read_bytes()).hexdigest() == before
+
+
+def test_training_images_dir_does_not_change_the_images_we_score_on():
+    """A scenario may train on one corpus and be scored on a frozen other one.
+
+    `skin_cancer_isic` trains on ISIC 2019 and is evaluated on the same HAM10000
+    files as every earlier run. If training and evaluation shared one
+    `images_dir`, growing the training set would swap the evaluation images for
+    re-encoded copies — identical manifest, identical content hash, different
+    pixels — and the comparison would look legitimate while being meaningless.
+    Neither the content hash nor `audit_split` can catch that: both read
+    manifests, not images.
+    """
+    sys.path.insert(0, str(REPO / "scripts"))
+    from train_model import split_spec
+    base = {"images_dir": "data/raw/ham10000", "manifest": "eval.csv"}
+
+    train = split_spec(base, {"images_dir": "data/raw/isic"}, "data/manifests", "isic", "train")
+    assert train["images_dir"] == "data/raw/isic"
+    assert train["manifest"] == "data/manifests/isic_train.csv"
+    # The evaluation spec the metrics read is untouched by the override.
+    assert base["images_dir"] == "data/raw/ham10000"
+    assert base["manifest"] == "eval.csv"
+
+    # Absent the override, training keeps reading the dataset's own directory.
+    plain = split_spec(base, {}, "data/manifests", "ham10000", "train")
+    assert plain["images_dir"] == "data/raw/ham10000"
+
+
+def test_the_isic_scenario_scores_on_the_same_images_as_the_runs_it_compares_to():
+    """Guards the specific wiring, not just the mechanism."""
+    yaml = pytest.importorskip("yaml")
+    isic = yaml.safe_load((REPO / "scenarios" / "skin_cancer_isic.yaml").read_text())
+    clean = yaml.safe_load((REPO / "scenarios" / "skin_cancer_clean.yaml").read_text())
+
+    # Same evaluation manifest AND same pixels as the configuration it ranks against.
+    assert isic["dataset"]["manifest"] == clean["dataset"]["manifest"]
+    assert isic["dataset"]["images_dir"] == clean["dataset"]["images_dir"]
+    # Training reads somewhere else, or the point above is lost.
+    assert isic["training"]["images_dir"] != isic["dataset"]["images_dir"]
+    # Membership inference must compare like with like: both sides from one corpus.
+    assert isic["privacy"]["members"] == clean["privacy"]["members"]
+    assert isic["privacy"]["non_members"] == clean["privacy"]["non_members"]

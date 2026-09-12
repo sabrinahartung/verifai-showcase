@@ -13,11 +13,14 @@
 # 7.5% of its melanoma) and keeps the rest, including HAM10000's own training
 # portion. `integrity.enforce` below is what proves it worked.
 #
-#   1. download ISIC 2019 (images + GroundTruth + Metadata) into data/raw/isic/
-#   2. python scripts/build_isic_train.py \
+#   1. fetch the two ISIC 2019 metadata CSVs (a few MB, no images needed yet) and
+#      build the manifests -- this is the auditable step, and it runs locally:
+#      python scripts/build_isic_train.py \
 #        --groundtruth data/raw/isic/ISIC_2019_Training_GroundTruth.csv \
 #        --metadata    data/raw/isic/ISIC_2019_Training_Metadata.csv
-#   3. python scripts/train_model.py scenarios/skin_cancer_isic.yaml
+#   2. materialize the ISIC images into data/raw/isic at max_size=320 quality=90,
+#      matching data/raw/ham10000 exactly (see training.images_dir below)
+#   3. python scripts/train_model.py scenarios/skin_cancer_isic.yaml   # ~15 min on MPS
 #   4. python scripts/run_scenario.py scenarios/skin_cancer_isic.yaml
 name: skin_cancer_isic
 domain: image
@@ -27,6 +30,12 @@ sample_size: null          # evaluate the whole test manifest (1,493 images)
 training:
   manifest_prefix: "isic"        # reads isic_train.csv + isic_val.csv
   manifest_dir: "data/manifests"
+  # Training images only. Kept separate from dataset.images_dir below so that
+  # growing the training corpus cannot change the pixels the model is SCORED on
+  # -- see the note there. Materialize ISIC at the same 320px/quality-90 as
+  # data/raw/ham10000 (scripts/materialize_images.py settings), or the
+  # robustness metric shifts for reasons that have nothing to do with the model.
+  images_dir: "data/raw/isic"
   arch: "resnet18"
   # Warm-start from ImageNet, NOT from the original skin-lesion-resnet18: per the
   # audit in docs/ROADMAP.md that checkpoint's training data covered 9,964 of
@@ -67,11 +76,12 @@ dataset:
   # existing runs — this is what makes the comparison legitimate rather than
   # merely adjacent. Do not regenerate or re-sort this file.
   manifest: "data/manifests/ham10000_test.csv"   # test ONLY — never train/val
-  # One directory has to serve both training and evaluation, because
-  # train_model.py inherits this `dataset` block. The ISIC 2019 download already
-  # contains the HAM10000 images (that is the overlap this scenario works
-  # around), so extracting it here covers the test manifest too.
-  images_dir: "data/raw/isic"
+  # UNCHANGED, and load-bearing. These are the exact 320px files the other five
+  # configurations were scored on. Pointing this at an ISIC copy of the same
+  # images would keep the manifest hash identical while changing every pixel --
+  # re-encoded at a different size and quality -- so the comparison would look
+  # legitimate and be meaningless. Training reads from training.images_dir.
+  images_dir: "data/raw/ham10000"
   source: "ISIC 2019 (training) / HAM10000 (evaluation)"
 
 card:
@@ -84,8 +94,17 @@ card:
   description: "Skin-lesion classification over 7 classes, trained on ISIC 2019 with every validation and test lesion held back, and evaluated on the same 1,493 images as the HAM10000-trained configurations."
 
 # Computable because we know exactly what was trained on.
+#
+# members is the HAM10000 training portion rather than the full isic_train.csv,
+# on purpose and for two reasons. Those 7,014 rows are all inside isic_train, so
+# they are genuine members of this model. And they live in data/raw/ham10000 at
+# the same 320px/q90 encoding as the non-members, so a confidence gap can only
+# mean memorisation. Drawing members from re-encoded ISIC copies instead would
+# confound the attack with a JPEG difference and inflate the AUC for a reason
+# that has nothing to do with privacy. It also keeps this number comparable with
+# the other five runs, which use exactly this members set.
 privacy:
-  members: "data/manifests/isic_train.csv"           # the model saw these
+  members: "data/manifests/ham10000_train.csv"       # the model saw these
   non_members: "data/manifests/ham10000_test.csv"    # it never saw these
   sample: 750                                        # per side, for runtime
 

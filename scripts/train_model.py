@@ -98,6 +98,25 @@ def _evaluate(model, loader, device, n_classes: int):
     return correct / total, sum(recalls) / len(recalls)
 
 
+def split_spec(base: dict, tcfg: dict, man_dir: str, prefix: str, split: str) -> dict:
+    """Dataset spec for one training split.
+
+    `training.images_dir` overrides `dataset.images_dir` when present, because a
+    scenario may train on one corpus and evaluate on a different, frozen one --
+    skin_cancer_isic trains on ISIC 2019 and is scored on the same HAM10000
+    images as every earlier run. Without the override both would read from one
+    directory, so growing the training set would silently swap the evaluation
+    images for re-encoded copies: identical manifest, identical content hash,
+    different pixels. The integrity guard cannot catch that, because it hashes
+    the manifest and not the images.
+    """
+    spec = dict(base)
+    spec["manifest"] = f"{man_dir}/{prefix}_{split}.csv"
+    if tcfg.get("images_dir"):
+        spec["images_dir"] = tcfg["images_dir"]
+    return spec
+
+
 def main(scenario_path: str) -> None:
     import torch
     from torch.utils.data import DataLoader
@@ -126,9 +145,7 @@ def main(scenario_path: str) -> None:
     man_dir, prefix = tcfg.get("manifest_dir", "data/manifests"), tcfg["manifest_prefix"]
 
     def _ds(split):
-        spec = dict(base)
-        spec["manifest"] = f"{man_dir}/{prefix}_{split}.csv"
-        return load_image_manifest(spec)
+        return load_image_manifest(split_spec(base, tcfg, man_dir, prefix, split))
 
     train_ds, val_ds = _ds("train"), _ds("val")
     classes = sorted({s.label for s in train_ds if s.label})

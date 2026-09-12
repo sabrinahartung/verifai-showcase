@@ -71,7 +71,7 @@ Not every pillar is blocked by leakage, which is worth knowing:
 
 **Acceptance: met.** Re-running `scenarios/skin_cancer.yaml` with no scenario edits
 produced findings identical to the pre-refactor baseline (top-1 100%, faithfulness
-0.669, stability 75%). 47 contract tests in `tests/` cover the seams; run them with
+0.669, stability 75%). 49 contract tests in `tests/` cover the seams; run them with
 `.venv/bin/python -m pytest tests/ -q`.
 
 Measured while doing this: MPS is **slower** than CPU here (5.5s vs 3.2s at n=7),
