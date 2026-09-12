@@ -71,7 +71,7 @@ Not every pillar is blocked by leakage, which is worth knowing:
 
 **Acceptance: met.** Re-running `scenarios/skin_cancer.yaml` with no scenario edits
 produced findings identical to the pre-refactor baseline (top-1 100%, faithfulness
-0.669, stability 75%). 49 contract tests in `tests/` cover the seams; run them with
+0.669, stability 75%). 53 contract tests in `tests/` cover the seams; run them with
 `.venv/bin/python -m pytest tests/ -q`.
 
 Measured while doing this: MPS is **slower** than CPU here (5.5s vs 3.2s at n=7),
@@ -363,8 +363,20 @@ honest gain comes from data drawn from somewhere else entirely.
         disagreed, the comparison would have confounded a label change with a
         data change.
 
-- [ ] Materialize the ISIC images (9.1 GB zip -> ~350 MB at 320px/q90), train
-      (~15 min on MPS by the throughput in pipeline.md), and evaluate
+- [x] `scripts/materialize_isic.py` — reads the 9.1 GB zip **in place** rather
+      than extracting it (every member is read once, so extracting would cost
+      another 9.1 GB for nothing). Of the 23,278 images the corpus needs, 8,393
+      are HAM10000 images we already hold at 320px and are **copied
+      byte-for-byte** instead of re-encoded; only 14,885 are encoded from the
+      zip. The copy is not just a time saving: `train_model.py` selects a
+      checkpoint on validation read from `training.images_dir` while
+      `tune_decision.py` tunes the decision weight on validation read from
+      `dataset.images_dir`, so re-encoding the shared rows would leave the
+      threshold tuned on different pixels than the checkpoint was selected on.
+      `_materialize.json` records both provenances, since that is the only place
+      the distinction survives
+- [ ] Download the zip, run the materializer, train (~15 min on MPS by the
+      throughput in pipeline.md), and evaluate
 
 **Image directories are per-corpus, not merged.** ISIC images go to
 `data/raw/isic2019/`, self-contained, including re-materialized copies of the

@@ -8,6 +8,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -669,3 +670,80 @@ def test_the_isic_scenario_scores_on_the_same_images_as_the_runs_it_compares_to(
     # Membership inference must compare like with like: both sides from one corpus.
     assert isic["privacy"]["members"] == clean["privacy"]["members"]
     assert isic["privacy"]["non_members"] == clean["privacy"]["non_members"]
+
+
+# --- materializing a second image corpus ------------------------------------
+def _isic_mat():
+    sys.path.insert(0, str(REPO / "scripts"))
+    import materialize_isic
+    return materialize_isic
+
+
+def test_the_zip_is_indexed_by_basename_not_by_nested_path():
+    """The challenge zip nests under ISIC_2019_Training_Input/; a repack may not."""
+    import io
+    import zipfile
+    m = _isic_mat()
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr("ISIC_2019_Training_Input/ISIC_0000001.jpg", b"x")
+        zf.writestr("ISIC_0000002.jpg", b"y")
+        zf.writestr("ISIC_2019_Training_Input/", b"")       # directory entry
+    with zipfile.ZipFile(buf) as zf:
+        index = m.zip_index(zf)
+    assert index["ISIC_0000001"] == "ISIC_2019_Training_Input/ISIC_0000001.jpg"
+    assert index["ISIC_0000002"] == "ISIC_0000002.jpg"
+    assert "" not in index, "a directory entry must not become an image key"
+
+
+def test_materializing_refuses_to_mix_two_encodings_in_one_directory():
+    """One directory, one encoding.
+
+    A blur radius or a JPEG quality means something different at a different
+    resolution, so a directory holding two encodings is unusable for a
+    comparison — and nothing in the files themselves would reveal it.
+    """
+    import json
+    m = _isic_mat()
+    out = Path(tempfile.mkdtemp())
+    (out / "_materialize.json").write_text(
+        json.dumps({"max_size": 320, "quality": 90, "source": "x"}), encoding="utf-8")
+
+    m.check_stamp(out, 320, 90)                    # same encoding: fine
+    with pytest.raises(SystemExit):
+        m.check_stamp(out, 224, 90)                # different size
+    with pytest.raises(SystemExit):
+        m.check_stamp(out, 320, 75)                # different quality
+
+
+def test_the_shrink_matches_what_data_raw_ham10000_already_holds():
+    """Both materializers must apply the same transform, or the corpora disagree."""
+    pytest.importorskip("PIL")
+    import io
+    from PIL import Image
+    m = _isic_mat()
+    buf = io.BytesIO()
+    Image.new("RGB", (600, 450), (10, 20, 30)).save(buf, "JPEG", quality=95)
+
+    out = Image.open(io.BytesIO(m._shrink(buf.getvalue(), 320, 90)))
+    assert max(out.size) == 320, "longest side is capped"
+    assert out.size == (320, 240), "aspect ratio is preserved"
+    # data/raw/ham10000 was written at exactly this setting; if that ever changes
+    # the two directories stop being comparable.
+    stamp = REPO / "data" / "raw" / "ham10000" / "_materialize.json"
+    if stamp.exists():
+        have = json.loads(stamp.read_text(encoding="utf-8"))
+        assert (have["max_size"], have["quality"]) == (320, 90)
+
+
+def test_the_manifests_are_the_source_of_truth_for_which_images_are_needed():
+    """No manifest, no guessing: it exits rather than materialize an unknown set."""
+    m = _isic_mat()
+    empty = Path(tempfile.mkdtemp())
+    with pytest.raises(SystemExit):
+        m.wanted(empty, "isic", ["train"])
+
+    want = m.wanted(REPO / "data" / "manifests", "isic", ["train", "val"])
+    # Training reads both splits, so both have to be materialized.
+    assert len(want) > 20000
+    assert all(f.endswith(".jpg") for f in want.values())
