@@ -490,3 +490,139 @@ def test_unhashed_snapshots_do_not_merge_on_being_equally_unidentified():
          "eval_set": {"sha256": None, "manifest": "b.csv", "n": 9}, "metrics": {}},
     ]
     assert len(app.group_snapshots(no_hash)) == 2
+
+
+# --- the ISIC exclusion, which is what keeps the new model comparable --------
+def _isic_builder():
+    sys.path.insert(0, str(REPO / "scripts"))
+    import build_isic_train
+    return build_isic_train
+
+
+def _write_gt(path: Path, rows: list[tuple[str, str]]) -> None:
+    """rows = [(image_id, ISIC code)] -> one-hot ground truth, as published."""
+    codes = ["MEL", "NV", "BCC", "AK", "BKL", "DF", "VASC", "SCC", "UNK"]
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["image"] + codes)
+        for image_id, code in rows:
+            w.writerow([image_id] + ["1.0" if c == code else "0.0" for c in codes])
+
+
+def _write_md(path: Path, rows: list[tuple[str, str]]) -> None:
+    """rows = [(image_id, lesion_id)]; an empty lesion_id is left empty."""
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["image", "age_approx",
+                                          "anatom_site_general", "lesion_id", "sex"])
+        w.writeheader()
+        for image_id, lesion_id in rows:
+            w.writerow({"image": image_id, "age_approx": "45",
+                        "anatom_site_general": "trunk",
+                        "lesion_id": lesion_id, "sex": "female"})
+
+
+def _write_manifest(path: Path, rows: list[tuple[str, str, str]]) -> None:
+    """rows = [(image_id, lesion_id, label)] in the repo's manifest schema."""
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["filename", "image_id", "lesion_id", "label",
+                                          "dx_type", "age", "sex", "localization"])
+        w.writeheader()
+        for image_id, lesion_id, label in rows:
+            w.writerow({"filename": f"{image_id}.jpg", "image_id": image_id,
+                        "lesion_id": lesion_id, "label": label,
+                        "dx_type": "", "age": "", "sex": "", "localization": ""})
+
+
+def test_held_back_images_never_reach_the_isic_training_manifest():
+    """ISIC 2019 contains HAM10000, so this anti-join is the whole safeguard."""
+    m = _isic_builder()
+    labels = {"ISIC_0000001": "melanoma", "ISIC_0000002": "melanocytic_Nevi"}
+    meta = {"ISIC_0000001": {"lesion_id": "HAM_1"}, "ISIC_0000002": {"lesion_id": "HAM_2"}}
+    rows, why = m.build_rows(labels, meta, {"ISIC_0000001"}, set())
+    assert [r["image_id"] for r in rows] == ["ISIC_0000002"]
+    assert why["excluded by image_id"] == 1
+
+
+def test_a_second_photo_of_a_held_back_lesion_is_excluded_too():
+    """The trap image_id matching alone would miss.
+
+    A held-back lesion can appear in ISIC under a completely different image id.
+    Keeping it would mean testing on a lesion the model had memorised, which is
+    the same mistake `audit_split` grouping by lesion_id exists to prevent.
+    """
+    m = _isic_builder()
+    labels = {"ISIC_9999001": "melanoma"}
+    meta = {"ISIC_9999001": {"lesion_id": "HAM_0001981"}}
+    rows, why = m.build_rows(labels, meta, set(), {"HAM_0001981"})
+    assert rows == []
+    assert why["excluded by lesion_id"] == 1
+
+
+def test_a_missing_lesion_id_is_absence_of_evidence_not_a_match():
+    """An empty lesion_id must not collide with a held-back one and drop the row."""
+    m = _isic_builder()
+    labels = {"ISIC_9999002": "basal_cell_carcinoma"}
+    rows, _ = m.build_rows(labels, {"ISIC_9999002": {"lesion_id": ""}}, set(), {""})
+    assert len(rows) == 1
+    # It still needs a grouping key, and falls back to its own image id.
+    assert rows[0]["lesion_id"] == "ISIC_9999002"
+
+
+def test_scc_is_dropped_by_default_and_unk_is_never_a_label(tmp_path):
+    """The frozen test set has 7 classes; an 8th head could never be scored on it."""
+    m = _isic_builder()
+    gt = tmp_path / "gt.csv"
+    _write_gt(gt, [("ISIC_1", "MEL"), ("ISIC_2", "SCC"), ("ISIC_3", "UNK")])
+
+    labels, dropped = m.read_groundtruth(gt, keep_scc=False)
+    assert labels == {"ISIC_1": "melanoma"}
+    assert sum(dropped.values()) == 2
+
+    kept, _ = m.read_groundtruth(gt, keep_scc=True)
+    assert kept["ISIC_2"] == "squamous_cell_carcinoma"
+    assert "ISIC_3" not in kept, "UNK is 'none of the above', never a diagnosis"
+
+
+def test_the_isic_manifest_matches_the_schema_the_loader_already_reads(tmp_path):
+    """A new manifest must need no loader change: same columns, same meaning."""
+    m = _isic_builder()
+    with open(REPO / "data" / "manifests" / "ham10000_test.csv", encoding="utf-8") as f:
+        existing = csv.DictReader(f).fieldnames
+    assert m.MANIFEST_FIELDS == list(existing)
+
+
+def test_the_builder_refuses_to_leave_a_leaking_manifest_on_disk(tmp_path):
+    """verify() reads the written file back, so a bug upstream still gets caught."""
+    m = _isic_builder()
+    train = tmp_path / "isic_train.csv"
+    held = tmp_path / "ham10000_test.csv"
+    _write_manifest(train, [("ISIC_0000001", "HAM_1", "melanoma")])
+    _write_manifest(held, [("ISIC_0000001", "HAM_1", "melanoma")])
+    assert m.verify(train, [held]) is False
+
+    _write_manifest(train, [("ISIC_0000009", "HAM_9", "melanoma")])
+    assert m.verify(train, [held]) is True
+
+
+def test_building_isic_manifests_leaves_the_frozen_test_set_untouched(tmp_path):
+    """Comparability is the content hash of the eval manifest — it must not move.
+
+    If building the new training set altered ham10000_test.csv by even a byte,
+    the new run would land in a different comparability group and could not be
+    ranked against the five existing configurations.
+    """
+    import hashlib
+    m = _isic_builder()
+    test_manifest = REPO / "data" / "manifests" / "ham10000_test.csv"
+    before = hashlib.sha256(test_manifest.read_bytes()).hexdigest()
+
+    gt, md = tmp_path / "gt.csv", tmp_path / "md.csv"
+    _write_gt(gt, [("ISIC_8880001", "MEL"), ("ISIC_8880002", "NV")])
+    _write_md(md, [("ISIC_8880001", "LES_A"), ("ISIC_8880002", "LES_B")])
+    labels, _ = m.read_groundtruth(gt, keep_scc=False)
+    meta = m.read_metadata(md)
+    excl_i, excl_l = m.read_exclusions([test_manifest])
+    rows, _ = m.build_rows(labels, meta, excl_i, excl_l)
+    m.write_manifest(rows, tmp_path / "isic_train.csv")
+
+    assert hashlib.sha256(test_manifest.read_bytes()).hexdigest() == before

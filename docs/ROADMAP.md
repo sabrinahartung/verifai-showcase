@@ -71,7 +71,7 @@ Not every pillar is blocked by leakage, which is worth knowing:
 
 **Acceptance: met.** Re-running `scenarios/skin_cancer.yaml` with no scenario edits
 produced findings identical to the pre-refactor baseline (top-1 100%, faithfulness
-0.669, stability 75%). 40 contract tests in `tests/` cover the seams; run them with
+0.669, stability 75%). 47 contract tests in `tests/` cover the seams; run them with
 `.venv/bin/python -m pytest tests/ -q`.
 
 Measured while doing this: MPS is **slower** than CPU here (5.5s vs 3.2s at n=7),
@@ -307,12 +307,41 @@ engineering.
 HAM10000 is 10,015 images and the model will have seen 70% of them. The next
 honest gain comes from data drawn from somewhere else entirely.
 
-- [ ] Add ISIC 2019 (~25k images, 8 classes) as additional **training** data
-- [ ] **Check the overlap first.** ISIC 2019 incorporates HAM10000, so the same
-      leakage trap is waiting: dedupe by `image_id`/`lesion_id` against our
-      manifests before mixing, and re-run `build_splits.py` over the union
-- [ ] Map the class vocabularies (ISIC's `SCC` has no HAM10000 equivalent —
-      decide explicitly whether to add an eighth class or drop those rows)
+- [x] `scripts/build_isic_train.py` — builds an ISIC 2019 training manifest with
+      every val and test lesion held back. Excludes by `image_id` **and**
+      `lesion_id`, re-reads the written file to prove the anti-join held, and
+      refuses to leave a leaking manifest on disk. 7 contract tests, no network
+- [x] **The overlap, measured.** Holding back val+test costs **3,001 images —
+      11.8% of ISIC 2019 and only 7.5% of its melanoma**. The remaining 22,330
+      are fair training data, HAM10000's own training portion included. The join
+      is exact, not approximate: HAM10000's `image_id` *is* an ISIC id
+      (`ISIC_0024342`), so this is a string anti-join and needs no image hashing
+- [x] Class vocabularies mapped. `SCC` is **dropped** by default: the frozen test
+      set has seven classes, so an eighth head could never be scored on it and
+      would make the run incomparable for no measurable gain. `--keep-scc` opts
+      in. `UNK` is never a label — it is "none of the above", not a diagnosis
+- [x] `scenarios/skin_cancer_isic.yaml`, warm-started from **ImageNet** rather
+      than `skin-lesion-resnet18`. That checkpoint's training data covered 9,964
+      of 10,015 HAM10000 images including this test set, so initialising from it
+      would re-contaminate the new model — and the integrity check cannot catch
+      it, because it inspects manifests, not checkpoint provenance
+- [ ] Materialize the ISIC images, train, and evaluate
+
+**One deliberate departure from the original plan above.** It said to "re-run
+`build_splits.py` over the union", i.e. re-split everything once ISIC was mixed
+in. That is wrong, and the comparison view is what makes it wrong: re-splitting
+moves the test set, which changes the evaluation manifest's content hash, which
+puts the new run in a different comparability group from the five existing
+configurations — so the one thing the larger training set was *for*, showing
+where it performs better, would have been impossible to display.
+
+So the test manifest is frozen instead, and only training grows. Validation is
+the existing `ham10000_val.csv` copied under the new prefix rather than
+resampled, because `tune_decision.py` tunes the decision rule on val and a
+different val would silently change what a tuned weight means.
+
+A larger training set does not license a new test set. Same rows, same bytes,
+same hash — that is the price of being able to compare at all.
 - [ ] Consider a genuinely **external** test set (PH2, Derm7pt, PAD-UFES-20) as a
       separate scenario. Different camera, different clinic, different population:
       the gap between the internal and external number *is* the generalisation

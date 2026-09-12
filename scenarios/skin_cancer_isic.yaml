@@ -1,0 +1,105 @@
+# Skin-lesion model trained on ISIC 2019, evaluated on the SAME frozen test set.
+#
+# The point of this scenario, versus scenarios/skin_cancer_clean.yaml: the model
+# sees ~3x more training images and ~5x more melanoma, while the evaluation set
+# does not move at all. `data/manifests/ham10000_test.csv` is byte-identical to
+# the one the other five configurations were scored on, so its content hash is
+# unchanged and this run lands in the *same* comparability group — the dashboard
+# will rank it against them instead of filing it separately.
+#
+# That only holds because the training manifest excludes every val and test
+# lesion. ISIC 2019 incorporates HAM10000, so training on all of it would train
+# on the test set; build_isic_train.py holds back 3,001 images (11.8% of ISIC,
+# 7.5% of its melanoma) and keeps the rest, including HAM10000's own training
+# portion. `integrity.enforce` below is what proves it worked.
+#
+#   1. download ISIC 2019 (images + GroundTruth + Metadata) into data/raw/isic/
+#   2. python scripts/build_isic_train.py \
+#        --groundtruth data/raw/isic/ISIC_2019_Training_GroundTruth.csv \
+#        --metadata    data/raw/isic/ISIC_2019_Training_Metadata.csv
+#   3. python scripts/train_model.py scenarios/skin_cancer_isic.yaml
+#   4. python scripts/run_scenario.py scenarios/skin_cancer_isic.yaml
+name: skin_cancer_isic
+domain: image
+seed: 42
+sample_size: null          # evaluate the whole test manifest (1,493 images)
+
+training:
+  manifest_prefix: "isic"        # reads isic_train.csv + isic_val.csv
+  manifest_dir: "data/manifests"
+  arch: "resnet18"
+  # Warm-start from ImageNet, NOT from the original skin-lesion-resnet18: per the
+  # audit in docs/ROADMAP.md that checkpoint's training data covered 9,964 of
+  # 10,015 HAM10000 images, this test set included. Initialising from it would
+  # re-contaminate the new model, and the integrity check cannot catch that —
+  # it inspects manifests, not checkpoint provenance.
+  pretrained: true
+  epochs: 12
+  batch_size: 32
+  lr: 0.0001
+  class_weights: true            # still imbalanced, though less so than HAM10000
+  image_size: 224
+  device: "auto"                 # cuda > mps > cpu
+  workers: 8
+  out_dir: "artifacts_training"  # gitignored; *.pt never goes in git
+
+model:
+  loader: "verifai.models.image:load"
+  id: "skin-lesion-resnet18-isic"
+  arch: "resnet18"
+  cam_layer: "layer4[-1]"
+  device: "auto"
+  # After training, point this at the checkpoint you just produced:
+  weights_path: "artifacts_training/skin_cancer_isic.pt"
+  classes:                        # must match the training class order (sorted)
+    - actinic_keratoses
+    - basal_cell_carcinoma
+    - benign_keratosis-like_lesions
+    - dermatofibroma
+    - melanocytic_Nevi
+    - melanoma
+    - vascular_lesions
+
+dataset:
+  loader: "verifai.datasets.loaders:load_image_manifest"
+  id: "ham10000-clean-test"
+  # UNCHANGED on purpose. Same rows, same bytes, same content hash as the five
+  # existing runs — this is what makes the comparison legitimate rather than
+  # merely adjacent. Do not regenerate or re-sort this file.
+  manifest: "data/manifests/ham10000_test.csv"   # test ONLY — never train/val
+  # One directory has to serve both training and evaluation, because
+  # train_model.py inherits this `dataset` block. The ISIC 2019 download already
+  # contains the HAM10000 images (that is the overlap this scenario works
+  # around), so extracting it here covers the test manifest too.
+  images_dir: "data/raw/isic"
+  source: "ISIC 2019 (training) / HAM10000 (evaluation)"
+
+card:
+  # Same group as the clean split: same problem, same test set, so these belong
+  # side by side. The lineage is what distinguishes the configurations.
+  group: "Skin lesion — HAM10000 (verified split)"
+  lineage: "ResNet18 · ISIC 2019 training set"
+  name: "Skin-Lesion ResNet18 (ISIC 2019)"
+  emoji: "🔬"
+  description: "Skin-lesion classification over 7 classes, trained on ISIC 2019 with every validation and test lesion held back, and evaluated on the same 1,493 images as the HAM10000-trained configurations."
+
+# Computable because we know exactly what was trained on.
+privacy:
+  members: "data/manifests/isic_train.csv"           # the model saw these
+  non_members: "data/manifests/ham10000_test.csv"    # it never saw these
+  sample: 750                                        # per side, for runtime
+
+# The load-bearing check for this scenario. ISIC 2019 contains HAM10000, so if
+# the exclusion in build_isic_train.py were wrong this is what catches it —
+# before any metric produces a flattering number.
+integrity:
+  enforce: true
+  group_key: "lesion_id"
+
+metrics:
+  - "integrity.split_leakage"      # every number below is conditional on this
+  - "performance.classification"
+  - "explainability.gradcam"
+  - "robustness.corruption"
+  - "fairness.skin_tone"
+  - "privacy.mia"
